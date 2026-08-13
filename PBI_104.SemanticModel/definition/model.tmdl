@@ -1,0 +1,22 @@
+model Model
+	culture: zh-TW
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["查詢"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 查詢
+ref table DateTableTemplate_1753b274-8100-473e-b608-723f7ec15e18
+ref table LocalDateTable_eb8be645-b2f7-45ed-84c0-0dd6f245b7fd
+ref table LocalDateTable_527b1dd5-9797-458f-a607-63e8043e5651
+
+ref cultureInfo zh-TW
+

@@ -1,0 +1,21 @@
+# Power BI Desktop local state and cache
+**/.pbi/
+*.abf
+
+# Local Python environments and secrets
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Unsanitized local API captures; keep only the reviewed TASK-002 fixture
+samples/raw/*
+!samples/raw/api-response-page-1.sample.json
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/

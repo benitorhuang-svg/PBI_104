@@ -1,0 +1,2979 @@
+{
+  "data": [
+    {
+      "appearDate": "20260807",
+      "applyCnt": 7,
+      "coIndustry": 1001001006,
+      "coIndustryDesc": "其它軟體及網路相關業",
+      "custName": "風采有限公司",
+      "custNo": "130000000153452",
+      "description": "。\n\n■必備條件\n   1.熟悉至少一種數據分析語言，如R，Python。\n   2.熟悉數據儀表板的建置與操作，如Tableau，PowerBI。\n   3.有資料庫開發經驗，有Mongo操作經驗尤佳。\n   4.具備開放學習態度和跨團隊的合作精",
+      "descSnippet": "。\n\n■必備條件\n   1.熟悉至少一種數據分析語言，如R，Python。\n   2.熟悉數據儀表板的建置與操作，如Tableau，[[[PowerBI]]]。\n   3.有資料庫開發經驗，有Mongo操作經驗尤佳。\n   4.具備開放學習態度和跨團隊的合作精",
+      "mrtDist": 0,
+      "jobAddress": "惠中路一段",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "數據分析師",
+      "jobNameSnippet": "數據分析師",
+      "jobNo": "13626547",
+      "jobRo": 1,
+      "jobType": 2,
+      "lat": 24.1609637,
+      "lon": 120.6440365,
+      "link": {
+        "job": "https://www.104.com.tw/job/842b7",
+        "cust": "https://www.104.com.tw/company/1a2x6bl9po",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/842b7?channel=104rpt"
+      },
+      "major": [
+        "數理統計相關",
+        "統計學相關",
+        "資訊管理相關"
+      ],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        4
+      ],
+      "period": 3,
+      "remoteWorkType": 0,
+      "s10": 50,
+      "salaryHigh": 70000,
+      "salaryLow": 45000,
+      "tags": {
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        },
+        "wf30": {
+          "desc": "",
+          "param": "wf30"
+        },
+        "wf25": {
+          "desc": "",
+          "param": "wf25"
+        },
+        "wf29": {
+          "desc": "",
+          "param": "wf29"
+        },
+        "wf9": {
+          "desc": "",
+          "param": "wf9"
+        },
+        "wf8": {
+          "desc": "",
+          "param": "wf8"
+        },
+        "wf26": {
+          "desc": "",
+          "param": "wf26"
+        },
+        "wf10": {
+          "desc": "",
+          "param": "wf10"
+        },
+        "wf31": {
+          "desc": "",
+          "param": "wf31"
+        },
+        "wf3": {
+          "desc": "",
+          "param": "wf3"
+        },
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        },
+        "wf34": {
+          "desc": "",
+          "param": "wf34"
+        },
+        "wf1": {
+          "desc": "",
+          "param": "wf1"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "09:00~18:00",
+      "hrBehaviorPR": 0.785675916434266,
+      "jobCat": [
+        2007001018,
+        2007001021,
+        2016001007
+      ],
+      "labels": [
+        "c@wf2",
+        "c@wf30",
+        "c@wf25",
+        "c@wf29",
+        "indexjob@ij005",
+        "c@wf9",
+        "c@wf8",
+        "c@wf26",
+        "c@wf10",
+        "c@wf31",
+        "c@wf3",
+        "c@wf7",
+        "c@wf34",
+        "association@j00021",
+        "c@wf1",
+        "indexjob@ij016",
+        "indexjob@ij039"
+      ],
+      "languageRequirements": [],
+      "acceptRole": [],
+      "employeeCount": 100,
+      "pcSkills": [
+        {
+          "code": "12001003045",
+          "description": "Python"
+        },
+        {
+          "code": "12001011001",
+          "description": "Tableau"
+        },
+        {
+          "code": "12001011012",
+          "description": "Power BI​"
+        }
+      ],
+      "pddScore": 0.07544871,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/3452/130000000153452/logo.jpg?v=20260811164441",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786535473,
+        "lastCustReplyTimestamp": null,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260810",
+      "applyCnt": 3,
+      "coIndustry": 1001001003,
+      "coIndustryDesc": "網際網路相關業",
+      "custName": "弈樂科技股份有限公司",
+      "custNo": "130000000130062",
+      "description": "***應徵時請附上作品集、文案、自傳、證照等加分文件***\n1.\t需求分析及規劃資料萃取、資料清理 \n2.\t數據分析、資訊視覺化、說明分析結果、提出建議及後續成效評估 \n3.\t蒐集競業資訊、報表整理\n\n※工作待遇依個人經歷及專長等條件參考核定，如相關經歷豐富可議更優渥薪資，歡迎能力優秀的您應徵面談\n",
+      "descSnippet": "***應徵時請附上作品集、文案、自傳、證照等加分文件***\n1.\t需求分析及規劃資料萃取、資料清理 \n2.\t數據分析、資訊視覺化、說明分析結果、提出建議及後續成效評估 \n3.\t蒐集競業資訊、報表整理\n\n※工作待遇依個人經歷及專長等條件參考核定，如相關經歷豐富可議更優渥薪資，歡迎能力優秀的您應徵面談\n",
+      "mrtDist": 0,
+      "jobAddress": "安和東路3號6樓",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "數據分析師(學士)",
+      "jobNameSnippet": "數據分析師(學士)",
+      "jobNo": "10970702",
+      "jobRo": 1,
+      "jobType": 2,
+      "lat": 24.1743279,
+      "lon": 120.623867,
+      "link": {
+        "job": "https://www.104.com.tw/job/6j51q",
+        "cust": "https://www.104.com.tw/company/1a2x6bkrny",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/6j51q?channel=104rpt"
+      },
+      "major": [
+        "數理統計相關",
+        "統計學相關",
+        "資訊管理相關"
+      ],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        4,
+        5,
+        6
+      ],
+      "period": 0,
+      "remoteWorkType": 0,
+      "s10": 50,
+      "salaryHigh": 9999999,
+      "salaryLow": 42000,
+      "tags": {
+        "wf3": {
+          "desc": "",
+          "param": "wf3"
+        },
+        "wf10": {
+          "desc": "",
+          "param": "wf10"
+        },
+        "wf30": {
+          "desc": "",
+          "param": "wf30"
+        },
+        "wf18": {
+          "desc": "",
+          "param": "wf18"
+        },
+        "wf9": {
+          "desc": "",
+          "param": "wf9"
+        },
+        "wf29": {
+          "desc": "",
+          "param": "wf29"
+        },
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        },
+        "wf34": {
+          "desc": "",
+          "param": "wf34"
+        },
+        "wf26": {
+          "desc": "",
+          "param": "wf26"
+        },
+        "wf31": {
+          "desc": "",
+          "param": "wf31"
+        },
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        },
+        "wf27": {
+          "desc": "",
+          "param": "wf27"
+        },
+        "wf28": {
+          "desc": "",
+          "param": "wf28"
+        },
+        "wf12": {
+          "desc": "",
+          "param": "wf12"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "0930-1830",
+      "hrBehaviorPR": 0.4095316325936802,
+      "jobCat": [
+        2004001010,
+        2003002008
+      ],
+      "labels": [
+        "c@wf3",
+        "c@wf10",
+        "c@wf30",
+        "c@wf18",
+        "c@graduates_welcome",
+        "association@j00021",
+        "indexjob@ij010",
+        "c@wf9",
+        "c@wf29",
+        "c@wf7",
+        "c@wf34",
+        "c@wf26",
+        "c@wf31",
+        "c@wf2",
+        "c@wf27",
+        "c@wf28",
+        "c@wf12"
+      ],
+      "languageRequirements": [
+        {
+          "language": 1,
+          "ability": {
+            "listening": 4,
+            "speaking": 4,
+            "reading": 4,
+            "writing": 4
+          }
+        }
+      ],
+      "acceptRole": [
+        2
+      ],
+      "employeeCount": 250,
+      "pcSkills": [
+        {
+          "code": "12001003008",
+          "description": "C"
+        },
+        {
+          "code": "12001003009",
+          "description": "C#"
+        },
+        {
+          "code": "12001003010",
+          "description": "C++"
+        },
+        {
+          "code": "12001003025",
+          "description": "Java"
+        },
+        {
+          "code": "12001003034",
+          "description": "Matlab"
+        },
+        {
+          "code": "12001003045",
+          "description": "Python"
+        },
+        {
+          "code": "12001003078",
+          "description": "R"
+        },
+        {
+          "code": "12001008003",
+          "description": "Excel"
+        },
+        {
+          "code": "12001008012",
+          "description": "PowerPoint"
+        }
+      ],
+      "pddScore": 0.0709888,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/0062/130000000130062/logo.png?v=20260511155218",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786555198,
+        "lastCustReplyTimestamp": null,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260804",
+      "applyCnt": 4,
+      "coIndustry": 1012001001,
+      "coIndustryDesc": "醫院",
+      "custName": "臺中市立老人復健綜合醫院(委託財團法人中國醫藥大學興建經營)",
+      "custNo": "130000000248086",
+      "description": "醫療品質與病人安全相關業務，包含：\n1.品質指標管理\n2.病人安全事件通報與管理\n3.病人安全與品質促進等相關活動辦理 \n4.病人就醫經驗調查\n5.醫療品質及病人安全教育訓練\n6.配合中央及地方主管機關評鑑及認證準備。\n7.主管交辦事項\n",
+      "descSnippet": "醫療品質與病人安全相關業務，包含：\n1.品質指標管理\n2.病人安全事件通報與管理\n3.病人安全與品質促進等相關活動辦理 \n4.病人就醫經驗調查\n5.醫療品質及病人安全教育訓練\n6.配合中央及地方主管機關評鑑及認證準備。\n7.主管交辦事項\n",
+      "mrtDist": 0,
+      "jobAddress": "太原路三段1141號",
+      "jobAddrNo": 6001008006,
+      "jobAddrNoDesc": "台中市北屯區",
+      "jobName": "醫療品質組 副管理師",
+      "jobNameSnippet": "醫療品質組 副管理師",
+      "jobNo": "14897983",
+      "jobRo": 1,
+      "jobType": 2,
+      "lat": 24.1626976,
+      "lon": 120.7231621,
+      "link": {
+        "job": "https://www.104.com.tw/job/8vbcv",
+        "cust": "https://www.104.com.tw/company/1a2x6bnaqe",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/8vbcv?channel=104rpt"
+      },
+      "major": [
+        "公共衛生相關",
+        "醫務管理相關",
+        "其他醫藥衛生相關"
+      ],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        5
+      ],
+      "period": 3,
+      "remoteWorkType": 0,
+      "s10": 10,
+      "salaryHigh": 0,
+      "salaryLow": 0,
+      "tags": {
+        "wf27": {
+          "desc": "",
+          "param": "wf27"
+        },
+        "wf28": {
+          "desc": "",
+          "param": "wf28"
+        },
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        },
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "如有活動或會議需求需配合加班",
+      "hrBehaviorPR": 0.4799076067737127,
+      "jobCat": [
+        2015002001,
+        2015002013
+      ],
+      "labels": [
+        "association@j00009",
+        "c@wf27",
+        "association@j00025",
+        "c@wf28",
+        "association@j00013",
+        "association@j00017",
+        "c@wf2",
+        "c@wf7",
+        "association@j00021"
+      ],
+      "languageRequirements": [
+        {
+          "language": 1,
+          "ability": {
+            "listening": 4,
+            "speaking": 4,
+            "reading": 4,
+            "writing": 4
+          }
+        }
+      ],
+      "acceptRole": [],
+      "employeeCount": 0,
+      "pcSkills": [
+        {
+          "code": "12001008003",
+          "description": "Excel"
+        },
+        {
+          "code": "12001008016",
+          "description": "Word"
+        },
+        {
+          "code": "12001008012",
+          "description": "PowerPoint"
+        },
+        {
+          "code": "12001011012",
+          "description": "Power BI​"
+        }
+      ],
+      "pddScore": 0.06415871,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/8086/130000000248086/logo.jpg?v=20260102095320",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786339215,
+        "lastCustReplyTimestamp": null,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260803",
+      "applyCnt": 7,
+      "coIndustry": 1001001002,
+      "coIndustryDesc": "電腦軟體服務業",
+      "custName": "Tata Consultancy Services Limited Taiwan Branch_印度商塔塔顧問服務有限公司台灣分公司",
+      "custNo": "27243923000",
+      "description": "1. Proven hands-on experience as a Data Engineer or Analytics/Data Engineering role, supporting Manufacturing and/or Supply Chain analytics use cases\n\n2. Strong experience in data integration, ETL development, data modeling, and ensuring data quality and consistency across multiple source systems\n\n3. Solid working experience with SQL Server BI technologies, including SSIS, SSAS (Tabular), and Power BI; ability to support analytics beyond just report building\n\n4. Ability to quickly understand existing architectures, identify data gaps, and propose practical, scalable solutions\n\n5. Comfortable working with ambiguous business requirements and proactively driving clarification and improvement\n\n6. Demonstrates a strong growth mindset: curious, adaptable, and continuously improving both technical skills and solution quality\n\nMust Have: \nSQL Server BI Technologies, including SSIS, SSAS, and Power BI. -Hands-on experience as a Data Engineer or Analytics/Data Engineering role \n(supporting manufacturing and supply chain analytics use cases).\n",
+      "descSnippet": "1. Proven hands-on experience as a Data Engineer or Analytics/Data Engineering role, supporting Manufacturing and/or Supply Chain analytics use cases\n\n2. Strong experience in data integration, ETL development, data modeling, and ensuring data quality and consistency across multiple source systems\n\n3. Solid working experience with SQL Server BI technologies, including SSIS, SSAS (Tabular), and Power BI; ability to support analytics beyond just report building\n\n4. Ability to quickly understand existing architectures, identify data gaps, and propose practical, scalable solutions\n\n5. Comfortable working with ambiguous business requirements and proactively driving clarification and improvement\n\n6. Demonstrates a strong growth mindset: curious, adaptable, and continuously improving both technical skills and solution quality\n\nMust Have: \nSQL Server BI Technologies, including SSIS, SSAS, and Power BI. -Hands-on experience as a Data Engineer or Analytics/Data Engineering role \n(supporting manufacturing and supply chain analytics use cases).\n",
+      "mrtDist": 0,
+      "jobAddress": "",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "[Hybrid] Data Engineer/ Analyst  (外商)",
+      "jobNameSnippet": "[Hybrid] Data Engineer/ Analyst  (外商)",
+      "jobNo": "15194604",
+      "jobRo": 1,
+      "jobType": 0,
+      "lat": 24.1769764,
+      "lon": 120.6424333,
+      "link": {
+        "job": "https://www.104.com.tw/job/91o8c",
+        "cust": "https://www.104.com.tw/company/cikbtiw",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/91o8c?channel=104rpt"
+      },
+      "major": [],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "period": 4,
+      "remoteWorkType": 2,
+      "s10": 10,
+      "salaryHigh": 0,
+      "salaryLow": 0,
+      "tags": {
+        "zoneForeign": {
+          "desc": "外商公司",
+          "param": 5
+        },
+        "remote": {
+          "desc": "遠端工作"
+        },
+        "wf12": {
+          "desc": "",
+          "param": "wf12"
+        },
+        "wf13": {
+          "desc": "",
+          "param": "wf13"
+        },
+        "wf3": {
+          "desc": "",
+          "param": "wf3"
+        },
+        "wf29": {
+          "desc": "",
+          "param": "wf29"
+        },
+        "wf35": {
+          "desc": "",
+          "param": "wf35"
+        },
+        "wf28": {
+          "desc": "",
+          "param": "wf28"
+        },
+        "wf30": {
+          "desc": "",
+          "param": "wf30"
+        },
+        "wf32": {
+          "desc": "",
+          "param": "wf32"
+        },
+        "wf26": {
+          "desc": "",
+          "param": "wf26"
+        },
+        "wf25": {
+          "desc": "",
+          "param": "wf25"
+        },
+        "wf9": {
+          "desc": "",
+          "param": "wf9"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "",
+      "hrBehaviorPR": 0.546185422103647,
+      "jobCat": [
+        2007001022,
+        2007001018
+      ],
+      "labels": [
+        "c@wf12",
+        "c@wf13",
+        "indexjob@ij013",
+        "indexjob@ij070",
+        "foreigners@fc_empmidchinese_jbs",
+        "c@wf3",
+        "indexjob@ij009",
+        "c@wf29",
+        "indexjob@ij010",
+        "c@wf35",
+        "c@wf28",
+        "c@wf30",
+        "association@j00002_002",
+        "c@wf32",
+        "c@wf26",
+        "foreigners@full_fc_em_jbs",
+        "c@wf25",
+        "c@wf9"
+      ],
+      "languageRequirements": [
+        {
+          "language": 1,
+          "ability": {
+            "listening": 2,
+            "speaking": 2,
+            "reading": 2,
+            "writing": 2
+          }
+        }
+      ],
+      "acceptRole": [],
+      "employeeCount": 320,
+      "pcSkills": [
+        {
+          "code": "12001004031",
+          "description": "MS SQL"
+        },
+        {
+          "code": "12001004018",
+          "description": "ETL"
+        },
+        {
+          "code": "12001011001",
+          "description": "Tableau"
+        },
+        {
+          "code": "12001011012",
+          "description": "Power BI​"
+        }
+      ],
+      "pddScore": 0.05893666,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/3000/27243923000/logo.jpg?v=20260528173005",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": null,
+        "lastCustReplyTimestamp": 1781144185,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260810",
+      "applyCnt": 5,
+      "coIndustry": 1002011010,
+      "coIndustryDesc": "其他金屬相關製造業",
+      "custName": "宇隆科技股份有限公司",
+      "custNo": "22702791000",
+      "description": "1.\t產業與競爭分析\n蒐集行業趨勢、競爭對手策略與技術變化\n建立分析報告與圖表，供策略長決策參考\n2.\t公司策略支援\n協助策略長制定長期策略及年度策略規劃\n分析公司產品、事業單位績效與發展潛力\n3.\t專案分析與支援\n協助總經理室經理推動跨部門專案\n提供數據與分析支援，追蹤專案進度\n4.\t董事會 / 高階報告支援\n協助整理資料、分析圖表與簡報\n提供決策建議與分析結論\n5.\t海外市場 / 投資評估分析\n蒐集國際市場、法規與租稅資料\n協助進行海外投資可行性分析\n6.\t制度與流程分析\n協助評估內控制度與流程有效性\n提出改善建議，支持決策\n",
+      "descSnippet": "1.\t產業與競爭分析\n蒐集行業趨勢、競爭對手策略與技術變化\n建立分析報告與圖表，供策略長決策參考\n2.\t公司策略支援\n協助策略長制定長期策略及年度策略規劃\n分析公司產品、事業單位績效與發展潛力\n3.\t專案分析與支援\n協助總經理室經理推動跨部門專案\n提供數據與分析支援，追蹤專案進度\n4.\t董事會 / 高階報告支援\n協助整理資料、分析圖表與簡報\n提供決策建議與分析結論\n5.\t海外市場 / 投資評估分析\n蒐集國際市場、法規與租稅資料\n協助進行海外投資可行性分析\n6.\t制度與流程分析\n協助評估內控制度與流程有效性\n提出改善建議，支持決策\n",
+      "mrtDist": 0,
+      "jobAddress": "市政路402號(中國人壽市政大樓)",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "總經理室_國際事務管理師",
+      "jobNameSnippet": "總經理室_國際事務管理師",
+      "jobNo": "15226821",
+      "jobRo": 1,
+      "jobType": 0,
+      "lat": 24.1591048,
+      "lon": 120.6395963,
+      "link": {
+        "job": "https://www.104.com.tw/job/92d39",
+        "cust": "https://www.104.com.tw/company/afgnlnc",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/92d39?channel=104rpt"
+      },
+      "major": [
+        "商業及管理學科類"
+      ],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        4,
+        5
+      ],
+      "period": 4,
+      "remoteWorkType": 0,
+      "s10": 10,
+      "salaryHigh": 0,
+      "salaryLow": 0,
+      "tags": {
+        "zone": {
+          "desc": "上市上櫃",
+          "param": 16
+        },
+        "wf31": {
+          "desc": "",
+          "param": "wf31"
+        },
+        "wf34": {
+          "desc": "",
+          "param": "wf34"
+        },
+        "wf10": {
+          "desc": "",
+          "param": "wf10"
+        },
+        "wf9": {
+          "desc": "",
+          "param": "wf9"
+        },
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        },
+        "wf3": {
+          "desc": "",
+          "param": "wf3"
+        },
+        "wf4": {
+          "desc": "",
+          "param": "wf4"
+        },
+        "wf29": {
+          "desc": "",
+          "param": "wf29"
+        },
+        "wf20": {
+          "desc": "",
+          "param": "wf20"
+        },
+        "wf27": {
+          "desc": "",
+          "param": "wf27"
+        },
+        "wf25": {
+          "desc": "",
+          "param": "wf25"
+        },
+        "wf1": {
+          "desc": "",
+          "param": "wf1"
+        },
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        },
+        "wf26": {
+          "desc": "",
+          "param": "wf26"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "",
+      "hrBehaviorPR": 0.7945906989028304,
+      "jobCat": [
+        2001001003,
+        2001001001,
+        2002001001
+      ],
+      "labels": [
+        "c@wf31",
+        "c@wf34",
+        "indexjob@ij006",
+        "c@wf10",
+        "c@wf9",
+        "c@wf7",
+        "c@wf3",
+        "indexjob@ij070",
+        "c@wf4",
+        "c@wf29",
+        "c@wf20",
+        "c@wf27",
+        "c@wf25",
+        "c@wf1",
+        "c@wf2",
+        "c@wf26",
+        "indexjob@ij003"
+      ],
+      "languageRequirements": [
+        {
+          "language": 1,
+          "ability": {
+            "listening": 2,
+            "speaking": 2,
+            "reading": 2,
+            "writing": 2
+          }
+        }
+      ],
+      "acceptRole": [],
+      "employeeCount": 1700,
+      "pcSkills": [
+        {
+          "code": "12001008003",
+          "description": "Excel"
+        },
+        {
+          "code": "12001008012",
+          "description": "PowerPoint"
+        },
+        {
+          "code": "12001011012",
+          "description": "Power BI​"
+        }
+      ],
+      "pddScore": 0.058560666,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/1000/22702791000/logo.png?v=20260224205256",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786436452,
+        "lastCustReplyTimestamp": 1783394681,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260811",
+      "applyCnt": 4,
+      "coIndustry": 1001001001,
+      "coIndustryDesc": "電腦系統整合服務業",
+      "custName": "葳誠科技有限公司",
+      "custNo": "24248946000",
+      "description": "固定駐點在外商客戶端(不會變更)\n目前急需的是地端環境（SQL SSIS）需要能馬上上手\n產業Knowhow 可以訓練,職務需求技能需熟練,能依照指示獨立作業\n\n·【主要職責 Key Responsibilities】\n與業務單位合作，釐清並定義需求，確保符合企業需求及全球標準與流程\n開發與設計製造智慧（Manufacturing Intelligence）視覺化解決方案，包括使用 Power BI 建立儀表板，並透過 Microsoft Analysis Services 建構支援製造營運與績效指標（KPI）的分析系統\n開發 ETL 流程，自動化整合、清理並維護製造數據來源的品質與一致性\n根據業務需求設計資料模型與資料架構，整合多來源資料並建立可供視覺化分析的數據模型\n與業務單位進行資料驗證，撰寫測試腳本並記錄與追蹤缺陷問題\n支援日常營運，包括問題與需求管理，並開發解決方案以根本改善系統問題\n監控並排除資料相關問題，提供即時支援以降低系統中斷與影響\n\n【必要條件 Required Skills】\n大學以上學歷（資訊工程、資訊管理、電腦科學、軟體工程、工業工程、應用數學、統計、管理相關科系）\n2年以上 Microsoft SQL Server BI 工具使用經驗（包含 SSIS、SSRS、SSAS、Power BI）及資料倉儲管理經驗\n具備商業智慧（BI, MDX script）、資料分析或儀表板開發相關經驗\n具備 24/7 製造環境 IT 系統運作經驗\n曾參與推動並交付提升營運效率之 IT 解決方案，並符合企業標準與 IT 策略方向\n良好的溝通、簡報、組織與協調能力（能在業務與技術之間有效轉譯需求）\n具備良好時間管理能力，能有效處理多重任務與優先順序\n具備團隊合作精神，亦能獨立作業\n良好中英文溝通能力（聽說讀寫），TOEIC 600 分以上\n\n【加分條件 Desired Skills】\n\n熟悉製造流程或製造執行系統（MES）\n\n具備 Python 或 R 使用經驗\n\n具備相關國際認證（如 Microsoft 認證）\n\n商業智慧工具經驗（Power BI、Tableau）\n\nDatabricks經驗\n\n具備成功導入 IT 解決方案之實績（同時符合商業需求與技術可行性）\n\n熟悉專案生命週期（Project Lifecycle）與應用系統生命週期（Application Lifecycle）\n\n具備良好邏輯分析與批判性思考能力，能依專案策略方向影響決策\n\nKey Responsibilities:\n\n· Collaborate with business users to define requirements that meet business needs while adhering to global standards and practices\n\n· Develop and design visual Manufacturing Intelligence solutions, including developing dashboards in Power BI, Microsoft Analysis Services for KPI's supporting manufacturing operational and performance metrics related analytics\n\n· Develop ETL that automate, integrate, cleanse, and maintain manufacturing data source quality and integrity\n\n· Design data models and data architecture based on business analysis requirements. Integrate various datasets and build data models for visualization\n\n· Perform data validation with business user, write test scripts and record defects\n\n· Support operation tasks in conducting issue/request management and maintenance, develop and implement resolutions that address the root cause of problems\n\n· Monitor and troubleshot data-related issues, providing timely resolution and support to minimize downtime and disruption\n\n \n\nRequired Skills:\n\n· Bachelor’s Degree above (Information Technology, Computer Science, Software Engineering, Industrial Engineering, Applied Mathematics, Statistic, Management)\n\n· 2 years of experience using Microsoft SQL server Business Intelligence Development Studio (SSIS, SSRS, SSAS, Power BI) and data warehouse management\n\n· 2 years of Business Intelligence level role in Analytics, Business Intelligence or Dashboards experience\n\n· Experience working with IT systems in a 24/7 manufacturing environment\n\n· Experience in driving and delivering new capabilities to improve business unit operations that are in keeping with established standards and the overall IT strategic direction\n\n· Strong communication, presentation, organizational and facilitation skills (including ability to “translate” between business and technology needs)\n\n· Good ability to continuously prioritize and multitask efficiently.\n\n· Good team player with interpersonal skills and the ability to work independently\n\n· Good English & Chinese communication in speaking, writing and presentation, TOEIC 600 and above\n\n \n\nDesired Skills:\n\n· Knowledge of manufacturing process and manufacturing execution systems\n\n· Experience with Python, R is a plus\n\n· Industry-recognized certification such as Microsoft certification\n\n· Business Intelligence Knowledge: SQL, Power BI, Tableau\n\n· Proven track record of implementing IT solutions that meet business demands and are technically sound.\n\n· Knowledge of project life cycle and application life cycle methodologies.\n\n· Ability to influence decisions with critical thinking based upon experience and understanding of the strategic intent of the project",
+      "descSnippet": "固定駐點在外商客戶端(不會變更)\n目前急需的是地端環境（SQL SSIS）需要能馬上上手\n產業Knowhow 可以訓練,職務需求技能需熟練,能依照指示獨立作業\n\n·【主要職責 Key Responsibilities】\n與業務單位合作，釐清並定義需求，確保符合企業需求及全球標準與流程\n開發與設計製造智慧（Manufacturing Intelligence）視覺化解決方案，包括使用 Power BI 建立儀表板，並透過 Microsoft Analysis Services 建構支援製造營運與績效指標（KPI）的分析系統\n開發 ETL 流程，自動化整合、清理並維護製造數據來源的品質與一致性\n根據業務需求設計資料模型與資料架構，整合多來源資料並建立可供視覺化分析的數據模型\n與業務單位進行資料驗證，撰寫測試腳本並記錄與追蹤缺陷問題\n支援日常營運，包括問題與需求管理，並開發解決方案以根本改善系統問題\n監控並排除資料相關問題，提供即時支援以降低系統中斷與影響\n\n【必要條件 Required Skills】\n大學以上學歷（資訊工程、資訊管理、電腦科學、軟體工程、工業工程、應用數學、統計、管理相關科系）\n2年以上 Microsoft SQL Server BI 工具使用經驗（包含 SSIS、SSRS、SSAS、Power BI）及資料倉儲管理經驗\n具備商業智慧（BI, MDX script）、資料分析或儀表板開發相關經驗\n具備 24/7 製造環境 IT 系統運作經驗\n曾參與推動並交付提升營運效率之 IT 解決方案，並符合企業標準與 IT 策略方向\n良好的溝通、簡報、組織與協調能力（能在業務與技術之間有效轉譯需求）\n具備良好時間管理能力，能有效處理多重任務與優先順序\n具備團隊合作精神，亦能獨立作業\n良好中英文溝通能力（聽說讀寫），TOEIC 600 分以上\n\n【加分條件 Desired Skills】\n\n熟悉製造流程或製造執行系統（MES）\n\n具備 Python 或 R 使用經驗\n\n具備相關國際認證（如 Microsoft 認證）\n\n商業智慧工具經驗（Power BI、Tableau）\n\nDatabricks經驗\n\n具備成功導入 IT 解決方案之實績（同時符合商業需求與技術可行性）\n\n熟悉專案生命週期（Project Lifecycle）與應用系統生命週期（Application Lifecycle）\n\n具備良好邏輯分析與批判性思考能力，能依專案策略方向影響決策\n\nKey Responsibilities:\n\n· Collaborate with business users to define requirements that meet business needs while adhering to global standards and practices\n\n· Develop and design visual Manufacturing Intelligence solutions, including developing dashboards in Power BI, Microsoft Analysis Services for KPI's supporting manufacturing operational and performance metrics related analytics\n\n· Develop ETL that automate, integrate, cleanse, and maintain manufacturing data source quality and integrity\n\n· Design data models and data architecture based on business analysis requirements. Integrate various datasets and build data models for visualization\n\n· Perform data validation with business user, write test scripts and record defects\n\n· Support operation tasks in conducting issue/request management and maintenance, develop and implement resolutions that address the root cause of problems\n\n· Monitor and troubleshot data-related issues, providing timely resolution and support to minimize downtime and disruption\n\n \n\nRequired Skills:\n\n· Bachelor’s Degree above (Information Technology, Computer Science, Software Engineering, Industrial Engineering, Applied Mathematics, Statistic, Management)\n\n· 2 years of experience using Microsoft SQL server Business Intelligence Development Studio (SSIS, SSRS, SSAS, Power BI) and data warehouse management\n\n· 2 years of Business Intelligence level role in Analytics, Business Intelligence or Dashboards experience\n\n· Experience working with IT systems in a 24/7 manufacturing environment\n\n· Experience in driving and delivering new capabilities to improve business unit operations that are in keeping with established standards and the overall IT strategic direction\n\n· Strong communication, presentation, organizational and facilitation skills (including ability to “translate” between business and technology needs)\n\n· Good ability to continuously prioritize and multitask efficiently.\n\n· Good team player with interpersonal skills and the ability to work independently\n\n· Good English & Chinese communication in speaking, writing and presentation, TOEIC 600 and above\n\n \n\nDesired Skills:\n\n· Knowledge of manufacturing process and manufacturing execution systems\n\n· Experience with Python, R is a plus\n\n· Industry-recognized certification such as Microsoft certification\n\n· Business Intelligence Knowledge: SQL, Power BI, Tableau\n\n· Proven track record of implementing IT solutions that meet business demands and are technically sound.\n\n· Knowledge of project life cycle and application life cycle methodologies.\n\n· Ability to influence decisions with critical thinking based upon experience and understanding of the strategic intent of the project",
+      "mrtDist": 0,
+      "jobAddress": "科園路一號",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "Data Engineer(台中,台南)希望熟悉SSIS與Cloud相關的技術與經驗",
+      "jobNameSnippet": "Data Engineer(台中,台南)希望熟悉SSIS與Cloud相關的技術與經驗",
+      "jobNo": "14590738",
+      "jobRo": 1,
+      "jobType": 0,
+      "lat": 24.2041283,
+      "lon": 120.6101573,
+      "link": {
+        "job": "https://www.104.com.tw/job/8oqaa",
+        "cust": "https://www.104.com.tw/company/b5172hc",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/8oqaa?channel=104rpt"
+      },
+      "major": [],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        4,
+        5,
+        6
+      ],
+      "period": 4,
+      "remoteWorkType": 0,
+      "s10": 50,
+      "salaryHigh": 100000,
+      "salaryLow": 70000,
+      "tags": {
+        "wf1": {
+          "desc": "",
+          "param": "wf1"
+        },
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "",
+      "hrBehaviorPR": 0.855828069814184,
+      "jobCat": [
+        2007001022,
+        2007001021,
+        2007001018
+      ],
+      "labels": [
+        "c@wf1",
+        "c@wf2",
+        "association@j00020",
+        "association@j00021",
+        "indexjob@ij039",
+        "indexjob@ij029"
+      ],
+      "languageRequirements": [
+        {
+          "language": 1,
+          "ability": {
+            "listening": 8,
+            "speaking": 8,
+            "reading": 8,
+            "writing": 8
+          }
+        }
+      ],
+      "acceptRole": [],
+      "employeeCount": 25,
+      "pcSkills": [
+        {
+          "code": "12001003045",
+          "description": "Python"
+        },
+        {
+          "code": "12001004018",
+          "description": "ETL"
+        },
+        {
+          "code": "12001004032",
+          "description": "MySQL"
+        },
+        {
+          "code": "12001004031",
+          "description": "MS SQL"
+        },
+        {
+          "code": "12001011001",
+          "description": "Tableau"
+        },
+        {
+          "code": "12001011012",
+          "description": "Power BI​"
+        }
+      ],
+      "pddScore": 0.05725289,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/6000/24248946000/logo.gif?v=20260411161628",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786594108,
+        "lastCustReplyTimestamp": 1786538870,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260810",
+      "applyCnt": 8,
+      "coIndustry": 1001001002,
+      "coIndustryDesc": "電腦軟體服務業",
+      "custName": "塶樂微創有限公司",
+      "custNo": "130000000160903",
+      "description": "*** 第一階段將有簡易SQL能力測試 ***\n*** 應徵時請附作品集。需含括資料來源、資料清理方式、分析使用理論、以及最後分析洞見 ***\n\n【職務說明】\n- 協助規劃實驗設計（如A/B測試），尋找關鍵影響因子，追蹤版本成效，提出具體優化建議\n- 分析使用者行為與商業數據，挖掘與洞察資料價值，支援產品優化與業務決策\n- 建立指標追蹤架構，進行用戶分群、轉換率、留存率等行為分析\n- 研究資料科學與AI相關新技術，尋找創新應用場景與方法\n- 了解資料ETL流程(資料萃取、資料轉置、資料清理)，應用SQL 查詢資料",
+      "descSnippet": "*** 第一階段將有簡易SQL能力測試 ***\n*** 應徵時請附作品集。需含括資料來源、資料清理方式、分析使用理論、以及最後分析洞見 ***\n\n【職務說明】\n- 協助規劃實驗設計（如A/B測試），尋找關鍵影響因子，追蹤版本成效，提出具體優化建議\n- 分析使用者行為與商業數據，挖掘與洞察資料價值，支援產品優化與業務決策\n- 建立指標追蹤架構，進行用戶分群、轉換率、留存率等行為分析\n- 研究資料科學與AI相關新技術，尋找創新應用場景與方法\n- 了解資料ETL流程(資料萃取、資料轉置、資料清理)，應用SQL 查詢資料",
+      "mrtDist": 0,
+      "jobAddress": "",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "數據分析師 - Data Analyst",
+      "jobNameSnippet": "數據分析師 - Data Analyst",
+      "jobNo": "12347843",
+      "jobRo": 1,
+      "jobType": 2,
+      "lat": 24.1769764,
+      "lon": 120.6424333,
+      "link": {
+        "job": "https://www.104.com.tw/job/7cnnn",
+        "cust": "https://www.104.com.tw/company/1a2x6blfgn",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/7cnnn?channel=104rpt"
+      },
+      "major": [
+        "經濟社會及心理學科類",
+        "商業及管理學科類",
+        "數學及電算機科學學科類"
+      ],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        5
+      ],
+      "period": 2,
+      "remoteWorkType": 0,
+      "s10": 10,
+      "salaryHigh": 0,
+      "salaryLow": 0,
+      "tags": {
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        },
+        "wf9": {
+          "desc": "",
+          "param": "wf9"
+        },
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        },
+        "wf18": {
+          "desc": "",
+          "param": "wf18"
+        },
+        "wf1": {
+          "desc": "",
+          "param": "wf1"
+        },
+        "wf26": {
+          "desc": "",
+          "param": "wf26"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "",
+      "hrBehaviorPR": 0.771076085642791,
+      "jobCat": [
+        2004001010,
+        2003002008,
+        2007001009
+      ],
+      "labels": [
+        "c@wf2",
+        "c@wf9",
+        "c@wf7",
+        "c@wf18",
+        "c@wf1",
+        "c@wf26"
+      ],
+      "languageRequirements": [],
+      "acceptRole": [],
+      "employeeCount": 30,
+      "pcSkills": [
+        {
+          "code": "12001003045",
+          "description": "Python"
+        },
+        {
+          "code": "12001011012",
+          "description": "Power BI​"
+        },
+        {
+          "code": "12001004018",
+          "description": "ETL"
+        },
+        {
+          "code": "12001003078",
+          "description": "R"
+        },
+        {
+          "code": "12001011001",
+          "description": "Tableau"
+        },
+        {
+          "code": "12001004032",
+          "description": "MySQL"
+        }
+      ],
+      "pddScore": 0.053582054,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/0903/130000000160903/logo.jpg?v=20251203165015",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786516927,
+        "lastCustReplyTimestamp": 1786075227,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260810",
+      "applyCnt": 4,
+      "coIndustry": 1002007008,
+      "coIndustryDesc": "其他化學相關製造業",
+      "custName": "臺久企業股份有限公司",
+      "custNo": "55685097000",
+      "description": "0.蝦皮、momo、PChome商店街操作營運\n1.網路行銷(網站規劃、SEO、 部落格行銷、 GA)\n2.社群行銷(FB粉絲團經營、IG, LINE@)\n3.數位廣告(關鍵字廣告、FB廣告、多媒體聯播網)\n4.線上線下整合行銷(品牌推廣、線上導購、線下銷售)\n5.CyberBiz購物官網操作營運",
+      "descSnippet": "0.蝦皮、momo、PChome商店街操作營運\n1.網路行銷(網站規劃、SEO、 部落格行銷、 GA)\n2.社群行銷(FB粉絲團經營、IG, LINE@)\n3.數位廣告(關鍵字廣告、FB廣告、多媒體聯播網)\n4.線上線下整合行銷(品牌推廣、線上導購、線下銷售)\n5.CyberBiz購物官網操作營運",
+      "mrtDist": 0,
+      "jobAddress": "",
+      "jobAddrNo": 6001008006,
+      "jobAddrNoDesc": "台中市北屯區",
+      "jobName": "電子商務專員/主管 （北屯）",
+      "jobNameSnippet": "電子商務專員/主管 （北屯）",
+      "jobNo": "14789655",
+      "jobRo": 1,
+      "jobType": 0,
+      "lat": 24.1815237,
+      "lon": 120.6861019,
+      "link": {
+        "job": "https://www.104.com.tw/job/8szrr",
+        "cust": "https://www.104.com.tw/company/pkxgvu0",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/8szrr?channel=104rpt"
+      },
+      "major": [],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "period": 0,
+      "remoteWorkType": 2,
+      "s10": 50,
+      "salaryHigh": 60000,
+      "salaryLow": 35000,
+      "tags": {
+        "remote": {
+          "desc": "遠端工作"
+        },
+        "wf1": {
+          "desc": "",
+          "param": "wf1"
+        },
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        },
+        "wf28": {
+          "desc": "",
+          "param": "wf28"
+        },
+        "wf3": {
+          "desc": "",
+          "param": "wf3"
+        },
+        "wf10": {
+          "desc": "",
+          "param": "wf10"
+        },
+        "wf26": {
+          "desc": "",
+          "param": "wf26"
+        },
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "",
+      "hrBehaviorPR": 0.5322212423844973,
+      "jobCat": [
+        2004001005,
+        2004001014,
+        2004001018
+      ],
+      "labels": [
+        "c@graduates_welcome",
+        "indexjob@ij043",
+        "senior@senior_job_H",
+        "foreigners@overseasStudents_tick",
+        "association@j00022",
+        "association@j00026",
+        "association@j00014",
+        "c@wf1",
+        "joblist_search@jl_j0011_001.70",
+        "c@wf7",
+        "c@rdss_welcome",
+        "foreigners@fc_emp5m_jbs",
+        "joblist_search@jl_j0016_001.52",
+        "joblist_search@jl_j0003_004.5",
+        "association@j00018",
+        "foreigners@foreigners_tick",
+        "joblist_search@jl_j0008_001.40",
+        "association@j00057",
+        "c@wf28",
+        "association@j00041",
+        "association@j00001",
+        "association@j00047",
+        "association@j00043",
+        "c@wf3",
+        "c@wf10",
+        "joblist_search@jl_j0010_001.55",
+        "c@wf26",
+        "c@wf2"
+      ],
+      "languageRequirements": [],
+      "acceptRole": [
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        2048,
+        32768,
+        65536
+      ],
+      "employeeCount": 0,
+      "pcSkills": [
+        {
+          "code": "12001011002",
+          "description": "Google Analytics"
+        },
+        {
+          "code": "12002002001",
+          "description": "Adobe Photoshop"
+        },
+        {
+          "code": "12002002005",
+          "description": "Illustrator"
+        },
+        {
+          "code": "12001011013",
+          "description": "Google關鍵字廣告"
+        },
+        {
+          "code": "12001011018",
+          "description": "SEO"
+        },
+        {
+          "code": "12001008035",
+          "description": "Line"
+        },
+        {
+          "code": "12001008033",
+          "description": "Instagram"
+        },
+        {
+          "code": "12001011007",
+          "description": "Google Trend"
+        },
+        {
+          "code": "12001011012",
+          "description": "Power BI​"
+        },
+        {
+          "code": "12001011015",
+          "description": "CSR"
+        },
+        {
+          "code": "12001011017",
+          "description": "SROI"
+        }
+      ],
+      "pddScore": 0.045590084,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/7000/55685097000/logo.jpg?v=20260414092459",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786578114,
+        "lastCustReplyTimestamp": 1785367907,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260810",
+      "applyCnt": 2,
+      "coIndustry": 1001001003,
+      "coIndustryDesc": "網際網路相關業",
+      "custName": "弈樂科技股份有限公司",
+      "custNo": "130000000130062",
+      "description": "***應徵時請附上作品集、文案、自傳、證照等加分文件***\n1.\t需求分析及規劃資料萃取、資料清理 \n2.\t數據分析、資訊視覺化、說明分析結果、提出建議及後續成效評估 \n3.\t蒐集競業資訊、報表整理\n\n※工作待遇依個人經歷及專長等條件參考核定，如相關經歷豐富可議更優渥薪資，歡迎能力優秀的您應徵面談\n",
+      "descSnippet": "***應徵時請附上作品集、文案、自傳、證照等加分文件***\n1.\t需求分析及規劃資料萃取、資料清理 \n2.\t數據分析、資訊視覺化、說明分析結果、提出建議及後續成效評估 \n3.\t蒐集競業資訊、報表整理\n\n※工作待遇依個人經歷及專長等條件參考核定，如相關經歷豐富可議更優渥薪資，歡迎能力優秀的您應徵面談\n",
+      "mrtDist": 0,
+      "jobAddress": "安和東路3號6樓",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "數據分析師(碩士)",
+      "jobNameSnippet": "數據分析師(碩士)",
+      "jobNo": "12841689",
+      "jobRo": 1,
+      "jobType": 2,
+      "lat": 24.1743319,
+      "lon": 120.6236257,
+      "link": {
+        "job": "https://www.104.com.tw/job/7n8pl",
+        "cust": "https://www.104.com.tw/company/1a2x6bkrny",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/7n8pl?channel=104rpt"
+      },
+      "major": [
+        "數理統計相關",
+        "統計學相關",
+        "資訊管理相關"
+      ],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        5,
+        6
+      ],
+      "period": 0,
+      "remoteWorkType": 0,
+      "s10": 50,
+      "salaryHigh": 9999999,
+      "salaryLow": 52000,
+      "tags": {
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        },
+        "wf18": {
+          "desc": "",
+          "param": "wf18"
+        },
+        "wf30": {
+          "desc": "",
+          "param": "wf30"
+        },
+        "wf12": {
+          "desc": "",
+          "param": "wf12"
+        },
+        "wf31": {
+          "desc": "",
+          "param": "wf31"
+        },
+        "wf27": {
+          "desc": "",
+          "param": "wf27"
+        },
+        "wf29": {
+          "desc": "",
+          "param": "wf29"
+        },
+        "wf34": {
+          "desc": "",
+          "param": "wf34"
+        },
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        },
+        "wf9": {
+          "desc": "",
+          "param": "wf9"
+        },
+        "wf10": {
+          "desc": "",
+          "param": "wf10"
+        },
+        "wf3": {
+          "desc": "",
+          "param": "wf3"
+        },
+        "wf26": {
+          "desc": "",
+          "param": "wf26"
+        },
+        "wf28": {
+          "desc": "",
+          "param": "wf28"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "0930-1830",
+      "hrBehaviorPR": 0.44655830755663783,
+      "jobCat": [
+        2004001010,
+        2003002008
+      ],
+      "labels": [
+        "c@wf2",
+        "c@wf18",
+        "c@wf30",
+        "c@wf12",
+        "c@wf31",
+        "c@wf27",
+        "indexjob@ij039",
+        "indexjob@ij010",
+        "c@wf29",
+        "association@j00021",
+        "c@wf34",
+        "c@wf7",
+        "c@graduates_welcome",
+        "c@wf9",
+        "c@wf10",
+        "c@wf3",
+        "c@wf26",
+        "c@wf28",
+        "association@j00020"
+      ],
+      "languageRequirements": [
+        {
+          "language": 1,
+          "ability": {
+            "listening": 4,
+            "speaking": 4,
+            "reading": 4,
+            "writing": 4
+          }
+        }
+      ],
+      "acceptRole": [
+        2
+      ],
+      "employeeCount": 250,
+      "pcSkills": [
+        {
+          "code": "12001003008",
+          "description": "C"
+        },
+        {
+          "code": "12001003009",
+          "description": "C#"
+        },
+        {
+          "code": "12001003010",
+          "description": "C++"
+        },
+        {
+          "code": "12001003025",
+          "description": "Java"
+        },
+        {
+          "code": "12001003034",
+          "description": "Matlab"
+        },
+        {
+          "code": "12001003045",
+          "description": "Python"
+        },
+        {
+          "code": "12001003078",
+          "description": "R"
+        },
+        {
+          "code": "12001008003",
+          "description": "Excel"
+        },
+        {
+          "code": "12001008012",
+          "description": "PowerPoint"
+        }
+      ],
+      "pddScore": 0.04322002,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/0062/130000000130062/logo.png?v=20260511155218",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786499349,
+        "lastCustReplyTimestamp": 1782377941,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260806",
+      "applyCnt": 11,
+      "coIndustry": 1016002002,
+      "coIndustryDesc": "飲料店業",
+      "custName": "可不可熟成茶行_永醇誠股份有限公司",
+      "custNo": "130000000133932",
+      "description": "▸主要工作項目\n• 負責全台連鎖門市POS系統與線上點餐後台營運，包含多種區域版本菜單建置、新品加料/糖冰邏輯設定，以及檔期促銷活動維護。\n• 管理並維護外送平台菜單串接與代碼對位，協助釐清並排除門市端進單異常、POS 設備連線等突發狀況，確保第一線營運順暢。\n• 維護與管理鼎新 Cosmos ERP 系統、電子簽核 (EasyFlow) 及 B2B 系統，進行日常參數調整、帳務邏輯排除與進銷存功能優化。\n• 規劃軟體導入流程與新系統架構，負責前置需求確認、技術規格評估，並統籌各系統開發商之專案進度追蹤。\n• 總部軟硬體、基礎網路環境、Mac設備故障排除及系統安裝設定。\n• 建立新系統與日常操作之標準使用手冊 (SOP) 及程序，並對其進行教育訓練。\n• 負責企業內部 NAS 伺服器之管理與維護，包含人員帳號建置、共用資料夾存取權限控管、以及日常資料備份防護。\n• 蒐集內部系統及跨部門的需求並進行整合、溝通、協調。\n• 與使用者和管理階層溝通，評估系統修改及建立新系統的需求。\n• 規劃系統新專案之架構及功能上線事宜，追蹤並匯報專案進度和識別專案風險，確保各專案符合時程規劃。\n• 協助專案測試及追蹤檢討，負責成果交付品質檢查、協助營運端導入。\n• 協助釐清門市端設備異常狀況並提供協助。\n• 主管交辦及其他資訊相關事項。\n\n☕ 加入我們，你將享有\n • 專業成長機會：內部訓練、技能培訓，讓你的創意與技術持續進化。\n • 年節獎金 & 久任獎金：你的努力，我們用行動肯定。\n • 健康與生活平衡：生日假、健康檢查補助、定期員工聚餐與節慶活動。\n • 滿滿好茶：公司飲水機流出的 可不可茶飲無限暢飲！",
+      "descSnippet": "▸主要工作項目\n• 負責全台連鎖門市POS系統與線上點餐後台營運，包含多種區域版本菜單建置、新品加料/糖冰邏輯設定，以及檔期促銷活動維護。\n• 管理並維護外送平台菜單串接與代碼對位，協助釐清並排除門市端進單異常、POS 設備連線等突發狀況，確保第一線營運順暢。\n• 維護與管理鼎新 Cosmos ERP 系統、電子簽核 (EasyFlow) 及 B2B 系統，進行日常參數調整、帳務邏輯排除與進銷存功能優化。\n• 規劃軟體導入流程與新系統架構，負責前置需求確認、技術規格評估，並統籌各系統開發商之專案進度追蹤。\n• 總部軟硬體、基礎網路環境、Mac設備故障排除及系統安裝設定。\n• 建立新系統與日常操作之標準使用手冊 (SOP) 及程序，並對其進行教育訓練。\n• 負責企業內部 NAS 伺服器之管理與維護，包含人員帳號建置、共用資料夾存取權限控管、以及日常資料備份防護。\n• 蒐集內部系統及跨部門的需求並進行整合、溝通、協調。\n• 與使用者和管理階層溝通，評估系統修改及建立新系統的需求。\n• 規劃系統新專案之架構及功能上線事宜，追蹤並匯報專案進度和識別專案風險，確保各專案符合時程規劃。\n• 協助專案測試及追蹤檢討，負責成果交付品質檢查、協助營運端導入。\n• 協助釐清門市端設備異常狀況並提供協助。\n• 主管交辦及其他資訊相關事項。\n\n☕ 加入我們，你將享有\n • 專業成長機會：內部訓練、技能培訓，讓你的創意與技術持續進化。\n • 年節獎金 & 久任獎金：你的努力，我們用行動肯定。\n • 健康與生活平衡：生日假、健康檢查補助、定期員工聚餐與節慶活動。\n • 滿滿好茶：公司飲水機流出的 可不可茶飲無限暢飲！",
+      "mrtDist": 0.3,
+      "jobAddress": "文心路四段448號",
+      "jobAddrNo": 6001008006,
+      "jobAddrNoDesc": "台中市北屯區",
+      "jobName": "可不可熟成紅茶_總部_資訊人員",
+      "jobNameSnippet": "可不可熟成紅茶_總部_資訊人員",
+      "jobNo": "13310095",
+      "jobRo": 1,
+      "jobType": 0,
+      "lat": 24.1722865,
+      "lon": 120.6821386,
+      "link": {
+        "job": "https://www.104.com.tw/job/7xa4v",
+        "cust": "https://www.104.com.tw/company/1a2x6bkung",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/7xa4v?channel=104rpt"
+      },
+      "major": [
+        "資訊管理相關"
+      ],
+      "mrt": "99003001005",
+      "mrtDesc": "捷運文心崇德站",
+      "optionEdu": [
+        4
+      ],
+      "period": 2,
+      "remoteWorkType": 0,
+      "s10": 10,
+      "salaryHigh": 0,
+      "salaryLow": 0,
+      "tags": {
+        "landmark": {
+          "desc": "距捷運文心崇德站約300公尺"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "",
+      "hrBehaviorPR": 0.4925825786842023,
+      "jobCat": [
+        2007002007,
+        2007002006,
+        2007002002
+      ],
+      "labels": [
+        "association@j00017",
+        "association@j00014",
+        "45plus@45invited",
+        "foreigners@pt_fc_em_jbs",
+        "association@j00018",
+        "association@j00025",
+        "senior@senior_job_G",
+        "association@j00004",
+        "association@j00021",
+        "association@j00013",
+        "c@graduates_welcome"
+      ],
+      "languageRequirements": [
+        {
+          "language": 1,
+          "ability": {
+            "listening": 4,
+            "speaking": 4,
+            "reading": 4,
+            "writing": 4
+          }
+        }
+      ],
+      "acceptRole": [
+        2,
+        64,
+        2048,
+        32768
+      ],
+      "employeeCount": 100,
+      "pcSkills": [
+        {
+          "code": "12001007038",
+          "description": "LAN"
+        },
+        {
+          "code": "12001001046",
+          "description": "Windows 10"
+        },
+        {
+          "code": "12001003006",
+          "description": "ASP.NET"
+        },
+        {
+          "code": "12001004030",
+          "description": "Access"
+        },
+        {
+          "code": "12001004031",
+          "description": "MS SQL"
+        },
+        {
+          "code": "12001004032",
+          "description": "MySQL"
+        },
+        {
+          "code": "12001005017",
+          "description": "Vmware"
+        },
+        {
+          "code": "12001005023",
+          "description": "AWS"
+        },
+        {
+          "code": "12001006013",
+          "description": "HTML"
+        },
+        {
+          "code": "12001001045",
+          "description": "Windows Server 2012"
+        },
+        {
+          "code": "12001007074",
+          "description": "VLAN"
+        },
+        {
+          "code": "12001007076",
+          "description": "WAN"
+        },
+        {
+          "code": "12001008001",
+          "description": "Adobe Acrobat"
+        },
+        {
+          "code": "12001008003",
+          "description": "Excel"
+        },
+        {
+          "code": "12001008012",
+          "description": "PowerPoint"
+        },
+        {
+          "code": "12001008016",
+          "description": "Word"
+        },
+        {
+          "code": "12001011012",
+          "description": "Power BI​"
+        },
+        {
+          "code": "12006001016",
+          "description": "鼎新"
+        },
+        {
+          "code": "12001001008",
+          "description": "Mac OS"
+        }
+      ],
+      "pddScore": 0.038791116,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/3932/130000000133932/logo.png?v=20260324115620",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786408457,
+        "lastCustReplyTimestamp": 1785751060,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260813",
+      "applyCnt": 9,
+      "coIndustry": 1012001004,
+      "coIndustryDesc": "其他醫療保健服務業",
+      "custName": "醫療財團法人台灣血液基金會台中捐血中心",
+      "custNo": "130000000099631",
+      "description": "1.捐血者資訊諮詢、維護、補發服務。\n2.執行電腦軟、硬體各項設備的安裝及問題排除。\n3.協助撰寫及維護內部簡易程式(如網頁表單、資料查詢工具)\n4.系統帳號管理、使用者權限設定與系統操作協助。\n5.協助推動數位化流程及資訊系統改善。\n6.具備基本程式撰寫能力(如Python、HTML/CSS/JavaScript)\n7.熟悉Office 軟體操作。\n8.具良好溝通能力與學習意願，能獨立完成交辦任務。\n9.有內部系統維運或MIS工作經驗者尤佳。",
+      "descSnippet": "1.捐血者資訊諮詢、維護、補發服務。\n2.執行電腦軟、硬體各項設備的安裝及問題排除。\n3.協助撰寫及維護內部簡易程式(如網頁表單、資料查詢工具)\n4.系統帳號管理、使用者權限設定與系統操作協助。\n5.協助推動數位化流程及資訊系統改善。\n6.具備基本程式撰寫能力(如Python、HTML/CSS/JavaScript)\n7.熟悉Office 軟體操作。\n8.具良好溝通能力與學習意願，能獨立完成交辦任務。\n9.有內部系統維運或MIS工作經驗者尤佳。",
+      "mrtDist": 0,
+      "jobAddress": "臺灣大道四段1176號",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "資訊課全時臨僱人員",
+      "jobNameSnippet": "資訊課全時臨僱人員",
+      "jobNo": "13310000",
+      "jobRo": 1,
+      "jobType": 0,
+      "lat": 24.1846057,
+      "lon": 120.6125981,
+      "link": {
+        "job": "https://www.104.com.tw/job/7xa28",
+        "cust": "https://www.104.com.tw/company/1a2x6bk46n",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/7xa28?channel=104rpt"
+      },
+      "major": [
+        "資訊管理相關",
+        "資訊工程相關"
+      ],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        3,
+        4
+      ],
+      "period": 0,
+      "remoteWorkType": 0,
+      "s10": 50,
+      "salaryHigh": 36000,
+      "salaryLow": 32000,
+      "tags": [],
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "",
+      "hrBehaviorPR": 0.6695867820388285,
+      "jobCat": [
+        2007002006,
+        2007002007,
+        2007001009
+      ],
+      "labels": [
+        "association@j00014"
+      ],
+      "languageRequirements": [],
+      "acceptRole": [
+        64
+      ],
+      "employeeCount": 0,
+      "pcSkills": [
+        {
+          "code": "12004001039",
+          "description": "VM"
+        },
+        {
+          "code": "12001004032",
+          "description": "MySQL"
+        },
+        {
+          "code": "12001006017",
+          "description": "JavaScript"
+        },
+        {
+          "code": "12001006032",
+          "description": "CSS"
+        },
+        {
+          "code": "12001011012",
+          "description": "Power BI​"
+        }
+      ],
+      "pddScore": 0.038524255,
+      "custLogo": "",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1785901237,
+        "lastCustReplyTimestamp": 1785901257,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260803",
+      "applyCnt": 5,
+      "coIndustry": 1005001009,
+      "coIndustryDesc": "其他教育服務業",
+      "custName": "東海大學",
+      "custNo": "52004800005",
+      "description": "-具實務經驗\n-對學習新技術具有熱情、企圖心與責任感，具備良好溝通能力，可團隊合作開發亦可獨立作業\n-對於不同產業領域的快速理解與實作能力\n-薪資依實務經驗與年資可面議\n\n職務需求\n\n1.Data Architect, Knowledge Graph Engineer 知識語意資料結構\n知識圖譜設計工程師 / BI Engineer / 資料工程師\n擅長工具：power bi , ETL , Neo4j\n\n2.AI Engineer\nAI / GenAI / Agent / LLM / RAG\n開發Agent流程與平台服務、LLM 調校\n\n3.Full Stack Developer\n資料pipeline / ETL處理 / 系統開發設計工程師 / \n開發與建置 Ontology搜尋資料庫、系統平台框架開發、資料串接整合與清洗、資料視覺化\n\n4.Frontend / UX 平台前介面與UX設計工程師\n平台UX/UI 設計與開發\n",
+      "descSnippet": "-具實務經驗\n-對學習新技術具有熱情、企圖心與責任感，具備良好溝通能力，可團隊合作開發亦可獨立作業\n-對於不同產業領域的快速理解與實作能力\n-薪資依實務經驗與年資可面議\n\n職務需求\n\n1.Data Architect, Knowledge Graph Engineer 知識語意資料結構\n知識圖譜設計工程師 / BI Engineer / 資料工程師\n擅長工具：power bi , ETL , Neo4j\n\n2.AI Engineer\nAI / GenAI / Agent / LLM / RAG\n開發Agent流程與平台服務、LLM 調校\n\n3.Full Stack Developer\n資料pipeline / ETL處理 / 系統開發設計工程師 / \n開發與建置 Ontology搜尋資料庫、系統平台框架開發、資料串接整合與清洗、資料視覺化\n\n4.Frontend / UX 平台前介面與UX設計工程師\n平台UX/UI 設計與開發\n",
+      "mrtDist": 0,
+      "jobAddress": "台灣大道四段1727號(東海大學)人工智慧中心",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "東海大學人工智慧中心誠徵AI工程師",
+      "jobNameSnippet": "東海大學人工智慧中心誠徵AI工程師",
+      "jobNo": "12537888",
+      "jobRo": 1,
+      "jobType": 0,
+      "lat": 24.1824689,
+      "lon": 120.6025474,
+      "link": {
+        "job": "https://www.104.com.tw/job/7gqao",
+        "cust": "https://www.104.com.tw/company/nw2bchx",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/7gqao?channel=104rpt"
+      },
+      "major": [
+        "資訊工程相關",
+        "數理統計相關",
+        "其他數學及電算機科學相關"
+      ],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        4,
+        5
+      ],
+      "period": 0,
+      "remoteWorkType": 0,
+      "s10": 10,
+      "salaryHigh": 0,
+      "salaryLow": 0,
+      "tags": [],
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "9:00-18:00",
+      "hrBehaviorPR": 0.5188076618336295,
+      "jobCat": [
+        2007001004,
+        2007001020
+      ],
+      "labels": [
+        "association@j00002_002",
+        "foreigners@pt_fc_em_jbs",
+        "indexjob@ij017",
+        "foreigners@full_fc_em_jbs"
+      ],
+      "languageRequirements": [],
+      "acceptRole": [],
+      "employeeCount": 0,
+      "pcSkills": [
+        {
+          "code": "12001011012",
+          "description": "Power BI​"
+        },
+        {
+          "code": "12001004018",
+          "description": "ETL"
+        },
+        {
+          "code": "12001003088",
+          "description": "NLP"
+        },
+        {
+          "code": "12001003097",
+          "description": "LLM"
+        }
+      ],
+      "pddScore": 0.036243185,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/0005/52004800005/logo.png?v=20220304074554",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786588875,
+        "lastCustReplyTimestamp": null,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260807",
+      "applyCnt": 4,
+      "coIndustry": 1001001001,
+      "coIndustryDesc": "電腦系統整合服務業",
+      "custName": "巨鷗科技股份有限公司",
+      "custNo": "12898070000",
+      "description": "(1)各類憑證&資料整理\n(2)合約書歸檔\n(3)差旅單彙整\n(4)協助出納銀行業務\n(5)其他主管交辦事項\n\n※必備條件：\n1.具 AI 基礎應用素養（了解 AI 基本原理、倫理與資料隱私），能評估 AI 導入可行性與效益。\n2.能運用 AI 工具提升財務作業效率與準確性。\n\n※加分條件：\n1.具備 AI 財務應用經驗（如：ChatGPT、Power BI、文件的自動化整理與檢核）。\n2.能規劃並導入 AI 於財務流程（如票據辨識、發票驗真），以提升作業效率與準確性。",
+      "descSnippet": "(1)各類憑證&資料整理\n(2)合約書歸檔\n(3)差旅單彙整\n(4)協助出納銀行業務\n(5)其他主管交辦事項\n\n※必備條件：\n1.具 AI 基礎應用素養（了解 AI 基本原理、倫理與資料隱私），能評估 AI 導入可行性與效益。\n2.能運用 AI 工具提升財務作業效率與準確性。\n\n※加分條件：\n1.具備 AI 財務應用經驗（如：ChatGPT、Power BI、文件的自動化整理與檢核）。\n2.能規劃並導入 AI 於財務流程（如票據辨識、發票驗真），以提升作業效率與準確性。",
+      "mrtDist": 0,
+      "jobAddress": "朝富路213號21樓之11 (CBD時代廣場大樓)",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "【總管理處】會計助理（實習）",
+      "jobNameSnippet": "【總管理處】會計助理（實習）",
+      "jobNo": "14480064",
+      "jobRo": 2,
+      "jobType": 0,
+      "lat": 24.1623335,
+      "lon": 120.6358051,
+      "link": {
+        "job": "https://www.104.com.tw/job/8mcw0",
+        "cust": "https://www.104.com.tw/company/5xb6ei8",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/8mcw0?channel=104rpt"
+      },
+      "major": [
+        "會計學相關",
+        "財稅金融相關",
+        "一般商業學類"
+      ],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        3,
+        4
+      ],
+      "period": 0,
+      "remoteWorkType": 0,
+      "s10": 30,
+      "salaryHigh": 196,
+      "salaryLow": 196,
+      "tags": {
+        "wf26": {
+          "desc": "",
+          "param": "wf26"
+        },
+        "wf32": {
+          "desc": "",
+          "param": "wf32"
+        },
+        "wf9": {
+          "desc": "",
+          "param": "wf9"
+        },
+        "wf3": {
+          "desc": "",
+          "param": "wf3"
+        },
+        "wf31": {
+          "desc": "",
+          "param": "wf31"
+        },
+        "wf29": {
+          "desc": "",
+          "param": "wf29"
+        },
+        "wf1": {
+          "desc": "",
+          "param": "wf1"
+        },
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        },
+        "wf30": {
+          "desc": "",
+          "param": "wf30"
+        },
+        "wf28": {
+          "desc": "",
+          "param": "wf28"
+        },
+        "wf10": {
+          "desc": "",
+          "param": "wf10"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "9:00~18:30(一周三日)",
+      "hrBehaviorPR": 0.6158451697233127,
+      "jobCat": [
+        2003001010
+      ],
+      "labels": [
+        "indexjob@ij017",
+        "indexjob@ij053",
+        "c@wf26",
+        "c@wf32",
+        "association@j00002_002",
+        "c@wf9",
+        "indexjob@ij052",
+        "association@j00021",
+        "foreigners@full_fc_em_jbs",
+        "c@wf3",
+        "c@wf31",
+        "association@j00026",
+        "c@wf29",
+        "indexjob@ij042",
+        "c@wf1",
+        "joblist_search@jl_j0004_001.26",
+        "c@intern_welcome",
+        "c@wf7",
+        "c@intern_keyword",
+        "association@j00033",
+        "c@intern_welcome_keyword",
+        "indexjob@ij064",
+        "indexjob@ij055",
+        "c@wf30",
+        "c@wf28",
+        "c@wf10"
+      ],
+      "languageRequirements": [],
+      "acceptRole": [
+        8,
+        1024
+      ],
+      "employeeCount": 120,
+      "pcSkills": [
+        {
+          "code": "12001008003",
+          "description": "Excel"
+        },
+        {
+          "code": "12001008016",
+          "description": "Word"
+        },
+        {
+          "code": "12001010003",
+          "description": "中文打字50~75"
+        }
+      ],
+      "pddScore": 0.035267256,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/0000/12898070000/logo.jpg?v=20260626112104",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786588722,
+        "lastCustReplyTimestamp": 1786064011,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260810",
+      "applyCnt": 1,
+      "coIndustry": 1001001002,
+      "coIndustryDesc": "電腦軟體服務業",
+      "custName": "塶樂微創有限公司",
+      "custNo": "130000000160903",
+      "description": "工作內容：\n－部署和實施 Google Analytics 等網站監測工具，並維護其運行，持續採集線上資料\n－使用 Google Tag Manager 佈署網站所需的各種追蹤事件\n\n任職需求：\n－具 Javascript Framework 經驗者（ex：React, Vue）\n－具 SPA 與前後端分離的開發經驗。\n－具 網頁元素事件綁定及處理經驗者。\n－2年以上的前端開發經驗(前台開發者優)。\n\n加分條件：\n－ 具 Tag Manager（不限於 Google 平台）經驗者\n－ Google Analytics 工具使用或配合經驗\n－ Power BI 或 Looker的使用經驗\n－ 具備 SQL、BigQuery、RDBMS使用經驗。\n",
+      "descSnippet": "工作內容：\n－部署和實施 Google Analytics 等網站監測工具，並維護其運行，持續採集線上資料\n－使用 Google Tag Manager 佈署網站所需的各種追蹤事件\n\n任職需求：\n－具 Javascript Framework 經驗者（ex：React, Vue）\n－具 SPA 與前後端分離的開發經驗。\n－具 網頁元素事件綁定及處理經驗者。\n－2年以上的前端開發經驗(前台開發者優)。\n\n加分條件：\n－ 具 Tag Manager（不限於 Google 平台）經驗者\n－ Google Analytics 工具使用或配合經驗\n－ Power BI 或 Looker的使用經驗\n－ 具備 SQL、BigQuery、RDBMS使用經驗。\n",
+      "mrtDist": 0,
+      "jobAddress": "",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "Google Analytic數據工程師",
+      "jobNameSnippet": "Google Analytic數據工程師",
+      "jobNo": "14321029",
+      "jobRo": 1,
+      "jobType": 2,
+      "lat": 24.1769764,
+      "lon": 120.6424333,
+      "link": {
+        "job": "https://www.104.com.tw/job/8iy6d",
+        "cust": "https://www.104.com.tw/company/1a2x6blfgn",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/8iy6d?channel=104rpt"
+      },
+      "major": [],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        4,
+        5,
+        6
+      ],
+      "period": 3,
+      "remoteWorkType": 0,
+      "s10": 10,
+      "salaryHigh": 0,
+      "salaryLow": 0,
+      "tags": {
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        },
+        "wf1": {
+          "desc": "",
+          "param": "wf1"
+        },
+        "wf9": {
+          "desc": "",
+          "param": "wf9"
+        },
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        },
+        "wf26": {
+          "desc": "",
+          "param": "wf26"
+        },
+        "wf18": {
+          "desc": "",
+          "param": "wf18"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "",
+      "hrBehaviorPR": 0.334759817899397,
+      "jobCat": [
+        2004001007,
+        2004001005,
+        2004001010
+      ],
+      "labels": [
+        "c@wf2",
+        "c@wf1",
+        "c@wf9",
+        "c@wf7",
+        "indexjob@ij023",
+        "c@wf26",
+        "joblist_search@jl_j0012_001.80",
+        "association@j00049",
+        "c@wf18"
+      ],
+      "languageRequirements": [],
+      "acceptRole": [],
+      "employeeCount": 30,
+      "pcSkills": [
+        {
+          "code": "12001003045",
+          "description": "Python"
+        },
+        {
+          "code": "12001004032",
+          "description": "MySQL"
+        },
+        {
+          "code": "12001004041",
+          "description": "RDBMS"
+        },
+        {
+          "code": "12001011002",
+          "description": "Google Analytics"
+        },
+        {
+          "code": "12001011003",
+          "description": "Google Tag Manager"
+        },
+        {
+          "code": "12001011012",
+          "description": "Power BI​"
+        },
+        {
+          "code": "12001011014",
+          "description": "Looker studio"
+        }
+      ],
+      "pddScore": 0.035110828,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/0903/130000000160903/logo.jpg?v=20251203165015",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786430315,
+        "lastCustReplyTimestamp": null,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260810",
+      "applyCnt": 7,
+      "coIndustry": 1001001002,
+      "coIndustryDesc": "電腦軟體服務業",
+      "custName": "億力資訊股份有限公司",
+      "custNo": "25146875000",
+      "description": "主要負責「玻璃基板」亞太（APAC）廠區所有供應鏈相關系統的運作、日常維護以及客製化功能開發。此職位需要兼具扎實的程式開發能力、資料庫管理技術，以及跨國供應鏈系統的故障排除經驗，是確保亞太區生產營運順暢的關鍵角色。角色可以是 PM/SA/SD/BA(依專業技術與能力 評核)\n。\n【工作內容】:\n1.系統維護與客製化開發： 負責亞太廠區供應鏈系統的日常維護，並依據業務需求進行系統客製化（Customization）功能設計與程式撰寫。\n2.系統部署與故障排除： 執行系統程式的安裝、組態設定，並針對技術問題進行即時的 Debug 與故障排除。\n3.IT 服務與案例管理： 負責接收、分析並處理康寧內部系統（如：ServiceNow）提交的系統案例（Tickets）。\n\n【技術條件】:\n1.具備 Win Form 與 Web Form 開發經驗，熟練使用 C# 或 VB.NET。\n2.具備 Java 程式設計能力。\n3.具備 Python / JPython 編程與腳本撰寫能力。\n4.熟練掌握 Microsoft SQL Server 與 Oracle Database\n5.熟練使用 Git、GitLab、SVN 等工具進行系統原始碼管理。\n6.熟悉 Microsoft Power Platform 生態系，包含：\nPower BI、Power Apps、Power Automate\n7. 英文優（因需對接亞太廠區，具備流利的商務英文溝通與讀寫能力）\n",
+      "descSnippet": "主要負責「玻璃基板」亞太（APAC）廠區所有供應鏈相關系統的運作、日常維護以及客製化功能開發。此職位需要兼具扎實的程式開發能力、資料庫管理技術，以及跨國供應鏈系統的故障排除經驗，是確保亞太區生產營運順暢的關鍵角色。角色可以是 PM/SA/SD/BA(依專業技術與能力 評核)\n。\n【工作內容】:\n1.系統維護與客製化開發： 負責亞太廠區供應鏈系統的日常維護，並依據業務需求進行系統客製化（Customization）功能設計與程式撰寫。\n2.系統部署與故障排除： 執行系統程式的安裝、組態設定，並針對技術問題進行即時的 Debug 與故障排除。\n3.IT 服務與案例管理： 負責接收、分析並處理康寧內部系統（如：ServiceNow）提交的系統案例（Tickets）。\n\n【技術條件】:\n1.具備 Win Form 與 Web Form 開發經驗，熟練使用 C# 或 VB.NET。\n2.具備 Java 程式設計能力。\n3.具備 Python / JPython 編程與腳本撰寫能力。\n4.熟練掌握 Microsoft SQL Server 與 Oracle Database\n5.熟練使用 Git、GitLab、SVN 等工具進行系統原始碼管理。\n6.熟悉 Microsoft Power Platform 生態系，包含：\nPower BI、Power Apps、Power Automate\n7. 英文優（因需對接亞太廠區，具備流利的商務英文溝通與讀寫能力）\n",
+      "mrtDist": 0,
+      "jobAddress": "台中科學園區",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "Supply Chain 供應鏈系統PM(or SA/SD/BA)(外商-台中/台南)",
+      "jobNameSnippet": "Supply Chain 供應鏈系統PM(or SA/SD/BA)(外商-台中/台南)",
+      "jobNo": "14686316",
+      "jobRo": 1,
+      "jobType": 0,
+      "lat": 24.2096567,
+      "lon": 120.6192971,
+      "link": {
+        "job": "https://www.104.com.tw/job/8qs18",
+        "cust": "https://www.104.com.tw/company/bjvssxk",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/8qs18?channel=104rpt"
+      },
+      "major": [],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        3,
+        4,
+        5
+      ],
+      "period": 6,
+      "remoteWorkType": 0,
+      "s10": 50,
+      "salaryHigh": 9999999,
+      "salaryLow": 80000,
+      "tags": {
+        "wf9": {
+          "desc": "",
+          "param": "wf9"
+        },
+        "wf10": {
+          "desc": "",
+          "param": "wf10"
+        },
+        "wf26": {
+          "desc": "",
+          "param": "wf26"
+        },
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        },
+        "wf3": {
+          "desc": "",
+          "param": "wf3"
+        },
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        },
+        "wf1": {
+          "desc": "",
+          "param": "wf1"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "",
+      "hrBehaviorPR": 0.7521520369931018,
+      "jobCat": [
+        2007001004,
+        2007001022,
+        2007002006
+      ],
+      "labels": [
+        "c@wf9",
+        "indexjob@ij019",
+        "c@wf10",
+        "association@j00004",
+        "c@wf26",
+        "c@wf2",
+        "c@wf3",
+        "c@wf7",
+        "45plus@45invited",
+        "indexjob@ij039",
+        "foreigners@jbs_invite_mid_chinese",
+        "c@wf1"
+      ],
+      "languageRequirements": [
+        {
+          "language": 1,
+          "ability": {
+            "listening": 8,
+            "speaking": 8,
+            "reading": 2,
+            "writing": 2
+          }
+        }
+      ],
+      "acceptRole": [],
+      "employeeCount": 180,
+      "pcSkills": [],
+      "pddScore": 0.031681444,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/5000/25146875000/logo.gif?v=20240731111104",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786417997,
+        "lastCustReplyTimestamp": 1786438118,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260812",
+      "applyCnt": 3,
+      "coIndustry": 1009002002,
+      "coIndustryDesc": "運輸工具設備租賃業",
+      "custName": "和運租車股份有限公司",
+      "custNo": "70364778000",
+      "description": "【工作內容】\t\n1.客戶相關資料輸入、處理及追蹤。\t\n2.每月製作業務相關報表，以供管理階層參考。\t\n3.協助業務人員處理及支援內部行政文書作業。\t\n4.製作會議資料提供主管彙報使用。\t\n5.協助跨部門之間聯繫業務。\t\n6.其他相關主管交辦事項。\t\n\t\n【工作待遇】\t\n1.營利共享，具競爭力的年薪(含員工紅利、三節禮金)\t\n2.完善升遷/輪調制度\t\n3.團體保險保障\t\n4.在職訓練\t\n5.享有每年調薪\t\n\t\n【工作技能】\t\n1.做事細心、肯努力學習者佳\t\n2.具汽車產業相關經驗者佳\t\n",
+      "descSnippet": "【工作內容】\t\n1.客戶相關資料輸入、處理及追蹤。\t\n2.每月製作業務相關報表，以供管理階層參考。\t\n3.協助業務人員處理及支援內部行政文書作業。\t\n4.製作會議資料提供主管彙報使用。\t\n5.協助跨部門之間聯繫業務。\t\n6.其他相關主管交辦事項。\t\n\t\n【工作待遇】\t\n1.營利共享，具競爭力的年薪(含員工紅利、三節禮金)\t\n2.完善升遷/輪調制度\t\n3.團體保險保障\t\n4.在職訓練\t\n5.享有每年調薪\t\n\t\n【工作技能】\t\n1.做事細心、肯努力學習者佳\t\n2.具汽車產業相關經驗者佳\t\n",
+      "mrtDist": 0,
+      "jobAddress": "臺中市西屯區臺灣大道三段658號16樓之2",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "業務助理(長租,中區直營處)",
+      "jobNameSnippet": "業務助理(長租,中區直營處)",
+      "jobNo": "14769237",
+      "jobRo": 1,
+      "jobType": 2,
+      "lat": 24.1704698,
+      "lon": 120.6380589,
+      "link": {
+        "job": "https://www.104.com.tw/job/8sk0l",
+        "cust": "https://www.104.com.tw/company/wbpde6o",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/8sk0l?channel=104rpt"
+      },
+      "major": [],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        3,
+        4
+      ],
+      "period": 2,
+      "remoteWorkType": 0,
+      "s10": 50,
+      "salaryHigh": 41800,
+      "salaryLow": 29500,
+      "tags": {
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        },
+        "wf10": {
+          "desc": "",
+          "param": "wf10"
+        },
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        },
+        "wf33": {
+          "desc": "",
+          "param": "wf33"
+        },
+        "wf30": {
+          "desc": "",
+          "param": "wf30"
+        },
+        "wf4": {
+          "desc": "",
+          "param": "wf4"
+        },
+        "wf25": {
+          "desc": "",
+          "param": "wf25"
+        },
+        "wf3": {
+          "desc": "",
+          "param": "wf3"
+        },
+        "wf32": {
+          "desc": "",
+          "param": "wf32"
+        },
+        "wf31": {
+          "desc": "",
+          "param": "wf31"
+        },
+        "wf28": {
+          "desc": "",
+          "param": "wf28"
+        },
+        "wf1": {
+          "desc": "",
+          "param": "wf1"
+        },
+        "wf9": {
+          "desc": "",
+          "param": "wf9"
+        },
+        "wf29": {
+          "desc": "",
+          "param": "wf29"
+        },
+        "wf23": {
+          "desc": "",
+          "param": "wf23"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "08:30~17:30",
+      "hrBehaviorPR": 0.31287238185619065,
+      "jobCat": [
+        2005003013,
+        2002001003,
+        2005003004
+      ],
+      "labels": [
+        "indexjob@ij014",
+        "c@wf7",
+        "c@wf10",
+        "association@j00024",
+        "c@wf2",
+        "c@wf33",
+        "c@wf30",
+        "c@wf4",
+        "c@wf25",
+        "association@j00002_002",
+        "c@wf3",
+        "c@wf32",
+        "c@wf31",
+        "association@j00021",
+        "joblist_search@jl_j0002_002.15",
+        "c@wf28",
+        "c@wf1",
+        "association@j00025",
+        "foreigners@full_fc_em_jbs",
+        "indexjob@ij044",
+        "c@wf9",
+        "c@wf29",
+        "indexjob@ij003",
+        "c@wf23"
+      ],
+      "languageRequirements": [],
+      "acceptRole": [],
+      "employeeCount": 912,
+      "pcSkills": [
+        {
+          "code": "12001008003",
+          "description": "Excel"
+        },
+        {
+          "code": "12001008012",
+          "description": "PowerPoint"
+        },
+        {
+          "code": "12001008016",
+          "description": "Word"
+        }
+      ],
+      "pddScore": 0.03079809,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/8000/70364778000/logo.jpg?v=20260529163848",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786589294,
+        "lastCustReplyTimestamp": null,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260812",
+      "applyCnt": 1,
+      "coIndustry": 1009002002,
+      "coIndustryDesc": "運輸工具設備租賃業",
+      "custName": "和運租車股份有限公司",
+      "custNo": "70364778000",
+      "description": "【工作內容】\t\n1.業務開發及管理與年度目標達成\n2.營業處營運績效管理\n3.團隊領導與組織培訓\n\t\n【工作技能】\n1.具備汽車租賃相關產業經驗5年以上\t\n2. 具備良好的溝通協調能力及團隊合作精神。\n3. 具備基礎數據分析能力。\n4. 積極主動、抗壓性強、負責的工作態度。\n\n\n",
+      "descSnippet": "【工作內容】\t\n1.業務開發及管理與年度目標達成\n2.營業處營運績效管理\n3.團隊領導與組織培訓\n\t\n【工作技能】\n1.具備汽車租賃相關產業經驗5年以上\t\n2. 具備良好的溝通協調能力及團隊合作精神。\n3. 具備基礎數據分析能力。\n4. 積極主動、抗壓性強、負責的工作態度。\n\n\n",
+      "mrtDist": 0,
+      "jobAddress": "臺灣大道三段658號16樓之2",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "業務主管(長租二,中區直營)",
+      "jobNameSnippet": "業務主管(長租二,中區直營)",
+      "jobNo": "15114662",
+      "jobRo": 1,
+      "jobType": 2,
+      "lat": 24.1704474,
+      "lon": 120.6379591,
+      "link": {
+        "job": "https://www.104.com.tw/job/8zyjq",
+        "cust": "https://www.104.com.tw/company/wbpde6o",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/8zyjq?channel=104rpt"
+      },
+      "major": [],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        3,
+        4
+      ],
+      "period": 6,
+      "remoteWorkType": 0,
+      "s10": 60,
+      "salaryHigh": 9999999,
+      "salaryLow": 1500000,
+      "tags": {
+        "wf33": {
+          "desc": "",
+          "param": "wf33"
+        },
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        },
+        "wf1": {
+          "desc": "",
+          "param": "wf1"
+        },
+        "wf31": {
+          "desc": "",
+          "param": "wf31"
+        },
+        "wf28": {
+          "desc": "",
+          "param": "wf28"
+        },
+        "wf30": {
+          "desc": "",
+          "param": "wf30"
+        },
+        "wf4": {
+          "desc": "",
+          "param": "wf4"
+        },
+        "wf25": {
+          "desc": "",
+          "param": "wf25"
+        },
+        "wf3": {
+          "desc": "",
+          "param": "wf3"
+        },
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        },
+        "wf9": {
+          "desc": "",
+          "param": "wf9"
+        },
+        "wf32": {
+          "desc": "",
+          "param": "wf32"
+        },
+        "wf29": {
+          "desc": "",
+          "param": "wf29"
+        },
+        "wf23": {
+          "desc": "",
+          "param": "wf23"
+        },
+        "wf10": {
+          "desc": "",
+          "param": "wf10"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "08:30~17:30",
+      "hrBehaviorPR": 0.1548929465113052,
+      "jobCat": [
+        2005003001,
+        2002001001,
+        2005003015
+      ],
+      "labels": [
+        "c@wf33",
+        "c@wf7",
+        "association@j00021",
+        "association@j00002_002",
+        "c@wf1",
+        "indexjob@ij015",
+        "association@j00025",
+        "c@wf31",
+        "indexjob@ij044",
+        "c@wf28",
+        "c@wf30",
+        "c@wf4",
+        "foreigners@full_fc_em_jbs",
+        "indexjob@ij014",
+        "indexjob@ij039",
+        "c@wf25",
+        "c@wf3",
+        "c@wf2",
+        "c@wf9",
+        "c@wf32",
+        "c@wf29",
+        "c@wf23",
+        "indexjob@ij003",
+        "c@wf10"
+      ],
+      "languageRequirements": [],
+      "acceptRole": [],
+      "employeeCount": 912,
+      "pcSkills": [
+        {
+          "code": "12001008003",
+          "description": "Excel"
+        },
+        {
+          "code": "12001008012",
+          "description": "PowerPoint"
+        },
+        {
+          "code": "12001008016",
+          "description": "Word"
+        }
+      ],
+      "pddScore": 0.02944647,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/8000/70364778000/logo.jpg?v=20260529163848",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786053624,
+        "lastCustReplyTimestamp": null,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260812",
+      "applyCnt": 6,
+      "coIndustry": 1009002002,
+      "coIndustryDesc": "運輸工具設備租賃業",
+      "custName": "和運租車股份有限公司",
+      "custNo": "70364778000",
+      "description": "【工作內容】\n1. 客戶資料管理，更新並管理客戶資訊\n2. 負責公司業務報表、公務事務、物品管理等相關工作\n3. 負責日常行政事務，如接聽電話、處理文書、管理文件等\n4. 協助主管製作工作報表及會議資料整理等相關工作\n5. 協助各部門協調安排相關工作流程，確保工作進度順利\n6. 其他主管交辦相關事項\n\n【工作待遇】 \n1. 營利共享，具競爭力的年薪(含員工紅利、三節禮金) \n2. 完善升遷/輪調制度 \n3. 團體保險保障 \n4. 在職訓練 \n5. 享有每年調薪\n\n【工作技能】\t\n1. 做事細心、肯努力學習者佳\t\n2. 熟悉office文書軟體\t\n3. 具汽車產業相關經驗佳\n\t\n\n",
+      "descSnippet": "【工作內容】\n1. 客戶資料管理，更新並管理客戶資訊\n2. 負責公司業務報表、公務事務、物品管理等相關工作\n3. 負責日常行政事務，如接聽電話、處理文書、管理文件等\n4. 協助主管製作工作報表及會議資料整理等相關工作\n5. 協助各部門協調安排相關工作流程，確保工作進度順利\n6. 其他主管交辦相關事項\n\n【工作待遇】 \n1. 營利共享，具競爭力的年薪(含員工紅利、三節禮金) \n2. 完善升遷/輪調制度 \n3. 團體保險保障 \n4. 在職訓練 \n5. 享有每年調薪\n\n【工作技能】\t\n1. 做事細心、肯努力學習者佳\t\n2. 熟悉office文書軟體\t\n3. 具汽車產業相關經驗佳\n\t\n\n",
+      "mrtDist": 0,
+      "jobAddress": "臺灣大道三段658號16樓之2",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "業務行政助理(長租,中區直營)",
+      "jobNameSnippet": "業務行政助理(長租,中區直營)",
+      "jobNo": "15119041",
+      "jobRo": 1,
+      "jobType": 2,
+      "lat": 24.1704474,
+      "lon": 120.6379591,
+      "link": {
+        "job": "https://www.104.com.tw/job/901xd",
+        "cust": "https://www.104.com.tw/company/wbpde6o",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/901xd?channel=104rpt"
+      },
+      "major": [],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        3,
+        4
+      ],
+      "period": 2,
+      "remoteWorkType": 0,
+      "s10": 50,
+      "salaryHigh": 41500,
+      "salaryLow": 29500,
+      "tags": {
+        "wf4": {
+          "desc": "",
+          "param": "wf4"
+        },
+        "wf32": {
+          "desc": "",
+          "param": "wf32"
+        },
+        "wf23": {
+          "desc": "",
+          "param": "wf23"
+        },
+        "wf31": {
+          "desc": "",
+          "param": "wf31"
+        },
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        },
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        },
+        "wf3": {
+          "desc": "",
+          "param": "wf3"
+        },
+        "wf29": {
+          "desc": "",
+          "param": "wf29"
+        },
+        "wf25": {
+          "desc": "",
+          "param": "wf25"
+        },
+        "wf1": {
+          "desc": "",
+          "param": "wf1"
+        },
+        "wf9": {
+          "desc": "",
+          "param": "wf9"
+        },
+        "wf28": {
+          "desc": "",
+          "param": "wf28"
+        },
+        "wf30": {
+          "desc": "",
+          "param": "wf30"
+        },
+        "wf10": {
+          "desc": "",
+          "param": "wf10"
+        },
+        "wf33": {
+          "desc": "",
+          "param": "wf33"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "08:30~17:30",
+      "hrBehaviorPR": 0.31287238185619065,
+      "jobCat": [
+        2005003013,
+        2002001003
+      ],
+      "labels": [
+        "c@wf4",
+        "c@wf32",
+        "foreigners@full_fc_em_jbs",
+        "c@wf23",
+        "c@wf31",
+        "joblist_search@jl_j0002_002.15",
+        "c@wf2",
+        "c@wf7",
+        "c@wf3",
+        "association@j00021",
+        "c@wf29",
+        "indexjob@ij044",
+        "c@wf25",
+        "c@wf1",
+        "association@j00025",
+        "c@wf9",
+        "c@wf28",
+        "indexjob@ij003",
+        "c@wf30",
+        "c@wf10",
+        "c@wf33",
+        "indexjob@ij014",
+        "association@j00002_002"
+      ],
+      "languageRequirements": [],
+      "acceptRole": [],
+      "employeeCount": 912,
+      "pcSkills": [
+        {
+          "code": "12001008003",
+          "description": "Excel"
+        },
+        {
+          "code": "12001008012",
+          "description": "PowerPoint"
+        },
+        {
+          "code": "12001008016",
+          "description": "Word"
+        }
+      ],
+      "pddScore": 0.028927434,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/8000/70364778000/logo.jpg?v=20260529163848",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1785764443,
+        "lastCustReplyTimestamp": null,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260730",
+      "applyCnt": 3,
+      "coIndustry": 1001001002,
+      "coIndustryDesc": "電腦軟體服務業",
+      "custName": "瑞盈軟體有限公司",
+      "custNo": "130000000216824",
+      "description": "1. 負責公司網站的SEO優化，包含：關鍵字部署、內部連結調整、頁面結構...等。\n2. 對行業熱點和趨勢進行分析，及研究、監控同行競爭對手優化手段進行分析。\n3. 主動研究搜尋引擎變化，即時提出調整方案。\n4. 製定SEO優化方案，定位關鍵字的難易度及操作排名所需時間，組織實施優化方案。\n5. 對網站流量進行數據監控和數據統計，跟蹤及分析頁面流量轉化數據和用戶行為提出改善建議。\n6. 收集數據資料，並製作報告進行進階的成效分析。細心檢查數據以確保每個階段的產出文件的精準性\n7. 善於利用多種SEO推廣手段及工具軟體，保持並逐步提升網站在搜尋引擎的權重和流量引入。\n8. 網站圖文資料建立及維護。\n9. 提供協助社群渠道經營、維護與管理，渠道平台內容文案撰寫",
+      "descSnippet": "1. 負責公司網站的SEO優化，包含：關鍵字部署、內部連結調整、頁面結構...等。\n2. 對行業熱點和趨勢進行分析，及研究、監控同行競爭對手優化手段進行分析。\n3. 主動研究搜尋引擎變化，即時提出調整方案。\n4. 製定SEO優化方案，定位關鍵字的難易度及操作排名所需時間，組織實施優化方案。\n5. 對網站流量進行數據監控和數據統計，跟蹤及分析頁面流量轉化數據和用戶行為提出改善建議。\n6. 收集數據資料，並製作報告進行進階的成效分析。細心檢查數據以確保每個階段的產出文件的精準性\n7. 善於利用多種SEO推廣手段及工具軟體，保持並逐步提升網站在搜尋引擎的權重和流量引入。\n8. 網站圖文資料建立及維護。\n9. 提供協助社群渠道經營、維護與管理，渠道平台內容文案撰寫",
+      "mrtDist": 0,
+      "jobAddress": "市政路386號25樓之7",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "SEO工程師/SEO專員",
+      "jobNameSnippet": "SEO工程師/SEO專員",
+      "jobNo": "13571402",
+      "jobRo": 1,
+      "jobType": 0,
+      "lat": 24.1584154,
+      "lon": 120.6411619,
+      "link": {
+        "job": "https://www.104.com.tw/job/82vre",
+        "cust": "https://www.104.com.tw/company/1a2x6bmmm0",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/82vre?channel=104rpt"
+      },
+      "major": [],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "period": 4,
+      "remoteWorkType": 2,
+      "s10": 10,
+      "salaryHigh": 0,
+      "salaryLow": 0,
+      "tags": {
+        "remote": {
+          "desc": "遠端工作"
+        },
+        "wf2": {
+          "desc": "",
+          "param": "wf2"
+        },
+        "wf31": {
+          "desc": "",
+          "param": "wf31"
+        },
+        "wf7": {
+          "desc": "",
+          "param": "wf7"
+        },
+        "wf12": {
+          "desc": "",
+          "param": "wf12"
+        },
+        "wf9": {
+          "desc": "",
+          "param": "wf9"
+        },
+        "wf29": {
+          "desc": "",
+          "param": "wf29"
+        },
+        "wf26": {
+          "desc": "",
+          "param": "wf26"
+        },
+        "wf8": {
+          "desc": "",
+          "param": "wf8"
+        },
+        "wf11": {
+          "desc": "",
+          "param": "wf11"
+        },
+        "wf1": {
+          "desc": "",
+          "param": "wf1"
+        }
+      },
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "",
+      "hrBehaviorPR": 0.13163796537939865,
+      "jobCat": [
+        2004001007,
+        2007001006,
+        2004001005
+      ],
+      "labels": [
+        "association@j00051",
+        "association@j00047",
+        "c@wf2",
+        "indexjob@ij010",
+        "association@j00053",
+        "c@wf31",
+        "c@wf7",
+        "c@wf12",
+        "c@wf9",
+        "joblist_search@jl_j0014_001.35",
+        "joblist_search@jl_j0013_001.45",
+        "c@wf29",
+        "c@wf26",
+        "c@wf8",
+        "c@wf11",
+        "joblist_search@jl_j0011_001.70",
+        "indexjob@ij005",
+        "c@wf1"
+      ],
+      "languageRequirements": [
+        {
+          "language": 1,
+          "ability": {
+            "listening": 8,
+            "speaking": 8,
+            "reading": 8,
+            "writing": 8
+          }
+        }
+      ],
+      "acceptRole": [],
+      "employeeCount": 24,
+      "pcSkills": [],
+      "pddScore": 0.028530713,
+      "custLogo": "https://static.104.com.tw/b_profile/cust_picture/6824/130000000216824/logo.jpg?v=20251008111639",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": 1786013841,
+        "lastCustReplyTimestamp": null,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    },
+    {
+      "appearDate": "20260813",
+      "applyCnt": 0,
+      "coIndustry": 1012001004,
+      "coIndustryDesc": "其他醫療保健服務業",
+      "custName": "醫療財團法人台灣血液基金會台中捐血中心",
+      "custNo": "130000000099631",
+      "description": "1.捐血者資訊諮詢、維護、補發服務。\n2.執行電腦軟、硬體各項設備的安裝及問題排除。\n3.協助撰寫及維護內部簡易程式(如網頁表單、資料查詢工具)\n4.系統帳號管理、使用者權限設定與系統操作協助。\n5.協助推動數位化流程及資訊系統改善。\n6.具備基本程式撰寫能力(如Python、HTML/CSS/JavaScript)\n7.熟悉Office 軟體操作。\n8.具良好溝通能力與學習意願，能獨立完成交辦任務。\n9.有內部系統維運或MIS工作經驗者尤佳。",
+      "descSnippet": "1.捐血者資訊諮詢、維護、補發服務。\n2.執行電腦軟、硬體各項設備的安裝及問題排除。\n3.協助撰寫及維護內部簡易程式(如網頁表單、資料查詢工具)\n4.系統帳號管理、使用者權限設定與系統操作協助。\n5.協助推動數位化流程及資訊系統改善。\n6.具備基本程式撰寫能力(如Python、HTML/CSS/JavaScript)\n7.熟悉Office 軟體操作。\n8.具良好溝通能力與學習意願，能獨立完成交辦任務。\n9.有內部系統維運或MIS工作經驗者尤佳。",
+      "mrtDist": 0,
+      "jobAddress": "臺灣大道四段1176號",
+      "jobAddrNo": 6001008007,
+      "jobAddrNoDesc": "台中市西屯區",
+      "jobName": "資訊課全時臨僱人員(身障)",
+      "jobNameSnippet": "資訊課全時臨僱人員(身障)",
+      "jobNo": "15212491",
+      "jobRo": 1,
+      "jobType": 0,
+      "lat": 24.1846057,
+      "lon": 120.6125981,
+      "link": {
+        "job": "https://www.104.com.tw/job/92217",
+        "cust": "https://www.104.com.tw/company/1a2x6bk46n",
+        "applyAnalyze": "https://www.104.com.tw/jobs/apply/analysis/92217?channel=104rpt"
+      },
+      "major": [
+        "資訊管理相關",
+        "資訊工程相關"
+      ],
+      "mrt": "",
+      "mrtDesc": "",
+      "optionEdu": [
+        3,
+        4
+      ],
+      "period": 0,
+      "remoteWorkType": 0,
+      "s10": 50,
+      "salaryHigh": 36000,
+      "salaryLow": 32000,
+      "tags": [],
+      "s9": [
+        1
+      ],
+      "s5": 0,
+      "d3": "",
+      "hrBehaviorPR": 0.1185511631966982,
+      "jobCat": [
+        2007002006,
+        2007002007,
+        2007001009
+      ],
+      "labels": [
+        "association@j00014"
+      ],
+      "languageRequirements": [],
+      "acceptRole": [
+        64
+      ],
+      "employeeCount": 0,
+      "pcSkills": [
+        {
+          "code": "12004001039",
+          "description": "VM"
+        },
+        {
+          "code": "12001004032",
+          "description": "MySQL"
+        },
+        {
+          "code": "12001006017",
+          "description": "JavaScript"
+        },
+        {
+          "code": "12001006032",
+          "description": "CSS"
+        },
+        {
+          "code": "12001011012",
+          "description": "Power BI​"
+        }
+      ],
+      "pddScore": 0.027840327,
+      "custLogo": "",
+      "jobSwitch": "on",
+      "isSave": null,
+      "interactionRecord": {
+        "lastProcessedResumeAtTime": null,
+        "lastCustReplyTimestamp": null,
+        "nowTimestamp": 1786604852
+      },
+      "isApplied": null,
+      "applyDate": null,
+      "userApplyCount": null
+    }
+  ],
+  "metadata": {
+    "pagination": {
+      "count": 20,
+      "currentPage": 1,
+      "lastPage": 3,
+      "total": 55
+    },
+    "isPreciseHotJob": false,
+    "filterQuery": {
+      "order": 15,
+      "asc": 0,
+      "keyword": "powerbi",
+      "fz": 8,
+      "kwop": 7,
+      "excludeKwFz": 4,
+      "excludeKwKwop": 8,
+      "enableJobNoTopOrder": 1,
+      "area": [
+        "6001008007",
+        "6001008006"
+      ],
+      "ro": [
+        0
+      ],
+      "scstrict": 0,
+      "scneg": 0,
+      "page": 1,
+      "pagesize": 20
+    },
+    "offJobs": [],
+    "personalBoost": 0
+  }
+}

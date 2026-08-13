@@ -1,0 +1,10 @@
+relationship 18299f62-bfe5-48eb-9281-ec30062549f4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 查詢.snapshotDate
+	toColumn: LocalDateTable_eb8be645-b2f7-45ed-84c0-0dd6f245b7fd.Date
+
+relationship 614673d1-e36e-41dd-b90d-4a7ea2b6ce27
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 查詢.snapshotDateTime
+	toColumn: LocalDateTable_527b1dd5-9797-458f-a607-63e8043e5651.Date
+
