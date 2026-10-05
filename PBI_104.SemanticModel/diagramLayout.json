@@ -10,11 +10,115 @@
       "nodes": [
         {
           "location": {
-            "x": 0,
-            "y": 0
+            "x": 1654.9453408445884,
+            "y": 433.13793007281561
           },
           "nodeIndex": "查詢",
           "nodeLineageTag": "dc7e7f30-db73-4ad0-a8e3-badbc6e28aaf",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 300.68436411272239,
+            "y": 784.23632144030353
+          },
+          "nodeIndex": "BridgeJobSkill",
+          "nodeLineageTag": "a0b1a084-dd93-42d7-b600-3e22a5192eb9",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 947.15166009655263,
+            "y": -50
+          },
+          "nodeIndex": "DimArea",
+          "nodeLineageTag": "8759c2f2-37c9-4ca5-9167-93818b4696a4",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 347.03940074796355,
+            "y": 243.53138289671358
+          },
+          "nodeIndex": "DimCompany",
+          "nodeLineageTag": "b842679e-dd95-41aa-a9d2-8beb20593b13",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 873.10380634725277,
+            "y": 225.81857183057571
+          },
+          "nodeIndex": "DimDate",
+          "nodeLineageTag": "b91a1d05-8fa3-46be-aeec-ca54790e04df",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1420.9453408445884,
+            "y": 519.13793007281561
+          },
+          "nodeIndex": "DimJobCategory",
+          "nodeLineageTag": "93995401-31c6-47e0-a7d6-72ee2622e376",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 988.27586014563121
+          },
+          "nodeIndex": "DimSkill",
+          "nodeLineageTag": "d2b10723-4051-4970-9a74-96fe0c24a95a",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 587.74003217809263,
+            "y": 472.592977078406
+          },
+          "nodeIndex": "FactJob",
+          "nodeLineageTag": "e01bc894-c60a-4e83-849b-cde9f0a28fda",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1186.9453408445884,
+            "y": 227.56835206369828
+          },
+          "nodeIndex": "FactJobSnapshot",
+          "nodeLineageTag": "b3392bee-cb0a-453d-9823-e3d0760b3593",
           "size": {
             "height": 300,
             "width": 234

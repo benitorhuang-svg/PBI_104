@@ -1,7 +1,10 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.1.0/schema.json",
   "pageOrder": [
-    "2f840c15692cc4a76dab"
+    "page01_market_overview",
+    "page02_salary",
+    "page03_skills",
+    "page04_job_explorer"
   ],
-  "activePageName": "2f840c15692cc4a76dab"
+  "activePageName": "page01_market_overview"
 }

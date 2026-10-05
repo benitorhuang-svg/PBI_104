@@ -1,0 +1,77 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "raw_salary_distribution",
+  "position": {
+    "x": 24,
+    "y": 280,
+    "z": 400,
+    "height": 190,
+    "width": 1206,
+    "tabOrder": 400
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactJob"
+                    }
+                  },
+                  "Property": "salaryLow"
+                }
+              },
+              "queryRef": "FactJob.salaryLow",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactJob"
+                    }
+                  },
+                  "Property": "Jobs with Salary"
+                }
+              },
+              "queryRef": "FactJob.Jobs with Salary"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Reported lower-bound distribution · raw numeric values'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

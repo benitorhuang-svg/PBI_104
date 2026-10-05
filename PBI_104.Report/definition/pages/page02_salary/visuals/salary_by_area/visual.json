@@ -1,0 +1,77 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "salary_by_area",
+  "position": {
+    "x": 433,
+    "y": 488,
+    "z": 501,
+    "height": 208,
+    "width": 389,
+    "tabOrder": 501
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimArea"
+                    }
+                  },
+                  "Property": "jobAddrNoDesc"
+                }
+              },
+              "queryRef": "DimArea.jobAddrNoDesc",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactJob"
+                    }
+                  },
+                  "Property": "Jobs with Salary"
+                }
+              },
+              "queryRef": "FactJob.Jobs with Salary"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'地區 / Salary rows by area'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "salary_detail_table",
+  "position": {
+    "x": 842,
+    "y": 488,
+    "z": 502,
+    "height": 208,
+    "width": 389,
+    "tabOrder": 502
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactJob"
+                    }
+                  },
+                  "Property": "jobName"
+                }
+              },
+              "queryRef": "FactJob.jobName",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimArea"
+                    }
+                  },
+                  "Property": "jobAddrNoDesc"
+                }
+              },
+              "queryRef": "DimArea.jobAddrNoDesc",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactJob"
+                    }
+                  },
+                  "Property": "salaryLow"
+                }
+              },
+              "queryRef": "FactJob.salaryLow",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactJob"
+                    }
+                  },
+                  "Property": "salaryHigh"
+                }
+              },
+              "queryRef": "FactJob.salaryHigh",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactJob"
+                    }
+                  },
+                  "Property": "Jobs with Salary"
+                }
+              },
+              "queryRef": "FactJob.Jobs with Salary"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'薪資明細 · reported bounds'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

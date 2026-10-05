@@ -1,0 +1,62 @@
+table DimDate
+	lineageTag: b91a1d05-8fa3-46be-aeec-ca54790e04df
+
+	column Date
+		lineageTag: 9b9cad5d-1714-4434-840d-8d17719768a4
+		isNameInferred
+		sourceColumn: [Date]
+
+	column Year
+		lineageTag: 8b38e2be-8947-458b-9dbf-7998c01b7ed7
+		isNameInferred
+		sourceColumn: [Year]
+
+	column MonthNo
+		lineageTag: 27251a5a-d5e5-46f4-af2d-2dffa4d364ee
+		isNameInferred
+		sourceColumn: [MonthNo]
+
+	column Month
+		lineageTag: a637baa0-3b4b-46f8-a212-2f7817dce033
+		isNameInferred
+		sourceColumn: [Month]
+
+	column QuarterNo
+		lineageTag: 31edad6f-623c-45d5-b1a6-4797e3cb5780
+		isNameInferred
+		sourceColumn: [QuarterNo]
+
+	column Quarter
+		lineageTag: e2547aac-fdba-4223-9be7-4a1986d7d84a
+		isNameInferred
+		sourceColumn: [Quarter]
+
+	column Day
+		lineageTag: db1deab6-df04-414d-ab4b-5c4a135f30b1
+		isNameInferred
+		sourceColumn: [Day]
+
+	partition DimDate = calculated
+		mode: import
+		source =
+				VAR RawDates =
+				    UNION(
+				        SELECTCOLUMNS(FILTER(FactJob, NOT ISBLANK(FactJob[appearDate])), "D", FactJob[appearDate]),
+				        SELECTCOLUMNS(FILTER(FactJobSnapshot, NOT ISBLANK(FactJobSnapshot[snapshotDate])), "D", FactJobSnapshot[snapshotDate])
+				    )
+				VAR MinDate = MINX(RawDates, [D])
+				VAR MaxDate = MAXX(RawDates, [D])
+				VAR StartDate = COALESCE(MinDate, DATE(YEAR(TODAY()), 1, 1))
+				VAR EndDate = COALESCE(MaxDate, DATE(YEAR(TODAY()), 12, 31))
+				RETURN
+				    SELECTCOLUMNS(
+				        CALENDAR(StartDate, EndDate),
+				        "Date", [Date],
+				        "Year", YEAR([Date]),
+				        "MonthNo", MONTH([Date]),
+				        "Month", FORMAT([Date], "yyyy-MM"),
+				        "QuarterNo", QUARTER([Date]),
+				        "Quarter", "Q" & FORMAT(QUARTER([Date]), "0"),
+				        "Day", DAY([Date])
+				    )
+

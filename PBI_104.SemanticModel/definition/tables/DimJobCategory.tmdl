@@ -1,0 +1,17 @@
+table DimJobCategory
+	lineageTag: 93995401-31c6-47e0-a7d6-72ee2622e376
+
+	column jobCatCode
+		dataType: int64
+		lineageTag: 6e5fdec6-4786-4273-90f9-a001ab912ed3
+		sourceColumn: jobCatCode
+
+	column jobCatDescription
+		dataType: string
+		lineageTag: 531ab141-43b4-422e-acd9-cf5b26635445
+		sourceColumn: jobCatDescription
+
+	partition DimJobCategory = m
+		mode: import
+		source = mdl_DimJobCategory
+

@@ -1,0 +1,1 @@
+﻿EVALUATE ROW("ActiveJobs", IF(ISFILTERED(DimSkill[skillDescription]) || ISFILTERED(DimSkill[skillCode]), CALCULATE(DISTINCTCOUNT(FactJob[jobNo]), CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], Both)), DISTINCTCOUNT(FactJob[jobNo])))

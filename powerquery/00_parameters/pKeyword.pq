@@ -3,5 +3,7 @@
     [
         IsParameterQuery = true,
         Type = "Text",
-        IsParameterQueryRequired = true
+        IsParameterQueryRequired = true,
+        List = {"powerbi", "tableau", "python"},
+        DefaultValue = "powerbi"
     ]

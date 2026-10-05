@@ -19,3 +19,8 @@ samples/raw/*
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Local immutable API batches and diagnostic artifacts
+data/
+artifacts/
+.optimization/

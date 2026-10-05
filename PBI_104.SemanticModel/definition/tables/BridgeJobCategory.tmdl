@@ -1,0 +1,22 @@
+table BridgeJobCategory
+	lineageTag: a890a5c5-1e0d-4917-a02d-a8d7d6c09d6f
+
+	column jobNo
+		dataType: string
+		lineageTag: ac32a99a-2d46-491f-aac2-6e07d51a00c9
+		sourceColumn: jobNo
+
+	column jobCatCode
+		dataType: int64
+		lineageTag: c39530a2-68ce-46b3-a676-2f34dc412087
+		sourceColumn: jobCatCode
+
+	column jobCatDescription
+		dataType: string
+		lineageTag: b8442128-c5ec-4ab0-8ee0-df3966a43a86
+		sourceColumn: jobCatDescription
+
+	partition BridgeJobCategory = m
+		mode: import
+		source = mdl_BridgeJobCategory
+

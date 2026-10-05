@@ -1,37 +1,47 @@
 (
     baseUrl as text,
-    keyword as text,
-    area as text,
-    jobsource as text,
-    mode as text,
-    order as text,
-    page as number,
-    pagesize as number
+    optional keyword as nullable text,
+    optional area as nullable text,
+    optional jobsource as nullable text,
+    optional mode as nullable text,
+    optional order as nullable text,
+    optional page as nullable number,
+    optional pagesize as nullable number
 ) as record =>
 let
+    NormalizedBaseUrl = Text.Trim(baseUrl),
+    ValidatedBaseUrl =
+        if NormalizedBaseUrl = "" then
+            error Error.Record(
+                "Missing base URL",
+                "baseUrl is required and cannot be empty.",
+                null
+            )
+        else
+            NormalizedBaseUrl,
     Configuration =
         #table(
             type table
             [
                 baseUrl = text,
-                keyword = text,
-                area = text,
-                jobsource = text,
-                mode = text,
-                order = text,
-                page = Int64.Type,
-                pagesize = Int64.Type
+                keyword = nullable text,
+                area = nullable text,
+                jobsource = nullable text,
+                mode = nullable text,
+                order = nullable text,
+                page = nullable number,
+                pagesize = nullable number
             ],
             {
                 {
-                    baseUrl,
+                    ValidatedBaseUrl,
                     keyword,
                     area,
                     jobsource,
                     mode,
                     order,
-                    Int64.From(page),
-                    Int64.From(pagesize)
+                    page,
+                    pagesize
                 }
             }
         ),
@@ -40,6 +50,7 @@ let
         Python.Execute(
 "
 import json
+import math
 import urllib.request
 from datetime import datetime
 
@@ -49,15 +60,36 @@ import pandas as pd
 config_row = config.iloc[0]
 
 BASE_URL = str(config_row['baseUrl'])
-KEYWORD = str(config_row['keyword'])
-AREA = str(config_row['area'])
-JOBSOURCE = str(config_row['jobsource'])
-MODE = str(config_row['mode'])
-ORDER = str(config_row['order'])
-PAGE = int(config_row['page'])
-PAGE_SIZE = int(config_row['pagesize'])
 
-params = {
+def optional_text(value):
+    if value is None or pd.isna(value):
+        return None
+    normalized = str(value).strip()
+    return normalized if normalized else None
+
+def optional_positive_int(value, field_name):
+    if value is None or pd.isna(value):
+        return None
+    try:
+        numeric_value = float(value)
+    except (TypeError, ValueError) as exc:
+        raise TypeError(f'{field_name} must be an integer when provided') from exc
+    if not math.isfinite(numeric_value) or not numeric_value.is_integer():
+        raise ValueError(f'{field_name} must be an integer when provided')
+    normalized = int(numeric_value)
+    if normalized < 1:
+        raise ValueError(f'{field_name} must be greater than zero when provided')
+    return normalized
+
+KEYWORD = optional_text(config_row['keyword'])
+AREA = optional_text(config_row['area'])
+JOBSOURCE = optional_text(config_row['jobsource'])
+MODE = optional_text(config_row['mode'])
+ORDER = optional_text(config_row['order'])
+PAGE = optional_positive_int(config_row['page'], 'page')
+PAGE_SIZE = optional_positive_int(config_row['pagesize'], 'pagesize')
+
+optional_params = {
     'area': AREA,
     'jobsource': JOBSOURCE,
     'keyword': KEYWORD,
@@ -65,6 +97,11 @@ params = {
     'order': ORDER,
     'page': PAGE,
     'pagesize': PAGE_SIZE,
+}
+params = {
+    key: value
+    for key, value in optional_params.items()
+    if value is not None
 }
 
 headers = {

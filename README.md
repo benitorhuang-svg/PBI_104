@@ -6,9 +6,14 @@ Power BI 專案，用於將已驗證的 104 職缺搜尋 API 資料逐步整理�
 
 - 專案入口：`PBI_104.pbip`
 - 已驗證來源：Python + `pandas` + `cloudscraper` + Windows system proxy
-- 目前模型仍由單一 `查詢` 同時處理擷取、展開、型別化與載入
-- 報表目前只有一個空白頁
-- 本次 Bootstrap 只建立文件、TASK 與目錄骨架，未修改 Power Query、TMDL 或 PBIR
+- `00_Parameters` 至 `03_Staging` 已完成並持久化；`fx104GetPage` 只有 `baseUrl` 必填，其餘參數 optional
+- `04_Model` 已載入 `FactJob`、`FactJobSnapshot`、`DimCompany`、`DimArea`、`DimSkill`、`DimJobCategory`、`BridgeJobSkill`；`DimDate` 為 semantic-model calculated table
+- Semantic Model 已建立 6 條新 relationships 與 7 個有 description/format/display folder 的 measures
+- 既有 `查詢` 表仍保留；報表已建立四頁 PBIR：職缺市場總覽、薪資市場分析、技能需求分析、職缺搜尋器
+- 報表已完成去重：移除四頁重複靜態側欄與職缺搜尋器中的重複 KPI/排行榜，保留原生頁籤導覽與查詢專用篩選器
+- PBIR visual-container 已修正 `drillFilterOtherVisuals` 的巢狀位置，重開 Desktop 不再產生 root-property 警告
+- 報表使用 `report-design/` 的四張核准參考圖與 page design briefs；percentile、experience、skill trend/pair 等未被模型支持的元素明確標記 `BLOCKED`
+- 最新驗證：重開 PBIP 後 Model partitions 可刷新至 `Ready`；DAX smoke query 回傳 FactJob 55 rows、55 jobs、35 companies、salary coverage 100%、48 jobs with skills、skill share 87.27%
 
 ## 開始工作
 

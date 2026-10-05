@@ -7,16 +7,31 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation __PBI_TimeIntelligenceEnabled = 1
+queryGroup 00_Parameters
 
-annotation PBI_QueryOrder = ["查詢"]
+queryGroup 01_Functions
 
-annotation PBI_ProTooling = ["DevMode"]
+queryGroup 02_Source
 
-ref table 查詢
-ref table DateTableTemplate_1753b274-8100-473e-b608-723f7ec15e18
-ref table LocalDateTable_eb8be645-b2f7-45ed-84c0-0dd6f245b7fd
-ref table LocalDateTable_527b1dd5-9797-458f-a607-63e8043e5651
+queryGroup 03_Staging
+
+queryGroup 04_Model
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["pArea", "pBaseUrl", "pJobSource", "pKeyword", "pMode", "pOrder", "pPage", "pPageSize", "pSnapshotRoot", "pSourceMode", "fx104GetAllPages", "fx104GetPage", "fx104ReadBatch", "fx104ValidatePage", "fxAreaKey", "fxNormalizeText", "fxParseJsonList", "fxStageJobs", "fxStrictNumber", "src_104CurrentManifest", "src_104HistoryJobs", "src_104Jobs", "src_104Metadata", "src_104Result", "stg_Areas", "stg_Companies", "stg_DataQuality", "stg_JobCategories", "stg_JobHistory", "stg_Jobs", "stg_JobSkills", "stg_Skills", "mdl_BridgeJobCategory", "mdl_BridgeJobSkill", "mdl_DimArea", "mdl_DimCompany", "mdl_DimJobCategory", "mdl_DimSkill", "mdl_FactJob", "mdl_FactJobSnapshot"]
+
+annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
+
+ref table FactJob
+ref table FactJobSnapshot
+ref table DimCompany
+ref table DimArea
+ref table DimSkill
+ref table DimJobCategory
+ref table BridgeJobSkill
+ref table BridgeJobCategory
+ref table DimDate
 
 ref cultureInfo zh-TW
 

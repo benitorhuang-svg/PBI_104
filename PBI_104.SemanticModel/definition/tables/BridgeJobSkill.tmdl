@@ -1,0 +1,22 @@
+table BridgeJobSkill
+	lineageTag: a0b1a084-dd93-42d7-b600-3e22a5192eb9
+
+	column jobNo
+		dataType: string
+		lineageTag: 48ca3142-9bd4-4550-bcab-f63b84465e84
+		sourceColumn: jobNo
+
+	column skillCode
+		dataType: string
+		lineageTag: 3212c22b-7784-4ef6-90b6-5d3a3fc224e6
+		sourceColumn: skillCode
+
+	column skillDescription
+		dataType: string
+		lineageTag: 96b99717-eee5-40c8-8232-d9504c76b5f6
+		sourceColumn: skillDescription
+
+	partition BridgeJobSkill = m
+		mode: import
+		source = mdl_BridgeJobSkill
+

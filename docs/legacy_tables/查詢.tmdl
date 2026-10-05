@@ -1,0 +1,1414 @@
+table 查詢
+	lineageTag: dc7e7f30-db73-4ad0-a8e3-badbc6e28aaf
+
+	column appearDate
+		dataType: int64
+		formatString: 0
+		lineageTag: 69185fdb-37a0-4cb5-b609-668511198d10
+		summarizeBy: sum
+		sourceColumn: appearDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column applyCnt
+		dataType: int64
+		formatString: 0
+		lineageTag: e42c3947-ee11-4a72-a3fc-ed6baefd5e13
+		summarizeBy: sum
+		sourceColumn: applyCnt
+
+		annotation SummarizationSetBy = Automatic
+
+	column coIndustry
+		dataType: int64
+		formatString: 0
+		lineageTag: c7b45b66-0268-4632-9ce2-9d16c142c82c
+		summarizeBy: sum
+		sourceColumn: coIndustry
+
+		annotation SummarizationSetBy = Automatic
+
+	column coIndustryDesc
+		dataType: string
+		lineageTag: 19f730c5-5f5e-46bd-8231-6426e2ff15ba
+		summarizeBy: none
+		sourceColumn: coIndustryDesc
+
+		annotation SummarizationSetBy = Automatic
+
+	column custName
+		dataType: string
+		lineageTag: 7a07472c-022f-4b44-a22c-4f3b215c6b40
+		summarizeBy: none
+		sourceColumn: custName
+
+		annotation SummarizationSetBy = Automatic
+
+	column custNo
+		dataType: int64
+		formatString: 0
+		lineageTag: 600e67b2-9d4e-40dc-b7e0-7f305d2d6b0e
+		summarizeBy: sum
+		sourceColumn: custNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: 8b280534-3c26-4824-b002-bd60d3c8896b
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column descSnippet
+		dataType: string
+		lineageTag: b260a2b1-f739-4c31-b4ec-a2702d1d0c48
+		summarizeBy: none
+		sourceColumn: descSnippet
+
+		annotation SummarizationSetBy = Automatic
+
+	column mrtDist
+		dataType: double
+		lineageTag: 04d089b1-e9c1-48b5-8e1b-73ed5cab8953
+		summarizeBy: sum
+		sourceColumn: mrtDist
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column jobAddress
+		dataType: string
+		lineageTag: 3f77213d-56f3-4669-a12e-a680b591e122
+		summarizeBy: none
+		sourceColumn: jobAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column jobAddrNo
+		dataType: int64
+		formatString: 0
+		lineageTag: 41c71f31-ab77-4599-8c88-257d89fc889a
+		summarizeBy: sum
+		sourceColumn: jobAddrNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column jobAddrNoDesc
+		dataType: string
+		lineageTag: 133697d2-478b-4865-b679-6661789bbe62
+		summarizeBy: none
+		sourceColumn: jobAddrNoDesc
+
+		annotation SummarizationSetBy = Automatic
+
+	column jobName
+		dataType: string
+		lineageTag: 2cfcc5e7-0f68-4b5e-9508-30af244a5ef8
+		summarizeBy: none
+		sourceColumn: jobName
+
+		annotation SummarizationSetBy = Automatic
+
+	column jobNameSnippet
+		dataType: string
+		lineageTag: 7860acf1-5764-47b0-a465-75806ee1652b
+		summarizeBy: none
+		sourceColumn: jobNameSnippet
+
+		annotation SummarizationSetBy = Automatic
+
+	column jobNo
+		dataType: int64
+		formatString: 0
+		lineageTag: 5cc2f300-c6f9-42b9-a78a-c7da93862b5f
+		summarizeBy: sum
+		sourceColumn: jobNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column jobRo
+		dataType: int64
+		formatString: 0
+		lineageTag: 96488484-faca-4258-888c-4f1000af530c
+		summarizeBy: sum
+		sourceColumn: jobRo
+
+		annotation SummarizationSetBy = Automatic
+
+	column jobType
+		dataType: int64
+		formatString: 0
+		lineageTag: e28606e0-1274-45d3-86d7-6a4796cd3293
+		summarizeBy: sum
+		sourceColumn: jobType
+
+		annotation SummarizationSetBy = Automatic
+
+	column lat
+		dataType: double
+		lineageTag: e64cbdcd-0b31-45fe-9b4d-5d7cd9d37878
+		summarizeBy: sum
+		sourceColumn: lat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lon
+		dataType: double
+		lineageTag: 2cbc5ebe-3ca1-4970-9a5c-38337907a450
+		summarizeBy: sum
+		sourceColumn: lon
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column major
+		dataType: string
+		lineageTag: b99bf090-3b00-438b-8678-9384730c2fa8
+		summarizeBy: none
+		sourceColumn: major
+
+		annotation SummarizationSetBy = Automatic
+
+	column mrt
+		dataType: int64
+		formatString: 0
+		lineageTag: 9741cb39-79fb-4caa-b406-4db2cc830a37
+		summarizeBy: sum
+		sourceColumn: mrt
+
+		annotation SummarizationSetBy = Automatic
+
+	column mrtDesc
+		dataType: string
+		lineageTag: d67af125-bbbc-4bbf-9317-ff0889ce9c14
+		summarizeBy: none
+		sourceColumn: mrtDesc
+
+		annotation SummarizationSetBy = Automatic
+
+	column optionEdu
+		dataType: string
+		lineageTag: cfd1576a-8c3f-41a6-86fc-3528ee622799
+		summarizeBy: none
+		sourceColumn: optionEdu
+
+		annotation SummarizationSetBy = Automatic
+
+	column period
+		dataType: int64
+		formatString: 0
+		lineageTag: 0530f424-d9f7-4775-9898-253a450ed277
+		summarizeBy: sum
+		sourceColumn: period
+
+		annotation SummarizationSetBy = Automatic
+
+	column remoteWorkType
+		dataType: int64
+		formatString: 0
+		lineageTag: 42e5fcf8-3e07-4a61-9684-3c51f0bee754
+		summarizeBy: sum
+		sourceColumn: remoteWorkType
+
+		annotation SummarizationSetBy = Automatic
+
+	column s10
+		dataType: int64
+		formatString: 0
+		lineageTag: aa45bc0d-17dc-41bb-abe8-ca478dc4fdfd
+		summarizeBy: sum
+		sourceColumn: s10
+
+		annotation SummarizationSetBy = Automatic
+
+	column salaryHigh
+		dataType: int64
+		formatString: 0
+		lineageTag: f03bf246-4068-4487-a8d6-db74db39be39
+		summarizeBy: sum
+		sourceColumn: salaryHigh
+
+		annotation SummarizationSetBy = Automatic
+
+	column salaryLow
+		dataType: int64
+		formatString: 0
+		lineageTag: dceb31dd-995a-4a5f-8b6c-f415c08e3009
+		summarizeBy: sum
+		sourceColumn: salaryLow
+
+		annotation SummarizationSetBy = Automatic
+
+	column s9
+		dataType: string
+		lineageTag: baf082e8-c7dd-459a-9b38-267c4d31081c
+		summarizeBy: none
+		sourceColumn: s9
+
+		annotation SummarizationSetBy = Automatic
+
+	column s5
+		dataType: int64
+		formatString: 0
+		lineageTag: 26e7b072-5834-4747-835c-972ced8cea36
+		summarizeBy: sum
+		sourceColumn: s5
+
+		annotation SummarizationSetBy = Automatic
+
+	column d3
+		dataType: string
+		lineageTag: 9d0fc2a1-79e4-4415-9976-49b7b305fee1
+		summarizeBy: none
+		sourceColumn: d3
+
+		annotation SummarizationSetBy = Automatic
+
+	column hrBehaviorPR
+		dataType: double
+		lineageTag: cf790a64-82ed-49e8-b766-b5fb62826d00
+		summarizeBy: sum
+		sourceColumn: hrBehaviorPR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column jobCat
+		dataType: string
+		lineageTag: 6d7fdfdb-7cb7-4d7d-9d82-94936e63981a
+		summarizeBy: none
+		sourceColumn: jobCat
+
+		annotation SummarizationSetBy = Automatic
+
+	column labels
+		dataType: string
+		lineageTag: f3877724-7509-445d-a4c4-77f14af71644
+		summarizeBy: none
+		sourceColumn: labels
+
+		annotation SummarizationSetBy = Automatic
+
+	column languageRequirements
+		dataType: string
+		lineageTag: 8ad9de08-50dc-416c-9303-a98365844930
+		summarizeBy: none
+		sourceColumn: languageRequirements
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptRole
+		dataType: string
+		lineageTag: 3e07bac7-bfd2-4ed1-b212-97aa747bf8d9
+		summarizeBy: none
+		sourceColumn: acceptRole
+
+		annotation SummarizationSetBy = Automatic
+
+	column employeeCount
+		dataType: int64
+		formatString: 0
+		lineageTag: 631632f2-6843-47c5-94d4-c0161e9a1c41
+		summarizeBy: sum
+		sourceColumn: employeeCount
+
+		annotation SummarizationSetBy = Automatic
+
+	column pcSkills
+		dataType: string
+		lineageTag: 97e7c27c-be46-48b4-a353-dfbd1308023a
+		summarizeBy: none
+		sourceColumn: pcSkills
+
+		annotation SummarizationSetBy = Automatic
+
+	column pddScore
+		dataType: double
+		lineageTag: 3be27f3e-95b9-4dde-9516-d6a7d4a4ff51
+		summarizeBy: sum
+		sourceColumn: pddScore
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column custLogo
+		dataType: string
+		lineageTag: 474809be-ad03-4ccf-a425-9c35e764428a
+		summarizeBy: none
+		sourceColumn: custLogo
+
+		annotation SummarizationSetBy = Automatic
+
+	column jobSwitch
+		dataType: string
+		lineageTag: 7685a496-a28d-4461-a5e3-b850e4061a0c
+		summarizeBy: none
+		sourceColumn: jobSwitch
+
+		annotation SummarizationSetBy = Automatic
+
+	column isSave
+		dataType: string
+		lineageTag: d54f14d6-a720-4846-ac3c-1e83860aa30b
+		summarizeBy: none
+		sourceColumn: isSave
+
+		annotation SummarizationSetBy = Automatic
+
+	column isApplied
+		dataType: string
+		lineageTag: 061544de-af88-4be3-ae2d-1a1b8944bbeb
+		summarizeBy: none
+		sourceColumn: isApplied
+
+		annotation SummarizationSetBy = Automatic
+
+	column applyDate
+		dataType: string
+		lineageTag: f00c8f7b-e162-48cb-8908-902b4aec5b40
+		summarizeBy: none
+		sourceColumn: applyDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column userApplyCount
+		dataType: string
+		lineageTag: b30f47b3-255a-47fc-bf9c-70085048c841
+		summarizeBy: none
+		sourceColumn: userApplyCount
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'link.job'
+		dataType: string
+		lineageTag: 157b6786-c59a-4761-9d3a-78ed5f39c42f
+		summarizeBy: none
+		sourceColumn: link.job
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'link.cust'
+		dataType: string
+		lineageTag: bd576d66-d544-4416-89f0-a121e2060c8a
+		summarizeBy: none
+		sourceColumn: link.cust
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'link.applyAnalyze'
+		dataType: string
+		lineageTag: 98825f39-e902-48fd-8322-d524925ac993
+		summarizeBy: none
+		sourceColumn: link.applyAnalyze
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf2.desc'
+		dataType: string
+		lineageTag: aa9e3042-034f-4764-8edd-549f18041773
+		summarizeBy: none
+		sourceColumn: tags.wf2.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf2.param'
+		dataType: string
+		lineageTag: e7c3560e-e5f8-4a02-83cd-4dae81a654c3
+		summarizeBy: none
+		sourceColumn: tags.wf2.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf30.desc'
+		dataType: string
+		lineageTag: 420f4e19-9af6-4bc1-bbef-c37748aaa337
+		summarizeBy: none
+		sourceColumn: tags.wf30.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf30.param'
+		dataType: string
+		lineageTag: b003c810-c5b3-44ad-9f85-798defdb65ae
+		summarizeBy: none
+		sourceColumn: tags.wf30.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf25.desc'
+		dataType: string
+		lineageTag: 2118e8c9-283b-4bbb-8762-ef8508655a0a
+		summarizeBy: none
+		sourceColumn: tags.wf25.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf25.param'
+		dataType: string
+		lineageTag: 9a4097cb-760d-4d24-b6ec-bdffb8983895
+		summarizeBy: none
+		sourceColumn: tags.wf25.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf29.desc'
+		dataType: string
+		lineageTag: 46580463-b9ce-47ee-90c6-a8f428bb38c0
+		summarizeBy: none
+		sourceColumn: tags.wf29.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf29.param'
+		dataType: string
+		lineageTag: 5de5dfce-1618-4c26-94c4-e6f767f8aa03
+		summarizeBy: none
+		sourceColumn: tags.wf29.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf9.desc'
+		dataType: string
+		lineageTag: 47ec84a1-e099-4ae4-8fc2-e2f429188aac
+		summarizeBy: none
+		sourceColumn: tags.wf9.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf9.param'
+		dataType: string
+		lineageTag: adf70c71-ef83-4c78-a45f-3c9e9d22f5d6
+		summarizeBy: none
+		sourceColumn: tags.wf9.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf8.desc'
+		dataType: string
+		lineageTag: 18e29f41-438a-4994-99b2-0cb53019e1a4
+		summarizeBy: none
+		sourceColumn: tags.wf8.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf8.param'
+		dataType: string
+		lineageTag: 7a189f0d-2960-497c-abd1-81b21590d65b
+		summarizeBy: none
+		sourceColumn: tags.wf8.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf26.desc'
+		dataType: string
+		lineageTag: 65aa491f-87fb-44aa-9037-27b286bbb5a6
+		summarizeBy: none
+		sourceColumn: tags.wf26.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf26.param'
+		dataType: string
+		lineageTag: 9f503019-0095-4730-92a1-d055657c6514
+		summarizeBy: none
+		sourceColumn: tags.wf26.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf10.desc'
+		dataType: string
+		lineageTag: aa6618a2-1674-4268-a90c-9959a0d11ef4
+		summarizeBy: none
+		sourceColumn: tags.wf10.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf10.param'
+		dataType: string
+		lineageTag: b4fa3f1b-6e74-42ad-b189-78aacb94c425
+		summarizeBy: none
+		sourceColumn: tags.wf10.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf31.desc'
+		dataType: string
+		lineageTag: e49f1fc1-516e-47e2-9176-5889f8d5c66b
+		summarizeBy: none
+		sourceColumn: tags.wf31.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf31.param'
+		dataType: string
+		lineageTag: c8732437-0985-4cdf-a394-08cce848fc87
+		summarizeBy: none
+		sourceColumn: tags.wf31.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf3.desc'
+		dataType: string
+		lineageTag: b3c9ca3c-f952-4023-92fd-65e4319eee1b
+		summarizeBy: none
+		sourceColumn: tags.wf3.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf3.param'
+		dataType: string
+		lineageTag: f16a2053-2172-494a-b457-7fbbea5039a3
+		summarizeBy: none
+		sourceColumn: tags.wf3.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf7.desc'
+		dataType: string
+		lineageTag: f5b21180-28b4-496e-8ba0-8a1c5909da30
+		summarizeBy: none
+		sourceColumn: tags.wf7.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf7.param'
+		dataType: string
+		lineageTag: d1a51072-931b-404b-94cf-0eb502fef701
+		summarizeBy: none
+		sourceColumn: tags.wf7.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf34.desc'
+		dataType: string
+		lineageTag: abfb347a-06a9-4236-98b3-027ea0b6ebe0
+		summarizeBy: none
+		sourceColumn: tags.wf34.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf34.param'
+		dataType: string
+		lineageTag: 69633055-0bac-4cf5-81c0-f14f90b63f9c
+		summarizeBy: none
+		sourceColumn: tags.wf34.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf1.desc'
+		dataType: string
+		lineageTag: 3023bb26-0f59-403e-9e05-730079204aff
+		summarizeBy: none
+		sourceColumn: tags.wf1.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf1.param'
+		dataType: string
+		lineageTag: 2eaa266f-a2e8-41e2-af20-a4acd16ae082
+		summarizeBy: none
+		sourceColumn: tags.wf1.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'interactionRecord.lastProcessedResumeAtTime'
+		dataType: string
+		lineageTag: 13c7b386-2b1c-45ba-a9c1-67b273c42922
+		summarizeBy: none
+		sourceColumn: interactionRecord.lastProcessedResumeAtTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'interactionRecord.lastCustReplyTimestamp'
+		dataType: string
+		lineageTag: 2b9e34aa-7ef0-465c-b48c-9684c644c291
+		summarizeBy: none
+		sourceColumn: interactionRecord.lastCustReplyTimestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'interactionRecord.nowTimestamp'
+		dataType: string
+		lineageTag: 8be3d526-13ac-41fb-adc3-4c0d719488ee
+		summarizeBy: none
+		sourceColumn: interactionRecord.nowTimestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf18.desc'
+		dataType: string
+		lineageTag: 9e687a3a-15b5-43d2-8256-a69b42cad333
+		summarizeBy: none
+		sourceColumn: tags.wf18.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf18.param'
+		dataType: string
+		lineageTag: e358207f-ab92-4103-9db7-13be54f7ed77
+		summarizeBy: none
+		sourceColumn: tags.wf18.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf27.desc'
+		dataType: string
+		lineageTag: 94f84e23-2dd5-41ac-922a-c84b05ec3381
+		summarizeBy: none
+		sourceColumn: tags.wf27.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf27.param'
+		dataType: string
+		lineageTag: c271c0a2-0535-44c4-91f7-59a72f4444ba
+		summarizeBy: none
+		sourceColumn: tags.wf27.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf28.desc'
+		dataType: string
+		lineageTag: c65b68bb-bf43-46d2-835b-4b6282eed096
+		summarizeBy: none
+		sourceColumn: tags.wf28.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf28.param'
+		dataType: string
+		lineageTag: 3eb71970-2feb-4732-b770-b351f2016d6d
+		summarizeBy: none
+		sourceColumn: tags.wf28.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf12.desc'
+		dataType: string
+		lineageTag: ec26d59a-3e6f-4af4-b2ef-232a22ab664f
+		summarizeBy: none
+		sourceColumn: tags.wf12.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf12.param'
+		dataType: string
+		lineageTag: e371a0cf-9ba2-4ad2-916b-f2a33a9efa09
+		summarizeBy: none
+		sourceColumn: tags.wf12.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.zoneForeign.desc'
+		dataType: string
+		lineageTag: b0b58fc5-97fb-4a6d-8f56-6e832db271b5
+		summarizeBy: none
+		sourceColumn: tags.zoneForeign.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.zoneForeign.param'
+		dataType: string
+		lineageTag: 21cdffd8-fde6-45ef-ac16-1f15a7ad926e
+		summarizeBy: none
+		sourceColumn: tags.zoneForeign.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.remote.desc'
+		dataType: string
+		lineageTag: f8820e9b-5ef8-4624-bebe-86fe6b6ccce3
+		summarizeBy: none
+		sourceColumn: tags.remote.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf13.desc'
+		dataType: string
+		lineageTag: 9b3f3e3f-21e5-41d5-8bf1-34d2a4f8e440
+		summarizeBy: none
+		sourceColumn: tags.wf13.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf13.param'
+		dataType: string
+		lineageTag: 6977604b-ff63-4801-a450-d5e99ae08080
+		summarizeBy: none
+		sourceColumn: tags.wf13.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf35.desc'
+		dataType: string
+		lineageTag: 9f025292-f2a5-4e24-8bb2-fb16e7b1e549
+		summarizeBy: none
+		sourceColumn: tags.wf35.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf35.param'
+		dataType: string
+		lineageTag: 6e69a427-04c2-4453-ba77-9b2f3414571e
+		summarizeBy: none
+		sourceColumn: tags.wf35.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf32.desc'
+		dataType: string
+		lineageTag: f59be0eb-6bd7-4565-9b41-62869d177c21
+		summarizeBy: none
+		sourceColumn: tags.wf32.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf32.param'
+		dataType: string
+		lineageTag: b9dd95ed-61a9-4609-9c66-d740812d3d9c
+		summarizeBy: none
+		sourceColumn: tags.wf32.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.zone.desc'
+		dataType: string
+		lineageTag: 93eda990-7bd6-4090-b523-852e4e0283fb
+		summarizeBy: none
+		sourceColumn: tags.zone.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.zone.param'
+		dataType: string
+		lineageTag: 27f3c60b-681f-4ce2-8bec-0492663ad657
+		summarizeBy: none
+		sourceColumn: tags.zone.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf4.desc'
+		dataType: string
+		lineageTag: 90dbbc2d-9f07-4e1a-989e-d739c1e2192e
+		summarizeBy: none
+		sourceColumn: tags.wf4.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf4.param'
+		dataType: string
+		lineageTag: fdf71719-ed5f-4455-a2e5-c54b6bacfd0f
+		summarizeBy: none
+		sourceColumn: tags.wf4.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf20.desc'
+		dataType: string
+		lineageTag: 975c50d0-5895-4bed-95de-02b1d0de047a
+		summarizeBy: none
+		sourceColumn: tags.wf20.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf20.param'
+		dataType: string
+		lineageTag: ba3eb40b-a0e2-4792-b67a-897d3a85751e
+		summarizeBy: none
+		sourceColumn: tags.wf20.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.landmark.desc'
+		dataType: string
+		lineageTag: 771faf94-fc6a-4ca5-9304-e656334bdf2c
+		summarizeBy: none
+		sourceColumn: tags.landmark.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column tags
+		dataType: string
+		lineageTag: 45b0e131-883d-4637-a3d3-f8b695ba777d
+		summarizeBy: none
+		sourceColumn: tags
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf33.desc'
+		dataType: string
+		lineageTag: f5d26ef0-94b7-48ac-94ac-9307a26b3880
+		summarizeBy: none
+		sourceColumn: tags.wf33.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf33.param'
+		dataType: string
+		lineageTag: e827b82d-1892-477b-8834-87756a7ad1c7
+		summarizeBy: none
+		sourceColumn: tags.wf33.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf23.desc'
+		dataType: string
+		lineageTag: 80bb7637-c1ee-46f9-addb-3092d8236c8f
+		summarizeBy: none
+		sourceColumn: tags.wf23.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf23.param'
+		dataType: string
+		lineageTag: ebe9669c-beca-4b69-be87-8877278eaf8c
+		summarizeBy: none
+		sourceColumn: tags.wf23.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf11.desc'
+		dataType: string
+		lineageTag: 906c8b13-c8d7-4eba-9809-c20097bce9af
+		summarizeBy: none
+		sourceColumn: tags.wf11.desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tags.wf11.param'
+		dataType: string
+		lineageTag: df7d0857-b89c-4b4b-9c91-b54299b549b9
+		summarizeBy: none
+		sourceColumn: tags.wf11.param
+
+		annotation SummarizationSetBy = Automatic
+
+	column snapshotDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e8386143-ef63-44ab-9ebc-c2178dca8558
+		summarizeBy: none
+		sourceColumn: snapshotDate
+
+		variation 變化
+			isDefault
+			relationship: 18299f62-bfe5-48eb-9281-ec30062549f4
+			defaultHierarchy: LocalDateTable_eb8be645-b2f7-45ed-84c0-0dd6f245b7fd.日期階層
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column snapshotDateTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2d235be1-3e57-4b47-a2a8-873f5f6029ea
+		summarizeBy: none
+		sourceColumn: snapshotDateTime
+
+		variation 變化
+			isDefault
+			relationship: 614673d1-e36e-41dd-b90d-4a7ea2b6ce27
+			defaultHierarchy: LocalDateTable_527b1dd5-9797-458f-a607-63e8043e5651.日期階層
+
+		annotation SummarizationSetBy = Automatic
+
+	column sourceKeyword
+		dataType: string
+		lineageTag: 197449c2-540a-4853-9d5e-9ad6f39b91ca
+		summarizeBy: none
+		sourceColumn: sourceKeyword
+
+		annotation SummarizationSetBy = Automatic
+
+	column sourceArea
+		dataType: string
+		lineageTag: e707edf5-2a39-4285-ad75-bac17cfe4684
+		summarizeBy: none
+		sourceColumn: sourceArea
+
+		annotation SummarizationSetBy = Automatic
+
+	column sourcePage
+		dataType: int64
+		formatString: 0
+		lineageTag: dddabfef-9040-412b-867e-ba98a8507f84
+		summarizeBy: sum
+		sourceColumn: sourcePage
+
+		annotation SummarizationSetBy = Automatic
+
+	column sourcePageSize
+		dataType: int64
+		formatString: 0
+		lineageTag: e829564a-2961-40b5-bb11-8ff001e1ae6b
+		summarizeBy: sum
+		sourceColumn: sourcePageSize
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 查詢 = m
+		mode: import
+		source =
+				let
+				    // ============================================================
+				    // 104 Job Search API
+				    // Raw / Staging Query
+				    // ============================================================
+				
+				    來源 =
+				        Python.Execute(
+				"
+				import pandas as pd
+				import cloudscraper
+				import urllib.request
+				import json
+				from datetime import datetime
+				
+				# ============================================================
+				# 1. API Parameters
+				# ============================================================
+				
+				BASE_URL = 'https://www.104.com.tw/jobs/search/api/jobs'
+				
+				AREA = '6001008007,6001008006'
+				KEYWORD = 'powerbi'
+				PAGE = 1
+				PAGE_SIZE = 20
+				
+				params = {
+				    'area': AREA,
+				    'jobsource': 'index_s',
+				    'keyword': KEYWORD,
+				    'mode': 's',
+				    'order': '15',
+				    'page': PAGE,
+				    'pagesize': PAGE_SIZE
+				}
+				
+				headers = {
+				    'Accept': 'application/json, text/plain, */*',
+				    'Accept-Language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
+				    'Referer': 'https://www.104.com.tw/jobs/search/'
+				}
+				
+				
+				# ============================================================
+				# 2. Windows System Proxy
+				# ============================================================
+				
+				sys_proxies = urllib.request.getproxies()
+				
+				scraper = cloudscraper.create_scraper(
+				    browser={
+				        'browser': 'chrome',
+				        'platform': 'windows',
+				        'desktop': True
+				    }
+				)
+				
+				# 只注入 HTTP / HTTPS Proxy
+				if sys_proxies:
+				    valid_proxies = {
+				        key: value
+				        for key, value in sys_proxies.items()
+				        if key.lower() in ('http', 'https')
+				    }
+				
+				    if valid_proxies:
+				        scraper.proxies.update(valid_proxies)
+				
+				
+				# ============================================================
+				# 3. Snapshot Time
+				# ============================================================
+				
+				snapshot_dt = datetime.now().astimezone()
+				snapshot_date = snapshot_dt.date().isoformat()
+				snapshot_datetime = snapshot_dt.isoformat(timespec='seconds')
+				
+				
+				# ============================================================
+				# 4. Call API
+				# ============================================================
+				
+				response = scraper.get(
+				    BASE_URL,
+				    params=params,
+				    headers=headers,
+				    timeout=30
+				)
+				
+				response.raise_for_status()
+				
+				json_data = response.json()
+				
+				
+				# ============================================================
+				# 5. Locate Job List
+				# ============================================================
+				
+				jobs_list = []
+				data_node = None
+				
+				if isinstance(json_data, list):
+				
+				    jobs_list = json_data
+				
+				elif isinstance(json_data, dict):
+				
+				    data_node = json_data.get('data', json_data)
+				
+				    if isinstance(data_node, list):
+				
+				        jobs_list = data_node
+				
+				    elif isinstance(data_node, dict):
+				
+				        # 兼容 API 未來可能修改 list key
+				        for candidate in ['list', 'jobs', 'items']:
+				
+				            candidate_value = data_node.get(candidate)
+				
+				            if isinstance(candidate_value, list):
+				                jobs_list = candidate_value
+				                break
+				
+				
+				# ============================================================
+				# 6. Jobs -> DataFrame
+				# ============================================================
+				
+				if jobs_list:
+				
+				    # dict 欄位直接展開，例如 company.xxx
+				    df_jobs = pd.json_normalize(
+				        jobs_list,
+				        sep='.'
+				    )
+				
+				else:
+				
+				    # 正常沒有資料時回傳空表，而不是製造假的職缺紀錄
+				    df_jobs = pd.DataFrame()
+				
+				
+				# ============================================================
+				# 7. Complex Columns -> Valid JSON String
+				# ============================================================
+				
+				# Power BI Python Connector 對 list/dict 欄位支援不好，
+				# 暫時保存為合法 JSON。
+				# 後續再針對 pcSkills / tags / jobCat 等拆成子表。
+				
+				for col in df_jobs.columns:
+				
+				    has_complex_value = df_jobs[col].map(
+				        lambda x: isinstance(x, (dict, list))
+				    ).any()
+				
+				    if has_complex_value:
+				
+				        df_jobs[col] = df_jobs[col].map(
+				            lambda x:
+				                json.dumps(
+				                    x,
+				                    ensure_ascii=False
+				                )
+				                if isinstance(x, (dict, list))
+				                else x
+				        )
+				
+				
+				# ============================================================
+				# 8. ETL Audit Columns
+				# ============================================================
+				
+				df_jobs['snapshotDate'] = snapshot_date
+				df_jobs['snapshotDateTime'] = snapshot_datetime
+				
+				df_jobs['sourceKeyword'] = KEYWORD
+				df_jobs['sourceArea'] = AREA
+				df_jobs['sourcePage'] = PAGE
+				df_jobs['sourcePageSize'] = PAGE_SIZE
+				
+				
+				# ============================================================
+				# 9. API Metadata
+				# ============================================================
+				
+				def safe_keys(value):
+				    if isinstance(value, dict):
+				        return json.dumps(
+				            list(value.keys()),
+				            ensure_ascii=False
+				        )
+				    return None
+				
+				
+				metadata = {
+				    'httpStatus': response.status_code,
+				    'requestUrl': response.url,
+				    'snapshotDate': snapshot_date,
+				    'snapshotDateTime': snapshot_datetime,
+				    'keyword': KEYWORD,
+				    'area': AREA,
+				    'requestedPage': PAGE,
+				    'requestedPageSize': PAGE_SIZE,
+				    'returnedJobs': len(jobs_list),
+				    'topLevelKeys': safe_keys(json_data),
+				    'dataKeys': safe_keys(data_node)
+				}
+				
+				
+				# 嘗試取得 API 中常見的 Pagination / Count 欄位
+				if isinstance(data_node, dict):
+				
+				    for key in [
+				        'totalCount',
+				        'totalPage',
+				        'page',
+				        'pageSize',
+				        'total',
+				        'count'
+				    ]:
+				
+				        if key in data_node:
+				            metadata[key] = data_node.get(key)
+				
+				
+				if isinstance(json_data, dict):
+				
+				    for key in [
+				        'totalCount',
+				        'totalPage',
+				        'page',
+				        'pageSize',
+				        'total',
+				        'count'
+				    ]:
+				
+				        if key in json_data and key not in metadata:
+				            metadata[key] = json_data.get(key)
+				
+				
+				df_metadata = pd.DataFrame([metadata])
+				"
+				        ),
+				
+				    // ============================================================
+				    // 10. Select Jobs DataFrame
+				    // ============================================================
+				
+				    df_jobs =
+				        來源{[Name = "df_jobs"]}[Value],
+				
+				
+				    // ============================================================
+				    // 11. Robust Power Query Types
+				    // 欄位不存在時不會報錯
+				    // ============================================================
+				
+				    欄位清單 =
+				        Table.ColumnNames(df_jobs),
+				
+				
+				    Int欄位 = {
+				        "appearDate",
+				        "applyCnt",
+				        "coIndustry",
+				        "custNo",
+				        "jobAddrNo",
+				        "jobNo",
+				        "jobRo",
+				        "jobType",
+				        "mrt",
+				        "period",
+				        "remoteWorkType",
+				        "s10",
+				        "salaryHigh",
+				        "salaryLow",
+				        "s5",
+				        "employeeCount",
+				        "sourcePage",
+				        "sourcePageSize"
+				    },
+				
+				
+				    Number欄位 = {
+				        "mrtDist",
+				        "lat",
+				        "lon",
+				        "hrBehaviorPR",
+				        "pddScore"
+				    },
+				
+				
+				    Text欄位 = {
+				        "coIndustryDesc",
+				        "custName",
+				        "description",
+				        "descSnippet",
+				        "jobAddress",
+				        "jobAddrNoDesc",
+				        "jobName",
+				        "jobNameSnippet",
+				        "link",
+				        "major",
+				        "mrtDesc",
+				        "optionEdu",
+				        "tags",
+				        "s9",
+				        "d3",
+				        "jobCat",
+				        "labels",
+				        "languageRequirements",
+				        "acceptRole",
+				        "pcSkills",
+				        "custLogo",
+				        "jobSwitch",
+				        "isSave",
+				        "interactionRecord",
+				        "isApplied",
+				        "applyDate",
+				        "userApplyCount",
+				        "sourceKeyword",
+				        "sourceArea"
+				    },
+				
+				
+				    // ------------------------------------------------------------
+				    // Int64
+				    // ------------------------------------------------------------
+				
+				    Int轉換 =
+				        List.Transform(
+				            List.Select(
+				                Int欄位,
+				                each List.Contains(欄位清單, _)
+				            ),
+				            (欄位名稱) =>
+				                {
+				                    欄位名稱,
+				                    each try Int64.From(_) otherwise null,
+				                    Int64.Type
+				                }
+				        ),
+				
+				
+				    // ------------------------------------------------------------
+				    // Decimal Number
+				    // ------------------------------------------------------------
+				
+				    Number轉換 =
+				        List.Transform(
+				            List.Select(
+				                Number欄位,
+				                each List.Contains(欄位清單, _)
+				            ),
+				            (欄位名稱) =>
+				                {
+				                    欄位名稱,
+				                    each try Number.From(_) otherwise null,
+				                    type number
+				                }
+				        ),
+				
+				
+				    // ------------------------------------------------------------
+				    // Text
+				    // ------------------------------------------------------------
+				
+				    Text轉換 =
+				        List.Transform(
+				            List.Select(
+				                Text欄位,
+				                each List.Contains(欄位清單, _)
+				            ),
+				            (欄位名稱) =>
+				                {
+				                    欄位名稱,
+				                    each
+				                        if _ = null
+				                        then null
+				                        else Text.From(_),
+				                    type text
+				                }
+				        ),
+				
+				
+				    // ------------------------------------------------------------
+				    // Apply transformations
+				    // ------------------------------------------------------------
+				
+				    基礎類型 =
+				        Table.TransformColumns(
+				            df_jobs,
+				            List.Combine({
+				                Int轉換,
+				                Number轉換,
+				                Text轉換
+				            })
+				        ),
+				
+				
+				    // ============================================================
+				    // 12. Snapshot Types
+				    // ============================================================
+				
+				    SnapshotDateType =
+				        if List.Contains(
+				            Table.ColumnNames(基礎類型),
+				            "snapshotDate"
+				        )
+				        then
+				            Table.TransformColumns(
+				                基礎類型,
+				                {
+				                    {
+				                        "snapshotDate",
+				                        each try Date.From(_) otherwise null,
+				                        type date
+				                    }
+				                }
+				            )
+				        else
+				            基礎類型,
+				
+				
+				    SnapshotDateTimeType =
+				        if List.Contains(
+				            Table.ColumnNames(SnapshotDateType),
+				            "snapshotDateTime"
+				        )
+				        then
+				            Table.TransformColumns(
+				                SnapshotDateType,
+				                {
+				                    {
+				                        "snapshotDateTime",
+				                        each
+				                            try DateTimeZone.From(_)
+				                            otherwise null,
+				                        type datetimezone
+				                    }
+				                }
+				            )
+				        else
+				            SnapshotDateType
+				
+				in
+				    SnapshotDateTimeType
+
+	annotation PBI_NavigationStepName = 導覽
+
+	annotation PBI_ResultType = Table
+

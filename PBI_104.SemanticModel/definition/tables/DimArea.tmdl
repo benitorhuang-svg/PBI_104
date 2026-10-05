@@ -1,0 +1,37 @@
+table DimArea
+	lineageTag: 8759c2f2-37c9-4ca5-9167-93818b4696a4
+
+	column jobAddrNo
+		dataType: int64
+		lineageTag: f4228e65-e052-41ae-8423-cddaa85d4080
+		sourceColumn: jobAddrNo
+
+	column jobAddrNoDesc
+		dataType: string
+		lineageTag: 23b2f60a-aab6-4f11-8200-381d986b5695
+		sourceColumn: jobAddrNoDesc
+
+	column jobAddress
+		dataType: string
+		lineageTag: 16130fca-f330-4b61-87fa-e9a723863de7
+		sourceColumn: jobAddress
+
+	column lat
+		dataType: double
+		lineageTag: 6056921c-dc58-4db3-9a3a-f9e413bb4c75
+		sourceColumn: lat
+
+	column lon
+		dataType: double
+		lineageTag: 12d61b81-8c6c-4f49-aca0-a8996d10f4b4
+		sourceColumn: lon
+
+	column areaKey
+		dataType: string
+		lineageTag: f9344aaf-9bde-43c6-8803-dbe36da70d57
+		sourceColumn: areaKey
+
+	partition DimArea = m
+		mode: import
+		source = mdl_DimArea
+

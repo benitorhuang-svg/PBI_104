@@ -11,4 +11,6 @@
 
 所有 TASK-002 queries 都必須 Disable Load。`src_104Result` 是共享 record，避免在 M code 中複製擷取流程；`src_104Jobs` 與 `src_104Metadata` 只投影該 record，不加入清理或商業邏輯。
 
-目前 PBIP/TMDL 未被修改，因此上述 Query Groups 與 Enable Load 設定仍須在 Power BI Desktop 匯入後人工確認。`03_staging/` 與 `04_model/` 在 TASK-002 保持空白。
+`fx104GetPage` 只有 `baseUrl` 必填；`keyword`、`area`、`jobsource`、`mode`、`order`、`page`、`pagesize` 均可省略。省略或傳入空白文字時，該參數不會加入 HTTP query string；若有提供 `page` 或 `pagesize`，其值必須是正整數。正式的 `src_104Result` 仍會明確傳入八個專案參數。
+
+TASK-003R 已將 `00_Parameters` 至 `03_Staging` 共 20 個 expressions 與四個 Query Groups 持久化至 PBIP/TMDL，並在 Power BI Desktop 儲存、關閉、重開及 refresh 驗證。這 20 個 queries 全部維持 Disable Load；`04_Model` 尚未建立，既有 loaded query `查詢` 未被修改。
