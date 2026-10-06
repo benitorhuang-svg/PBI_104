@@ -3,73 +3,89 @@ table FactJobSnapshot
 
 	column snapshotDate
 		dataType: dateTime
+		formatString: Long Date
 		lineageTag: 760cd627-c7c4-4ab3-9667-73492ede4240
+		summarizeBy: none
 		sourceColumn: snapshotDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
 
 	column snapshotDateTime
 		dataType: dateTime
 		lineageTag: 713fe924-f377-4c87-a9b8-a360697e964d
+		summarizeBy: none
 		sourceColumn: snapshotDateTime
+
+		annotation SummarizationSetBy = Automatic
 
 	column jobNo
 		dataType: string
 		lineageTag: c0c5f9a2-5bf7-4f10-a621-a2fd8f98cac1
+		summarizeBy: none
 		sourceColumn: jobNo
+
+		annotation SummarizationSetBy = Automatic
 
 	column custNo
 		dataType: string
 		lineageTag: 349bb44e-fcb9-4b95-ae38-fa143ec4a130
+		summarizeBy: none
 		sourceColumn: custNo
 
-	column jobAddrNo
-		dataType: int64
-		lineageTag: 6e70e102-0697-4354-a0e0-1dd33b13f8ee
-		sourceColumn: jobAddrNo
+		annotation SummarizationSetBy = Automatic
 
 	column appearDate
 		dataType: dateTime
+		formatString: Long Date
 		lineageTag: 3a2c904b-f834-442b-b240-ee64186e3d8b
+		summarizeBy: none
 		sourceColumn: appearDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
 
 	column salaryLow
 		dataType: double
 		lineageTag: bc8d8a79-354e-43d0-970e-00fb62bda881
+		summarizeBy: sum
 		sourceColumn: salaryLow
+
+		annotation SummarizationSetBy = Automatic
 
 	column salaryHigh
 		dataType: double
 		lineageTag: e70d165c-2f79-4a8b-9abb-6c8c8150ca91
+		summarizeBy: sum
 		sourceColumn: salaryHigh
 
-	column applyCnt
-		dataType: int64
-		lineageTag: 50b6d536-4629-458f-8a4b-43fe0f339725
-		sourceColumn: applyCnt
-
-	column remoteWorkType
-		dataType: int64
-		lineageTag: 6f102751-905e-454f-8bf1-2d117be6c402
-		sourceColumn: remoteWorkType
+		annotation SummarizationSetBy = Automatic
 
 	column sourceKeyword
 		dataType: string
 		lineageTag: a990af48-ae3e-4b10-9ea8-d8582f287913
+		summarizeBy: none
 		sourceColumn: sourceKeyword
+
+		annotation SummarizationSetBy = Automatic
 
 	column sourceArea
 		dataType: string
 		lineageTag: f446d1c0-5b6e-4244-8990-f2643d323ff2
+		summarizeBy: none
 		sourceColumn: sourceArea
 
-	column sourcePage
-		dataType: int64
-		lineageTag: 3053d1b5-83ed-4223-b0ca-cfd7a1cbaa88
-		sourceColumn: sourcePage
+		annotation SummarizationSetBy = Automatic
 
-	column sourcePageSize
-		dataType: int64
-		lineageTag: 6fa0fb3c-2ccc-47b4-a945-9cf7654caf18
-		sourceColumn: sourcePageSize
+	column querySeriesKey
+		dataType: string
+		lineageTag: fc68a58b-58d7-4c7a-8786-ce6c9e0efaa2
+		summarizeBy: none
+		sourceColumn: querySeriesKey
+
+		annotation SummarizationSetBy = Automatic
 
 	partition FactJobSnapshot = m
 		mode: import

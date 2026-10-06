@@ -4,6 +4,7 @@ param(
   [string]$Name,
   [string]$Scope,
   [string]$OutputFile = 'artifacts/desktop.png',
+  [int]$ProcessId = 0,
   [int]$X,
   [int]$Y
 )
@@ -20,7 +21,10 @@ public static class PbiUiNative {
   [DllImport("user32.dll")] public static extern void mouse_event(uint f,uint x,uint y,uint d,UIntPtr e);
 }
 '@
-$process = Get-Process PBIDesktop | Select-Object -First 1
+$processes = @(Get-Process PBIDesktop -ErrorAction SilentlyContinue)
+if ($ProcessId) { $processes = @($processes | Where-Object { $_.Id -eq $ProcessId }) }
+if ($processes.Count -ne 1) { throw 'Select exactly one Power BI Desktop process with -ProcessId when multiple are open.' }
+$process = $processes[0]
 $window = [System.Windows.Automation.AutomationElement]::FromHandle($process.MainWindowHandle)
 $nodes = $window.FindAll([System.Windows.Automation.TreeScope]::Descendants, [System.Windows.Automation.Condition]::TrueCondition)
 if ($Scope) {

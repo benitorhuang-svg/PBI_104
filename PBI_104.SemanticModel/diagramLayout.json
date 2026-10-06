@@ -10,19 +10,6 @@
       "nodes": [
         {
           "location": {
-            "x": 1654.9453408445884,
-            "y": 433.13793007281561
-          },
-          "nodeIndex": "查詢",
-          "nodeLineageTag": "dc7e7f30-db73-4ad0-a8e3-badbc6e28aaf",
-          "size": {
-            "height": 300,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
             "x": 300.68436411272239,
             "y": 784.23632144030353
           },
@@ -121,6 +108,19 @@
           "nodeLineageTag": "b3392bee-cb0a-453d-9823-e3d0760b3593",
           "size": {
             "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1654.9453408445884,
+            "y": 507.13793007281561
+          },
+          "nodeIndex": "BridgeJobCategory",
+          "nodeLineageTag": "a890a5c5-1e0d-4917-a02d-a8d7d6c09d6f",
+          "size": {
+            "height": 152,
             "width": 234
           },
           "zIndex": 0

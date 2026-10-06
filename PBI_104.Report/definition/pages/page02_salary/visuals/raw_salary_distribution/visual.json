@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "raw_salary_distribution",
   "position": {
     "x": 24,
     "y": 280,
-    "z": 400,
+    "z": 8000,
     "height": 190,
     "width": 1206,
-    "tabOrder": 400
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "lineChart",

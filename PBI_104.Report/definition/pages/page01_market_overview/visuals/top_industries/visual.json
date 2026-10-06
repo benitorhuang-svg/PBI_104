@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "top_industries",
   "position": {
     "x": 433,
     "y": 488,
-    "z": 501,
+    "z": 10000,
     "height": 208,
     "width": 389,
-    "tabOrder": 501
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "donutChart",

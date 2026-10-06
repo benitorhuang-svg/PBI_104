@@ -75,3 +75,38 @@ source, staging, and function expressions remain Disable Load; only the model
 tables are loaded. Power BI Desktop refreshes were performed after import and
 after a close/reopen cycle. The legacy `查詢` table, relationships, measures,
 and PBIR were not changed by TASK-003. No commit was created.
+
+## PostgreSQL salary baseline (TASK-009, 2026-10-05 archive)
+
+The local archive contains 25 Bronze batches, 25,444 raw rows, 21 query series,
+and 17,207 distinct `jobNo` values. A rough description regex found salary-related
+terms on 3,801 distinct jobs, approximate 40,000-plus wording on 134, and
+negotiable/non-disclosure wording on 373. These are text-profile counts, not
+salary classifications. Across distinct jobs, 2,923 had at least one `(0,0)`
+API pair and 3,228 had at least one `salaryHigh=9999999`; neither value is
+treated as a proven business code.
+
+Only complete batches enter Silver: 3,168 job snapshots received one
+`API_FIELDS` observation each. Of these, 1,323 are marked
+`SENTINEL_CANDIDATE` and 1,845 `API_UNIT_UNMAPPED`. All receive TWD with basis
+`PLATFORM_DEFAULT` as requested, but zero API observations have normalized
+amount bounds because the API amount unit and pay period remain unverified.
+Bronze values and the existing `salary_low`/`salary_high` columns are retained.
+
+Parser version 1.1.2 produced 1,314 description observations from the complete
+snapshots: 212 `PARSED`, 1,024 `NEEDS_REVIEW`, 74 `NEGOTIABLE`, and 4
+`NOT_DISCLOSED`. A single parsed amount is stored as `MIN_ONLY` with a null
+maximum; an explicit numeric range fills both bounds. `PARSED` means the
+amount/bound and pay period are unambiguous; currency may come from explicit
+text or the approved TWD default. For example, `月薪四萬以上` is a parsed
+40,000 monthly minimum with no upper bound, while bare `35000~42000` has its
+bounds but remains under review because the period is unknown. `/hr` is
+recognized as hourly. These deterministic rules are not a completeness or
+accuracy guarantee. Evidence-span lengths matched the stored evidence text
+for every row, and re-importing the archive did not create duplicate
+observations.
+
+These results are limited to the locally saved archive dated 2026-10-05. They
+do not represent a live nationwide refresh; incomplete pagination and
+Silver-blocked batches remain in Bronze and are excluded from these salary
+observation counts.

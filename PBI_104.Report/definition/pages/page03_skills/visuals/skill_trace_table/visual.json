@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "skill_trace_table",
   "position": {
     "x": 24,
     "y": 488,
-    "z": 500,
+    "z": 10000,
     "height": 208,
     "width": 500,
-    "tabOrder": 500
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "pivotTable",

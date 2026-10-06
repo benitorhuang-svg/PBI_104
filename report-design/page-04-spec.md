@@ -2,7 +2,7 @@
 
 ## Page purpose
 
-讓使用者依地區、產業、技能、薪資與來源關鍵字篩選目前職缺，查看清單欄位與可追溯的原始 104 link。
+讓使用者依職稱、官方職類、地區、產業、技能與薪資篩選目前職缺，查看清單欄位與可追溯的原始 104 link。
 
 ## Canvas and grid
 
@@ -11,7 +11,7 @@
 
 ## Filters
 
-- `FactJob[sourceKeyword]`、`DimArea[jobAddrNoDesc]`、`DimCompany[coIndustryDesc]`、`DimSkill[skillDescription]`。
+- `FactJob[jobName]`（職稱）、`DimJobCategory[jobCatDescription]`（官方職類）、`DimArea[jobAddrNoDesc]`、`DimCompany[coIndustryDesc]`、`DimSkill[skillDescription]`。
 - Salary 以 `salaryLow`/`salaryHigh` numeric filters；不建立 experience filter，因模型未提供可靠 experience group。
 
 ## KPI card

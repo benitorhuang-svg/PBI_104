@@ -1,19 +1,19 @@
 # 104 Power BI Job Intelligence
 
-Power BI 專案，用於將已驗證的 104 職缺搜尋 API 資料逐步整理成可分析的模型與報表。
+Power BI 專案，將已驗證的 104 職缺擷取送入 PostgreSQL ETL，再由 Power Query 匯入 Gold 模型表，DAX measures 提供報表呈現。
 
 ## 目前狀態
 
-- 專案入口：`PBI_104.pbip`
-- 已驗證來源：Python + `pandas` + `cloudscraper` + Windows system proxy
-- `00_Parameters` 至 `03_Staging` 已完成並持久化；`fx104GetPage` 只有 `baseUrl` 必填，其餘參數 optional
-- `04_Model` 已載入 `FactJob`、`FactJobSnapshot`、`DimCompany`、`DimArea`、`DimSkill`、`DimJobCategory`、`BridgeJobSkill`；`DimDate` 為 semantic-model calculated table
-- Semantic Model 已建立 6 條新 relationships 與 7 個有 description/format/display folder 的 measures
-- 既有 `查詢` 表仍保留；報表已建立四頁 PBIR：職缺市場總覽、薪資市場分析、技能需求分析、職缺搜尋器
-- 報表已完成去重：移除四頁重複靜態側欄與職缺搜尋器中的重複 KPI/排行榜，保留原生頁籤導覽與查詢專用篩選器
-- PBIR visual-container 已修正 `drillFilterOtherVisuals` 的巢狀位置，重開 Desktop 不再產生 root-property 警告
-- 報表使用 `report-design/` 的四張核准參考圖與 page design briefs；percentile、experience、skill trend/pair 等未被模型支持的元素明確標記 `BLOCKED`
-- 最新驗證：重開 PBIP 後 Model partitions 可刷新至 `Ready`；DAX smoke query 回傳 FactJob 55 rows、55 jobs、35 companies、salary coverage 100%、48 jobs with skills、skill share 87.27%
+- 專案入口：`PBI_104.pbip`；目前架構工作規格為 `tasks/TASK-011-database-snapshot-aggregate.md`。
+- 擷取工具保存不可變批次；`tools/sync_lake_to_postgres.py` 驗證後載入 PostgreSQL Bronze/Silver，Gold views 負責模型表篩選、去重、彙整與維度關聯。
+- Power Query 只讀取 `gold.pbi_*` views；FactJob 以完整職業類別批次為來源，按 `jobNo` 選取最新觀測，地區不由模型查詢限定。
+- Semantic Model 維持既有 relationships 與 DAX measures；技能／職類橋接和日期維度也由 Gold ETL 輸出。
+- 全台職類擷取尚未完成：目前資料庫的完整職類批次仍是舊雙地區批次；不限地區規模檢查顯示大量類別觸及 API 150 頁上限，詳見 `docs/category-acquisition-probe.md`。
+- 四頁報表依 `report-design/` 參考圖更新；職缺清單逐列以 `jobNo` 識別，技能統計與預覽使用正規化 bridge 欄位。
+- 捕獲結果、Desktop 實際載入筆數及目前限制記錄在 `docs/optimization-status.md`。歷史驗證文件保留原始日期與數字，不代表今天的資料。
+- 本機唯讀入口：`python tools/validate_project.py`；Desktop 套用、刷新、儲存和重開仍需完成，刷新錯誤與目前狀態記錄於 `docs/optimization-status.md`。
+- Service gateway／雲端排程尚未以目標環境驗證。Desktop 成功不代表 Service 可刷新。
+- 後續資料擷取以 104 官方職業類別代碼為主；使用 `python tools/capture_category_matrix.py` 檢視各大類筆數，確認規模後以 `--capture` 保存完整批次。
 
 ## 開始工作
 

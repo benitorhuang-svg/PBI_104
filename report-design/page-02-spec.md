@@ -12,7 +12,7 @@
 ## Header and slicers
 
 - 標題「薪資市場分析 / Salary Intelligence」。
-- `FactJob[jobName]` 不作搜尋輸入；使用有直接資料關聯的 `FactJob[jobCatRaw]`（raw category）、`DimArea[jobAddrNoDesc]`、`FactJob[sourceKeyword]`、`DimDate[Date]`。`DimJobCategory` 目前沒有可驗證的 FactJob key，不拿來假裝篩選關聯。
+- `FactJob[jobName]`：職稱選擇；`DimJobCategory[jobCatDescription]`：官方職類；另有 `DimArea[jobAddrNoDesc]` 與 `DimDate[Date]`。職類透過 `BridgeJobCategory` 篩選職缺。
 
 ## KPI cards
 

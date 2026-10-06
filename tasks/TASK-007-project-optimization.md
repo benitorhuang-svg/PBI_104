@@ -31,7 +31,7 @@
 
 ## 驗收
 
-- 正常、零結果、錯頁、部分失敗、型別漂移與 orphan cases 有具體 gates。
+- 正常與零結果、錯頁、部分失敗、型別漂移與 orphan cases 已設計具體 gates；Python 擷取／儲存測試與 Desktop semantic DAX gates 已執行。額外 M 邊界案例 probe 尚未能在原生 Desktop 引擎成功執行，須標記 UNVERIFIED。
 - 所有 M 匯出與 TMDL 一致，JSON Schema／TMDL 可解析，程式檔 <= 300 行。
 - 技能／分類 OR、多篩選交集、比例分母、日期 coverage 與 jobNo 選取通過。
 - 持久化失敗不能更新 current pointer；失敗保留上一個成功批次。
@@ -40,5 +40,13 @@
 
 ## 驗證入口
 
-將建立 tools/validate_project.py、tools/tests/ 與 Desktop DAX／M probes。
+驗證入口：`tools/README.md` 與 `docs/optimization-status.md`。
 正常開啟命令：`Start-Process .\PBI_104.pbip`。
+
+## 執行結果（2026-10-05）
+
+- 完成 source/staging/model/semantic/report 與文件／工具範圍內的本機優化；PBIR 依既有 Git baseline 與核准參考圖編輯。未 commit、publish 或改動原始 capture pointer。
+- Python tests 11/11 通過；42 queries 同步一致；58 JSON、57 PBIR schemas、73 欄位引用與 Desktop TMDL parser 通過。
+- Desktop snapshot refresh 完成；9/9 loaded table partitions Ready，8 relationships。DAX 資料列與技能／職類／交集／日期合約通過。
+- 關閉並重開 PBIP 後，Import partitions 先顯示 `NoData`；再次 snapshot refresh 後 9/9 partitions Ready，DAX 契約再通過並於 8:23 PM 儲存。fresh Desktop session 需重新 refresh 才能檢視資料列。
+- 完整結果與資料限制記錄於 `docs/optimization-status.md`。原生 M 邊界案例 probe 未執行成功，保持 UNVERIFIED；不可宣稱 live API、Service gateway 或多日趨勢已驗證。

@@ -1,16 +1,17 @@
 # Power Query Source Files
 
-此目錄保存可貼入 Power Query Advanced Editor 的完整 M expressions。檔案系統使用小寫目錄；Power BI Desktop 內請建立 `00_Parameters` 至 `04_Model` Query Groups。
+此目錄保存與 PBIP/TMDL 同步的 active M expressions。Power Query 僅讀取 PostgreSQL Gold views；擷取、解析、正規化、去重、彙整和品質規則在 Python/PostgreSQL ETL。
 
-## TASK-002 import order
+## Active query groups
 
-1. 在 `00_Parameters` 建立 `pBaseUrl`、`pArea`、`pJobSource`、`pKeyword`、`pMode`、`pOrder`、`pPage`、`pPageSize`。
-2. 在 `01_Functions` 建立 `fx104GetPage`、`fx104GetAllPages`。
-3. 在 `02_Source` 建立 `src_104Result`、`src_104Jobs`、`src_104Metadata`。
-4. 先單獨呼叫 `fx104GetPage` 驗證 page 1，再 refresh `src_104Jobs` 與 `src_104Metadata`。
+- `00_parameters/`: PostgreSQL server/database 參數。
+- `01_functions/`: `fxReadGoldView`，只負責連線與選取 Gold view。
+- `02_source/`: 九個 `src_Pbi*` PostgreSQL view readers。
+- `03_staging/`: 空；模型載入路徑不經 M staging。
+- `04_model/`: 九個 `mdl_*` pass-through，對應九張 Import 表。
 
-所有 TASK-002 queries 都必須 Disable Load。`src_104Result` 是共享 record，避免在 M code 中複製擷取流程；`src_104Jobs` 與 `src_104Metadata` 只投影該 record，不加入清理或商業邏輯。
+Source、Function、Parameter expressions 均 Disable Load；只有 `04_Model` 的九張模型表 Enable Load。DAX measures 維持在 Semantic Model，`DimDate` 也由 PostgreSQL Gold view 提供。
 
-`fx104GetPage` 只有 `baseUrl` 必填；`keyword`、`area`、`jobsource`、`mode`、`order`、`page`、`pagesize` 均可省略。省略或傳入空白文字時，該參數不會加入 HTTP query string；若有提供 `page` 或 `pagesize`，其值必須是正整數。正式的 `src_104Result` 仍會明確傳入八個專案參數。
+用 `python tools/sync_queries.py` 檢查 M/TMDL 完整同步；有意同步時使用 `python tools/sync_queries.py --write`。舊 API/JSON/staging M 查詢完整保存在 `archive/pre-db-etl/`，不屬於 active PBIP expressions。擷取 CLI 仍使用既有 `cloudscraper`、Windows system proxy 和不可變批次驗證。
 
-TASK-003R 已將 `00_Parameters` 至 `03_Staging` 共 20 個 expressions 與四個 Query Groups 持久化至 PBIP/TMDL，並在 Power BI Desktop 儲存、關閉、重開及 refresh 驗證。這 20 個 queries 全部維持 Disable Load；`04_Model` 尚未建立，既有 loaded query `查詢` 未被修改。
+刷新前執行 `python tools/sync_lake_to_postgres.py --write`，將通過 manifest、頁面 checksum、分頁與 Silver 正規化檢查的批次載入資料庫。接著在 Desktop 執行「全部重新整理」、儲存並關閉/重開 PBIP。舊 keyword 快照保留在 `FactJobSnapshot`；目前 `FactJob` 從已匯入的完整職業類別批次按 `jobNo` 選最新觀測。資料庫現有完整職類批次仍是雙地區舊資料；不限地區採集需按 `docs/category-acquisition-probe.md` 的頁數限制逐步完成。

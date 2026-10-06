@@ -11,7 +11,7 @@
 
 ## Slicers
 
-- `FactJob[sourceKeyword]`、`DimCompany[coIndustryDesc]`、`DimArea[jobAddrNoDesc]`、`DimDate[Date]`。
+- `DimJobCategory[jobCatDescription]`、`DimCompany[coIndustryDesc]`、`DimArea[jobAddrNoDesc]`、`DimDate[Date]`。
 
 ## KPI cards
 

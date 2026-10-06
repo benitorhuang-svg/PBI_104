@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def function(name):
-    code = (ROOT / f"powerquery/03_staging/{name}.pq").read_text(encoding="utf-8")
+    code = (ROOT / f"powerquery/archive/pre-db-etl/03_staging/{name}.pq").read_text(encoding="utf-8")
     return "(jobs as table) => let stg_Jobs = jobs, Result = (" + code + ") in Result"
 
 
@@ -30,6 +30,7 @@ def main():
     BadSalary = fxStageJobs(Table.TransformColumns(Raw, {{"salaryLow", each "invalid"}})),
     BadDate = fxStageJobs(Table.TransformColumns(Raw, {{"appearDate", each "20260230"}})),
     Duplicate = Table.Combine({Raw, Table.TransformColumns(Raw, {{"sourcePage", each 99}})}),
+    PddDrift = Table.Combine({Raw, Table.TransformColumns(Raw, {{"pddScore", each if _ = null then 0 else _ + 1}})}),
     Conflict = Table.Combine({Raw, Table.TransformColumns(Raw, {{"jobName", each "CONFLICT"}})}),
     BadKey = Table.TransformColumns(Raw, {{"jobNo", each null}}),
     BadSkillShape = Table.TransformColumns(Stage, {{"pcSkillsRaw", each "{}"}}),
@@ -45,6 +46,7 @@ def main():
         nullJobRejected = MustFail(() => fxStageJobs(BadKey)),
         conflictingJobRejected = MustFail(() => fxStageJobs(Conflict)),
         identicalJobCollapsed = Table.RowCount(fxStageJobs(Duplicate)) = 1,
+        unmodeledPddScoreDriftCollapsed = Table.RowCount(fxStageJobs(PddDrift)) = 1,
         invalidSalaryRecorded = BadSalary{0}[salaryLow] = null and Text.Contains(BadSalary{0}[qualityIssues], "salaryLow"),
         invalidDateRecorded = BadDate{0}[appearDate] = null and BadDate{0}[appearDateQuality] = "invalid",
         emptyJobs = Table.RowCount(Empty) = 0,

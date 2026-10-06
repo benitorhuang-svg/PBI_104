@@ -1,48 +1,20 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "job_list",
   "position": {
     "x": 24,
     "y": 286,
-    "z": 400,
+    "z": 11000,
     "height": 390,
     "width": 560,
-    "tabOrder": 400
+    "tabOrder": 11000
   },
   "visual": {
-    "visualType": "pivotTable",
+    "visualType": "tableEx",
     "query": {
       "queryState": {
-        "Rows": {
+        "Values": {
           "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "DimCompany"
-                    }
-                  },
-                  "Property": "custName"
-                }
-              },
-              "queryRef": "DimCompany.custName",
-              "active": true
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "FactJob"
-                    }
-                  },
-                  "Property": "jobNo"
-                }
-              },
-              "queryRef": "FactJob.jobNo",
-              "active": true
-            },
             {
               "field": {
                 "Column": {
@@ -118,34 +90,60 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "DimCompany"
                     }
                   },
-                  "Property": "jobLink"
+                  "Property": "custName"
                 }
               },
-              "queryRef": "FactJob.jobLink",
+              "queryRef": "DimCompany.custName",
               "active": true
             }
           ]
-        },
-        "Values": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "FactJob"
-                    }
-                  },
-                  "Property": "Active Jobs"
-                }
-              },
-              "queryRef": "FactJob.Active Jobs"
-            }
-          ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FactJob"
+                  }
+                },
+                "Property": "appearDate"
+              }
+            },
+            "direction": "Descending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FactJob"
+                  }
+                },
+                "Property": "jobName"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DimCompany"
+                  }
+                },
+                "Property": "custName"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
       }
     },
     "visualContainerObjects": {

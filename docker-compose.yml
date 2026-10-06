@@ -4,20 +4,52 @@ services:
     container_name: pbi104_postgres
     restart: unless-stopped
     ports:
-      - "5432:5432"
+      - "127.0.0.1:${PBI104_POSTGRES_PORT:-5433}:5432"
     environment:
-      POSTGRES_DB: pbi_104
-      POSTGRES_USER: pbi_admin
-      POSTGRES_PASSWORD: pbi_password_local
+      POSTGRES_DB: ${PBI104_POSTGRES_DB:-pbi_104}
+      POSTGRES_USER: ${PBI104_POSTGRES_USER:-pbi_admin}
+      POSTGRES_PASSWORD: ${PBI104_POSTGRES_PASSWORD:?Set PBI104_POSTGRES_PASSWORD in the ignored .env file}
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./tools/sql/init_postgres_schema.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U pbi_admin -d pbi_104"]
+      test: ["CMD-SHELL", "pg_isready -U ${PBI104_POSTGRES_USER:-pbi_admin} -d ${PBI104_POSTGRES_DB:-pbi_104}"]
       interval: 10s
       timeout: 5s
       retries: 5
 
+  address-geocoder:
+    build:
+      context: ../WGS84_TWD97
+      dockerfile: Dockerfile
+    image: wgs84-twd97-geospatial:dev
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3001
+      ADDRESS_DB_PATH: /data/source/database.sqlite
+      ADDRESS_DB_READ_ONLY: 'true'
+      COMPANY_DB_PATH: /data/source/server/database.sqlite
+      COMPANY_DB_READ_ONLY: 'true'
+    ports:
+      - "127.0.0.1:${PBI104_GEOCODER_PORT:-3301}:3001"
+    volumes:
+      - type: bind
+        source: ../WGS84_TWD97
+        target: /data/source
+        read_only: true
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3001/health/ready').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
 volumes:
   pgdata:
     driver: local
+    name: pbi104_pgdata

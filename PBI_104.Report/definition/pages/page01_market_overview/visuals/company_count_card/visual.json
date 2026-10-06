@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "company_count_card",
   "position": {
     "x": 329,
     "y": 176,
-    "z": 301,
+    "z": 5000,
     "height": 88,
     "width": 291,
-    "tabOrder": 301
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "card",

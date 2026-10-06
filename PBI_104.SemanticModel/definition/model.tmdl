@@ -9,17 +9,27 @@ model Model
 
 queryGroup 00_Parameters
 
+	annotation PBI_QueryGroupOrder = 0
+
 queryGroup 01_Functions
+
+	annotation PBI_QueryGroupOrder = 1
 
 queryGroup 02_Source
 
+	annotation PBI_QueryGroupOrder = 2
+
 queryGroup 03_Staging
+
+	annotation PBI_QueryGroupOrder = 3
 
 queryGroup 04_Model
 
+	annotation PBI_QueryGroupOrder = 4
+
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["pArea", "pBaseUrl", "pJobSource", "pKeyword", "pMode", "pOrder", "pPage", "pPageSize", "pSnapshotRoot", "pSourceMode", "fx104GetAllPages", "fx104GetPage", "fx104ReadBatch", "fx104ValidatePage", "fxAreaKey", "fxNormalizeText", "fxParseJsonList", "fxStageJobs", "fxStrictNumber", "src_104CurrentManifest", "src_104HistoryJobs", "src_104Jobs", "src_104Metadata", "src_104Result", "stg_Areas", "stg_Companies", "stg_DataQuality", "stg_JobCategories", "stg_JobHistory", "stg_Jobs", "stg_JobSkills", "stg_Skills", "mdl_BridgeJobCategory", "mdl_BridgeJobSkill", "mdl_DimArea", "mdl_DimCompany", "mdl_DimJobCategory", "mdl_DimSkill", "mdl_FactJob", "mdl_FactJobSnapshot"]
+annotation PBI_QueryOrder = ["pPostgresDatabase","pPostgresServer","fxReadGoldView","src_PbiBridgeJobCategory","src_PbiBridgeJobSkill","src_PbiDimArea","src_PbiDimCompany","src_PbiDimDate","src_PbiDimJobCategory","src_PbiDimSkill","src_PbiFactJobs","src_PbiFactJobSnapshots","mdl_BridgeJobCategory","mdl_BridgeJobSkill","mdl_DimArea","mdl_DimCompany","mdl_DimDate","mdl_DimJobCategory","mdl_DimSkill","mdl_FactJob","mdl_FactJobSnapshot","FactJob","FactJobSnapshot","DimCompany","DimArea","DimSkill","DimJobCategory","BridgeJobSkill","DimDate","BridgeJobCategory"]
 
 annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
 
@@ -30,8 +40,8 @@ ref table DimArea
 ref table DimSkill
 ref table DimJobCategory
 ref table BridgeJobSkill
-ref table BridgeJobCategory
 ref table DimDate
+ref table BridgeJobCategory
 
 ref cultureInfo zh-TW
 

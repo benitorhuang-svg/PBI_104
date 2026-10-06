@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "limitation",
   "position": {
     "x": 804,
     "y": 18,
-    "z": 101,
+    "z": 1000,
     "height": 58,
     "width": 250,
-    "tabOrder": 101
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "textbox",

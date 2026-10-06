@@ -7,8 +7,8 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from acquisition.pagination import collect, validate_page
-from acquisition.storage import daily_batches, publish, verify
+from acquisition.pagination import PaginationTotalMismatch, collect, validate_page
+from acquisition.storage import daily_batches, publish, series_key, verify
 
 PROJECT = Path(__file__).resolve().parents[2]
 REQUEST = {"baseUrl": "https://www.104.com.tw/jobs/search/api/jobs", "keyword": "powerbi",
@@ -58,7 +58,34 @@ class PaginationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             collect(lambda p: result(p, [1], last=1, total=2))
         with self.assertRaises(ValueError):
-            collect(lambda p: result(p, [1], last=1001, total=1001), max_pages=1000)
+            collect(lambda p: result(p, [1], last=151, total=151), max_pages=151)
+
+    def test_page_cap_fetches_only_the_allowed_pages_and_marks_incomplete(self):
+        calls = []
+
+        def fetch(page):
+            calls.append(page)
+            return result(page, [page * 2 - 1, page * 2], last=3, total=5)
+
+        with self.assertRaises(PaginationTotalMismatch) as raised:
+            collect(fetch, max_pages=2)
+        self.assertEqual(calls, [1, 2])
+        self.assertEqual(len(raised.exception.pages), 2)
+        self.assertTrue(raised.exception.diagnostics["pageLimitReached"])
+        self.assertEqual(raised.exception.diagnostics["configuredPageLimit"], 2)
+
+    def test_page_cap_cannot_be_raised_above_150(self):
+        calls = []
+        with self.assertRaisesRegex(ValueError, "max_pages must be <= 150"):
+            collect(lambda page: calls.append(page), max_pages=151)
+        self.assertEqual(calls, [])
+
+    def test_total_mismatch_reports_duplicate_job_counts_without_payloads(self):
+        with self.assertRaises(PaginationTotalMismatch) as raised:
+            collect(lambda page: result(1, [7, 7], last=1, total=1))
+        self.assertEqual(raised.exception.diagnostics["uniqueJobNos"], 1)
+        self.assertEqual(raised.exception.diagnostics["duplicateJobNoRows"], 1)
+        self.assertEqual(raised.exception.diagnostics["delta"], 1)
 
 
 class StorageTests(unittest.TestCase):
@@ -75,6 +102,59 @@ class StorageTests(unittest.TestCase):
         selected = daily_batches(self.root, third)
         self.assertEqual([m["batchId"] for m in selected], [second["batchId"], third["batchId"]])
         self.assertTrue((self.root / first["batchPath"] / "manifest.json").exists())
+
+    def test_histories_remain_separate_by_query_series(self):
+        first = publish(self.root, REQUEST, self.pages, "2026-08-13T09:00:00+08:00")
+        other_request = dict(REQUEST, keyword="tableau")
+        second = publish(self.root, other_request, self.pages, "2026-08-13T10:00:00+08:00")
+        self.assertNotEqual(first["seriesKey"], second["seriesKey"])
+        self.assertEqual([batch["seriesKey"] for batch in daily_batches(self.root, first)], [first["seriesKey"]])
+        self.assertEqual([batch["seriesKey"] for batch in daily_batches(self.root, second)], [second["seriesKey"]])
+
+    def test_keyword_series_identity_is_unchanged_and_category_only_is_supported(self):
+        legacy = {key: REQUEST[key] for key in ("baseUrl", "area", "jobsource", "mode", "order", "keyword")}
+        old_key = __import__("hashlib").sha256(json.dumps(legacy, sort_keys=True).encode()).hexdigest()[:20]
+        self.assertEqual(series_key(REQUEST), old_key)
+        category_request = {key: value for key, value in REQUEST.items() if key != "keyword"}
+        category_request["jobcat"] = "2007000000"
+        self.assertNotEqual(series_key(category_request), old_key)
+        with self.assertRaisesRegex(ValueError, "keyword or jobcat"):
+            series_key({key: value for key, value in REQUEST.items() if key != "keyword"})
+
+    def test_category_batch_does_not_replace_keyword_current_pointer(self):
+        publish(self.root, REQUEST, self.pages)
+        before = (self.root / "current.json").read_bytes()
+        category_request = {key: value for key, value in REQUEST.items() if key != "keyword"}
+        category_request["jobcat"] = "2007000000"
+        category = publish(self.root, category_request, self.pages, update_current=False)
+        self.assertTrue((self.root / category["batchPath"] / "manifest.json").exists())
+        self.assertEqual((self.root / "current.json").read_bytes(), before)
+
+    def test_total_mismatch_is_stored_only_with_explicit_page_diagnostics(self):
+        pages = [result(1, [1, 2], last=2, total=2), result(2, [3], last=2, total=2)]
+        with self.assertRaises(PaginationTotalMismatch) as raised:
+            collect(lambda page: pages[page - 1])
+        error = raised.exception
+        with self.assertRaisesRegex(ValueError, "API total"):
+            publish(self.root, REQUEST, error.pages)
+        manifest = publish(self.root, REQUEST, error.pages,
+                           pagination_status="PAGE_TOTAL_MISMATCH",
+                           pagination_diagnostics=error.diagnostics,
+                           update_current=False)
+        self.assertEqual(verify(self.root, manifest), 3)
+        self.assertEqual(manifest["paginationStatus"], "PAGE_TOTAL_MISMATCH")
+
+    def test_page_capped_batch_is_verifiable_but_incomplete(self):
+        with self.assertRaises(PaginationTotalMismatch) as raised:
+            collect(lambda page: result(page, [page * 2 - 1, page * 2], last=3, total=5),
+                    max_pages=2)
+        error = raised.exception
+        manifest = publish(self.root, REQUEST, error.pages,
+                           pagination_status="PAGE_TOTAL_MISMATCH",
+                           pagination_diagnostics=error.diagnostics,
+                           update_current=False)
+        self.assertEqual(verify(self.root, manifest), 4)
+        self.assertTrue(manifest["paginationDiagnostics"]["pageLimitReached"])
 
     def test_failure_preserves_current(self):
         publish(self.root, REQUEST, self.pages)

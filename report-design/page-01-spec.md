@@ -17,7 +17,7 @@
 
 ## Slicers
 
-- `FactJob[sourceKeyword]`：目前 API 查詢關鍵字。
+- `DimJobCategory[jobCatDescription]`：依目前職缺的 104 官方職類篩選。
 - `DimArea[jobAddrNoDesc]`：地區。
 - `DimDate[Date]`：日期範圍。
 

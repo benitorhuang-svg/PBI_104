@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "role_slicer",
   "position": {
     "x": 24,
     "y": 88,
-    "z": 200,
+    "z": 1000,
     "height": 72,
     "width": 250,
-    "tabOrder": 200
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "slicer",
@@ -23,10 +23,10 @@
                       "Entity": "FactJob"
                     }
                   },
-                  "Property": "jobCatRaw"
+                  "Property": "jobName"
                 }
               },
-              "queryRef": "FactJob.jobCatRaw",
+              "queryRef": "FactJob.jobName",
               "active": true
             }
           ]
@@ -62,7 +62,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'職類 / raw category'"
+                  "Value": "'職稱 / Job Title'"
                 }
               }
             }

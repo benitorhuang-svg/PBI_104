@@ -6,7 +6,8 @@
     optional mode as nullable text,
     optional order as nullable text,
     optional page as nullable number,
-    optional pagesize as nullable number
+    optional pagesize as nullable number,
+    optional jobcat as nullable text
 ) as record =>
 let
     NormalizedBaseUrl = Text.Trim(baseUrl),
@@ -30,7 +31,8 @@ let
                 mode = nullable text,
                 order = nullable text,
                 page = nullable number,
-                pagesize = nullable number
+                pagesize = nullable number,
+                jobcat = nullable text
             ],
             {
                 {
@@ -41,7 +43,8 @@ let
                     mode,
                     order,
                     page,
-                    pagesize
+                    pagesize,
+                    jobcat
                 }
             }
         ),
@@ -88,6 +91,7 @@ MODE = optional_text(config_row['mode'])
 ORDER = optional_text(config_row['order'])
 PAGE = optional_positive_int(config_row['page'], 'page')
 PAGE_SIZE = optional_positive_int(config_row['pagesize'], 'pagesize')
+JOBCAT = optional_text(config_row['jobcat'])
 
 optional_params = {
     'area': AREA,
@@ -97,6 +101,7 @@ optional_params = {
     'order': ORDER,
     'page': PAGE,
     'pagesize': PAGE_SIZE,
+    'jobcat': JOBCAT,
 }
 params = {
     key: value
@@ -191,6 +196,7 @@ df_jobs['snapshotDate'] = snapshot_date
 df_jobs['snapshotDateTime'] = snapshot_datetime
 df_jobs['sourceKeyword'] = KEYWORD
 df_jobs['sourceArea'] = AREA
+df_jobs['sourceJobcat'] = JOBCAT
 df_jobs['sourcePage'] = PAGE
 df_jobs['sourcePageSize'] = PAGE_SIZE
 
@@ -211,6 +217,7 @@ metadata = {
     'snapshotDateTime': snapshot_datetime,
     'keyword': KEYWORD,
     'area': AREA,
+    'jobcat': JOBCAT,
     'jobsource': JOBSOURCE,
     'mode': MODE,
     'order': ORDER,

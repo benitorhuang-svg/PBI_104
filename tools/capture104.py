@@ -6,7 +6,7 @@ from pathlib import Path
 import time
 
 from acquisition.embedded_client import client_code, fetch_page
-from acquisition.pagination import collect, integer
+from acquisition.pagination import MAX_CAPTURE_PAGES, collect, integer
 from acquisition.storage import publish
 
 
@@ -16,7 +16,7 @@ def main():
     parser.add_argument("--keyword", default="powerbi")
     parser.add_argument("--area", default="6001008007,6001008006")
     parser.add_argument("--pagesize", type=int, default=20)
-    parser.add_argument("--max-pages", type=int, default=1000)
+    parser.add_argument("--max-pages", type=int, default=MAX_CAPTURE_PAGES)
     args = parser.parse_args()
     request = {"baseUrl": "https://www.104.com.tw/jobs/search/api/jobs",
                "keyword": args.keyword, "area": args.area, "jobsource": "index_s",

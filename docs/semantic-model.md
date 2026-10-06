@@ -1,5 +1,24 @@
 # TASK-005 Semantic Model Validation
 
+## Current model status (2026-10-06)
+
+The nine imported tables use PostgreSQL Gold views, including database-provided
+`DimDate`. Power BI Desktop refreshed, saved, closed, and reopened the project
+after the change. The reopened model had nine Ready partitions, 21 expressions,
+and eight relationships. Current row counts, report-filter checks, and the
+28.33-second local refresh measurement are recorded in
+[TASK-011 and TASK-012 status](optimization-status.md).
+
+`BridgeJobSkill[jobNo]` and `BridgeJobCategory[jobNo]` filter `FactJob` in both
+directions so skill and category slicers can select current jobs. Their code
+columns filter `DimSkill` and `DimJobCategory` respectively. `FactJob` also
+relates to company, area, and date dimensions; `FactJobSnapshot` relates to
+`DimDate`. There is no direct category-to-FactJob relationship because a job
+can have multiple categories.
+
+> Historical TASK-005 validation follows. Its counts and refresh results
+> describe the 2026-08-13 model and are not current model evidence.
+
 ## Inventory
 
 The saved live model contains the pre-existing `查詢` table plus the eight
@@ -39,7 +58,7 @@ SELECTCOLUMNS(
 For the recorded refresh its range is `2026-05-25` through `2026-08-13`.
 It is a current-refresh date range, not historical persistence.
 
-## Relationships created
+## Historical TASK-005 relationships (2026-08-13)
 
 All new relationships are active, single-column, many-to-one, and use
 one-direction filtering from the fact/bridge side to the dimension side:
@@ -107,8 +126,10 @@ was created for an unverified key.
 ## Known limitations
 
 - The legacy `查詢` table remains loaded and retains its prior wide schema.
-- `DimArea` uses an observation-level composite key because `jobAddrNo` alone
-  had multiple full location variants.
+- `DimArea` uses an observation-level key that Gold encodes from the exact
+  UTF-8 bytes of the source composite. This preserves compatibility-character
+  variants under Power BI's string collation; `jobAddrNo` alone had multiple
+  full location variants.
 - No historical append store exists, so trend/emerging-skill measures remain
   blocked.
 - Salary values remain raw numeric projections; zero and `9999999` are not

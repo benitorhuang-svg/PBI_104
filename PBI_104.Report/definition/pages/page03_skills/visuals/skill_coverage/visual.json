@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "skill_coverage",
   "position": {
     "x": 544,
     "y": 280,
-    "z": 401,
+    "z": 9000,
     "height": 190,
     "width": 686,
-    "tabOrder": 401
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "barChart",

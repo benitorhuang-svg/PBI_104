@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "date_distribution",
   "position": {
-    "x": 24,
-    "y": 280,
-    "z": 400,
-    "height": 190,
-    "width": 1206,
-    "tabOrder": 400
+    "x": 23.467101242615605,
+    "y": 280.0407414952129,
+    "z": 8000,
+    "height": 175.22102261152986,
+    "width": 409.8920350376859,
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "lineChart",

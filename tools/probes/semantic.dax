@@ -1,0 +1,66 @@
+DEFINE
+    VAR SkillCodes = TOPN(2, VALUES(DimSkill[skillCode]), DimSkill[skillCode], ASC)
+    VAR CategoryCodes = TOPN(2, VALUES(DimJobCategory[jobCatCode]), DimJobCategory[jobCatCode], ASC)
+    VAR SkillCategoryPairs = FILTER(
+        CROSSJOIN(VALUES(DimSkill[skillCode]), VALUES(DimJobCategory[jobCatCode])),
+        CALCULATE([Active Jobs]) > 0
+    )
+    VAR ChosenPair = TOPN(1, SkillCategoryPairs, DimSkill[skillCode], ASC, DimJobCategory[jobCatCode], ASC)
+    VAR PairSkills = SELECTCOLUMNS(ChosenPair, "SkillCode", DimSkill[skillCode])
+    VAR PairCategories = SELECTCOLUMNS(ChosenPair, "CategoryCode", DimJobCategory[jobCatCode])
+    VAR ActualSkill = CALCULATE([Skill Job Count], TREATAS(SkillCodes, DimSkill[skillCode]))
+    VAR ExpectedSkill = CALCULATE(
+    DISTINCTCOUNT(BridgeJobSkill[jobNo]),
+    TREATAS(SkillCodes, DimSkill[skillCode]),
+    CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH)
+)
+    VAR ActualCategory = CALCULATE([Category Job Count], TREATAS(CategoryCodes, DimJobCategory[jobCatCode]))
+    VAR ExpectedCategory = CALCULATE(
+    DISTINCTCOUNT(BridgeJobCategory[jobNo]),
+    TREATAS(CategoryCodes, DimJobCategory[jobCatCode]),
+    CROSSFILTER(BridgeJobCategory[jobNo], FactJob[jobNo], BOTH)
+)
+    VAR ActualIntersection = CALCULATE(
+        [Active Jobs],
+        TREATAS(PairSkills, DimSkill[skillCode]),
+        TREATAS(PairCategories, DimJobCategory[jobCatCode])
+    )
+    VAR ExpectedIntersection = CALCULATE(
+        DISTINCTCOUNT(FactJob[jobNo]),
+        TREATAS(PairSkills, DimSkill[skillCode]),
+        TREATAS(PairCategories, DimJobCategory[jobCatCode]),
+        CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH),
+        CROSSFILTER(BridgeJobCategory[jobNo], FactJob[jobNo], BOTH)
+    )
+    VAR SkillJobs = TOPN(1, VALUES(BridgeJobSkill[jobNo]), BridgeJobSkill[jobNo], ASC)
+    VAR JobSkillsText = CALCULATE([Job Skills], TREATAS(SkillJobs, FactJob[jobNo]))
+    VAR OrphanAppearDates = COALESCE(COUNTROWS(EXCEPT(
+        DISTINCT(SELECTCOLUMNS(FILTER(FactJob, NOT ISBLANK(FactJob[appearDate])), "Date", FactJob[appearDate])),
+        SELECTCOLUMNS(DimDate, "Date", DimDate[Date])
+    )), 0)
+    VAR OrphanSnapshotDates = COALESCE(COUNTROWS(EXCEPT(
+        DISTINCT(SELECTCOLUMNS(FILTER(FactJobSnapshot, NOT ISBLANK(FactJobSnapshot[snapshotDate])), "Date", FactJobSnapshot[snapshotDate])),
+        SELECTCOLUMNS(DimDate, "Date", DimDate[Date])
+    )), 0)
+EVALUATE
+ROW(
+    "FactJobs", COUNTROWS(FactJob),
+    "SnapshotRows", COUNTROWS(FactJobSnapshot),
+    "ActiveJobs", [Active Jobs],
+    "Companies", [Company Count],
+    "SalaryCoverage", [Salary Coverage %],
+    "SkillActual", ActualSkill,
+    "SkillExpected", ExpectedSkill,
+    "CategoryActual", ActualCategory,
+    "CategoryExpected", ExpectedCategory,
+    "IntersectionActual", ActualIntersection,
+    "IntersectionExpected", ExpectedIntersection,
+    "IntersectionPairFound", COUNTROWS(ChosenPair) = 1,
+    "JobSkillsPopulated", NOT ISBLANK(JobSkillsText),
+    "OrphanAppearDates", OrphanAppearDates,
+    "OrphanSnapshotDates", OrphanSnapshotDates,
+    "SkillPassed", ActualSkill = ExpectedSkill,
+    "CategoryPassed", ActualCategory = ExpectedCategory,
+    "IntersectionPassed", ActualIntersection = ExpectedIntersection,
+    "DateContractPassed", OrphanAppearDates = 0 && OrphanSnapshotDates = 0
+)

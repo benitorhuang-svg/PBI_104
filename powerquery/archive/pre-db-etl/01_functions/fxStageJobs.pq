@@ -1,7 +1,8 @@
 (input as table) as table =>
 let
     Raw = Table.Buffer(input),
-    IdentityColumns = List.RemoveItems(Table.ColumnNames(Raw), {"sourcePage"}),
+    // Volatile telemetry remains in the immutable source batch outside the staged/model contract.
+    IdentityColumns = List.RemoveItems(Table.ColumnNames(Raw), {"sourcePage", "pddScore", "interactionRecord"}),
     GroupedRaw = Table.Group(Raw, {"jobNo"}, {
         {"variants", each Table.RowCount(Table.Distinct(Table.SelectColumns(_, IdentityColumns))), Int64.Type},
         {"firstRow", each Table.First(_), type record}}),
@@ -10,7 +11,7 @@ let
         error Error.Record("Conflicting job duplicate", "A jobNo has different raw values within one batch.", [Jobs = Conflicts[jobNo]])
         else Table.FromRecords(GroupedRaw[firstRow], Table.ColumnNames(Raw), MissingField.UseNull),
     Selected = Table.SelectColumns(UniqueRaw, {
-        "jobNo", "custNo", "custName", "coIndustry", "coIndustryDesc", "jobName", "description",
+        "jobNo", "custNo", "querySeriesKey", "custName", "coIndustry", "coIndustryDesc", "jobName", "description",
         "descSnippet", "jobAddress", "jobAddrNo", "jobAddrNoDesc", "lat", "lon", "salaryLow",
         "salaryHigh", "appearDate", "applyCnt", "jobCat", "pcSkills", "tags", "labels", "link",
         "remoteWorkType", "languageRequirements", "major", "acceptRole", "snapshotDate",

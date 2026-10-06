@@ -1,69 +1,51 @@
 # 104 Power BI Job Intelligence 架構
 
-## 目的與本次邊界
+## 目標責任邊界
 
-本文件定義 Power Query、資料載入與 Semantic Model 的責任邊界。目前只建立架構與工作拆分，不修改查詢、模型或 Dashboard。`00_Parameters` 至 `04_Model` 是 Power Query 內的 Query Groups，不是檔案系統目錄。
+資料取得、原始資料保存、驗證、清理、型別轉換、正規化、去重、關聯與彙整都由 Python/PostgreSQL ETL 處理。Power Query 僅連接 PostgreSQL 並讀取 Gold 模型輸出；Semantic Model 維持關聯與 DAX measures；報表視覺從模型欄位和 measures 呈現結果。
 
-## 現況盤點
+```text
+104 API → immutable capture batches → Bronze → Silver ETL → PostgreSQL Gold views
+                                                        ↓
+                                          Power Query Import → Semantic Model
+                                                        ↓
+                                                  DAX measures → PBIR visuals
+```
 
-- `PBI_104.pbip` 連結 `PBI_104.Report/` 與 `PBI_104.SemanticModel/`。
-- 報表目前只有一個 1280×720 空白頁。
-- Semantic Model 目前載入單一 `查詢` 表，另有 Power BI 自動日期表與兩條日期關聯。
-- `查詢.tmdl` 目前將參數、Python API 呼叫、JSON 展開、清理、型別轉換及模型輸出放在同一個查詢內。
-- 已驗證的連線方式是 Python、`cloudscraper`、Windows 系統 Proxy；目前沒有獨立測試或 Git metadata。
+擷取工具會保留可驗證的不可變批次檔，再由 `tools/sync_lake_to_postgres.py` 驗證 manifest、頁面 checksum、分頁完整性和資料品質後寫入 PostgreSQL。這些檔案是 ETL 的原始證據；Power Query 不讀取它們，也不直接呼叫 104 API。
 
-## 目標分層
+## Power Query 邊界
 
 | Query Group | 責任 | Enable Load |
 |---|---|---|
-| `00_Parameters` | API URL 與已確認的 `area`、`keyword`、`mode`、`order`、`page`、`pagesize` | 否 |
-| `01_Functions` | 僅放兩處以上會重複使用且規則穩定的轉換或呼叫 | 否 |
-| `02_Source` | 取得原始回應與技術性請求中繼資料，不做商業清理 | 否 |
-| `03_Staging` | 展開、清理、型別化、錯誤與空值處理、加入稽核欄位 | 否 |
-| `04_Model` | 只輸出供模型使用、粒度明確的乾淨資料表 | 是 |
+| `00_Parameters` | PostgreSQL host/database | 否 |
+| `01_Functions` | 共用 Gold view navigation | 否 |
+| `02_Source` | 讀取 `gold.pbi_*` 模型 views | 否 |
+| `03_Staging` | 不參與目前載入路徑；轉換屬於資料庫 ETL | 否 |
+| `04_Model` | 一對一引用 Gold view，名稱對應模型表 | 是 |
 
-依賴只能單向往下：Parameters／Functions → Source → Staging → Model。不得讓 Source 參照 Staging 或 Model。若沒有可證明的重複規則，`01_Functions` 可以保持空白，不為抽象而抽象。
+依賴只往下：Parameters/Functions → Source → Model。所有 9 張 Import 表都以 PostgreSQL Gold view 為來源。Power Query 不做 API 呼叫、JSON 展開、欄位改名、型別轉換、合併、去重或資料品質檢查。
 
-Semantic Model 位於上述流程之外，負責關聯、DAX measures、格式、階層與 RLS。Power Query 的 `04_Model` 只定義資料形狀，不定義報表視覺或 DAX 商業語意。Report 是再下一層，僅負責 PBIR pages、visuals、slicers、互動與版面；本次不實作。
+## PostgreSQL Bronze/Silver/Gold
 
-## API 與 Schema 契約
+- Bronze 保存官方職類目錄、原始 API 頁面、請求條件、manifest 與批次狀態。失敗、頁數封頂或 API total 不一致的批次留在 Bronze，不發布到模型 Gold views。
+- Silver 由 ETL 建立職缺觀測、歷史快照、公司／地點／技能／職類維度和橋接資料；鍵、數值、日期與複合欄位規則都在此處執行。
+- Gold 提供模型契約：`pbi_fact_jobs`、`pbi_fact_job_snapshots`、各 `pbi_dim_*`、`pbi_bridge_*` 和 `pbi_dim_date`。Gold 負責範圍選擇、最新觀測去重、座標有效值選取與日期日曆計算。
 
-固定端點為 `https://www.104.com.tw/jobs/search/api/jobs`。目前基準參數為 `area=6001008007,6001008006`、`keyword=powerbi`、`mode=s`、`order=15`、`page=1`、`pagesize=20`。
+`FactJob` 只由帶有 104 官方 `jobcat` 查詢條件的完整批次組成。跨職類重複職缺按 `jobNo` 選一筆最新觀測；該觀測所屬批次的技能與回傳職類形成橋接。查詢不限定 `area`，因此新匯入的全區職類批次可自動進入 Gold。歷史快照保留完整來源系列，舊 keyword 快照不刪除，但不作為目前 `FactJob` 的來源。
 
-已確認的頂層欄位只有：
+## 目前資料覆蓋限制
 
-```text
-appearDate, applyCnt, coIndustry, coIndustryDesc, custName, custNo,
-description, descSnippet, mrtDist, jobAddress, jobAddrNo, jobAddrNoDesc,
-jobName, jobNameSnippet, jobNo, jobRo, jobType, lat, lon, link, major,
-mrt, mrtDesc, optionEdu, period, remoteWorkType, s10, salaryHigh,
-salaryLow, tags, s9, s5, d3, hrBehaviorPR, jobCat, labels,
-languageRequirements, acceptRole, employeeCount, pcSkills, pddScore,
-custLogo, jobSwitch, isSave, interactionRecord, isApplied, applyDate,
-userApplyCount
-```
+目前 PostgreSQL 已有完整職類批次，但都是先前兩個地區的資料；全區職類 page-1 規模檢查估計完整抓取需約 42,466 次頁面請求，且多個職業代碼達到 150 頁上限。未完成的批次維持 Bronze-only。Gold views 不會合成缺頁資料，也不會把目前資料標示為全台完整；全區資料會在後續官方職類批次通過 ETL 後逐步增加。詳見 `docs/category-acquisition-probe.md`。
 
-`link`、`tags`、`pcSkills`、`jobCat`、`interactionRecord` 等欄位的內部結構，以及分頁 metadata、唯一鍵與跨頁重複規則，尚未形成穩定契約。現有模型中的 `link.job`、`tags.*` 等展開結果只能視為一次觀察，不得直接推定為永久 Schema。每次 Schema 擴充都必須保留真實回應證據並獨立驗證。
+## Semantic Model 與報表
 
-## 擷取、清理與安全規則
+Semantic Model 維持既有表關聯、欄位格式、DAX measures、階層和 RLS。`DimDate` 現在由 PostgreSQL Gold 輸出；DAX measures 專注於視覺呈現時的篩選與度量。PBIR 是獨立報表層，不由資料擷取或 ETL 任務重建。
 
-- 保留已證實有效的 `cloudscraper` 與 Windows Proxy 注入方式，替代方案必須先通過同參數測試。
-- 不硬編碼 Cookie、Token、帳密或個人 Proxy 設定；HTTP 失敗必須明確回報，不以假資料補成功。
-- Source 保留原始欄位與請求事實；欄位改名、型別轉換、展開與商業規則集中在 Staging。
-- Staging 必須能處理合法空結果；是否去重、薪資解讀與日期語意須先有規則與證據。
-- 只有 `04_Model` 查詢允許載入 Data Model。`.pbi/`、`cache.abf` 與原始職缺匯出不得納入版本控制。
-- 未經明確要求不建立 Dashboard，也不自行 commit。
-- 未來若交付可貼入 Power Query 的版本，該版本所需的每個 query 都必須提供完整程式碼，不以「沿用上一版」省略。
+## 刷新順序
 
-## 驗證與變更流程
+1. 使用 `tools/capture_category_matrix.py` 依官方類別擷取；不提供 `--area` 即為不限地區。對超過 API 頁數上限的類別，先拆到更細官方職類並記錄未覆蓋項目。
+2. 執行 `python tools/sync_lake_to_postgres.py --write`，把通過驗證的批次送入 Bronze/Silver 並更新 Gold 輸出。
+3. Power BI Desktop 執行全部重新整理，確認 9 個 Gold 載入表、鍵粒度與關聯，再儲存並重開 PBIP。
 
-依 `TASK-001` 至 `TASK-005`、再依 `TASK-006A` 至 `TASK-006D` 順序執行。這是六個主階段，其中 Report 階段拆成四個可獨立驗證的頁面文件。每個 TASK 都要先檢查既有查詢、只修改允許範圍、完成對應驗證，並記錄輸入、結果與未解問題後才可進入下一項。未通過的 TASK 不得由後續 TASK 隱性補救。
-
-## 尚待決策
-
-1. API 分頁節點、總筆數與 rate limit 的實際契約。
-2. 複合欄位的穩定結構、缺欄與型別漂移策略。
-3. 職缺資料粒度、候選唯一鍵與跨快照歷史保存方式。
-4. `salaryLow`／`salaryHigh` 與薪資型態欄位的商業解讀。
-5. Power BI Service refresh 是否需要 gateway，以及 Python／`cloudscraper` 的部署限制。
-6. 是否停用 Auto Date/Time 並建立正式日期維度；需待 Model 粒度確認。
+Power Query 的資料來源認證儲存在 Power BI Desktop；M、TMDL、SQL 與文件不包含資料庫密碼。`.pbi/`、`cache.abf`、`.env` 和原始擷取檔仍是本機狀態或資料，不納入版本控制。

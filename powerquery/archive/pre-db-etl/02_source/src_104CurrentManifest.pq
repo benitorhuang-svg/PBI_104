@@ -6,6 +6,11 @@ let
         Value.Is(m, type record) and
         Record.FieldOrDefault(m, "schemaVersion", null) = 1 and
         Value.Is(Record.FieldOrDefault(m, "request", null), type record) and
+        Text.Length(Text.From(Record.FieldOrDefault(m, "seriesKey", ""))) = 20 and
+        Text.Select(Text.Lower(Text.From(Record.FieldOrDefault(m, "seriesKey", ""))), {"0".."9", "a".."f"}) = Text.Lower(Text.From(Record.FieldOrDefault(m, "seriesKey", ""))) and
+        Text.Replace(Text.From(Record.FieldOrDefault(m, "batchPath", "")), "\", "/") =
+            "series/" & Text.Lower(Text.From(Record.FieldOrDefault(m, "seriesKey", ""))) & "/batches/" & Text.From(Record.FieldOrDefault(m, "batchId", "")) and
+        List.Count(Record.FieldOrDefault(m, "pages", {})) > 0 and
         List.AllTrue(List.Transform(Record.FieldNames(ExpectedRequest), each Record.FieldOrDefault(m[request], _, null) = Record.Field(ExpectedRequest, _))),
     SelectedManifest =
         if MatchesExpected(DefaultCurrent) then DefaultCurrent

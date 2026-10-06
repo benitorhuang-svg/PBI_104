@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "salary_slicer",
   "position": {
-    "x": 884,
+    "x": 902,
     "y": 88,
-    "z": 204,
+    "z": 7000,
     "height": 72,
-    "width": 346,
-    "tabOrder": 204
+    "width": 300,
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "slicer",

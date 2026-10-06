@@ -1,79 +1,73 @@
 table FactJob
 	lineageTag: e01bc894-c60a-4e83-849b-cde9f0a28fda
 
-	/// Distinct current jobNo values in the loaded FactJob refresh, propagating skill and category filter selections through their bridge tables.
+	/// Distinct current jobNo values after optional skill/category filters. Multi-select within each bridge is OR; the two bridges intersect and other model filters remain intersections.
 	measure 'Active Jobs' =
-		VAR HasSkillFilter = ISFILTERED(DimSkill[skillDescription]) || ISFILTERED(DimSkill[skillCode])
-		VAR HasCategoryFilter = ISFILTERED(DimJobCategory[jobCatDescription]) || ISFILTERED(DimJobCategory[jobCatCode])
-		RETURN
-		IF(
-			HasSkillFilter && HasCategoryFilter,
-			CALCULATE(
-				DISTINCTCOUNT(FactJob[jobNo]),
-				CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], Both),
-				CROSSFILTER(BridgeJobCategory[jobNo], FactJob[jobNo], Both)
-			),
-			IF(
-				HasSkillFilter,
-				CALCULATE(DISTINCTCOUNT(FactJob[jobNo]), CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], Both)),
-				IF(
-					HasCategoryFilter,
-					CALCULATE(DISTINCTCOUNT(FactJob[jobNo]), CROSSFILTER(BridgeJobCategory[jobNo], FactJob[jobNo], Both)),
-					DISTINCTCOUNT(FactJob[jobNo])
-				)
-			)
-		)
+			VAR HasSkillFilter = ISFILTERED(DimSkill[skillDescription]) || ISFILTERED(DimSkill[skillCode])
+			VAR HasCategoryFilter = ISFILTERED(DimJobCategory[jobCatDescription]) || ISFILTERED(DimJobCategory[jobCatCode])
+			RETURN
+			    IF(
+			        HasSkillFilter || HasCategoryFilter,
+			        CALCULATE(
+			            DISTINCTCOUNT(FactJob[jobNo]),
+			            CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH),
+			            CROSSFILTER(BridgeJobCategory[jobNo], FactJob[jobNo], BOTH)
+			        ),
+			        DISTINCTCOUNT(FactJob[jobNo])
+			    )
 		formatString: #,0
 		displayFolder: Jobs
-		lineageTag: e576effe-a723-4f26-b829-15d17a446219
+		lineageTag: 5a72a91a-af34-48a4-8758-7e082876aa35
 
-	/// Distinct jobs represented by the validated jobNo × jobCatCode bridge under the current filter context.
-	measure 'Category Job Count' = DISTINCTCOUNT(BridgeJobCategory[jobNo])
+	/// Distinct companies in the currently matched job set.
+	measure 'Company Count' = CALCULATE(DISTINCTCOUNT(FactJob[custNo]), CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH), CROSSFILTER(BridgeJobCategory[jobNo], FactJob[jobNo], BOTH))
 		formatString: #,0
-		displayFolder: Categories
-		lineageTag: c314b901-7fa2-4be0-82a1-a7b2184c901e
-
-	/// Share of current jobs associated with the selected job category. This describes association, not causation.
-	measure 'Category Share %' = DIVIDE([Category Job Count], CALCULATE([Active Jobs], REMOVEFILTERS(DimJobCategory)), 0)
-		formatString: 0.0%
-		displayFolder: Categories
-		lineageTag: d85a2104-51bc-4e4b-9e0a-bf1930b8c6e2
-
-	/// Distinct custNo values represented by the current FactJob refresh.
-	measure 'Company Count' = DISTINCTCOUNT(FactJob[custNo])
-		formatString: #,0
-		displayFolder: Companies
+		displayFolder: Jobs
 		lineageTag: d79a642c-479c-4e17-b1fe-e81a5568ad8d
 
-	/// Rows with both numeric salary bounds present. The measure does not reinterpret zero or 9999999; salary availability and units remain unresolved.
-	measure 'Jobs with Salary' = COUNTROWS(FILTER(FactJob, NOT ISBLANK(FactJob[salaryLow]) && NOT ISBLANK(FactJob[salaryHigh])))
+	/// Matched jobs with both numeric API salary bounds present; this does not interpret either bound as disclosed salary.
+	measure 'Jobs with Salary' = CALCULATE(COUNTROWS(FILTER(FactJob, NOT ISBLANK(FactJob[salaryLow]) && NOT ISBLANK(FactJob[salaryHigh]))), CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH), CROSSFILTER(BridgeJobCategory[jobNo], FactJob[jobNo], BOTH))
 		formatString: #,0
-		displayFolder: Salary
+		displayFolder: Jobs
 		lineageTag: ddd9a331-14db-43b8-9316-6e0da72efdc2
 
-	/// Jobs with both reported numeric salary bounds divided by current distinct jobs. This is raw-bound coverage, not a claim that the values are disclosed salary.
+	/// Matched jobs with both raw numeric salary bounds divided by matched current jobs.
 	measure 'Salary Coverage %' = DIVIDE([Jobs with Salary], [Active Jobs], 0)
 		formatString: 0.0%
-		displayFolder: Salary
+		displayFolder: Jobs
 		lineageTag: 1a453a7e-4a28-4c7b-b5b0-9fced4a7ca4d
 
-	/// Sum of the API applyCnt field for the current refresh. The business interpretation of applyCnt is not independently confirmed.
-	measure 'Job Applications' = SUM(FactJob[applyCnt])
+	/// Distinct jobs matching the selected normalized skill set and all other filters.
+	measure 'Skill Job Count' = [Active Jobs]
 		formatString: #,0
-		displayFolder: Applications
-		lineageTag: a439b490-bce5-4d1f-accf-ff1d1ac7acaf
-
-	/// Distinct jobs represented by the validated jobNo × skillCode bridge under the current filter context.
-	measure 'Skill Job Count' = DISTINCTCOUNT(BridgeJobSkill[jobNo])
-		formatString: #,0
-		displayFolder: Skills
+		displayFolder: Jobs
 		lineageTag: cac87f8d-6ddc-4a9f-bd2f-86fab1d4368c
 
-	/// Share of current jobs associated with the selected normalized skill. This describes association, not causation.
+	/// Share of matched jobs associated with the selected normalized skills; describes association, not causation.
 	measure 'Skill Share %' = DIVIDE([Skill Job Count], CALCULATE([Active Jobs], REMOVEFILTERS(DimSkill)), 0)
 		formatString: 0.0%
-		displayFolder: Skills
+		displayFolder: Jobs
 		lineageTag: fbac9dd5-be67-471f-8cc8-0f0d3537c804
+
+	/// Distinct jobs matching the selected observed category codes and all other filters.
+	measure 'Category Job Count' = [Active Jobs]
+		formatString: #,0
+		displayFolder: Jobs
+		lineageTag: c314b901-7fa2-4be0-82a1-a7b2184c901e
+
+	/// Share of matched jobs associated with the selected category codes.
+	measure 'Category Share %' = DIVIDE([Category Job Count], CALCULATE([Active Jobs], REMOVEFILTERS(DimJobCategory)), 0)
+		formatString: 0.0%
+		displayFolder: Jobs
+		lineageTag: d85a2104-51bc-4e4b-9e0a-bf1930b8c6e2
+
+	/// Distinct normalized skill descriptions for the currently selected job.
+	measure 'Job Skills' =
+			VAR SkillNames = CALCULATETABLE(VALUES(BridgeJobSkill[skillDescription]), CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH))
+			RETURN CONCATENATEX(FILTER(SkillNames, NOT ISBLANK([skillDescription])), [skillDescription], ", ", [skillDescription], ASC)
+		formatString: @
+		displayFolder: Jobs
+		lineageTag: 732335da-adee-4143-9b7a-f47b31082ad4
 
 	column jobNo
 		dataType: string
@@ -91,43 +85,11 @@ table FactJob
 
 		annotation SummarizationSetBy = Automatic
 
-	column custName
-		dataType: string
-		lineageTag: 2c9bfb4f-8966-4e24-9b0d-5db92b35a4c1
-		summarizeBy: none
-		sourceColumn: custName
-
-		annotation SummarizationSetBy = Automatic
-
-	column coIndustry
-		dataType: int64
-		lineageTag: bb3e916c-0525-4390-853a-9f55978aad8d
-		summarizeBy: none
-		sourceColumn: coIndustry
-
-		annotation SummarizationSetBy = User
-
-	column coIndustryDesc
-		dataType: string
-		lineageTag: 9a1037a0-52fc-4909-8169-60a7e2aec341
-		summarizeBy: none
-		sourceColumn: coIndustryDesc
-
-		annotation SummarizationSetBy = Automatic
-
 	column jobName
 		dataType: string
 		lineageTag: c81ad7f4-7158-4390-89c8-aeab2a881964
 		summarizeBy: none
 		sourceColumn: jobName
-
-		annotation SummarizationSetBy = Automatic
-
-	column description
-		dataType: string
-		lineageTag: d74b6f7e-4786-4f2c-9a3e-e40068a49a4a
-		summarizeBy: none
-		sourceColumn: description
 
 		annotation SummarizationSetBy = Automatic
 
@@ -147,51 +109,11 @@ table FactJob
 
 		annotation SummarizationSetBy = Automatic
 
-	column jobAddrNo
-		dataType: int64
-		lineageTag: f1af4351-b8ac-4fba-a7a9-850c0b4ead26
-		summarizeBy: none
-		sourceColumn: jobAddrNo
-
-		annotation SummarizationSetBy = User
-
 	column jobAddrNoDesc
 		dataType: string
 		lineageTag: f06acbb7-5d00-4996-98df-8660f73cf6d3
 		summarizeBy: none
 		sourceColumn: jobAddrNoDesc
-
-		annotation SummarizationSetBy = Automatic
-
-	column lat
-		dataType: double
-		lineageTag: 84fcdf47-54e6-4dfb-bac1-80c925b1eb74
-		summarizeBy: none
-		sourceColumn: lat
-
-		annotation SummarizationSetBy = User
-
-	column lon
-		dataType: double
-		lineageTag: ff42395d-0c30-4c61-ad08-64ee911c9004
-		summarizeBy: none
-		sourceColumn: lon
-
-		annotation SummarizationSetBy = User
-
-	column salaryLowRaw
-		dataType: string
-		lineageTag: 6350da3a-4748-4bb9-b260-766c8dd1ee13
-		summarizeBy: none
-		sourceColumn: salaryLowRaw
-
-		annotation SummarizationSetBy = Automatic
-
-	column salaryHighRaw
-		dataType: string
-		lineageTag: 9c022fda-3b2d-4cd7-8a9b-ffc231d43052
-		summarizeBy: none
-		sourceColumn: salaryHighRaw
 
 		annotation SummarizationSetBy = Automatic
 
@@ -211,14 +133,6 @@ table FactJob
 
 		annotation SummarizationSetBy = Automatic
 
-	column appearDateRaw
-		dataType: string
-		lineageTag: f867f04e-d2da-45fc-8239-fe1458052a5d
-		summarizeBy: none
-		sourceColumn: appearDateRaw
-
-		annotation SummarizationSetBy = Automatic
-
 	column appearDate
 		dataType: dateTime
 		formatString: Long Date
@@ -227,86 +141,6 @@ table FactJob
 		sourceColumn: appearDate
 
 		annotation UnderlyingDateTimeDataType = Date
-
-		annotation SummarizationSetBy = Automatic
-
-	column applyCnt
-		dataType: int64
-		lineageTag: 22bd9726-3519-4e08-820d-75d6ebadebf1
-		summarizeBy: sum
-		sourceColumn: applyCnt
-
-		annotation SummarizationSetBy = Automatic
-
-	column jobCatRaw
-		dataType: string
-		lineageTag: 54d99a55-49fd-4c32-80a3-fd166eff22bc
-		summarizeBy: none
-		sourceColumn: jobCatRaw
-
-		annotation SummarizationSetBy = Automatic
-
-	column pcSkillsRaw
-		dataType: string
-		lineageTag: ada38b71-a4a0-4239-83ca-9da6ac75f0a8
-		summarizeBy: none
-		sourceColumn: pcSkillsRaw
-
-		annotation SummarizationSetBy = Automatic
-
-	column tagsRaw
-		dataType: string
-		lineageTag: e83a1eb1-61ab-432a-82cd-c7ffe49b2d2f
-		summarizeBy: none
-		sourceColumn: tagsRaw
-
-		annotation SummarizationSetBy = Automatic
-
-	column labelsRaw
-		dataType: string
-		lineageTag: 458945c8-8b7d-453b-b4e4-e5feacc186ef
-		summarizeBy: none
-		sourceColumn: labelsRaw
-
-		annotation SummarizationSetBy = Automatic
-
-	column linkRaw
-		dataType: string
-		lineageTag: e5951d41-ecb5-470a-abc6-c17e73b045c1
-		summarizeBy: none
-		sourceColumn: linkRaw
-
-		annotation SummarizationSetBy = Automatic
-
-	column remoteWorkType
-		dataType: int64
-		lineageTag: 71a10b37-fd20-4eb3-a173-6581533f3393
-		summarizeBy: none
-		sourceColumn: remoteWorkType
-
-		annotation SummarizationSetBy = User
-
-	column languageRequirementsRaw
-		dataType: string
-		lineageTag: 6fae8bc8-1f05-4a7e-a0b0-cb6c91eb0201
-		summarizeBy: none
-		sourceColumn: languageRequirementsRaw
-
-		annotation SummarizationSetBy = Automatic
-
-	column majorRaw
-		dataType: string
-		lineageTag: 8e71193a-50cb-4df4-a469-c1e0d8187236
-		summarizeBy: none
-		sourceColumn: majorRaw
-
-		annotation SummarizationSetBy = Automatic
-
-	column acceptRoleRaw
-		dataType: string
-		lineageTag: 3349fc85-3b83-4405-a3b5-40f59755de8f
-		summarizeBy: none
-		sourceColumn: acceptRoleRaw
 
 		annotation SummarizationSetBy = Automatic
 
@@ -344,22 +178,6 @@ table FactJob
 		sourceColumn: sourceArea
 
 		annotation SummarizationSetBy = Automatic
-
-	column sourcePage
-		dataType: int64
-		lineageTag: 07148562-65a7-4c16-bcd8-b22ed5b971dc
-		summarizeBy: none
-		sourceColumn: sourcePage
-
-		annotation SummarizationSetBy = User
-
-	column sourcePageSize
-		dataType: int64
-		lineageTag: bb74ef1f-59f1-4bec-950e-01c8c4f59866
-		summarizeBy: none
-		sourceColumn: sourcePageSize
-
-		annotation SummarizationSetBy = User
 
 	column jobLink
 		dataType: string

@@ -49,11 +49,10 @@ def expressions(root):
             else:
                 metadata = "\tlineageTag: " + str(uuid.uuid4()) + "\n\tqueryGroup: " + group
                 mismatches.append(name)
-            body = "\n".join("\t\t" + line if line else "" for line in code.splitlines())
+            body = "\n".join("\t\t" + line if line.strip() else "" for line in code.splitlines())
             rendered.append("expression " + name + " = ```\n" + body + "\n\t\t```\n" + metadata + "\n")
     extra = set(existing) - set(names)
-    if extra:
-        raise ValueError(f"Persisted expressions without a complete M export: {sorted(extra)}")
+    mismatches.extend(sorted(extra))
     return path, "\n".join(rendered), names, mismatches
 
 
@@ -63,8 +62,10 @@ def sync(root, write=False):
     model = model_path.read_text(encoding="utf-8-sig")
     order_match = re.search(r"(?m)^annotation PBI_QueryOrder = (.+)$", model)
     old_order = json.loads(order_match[1])
-    table_queries = [name for name in old_order if name not in names and name == "查詢"]
-    order = table_queries + names
+    table_names = set(re.findall(r"(?m)^ref table (.+)$", model))
+    preserved_tables = [name for name in old_order if name not in names and name in table_names]
+    legacy_query_tables = [name for name in old_order if name not in names and name == "查詢"]
+    order = names + preserved_tables + [name for name in legacy_query_tables if name not in preserved_tables]
     updated = model[:order_match.start(1)] + json.dumps(order, ensure_ascii=False) + model[order_match.end(1):]
     if write:
         path.write_text(content, encoding="utf-8", newline="\n")

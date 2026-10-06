@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "insight",
   "position": {
     "x": 544,
     "y": 604,
-    "z": 502,
+    "z": 12000,
     "height": 92,
     "width": 686,
-    "tabOrder": 502
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "textbox",

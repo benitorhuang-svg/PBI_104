@@ -1,4 +1,3 @@
-
 relationship FactJob_DimCompany_custNo
 	fromColumn: FactJob.custNo
 	toColumn: DimCompany.custNo
@@ -8,12 +7,22 @@ relationship FactJob_DimArea_areaKey
 	toColumn: DimArea.areaKey
 
 relationship BridgeJobSkill_FactJob_jobNo
+	crossFilteringBehavior: bothDirections
 	fromColumn: BridgeJobSkill.jobNo
 	toColumn: FactJob.jobNo
 
 relationship BridgeJobSkill_DimSkill_skillCode
 	fromColumn: BridgeJobSkill.skillCode
 	toColumn: DimSkill.skillCode
+
+relationship BridgeJobCategory_FactJob_jobNo
+	crossFilteringBehavior: bothDirections
+	fromColumn: BridgeJobCategory.jobNo
+	toColumn: FactJob.jobNo
+
+relationship BridgeJobCategory_DimJobCategory_jobCatCode
+	fromColumn: BridgeJobCategory.jobCatCode
+	toColumn: DimJobCategory.jobCatCode
 
 relationship FactJobSnapshot_DimDate_snapshotDate
 	joinOnDateBehavior: datePartOnly
@@ -24,12 +33,4 @@ relationship FactJob_DimDate_appearDate
 	joinOnDateBehavior: datePartOnly
 	fromColumn: FactJob.appearDate
 	toColumn: DimDate.Date
-
-relationship BridgeJobCategory_FactJob_jobNo
-	fromColumn: BridgeJobCategory.jobNo
-	toColumn: FactJob.jobNo
-
-relationship BridgeJobCategory_DimJobCategory_jobCatCode
-	fromColumn: BridgeJobCategory.jobCatCode
-	toColumn: DimJobCategory.jobCatCode
 

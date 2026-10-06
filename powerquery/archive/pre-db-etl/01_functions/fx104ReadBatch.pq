@@ -7,8 +7,14 @@ let
         if Text.Contains(RelativePath, ":") or List.Contains(PathParts, "..") or List.Contains(PathParts, "") then
             error Error.Record("Invalid snapshot path", "Batch paths must remain below the configured root.", null)
         else Root & "\" & Text.Combine(PathParts, "\"),
-    Request = manifest[request],
-    SerializeComplex = (value as any) as any =>
+    SeriesKey = Text.Lower(Text.From(manifest[seriesKey])),
+    SafeSeriesKey = if Text.Length(SeriesKey) <> 20 or Text.Select(SeriesKey, {"0".."9", "a".."f"}) <> SeriesKey then
+        error Error.Record("Invalid snapshot series", "seriesKey must be 20 lowercase hexadecimal characters.", null) else SeriesKey,
+    ExpectedBatchPath = "series/" & SafeSeriesKey & "/batches/" & Text.From(manifest[batchId]),
+    CheckedManifest = if RelativePath <> ExpectedBatchPath then
+        error Error.Record("Manifest path mismatch", "batchPath must match the seriesKey and batchId.", null) else manifest,
+    Request = CheckedManifest[request],
+            SerializeComplex = (value as any) as any =>
         if Value.Is(value, type record) or Value.Is(value, type list) then Text.FromBinary(Json.FromValue(value), TextEncoding.Utf8) else value,
     ReadPage = (descriptor as record) as record =>
         let
@@ -22,9 +28,12 @@ let
             SerializedRows = List.Transform(RawRows, (job as record) => Record.Combine({
                 Record.TransformFields(job, List.Transform(Record.FieldNames(job), each {_, SerializeComplex})),
                 [snapshotDate = manifest[snapshotDate], snapshotDateTime = manifest[snapshotDateTime],
-                 sourceKeyword = Request[keyword], sourceArea = Request[area], sourcePage = descriptor[page], sourcePageSize = Request[pagesize]]
+                 sourceKeyword = Record.FieldOrDefault(Request, "keyword", null),
+                 sourceJobcat = Record.FieldOrDefault(Request, "jobcat", null),
+                 sourceArea = Record.FieldOrDefault(Request, "area", null), querySeriesKey = SafeSeriesKey,
+                 sourcePage = descriptor[page], sourcePageSize = Request[pagesize]]
             })),
-            Columns = List.Distinct(List.Combine({{"jobNo", "custNo", "pcSkills", "jobCat", "snapshotDate", "snapshotDateTime", "sourceKeyword", "sourceArea", "sourcePage", "sourcePageSize"}, List.Combine(List.Transform(SerializedRows, Record.FieldNames))})),
+            Columns = List.Distinct(List.Combine({{"jobNo", "custNo", "pcSkills", "jobCat", "snapshotDate", "snapshotDateTime", "sourceKeyword", "sourceJobcat", "sourceArea", "querySeriesKey", "sourcePage", "sourcePageSize"}, List.Combine(List.Transform(SerializedRows, Record.FieldNames))})),
             Jobs = Table.FromRecords(SerializedRows, Columns, MissingField.UseNull),
             Metadata = Table.FromRecords({Record.Combine({Stored[technical], Pagination,
                 [snapshotDate = manifest[snapshotDate], snapshotDateTime = manifest[snapshotDateTime]]})}),

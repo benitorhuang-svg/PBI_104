@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "salary_by_category",
   "position": {
     "x": 24,
     "y": 488,
-    "z": 500,
+    "z": 9000,
     "height": 208,
     "width": 389,
-    "tabOrder": 500
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "barChart",
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "DimJobCategory"
                     }
                   },
-                  "Property": "jobCatRaw"
+                  "Property": "jobCatCode"
                 }
               },
-              "queryRef": "FactJob.jobCatRaw",
+              "queryRef": "DimJobCategory.jobCatCode",
               "active": true
             }
           ]

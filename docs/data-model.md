@@ -1,5 +1,31 @@
 # TASK-004 Model Table Contract
 
+## Current database-backed contract (2026-10-06)
+
+The TASK-004 profile below is historical. The active model now imports all
+nine tables from PostgreSQL Gold views. `FactJob` has one latest complete
+occupational-category observation per `jobNo`; it has no keyword or area
+predicate. `BridgeJobSkill` and `BridgeJobCategory` come from the selected
+observation's Silver rows. `DimCompany`, `DimArea`, `DimSkill`,
+`DimJobCategory`, and `DimDate` are built in Gold to match those keys.
+
+`FactJobSnapshot` remains the complete-series history at
+`querySeriesKey × snapshotDate × jobNo`, including retained legacy keyword
+series. Current category facts are based on batches imported so far, not a
+claim of all-Taiwan coverage. The existing complete category batches were
+captured with the earlier two-area filter; nationwide category captures will
+expand the same Gold views when they pass ETL validation. Power Query performs
+no shaping or grain checks, and the DAX measures are unchanged.
+
+See [current architecture](architecture.md) and
+[database refresh status](optimization-status.md) for Gold view names and
+Desktop acceptance status.
+
+> Historical TASK-004 snapshot: row counts below describe the 2026-08-13
+> profile. TASK-007 supersedes its current load inventory and persistence
+> status; see [optimization status](optimization-status.md) for the verified
+> 2026-10-05 Desktop state and current snapshot counts.
+
 ## Evidence boundary
 
 The model-table design is based on the live 104 profile recorded on
@@ -21,7 +47,7 @@ error instead of silently dropping or manufacturing rows.
 | `FactJob` | Current job listing for exploration and current KPIs | One current row per `jobNo` | `jobNo` | `jobNo` | `mdl_FactJob` ← `stg_Jobs` | 55 |
 | `FactJobSnapshot` | The refresh's observed snapshot facts | `snapshotDate × jobNo` | `snapshotDate`, `jobNo` | composite natural key | `mdl_FactJobSnapshot` ← `stg_Jobs` | 55 |
 | `DimCompany` | Observed company identity attributes | One row per `custNo` | `custNo` | `custNo` | `mdl_DimCompany` ← `stg_Companies` | 35 |
-| `DimArea` | Observed area/address and coordinates | One row per observed `areaKey` | `areaKey` (`jobAddrNo|description|address|lat|lon`) | `areaKey` | `mdl_DimArea` ← `stg_Areas` | 2+ variants |
+| `DimArea` | Observed area/address and coordinates | One row per observed location variant | `areaKey` (lowercase hex of the source key's UTF-8 bytes) | `areaKey` | `mdl_DimArea` ← `stg_Areas` | 2+ variants |
 | `DimSkill` | Normalized observed skill codes/descriptions | One row per `skillCode` | `skillCode` | `skillCode` | `mdl_DimSkill` ← `stg_Skills` | 89 |
 | `DimJobCategory` | Observed category codes | One row per `jobCatCode` | `jobCatCode` | `jobCatCode` | `mdl_DimJobCategory` ← `stg_JobCategories` | 69 |
 | `BridgeJobSkill` | Job-to-skill bridge | One row per `jobNo × skillCode` | composite pair | composite natural key | `mdl_BridgeJobSkill` ← `stg_JobSkills` | 280 |
@@ -49,8 +75,11 @@ measures remain **BLOCKED** until an external persistence mechanism exists.
 only observed address and coordinates and does not infer missing locations.
 `jobAddrNo` is retained as an API code, but it is not used as the sole
 dimension key because refresh validation observed multiple full location
-variants for a code. `areaKey` preserves those variants without silently
-selecting one.
+variants for a code. Silver retains the original composite `area_key`. Gold
+encodes its exact UTF-8 bytes as lowercase hexadecimal in both `FactJob` and
+`DimArea`, so Power BI's string collation preserves compatibility-character
+variants as distinct keys. The displayed address fields retain the original
+text; the key encoding does not merge or select location variants.
 
 ## Validation rules and observed results
 
@@ -59,7 +88,7 @@ selecting one.
 | `FactJob` key | `jobNo` non-null and unique | null 0, duplicate 0 |
 | `FactJobSnapshot` grain | `snapshotDate × jobNo` non-null and unique | null 0, duplicate 0 |
 | `DimCompany` key | `custNo` non-null and unique | 35 rows, duplicate 0 |
-| `DimArea` identity | One observed row per `areaKey` | variant-preserving; no collapse |
+| `DimArea` identity | One observed row per byte-preserving encoded `areaKey` | variant-preserving; no collapse |
 | `DimSkill` key | `skillCode` non-null and unique | 89 rows, duplicate 0 |
 | `DimJobCategory` key | `jobCatCode` non-null and unique | 69 rows, duplicate 0 |
 | `BridgeJobSkill` grain | `jobNo × skillCode` non-null and unique | 280 rows, duplicate 0 |

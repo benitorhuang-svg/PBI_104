@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "blocked_metrics",
   "position": {
     "x": 664,
     "y": 176,
-    "z": 302,
+    "z": 7000,
     "height": 88,
     "width": 390,
-    "tabOrder": 302
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "textbox",

@@ -1,19 +1,19 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "job_preview",
   "position": {
     "x": 604,
     "y": 286,
-    "z": 401,
+    "z": 12000,
     "height": 390,
     "width": 626,
-    "tabOrder": 401
+    "tabOrder": 12000
   },
   "visual": {
-    "visualType": "pivotTable",
+    "visualType": "tableEx",
     "query": {
       "queryState": {
-        "Rows": {
+        "Values": {
           "projections": [
             {
               "field": {
@@ -101,17 +101,17 @@
             },
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
                       "Entity": "FactJob"
                     }
                   },
-                  "Property": "pcSkillsRaw"
+                  "Property": "Job Skills"
                 }
               },
-              "queryRef": "FactJob.pcSkillsRaw",
-              "active": true
+              "queryRef": "FactJob.Job Skills",
+              "active": false
             },
             {
               "field": {
@@ -126,23 +126,6 @@
               },
               "queryRef": "FactJob.jobLink",
               "active": true
-            }
-          ]
-        },
-        "Values": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "FactJob"
-                    }
-                  },
-                  "Property": "Active Jobs"
-                }
-              },
-              "queryRef": "FactJob.Active Jobs"
             }
           ]
         }
@@ -162,7 +145,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'職缺詳情 / Job Preview · select a row'"
+                  "Value": "'職缺詳情 / select a job for skills and source link'"
                 }
               }
             }

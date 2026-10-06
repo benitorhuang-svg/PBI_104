@@ -1,13 +1,14 @@
 (
     baseUrl as text,
-    keyword as text,
-    area as text,
+    keyword as nullable text,
+    area as nullable text,
     jobsource as text,
     mode as text,
     order as text,
     startPage as number,
     pagesize as number,
-    optional maxPages as nullable number
+    optional maxPages as nullable number,
+    optional jobcat as nullable text
 ) as record =>
 let
     StartPage =
@@ -24,7 +25,8 @@ let
             mode,
             order,
             StartPage,
-            pagesize
+            pagesize,
+            jobcat = jobcat
         ), StartPage),
     FirstMetadata = FirstPage[Metadata],
     CurrentPageValue =
@@ -77,7 +79,8 @@ let
                     mode,
                     order,
                     currentPage,
-                    pagesize
+                    pagesize,
+                    jobcat = jobcat
                 ), currentPage, ValidatedLastPage, FirstMetadata{0}[total])
         ),
     PageRecords = List.Buffer({FirstPage} & RemainingPages),

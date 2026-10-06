@@ -1,16 +1,14 @@
 # 04_Model query source
 
-These seven `.pq` files are the complete M source for the persisted model
-queries. In Power BI Desktop they are named with the `mdl_` prefix
-(`mdl_FactJob`, `mdl_FactJobSnapshot`, `mdl_DimCompany`, `mdl_DimArea`,
-`mdl_DimSkill`, `mdl_DimJobCategory`, `mdl_BridgeJobSkill`) because the current
-Mashup authoring surface treats a named expression and a loaded table with
-the same identifier as duplicate members. The loaded semantic tables retain
-the unprefixed star-schema names.
+The nine `.pq` files are one-to-one pass-throughs to PostgreSQL Source queries:
+`FactJob`, `FactJobSnapshot`, `DimCompany`, `DimArea`, `DimSkill`,
+`DimJobCategory`, `BridgeJobSkill`, `BridgeJobCategory`, and `DimDate`.
 
-`DimDate` is intentionally not an M query. It is a semantic-model calculated
-table over the loaded `FactJob[appearDate]` range; this keeps the date
-dimension in the Semantic Model layer and avoids a second staging/API access.
+Power BI Desktop persists their expressions with the `mdl_` prefix because the
+Mashup authoring surface treats a named expression and loaded table with the
+same identifier as duplicate members. The loaded semantic tables retain their
+public star-schema names.
 
-Only these seven `mdl_` queries are Enable Load. Parameters, Functions,
-Source, and Staging remain Disable Load.
+Every model expression returns a Gold view without M transformations. Only
+these nine queries are Enable Load; parameters, functions, and source readers
+remain Disable Load.

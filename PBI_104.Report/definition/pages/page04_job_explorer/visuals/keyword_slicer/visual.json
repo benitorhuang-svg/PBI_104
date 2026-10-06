@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "keyword_slicer",
   "position": {
     "x": 24,
     "y": 88,
-    "z": 200,
+    "z": 3000,
     "height": 72,
-    "width": 280,
-    "tabOrder": 200
+    "width": 208,
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "slicer",
@@ -23,10 +23,10 @@
                       "Entity": "FactJob"
                     }
                   },
-                  "Property": "sourceKeyword"
+                  "Property": "jobName"
                 }
               },
-              "queryRef": "FactJob.sourceKeyword",
+              "queryRef": "FactJob.jobName",
               "active": true
             }
           ]
@@ -46,6 +46,11 @@
             }
           }
         }
+      ],
+      "general": [
+        {
+          "properties": {}
+        }
       ]
     },
     "visualContainerObjects": {
@@ -62,7 +67,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'來源關鍵字 / Source Keyword'"
+                  "Value": "'職稱 / Job Title'"
                 }
               }
             }

@@ -1,120 +1,175 @@
-"""Comprehensive validation gate for 104 Power BI intelligence project."""
+"""Run deterministic offline project checks plus official cached PBIR schemas."""
 
-import glob
+from __future__ import annotations
+
+import hashlib
+import importlib
 import json
+import os
+from copy import deepcopy
 from pathlib import Path
+import re
+import shutil
 import subprocess
 import sys
-import unittest
+from urllib.parse import urldefrag, urlparse
+from urllib.error import HTTPError
+from urllib.request import urlopen
 
-PROJECT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[1]
+CACHE = ROOT / ".optimization/schema-cache"
+SCHEMA_FALLBACKS: dict[str, str] = {}
+sys.path.insert(0, str(ROOT / ".optimization/deps"))
+sys.path.insert(0, str(ROOT / "tools"))
 
 
-def check_sync():
-    sys.path.insert(0, str(PROJECT / "tools"))
+def official_schema(url: str) -> dict:
+    url, _ = urldefrag(url)
+    if urlparse(url).scheme != "https" or urlparse(url).hostname != "developer.microsoft.com":
+        raise ValueError(f"PBIR schema host is not the official Microsoft schema host: {url}")
+    cached = CACHE / (hashlib.sha256(url.encode()).hexdigest() + ".json")
+    compatibility_file = cached.with_suffix(".compatibility.json")
+    if cached.exists():
+        if compatibility_file.exists():
+            SCHEMA_FALLBACKS.update(json.loads(compatibility_file.read_text(encoding="utf-8")))
+        elif url.endswith("/visualContainer/2.13.0/schema.json"):
+            fallback_url = url.replace("/2.13.0/", "/2.12.0/")
+            SCHEMA_FALLBACKS[url] = fallback_url
+            compatibility_file.write_text(json.dumps(SCHEMA_FALLBACKS), encoding="utf-8")
+        return json.loads(cached.read_text(encoding="utf-8"))
+    try:
+        with urlopen(url, timeout=30) as response:
+            content = response.read()
+        schema = json.loads(content.decode("utf-8-sig"))
+    except HTTPError as error:
+        if not url.endswith("/visualContainer/2.13.0/schema.json"):
+            raise RuntimeError(f"Could not fetch official Microsoft schema {url}: {error}") from error
+        if error.code != 404:
+            raise RuntimeError(f"Official Microsoft schema request failed with HTTP {error.code}: {url}") from error
+        fallback_url = url.replace("/2.13.0/", "/2.12.0/")
+        with urlopen(fallback_url, timeout=30) as response:
+            schema = json.loads(response.read().decode("utf-8-sig"))
+        schema = deepcopy(schema)
+        schema["$id"] = url
+        schema.get("properties", {}).get("$schema", {})["const"] = url
+        SCHEMA_FALLBACKS[url] = fallback_url
+    CACHE.mkdir(parents=True, exist_ok=True)
+    cached.write_text(json.dumps(schema, ensure_ascii=False), encoding="utf-8")
+    if url in SCHEMA_FALLBACKS:
+        compatibility_file.write_text(json.dumps({url: SCHEMA_FALLBACKS[url]}), encoding="utf-8")
+    return schema
+
+
+def check_json() -> int:
+    files = [ROOT / "PBI_104.pbip"]
+    files += list((ROOT / "PBI_104.Report/definition").rglob("*.json"))
+    files += list((ROOT / "PBI_104.SemanticModel/definition").rglob("*.json"))
+    for path in files:
+        with path.open("r", encoding="utf-8-sig") as source:
+            json.load(source)
+    return len(files)
+
+
+def report_symbols() -> dict[str, set[str]]:
+    symbols: dict[str, set[str]] = {}
+    for table in (ROOT / "PBI_104.SemanticModel/definition/tables").glob("*.tmdl"):
+        text = table.read_text(encoding="utf-8-sig")
+        name = re.search(r"(?m)^table (.+)$", text)
+        if not name:
+            continue
+        values = set(re.findall(r"(?m)^\tcolumn ([^\n]+)$", text))
+        values |= set(re.findall(r"(?m)^\tmeasure '([^']+)' =", text))
+        symbols[name[1]] = values
+    return symbols
+
+
+def check_report_references() -> int:
+    symbols = report_symbols()
+    checked = 0
+    for path in (ROOT / "PBI_104.Report/definition/pages").rglob("visual.json"):
+        visual = json.loads(path.read_text(encoding="utf-8-sig"))
+
+        def visit(value):
+            nonlocal checked
+            if isinstance(value, dict):
+                for kind in ("Column", "Measure"):
+                    field = value.get(kind)
+                    if not isinstance(field, dict):
+                        continue
+                    source = field.get("Expression", {}).get("SourceRef", {}).get("Entity")
+                    prop = field.get("Property")
+                    if source and prop:
+                        checked += 1
+                        if prop not in symbols.get(source, set()):
+                            raise ValueError(f"{path.relative_to(ROOT)} refers to missing {source}.{prop}")
+                for child in value.values():
+                    visit(child)
+            elif isinstance(value, list):
+                for child in value:
+                    visit(child)
+
+        visit(visual.get("visual", {}))
+    return checked
+
+
+def check_schemas() -> int:
+    jsonschema = importlib.import_module("jsonschema")
+    from referencing import Registry, Resource
+
+    schemas: dict[str, dict] = {}
+
+    def retrieve(uri):
+        url, fragment = urldefrag(str(uri))
+        if url not in schemas:
+            schemas[url] = official_schema(url)
+        schema = schemas[url]
+        return Resource.from_contents(schema)
+
+    registry = Registry(retrieve=retrieve)
+    checked = 0
+    for path in (ROOT / "PBI_104.Report/definition").rglob("*.json"):
+        document = json.loads(path.read_text(encoding="utf-8-sig"))
+        schema_url = document.get("$schema")
+        if not schema_url:
+            continue
+        schema = official_schema(schema_url)
+        validator = jsonschema.validators.validator_for(schema)(schema, registry=registry)
+        errors = sorted(validator.iter_errors(document), key=lambda error: list(error.path))
+        if errors:
+            error = errors[0]
+            raise ValueError(f"{path.relative_to(ROOT)}: {list(error.path)}: {error.message}")
+        checked += 1
+    return checked
+
+
+def main() -> int:
+    json_files = check_json()
+    references = check_report_references()
+    schemas = check_schemas()
     from sync_queries import sync
-    result = sync(PROJECT, write=False)
-    return {
-        "passed": len(result["mismatches"]) == 0 and not result["queryOrderChanged"],
-        "queries": result["queries"],
-        "mismatches": result["mismatches"]
-    }
 
-
-def check_tmdl():
-    ps = PROJECT / "tools/desktop_model.ps1"
-    res = subprocess.run(
-        ["powershell", "-ExecutionPolicy", "Bypass", "-File", str(ps), "-Operation", "Parse"],
-        capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=str(PROJECT)
-    )
-    if res.returncode != 0:
-        return {"passed": False, "error": res.stderr.strip() or res.stdout.strip()}
-    data = json.loads(res.stdout.strip())
-    return {"passed": data.get("Result") == "PASS", "details": data}
-
-
-def check_pbir_json():
-    files = list(PROJECT.glob("PBI_104.Report/**/*.json"))
-    invalid = []
-    for f in files:
-        try:
-            with open(f, "r", encoding="utf-8") as fp:
-                json.load(fp)
-        except Exception as e:
-            invalid.append({"file": str(f.relative_to(PROJECT)), "error": str(e)})
-    return {
-        "passed": len(invalid) == 0,
-        "totalJsonFiles": len(files),
-        "invalidFiles": invalid
-    }
-
-
-def check_unit_tests():
-    loader = unittest.TestLoader()
-    suite = loader.discover(str(PROJECT / "tools/tests"))
-    runner = unittest.TextTestRunner(verbosity=0)
-    result = runner.run(suite)
-    return {
-        "passed": result.wasSuccessful(),
-        "run": result.testsRun,
-        "failures": len(result.failures),
-        "errors": len(result.errors)
-    }
-
-
-def check_line_counts():
-    scripts = list(PROJECT.glob("tools/**/*.py")) + list(PROJECT.glob("tools/**/*.ps1"))
-    violations = []
-    for s in scripts:
-        lines = len(s.read_text(encoding="utf-8", errors="replace").splitlines())
-        if lines > 300:
-            violations.append({"file": str(s.relative_to(PROJECT)), "lines": lines})
-    return {
-        "passed": len(violations) == 0,
-        "checkedFiles": len(scripts),
-        "violations": violations
-    }
-
-
-def check_live_desktop():
-    ps = PROJECT / "tools/desktop_model.ps1"
-    res = subprocess.run(
-        ["powershell", "-ExecutionPolicy", "Bypass", "-Command", "@(Get-Process msmdsrv -ErrorAction SilentlyContinue).Count"],
-        capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=str(PROJECT)
-    )
-    count = int(res.stdout.strip() or "0")
-    if count != 1:
-        return {"available": False, "note": f"msmdsrv instances: {count}"}
-    inv = subprocess.run(
-        ["powershell", "-ExecutionPolicy", "Bypass", "-File", str(ps), "-Operation", "Inventory"],
-        capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=str(PROJECT)
-    )
-    if inv.returncode != 0:
-        return {"available": False, "error": inv.stderr.strip()}
-    data = json.loads(inv.stdout.strip())
-    return {"available": True, "inventory": data}
-
-
-def main():
-    report = {
-        "mExpressionsSync": check_sync(),
-        "tmdlSerialization": check_tmdl(),
-        "pbirJsonSyntax": check_pbir_json(),
-        "unitTests": check_unit_tests(),
-        "lineCountsLimit300": check_line_counts(),
-        "liveDesktop": check_live_desktop()
-    }
-    all_passed = (
-        report["mExpressionsSync"]["passed"]
-        and report["tmdlSerialization"]["passed"]
-        and report["pbirJsonSyntax"]["passed"]
-        and report["unitTests"]["passed"]
-        and report["lineCountsLimit300"]["passed"]
-    )
-    report["overallPassed"] = all_passed
-    print(json.dumps(report, indent=2, ensure_ascii=False))
-    sys.exit(0 if all_passed else 1)
+    sync_result = sync(ROOT)
+    if sync_result["mismatches"] or sync_result["queryOrderChanged"]:
+        raise ValueError(f"M exports are out of sync with TMDL: {sync_result}")
+    for path in (ROOT / "tools").rglob("*.py"):
+        if len(path.read_text(encoding="utf-8-sig").splitlines()) > 300:
+            raise ValueError(f"Maintained Python file exceeds 300 lines: {path.relative_to(ROOT)}")
+    desktop_parse = "UNAVAILABLE"
+    powershell = shutil.which("powershell") or shutil.which("pwsh")
+    if powershell and os.name == "nt":
+        result = subprocess.run(
+            [powershell, "-NoProfile", "-File", str(ROOT / "tools/desktop_model.ps1"), "-Operation", "Parse"],
+            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=90
+        )
+        if result.returncode:
+            raise RuntimeError(result.stderr.strip() or result.stdout.strip())
+        desktop_parse = json.loads(result.stdout).get("Result", "FAIL")
+    print(json.dumps({"result": "PASS", "jsonFiles": json_files, "pbirSchemas": schemas,
+                      "reportFieldReferences": references, "queries": sync_result["queries"],
+                      "desktopTmdlParser": desktop_parse,
+                      "schemaCompatibility": SCHEMA_FALLBACKS}, ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

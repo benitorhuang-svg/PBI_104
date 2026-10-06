@@ -7,7 +7,7 @@ from pathlib import Path
 import time
 
 from acquisition.embedded_client import client_code, fetch_page
-from acquisition.pagination import collect, integer
+from acquisition.pagination import MAX_CAPTURE_PAGES, collect, integer
 from acquisition.storage import publish
 
 DEFAULT_TARGETS = [
@@ -17,7 +17,7 @@ DEFAULT_TARGETS = [
 ]
 
 
-def capture_target(code, target, output_dir, max_pages=1000):
+def capture_target(code, target, output_dir, max_pages=MAX_CAPTURE_PAGES):
     request = {
         "baseUrl": "https://www.104.com.tw/jobs/search/api/jobs",
         "keyword": target["keyword"],

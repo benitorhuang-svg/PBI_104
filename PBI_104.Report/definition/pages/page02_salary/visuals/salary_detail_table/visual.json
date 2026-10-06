@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "salary_detail_table",
   "position": {
     "x": 842,
     "y": 488,
-    "z": 502,
+    "z": 11000,
     "height": 208,
     "width": 389,
-    "tabOrder": 502
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "pivotTable",
