@@ -4,6 +4,8 @@ from datetime import date, datetime
 
 from .postgres_pages import backfill_capture_pages, save_capture_pages
 from .postgres_schema import apply_schema
+from .raw_payload import (jsonb_projection, normalize_payload,
+                          payload_quality_flags, source_json)
 
 
 def _unique(rows, key):
@@ -189,13 +191,20 @@ def _save_salary_observations(conn, jobs, Jsonb):
 
 def _verify_stored_raw_rows(conn, batch):
     batch_id = batch["manifest"]["batchId"]
-    expected = [(page, row_index, str(raw.get("jobNo")) if raw.get("jobNo") is not None else None, raw)
+    expected = [(page, row_index,
+                 jsonb_projection(str(raw.get("jobNo")))
+                 if raw.get("jobNo") is not None else None,
+                 source_json(raw), payload_quality_flags(raw))
                 for page, row_index, raw in batch["raw_rows"]]
     expected.sort(key=lambda row: (row[0], row[1]))
-    stored = conn.execute("""SELECT source_page, row_index, job_no, payload
+    stored = conn.execute("""SELECT source_page, row_index, job_no,
+        payload_source_json, payload, payload_quality_flags
         FROM bronze.raw_job_rows WHERE batch_id = %s ORDER BY source_page, row_index""",
         (batch_id,)).fetchall()
-    if stored != expected:
+    restored = [(page, row_index, job_no,
+                 source if source is not None else source_json(projection), flags)
+                for page, row_index, job_no, source, projection, flags in stored]
+    if restored != expected:
         raise ValueError(f"Stored Bronze payload differs from verified batch files: {batch_id}")
 
 
@@ -246,11 +255,18 @@ def _save_batch(conn, batch, Jsonb):
         (batch_id, manifest["seriesKey"], snapshot_date, snapshot_time,
          request.get("jobcat"), Jsonb(request),
          batch["manifest_sha256"], Jsonb(manifest), len(batch["raw_rows"]), batch["capture_status"]))
-    raw_values = [(batch_id, page, row_index, str(raw.get("jobNo")) if raw.get("jobNo") is not None else None,
-                   Jsonb(raw)) for page, row_index, raw in batch["raw_rows"]]
+    raw_values = []
+    for page, row_index, raw in batch["raw_rows"]:
+        payload, flags = normalize_payload(raw)
+        job_no = (jsonb_projection(str(raw.get("jobNo")))
+                  if raw.get("jobNo") is not None else None)
+        raw_values.append((batch_id, page, row_index, job_no,
+                           Jsonb(payload), source_json(raw), Jsonb(flags)))
     if raw_values:
         _many(conn, """INSERT INTO bronze.raw_job_rows
-            (batch_id, source_page, row_index, job_no, payload) VALUES (%s, %s, %s, %s, %s)""", raw_values)
+            (batch_id, source_page, row_index, job_no, payload,
+             payload_source_json, payload_quality_flags)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)""", raw_values)
     save_capture_pages(conn, batch_id, batch.get("capture_pages", []), Jsonb)
     jobs = batch["jobs"]
     if batch["capture_status"] == "COMPLETE":

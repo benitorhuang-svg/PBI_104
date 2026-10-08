@@ -1,0 +1,64 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "header",
+  "position": {
+    "x": 24.540066331443242,
+    "y": 14.022895046538997,
+    "z": 0,
+    "height": 85.890232160051355,
+    "width": 313.76227666631007,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "下載戰情室",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "25pt",
+                      "color": "#172b4d"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "104 官方職類擷取 · Power BI 重新整理後更新",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#667085"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -71,7 +71,9 @@ def addresses_equivalent_after_standardization(left, right):
 
 def street_lookup_query(value):
     text = standardize_taiwan_address(value)
-    match = re.match(r"^[\u4e00-\u9fff]{1,6}?[縣市][\u4e00-\u9fff]{1,8}?(?:區|鄉|鎮|市)(.*)$", text)
+    match = re.match(
+        r"^[\u4e00-\u9fff]{1,6}?[縣市][\u4e00-\u9fff]{1,8}?(?:區|鄉|鎮|市)(?![區鄉鎮市])(.*)$",
+        text)
     if not match:
         return text
     street = match.group(1)
@@ -185,11 +187,29 @@ def geocode_candidates(base_url, candidates, opener=urlopen):
         results.extend(geocode_batch(base_url, batch, opener))
     if len(results) != len(candidates):
         raise ValueError("Geocoder returned an incomplete candidate set")
-    for candidate, result in zip(candidates, results):
+
+    def upgrade_standardized(candidate, result):
         if (result["match_level"] == "ADDRESS_VARIANT"
                 and addresses_equivalent_after_standardization(
                     candidate["canonical_address"], result["matched_address"])):
             result["match_level"] = "ADDRESS_STANDARDIZED"
+
+    for candidate, result in zip(candidates, results):
+        upgrade_standardized(candidate, result)
+
+    retry_indexes = [index for index, (candidate, result) in enumerate(zip(candidates, results))
+                     if result["match_level"] == "NOT_FOUND"
+                     and candidate["canonical_address"] != candidate["geocoder_query"]]
+    retry_queries = [candidates[index]["canonical_address"] for index in retry_indexes]
+    retry_results = []
+    for batch in chunks(retry_queries):
+        retry_results.extend(geocode_batch(base_url, batch, opener))
+    if len(retry_results) != len(retry_indexes):
+        raise ValueError("Geocoder returned an incomplete contextual retry set")
+    for index, result in zip(retry_indexes, retry_results):
+        upgrade_standardized(candidates[index], result)
+        if result["match_level"] != "NOT_FOUND":
+            results[index] = result
     return results
 
 

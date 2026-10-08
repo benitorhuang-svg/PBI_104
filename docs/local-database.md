@@ -19,11 +19,17 @@ docker compose up -d --build --wait
 The first sync command is a dry run. `--write` applies the checked-in schema and commits each complete batch in its own transaction. A batch already present with the same manifest SHA-256 is skipped; a conflicting identity fails. Re-running after an interruption therefore imports only the remaining batches. The loader verifies each manifest, page hash, pagination contract, and row count before connecting to PostgreSQL. Run `--write` after a new capture and before a Power BI Snapshot-mode refresh.
 
 Schema migration 9 adds the PostgreSQL Gold views used by all nine Power BI
-Import tables. Migration 10 adds the explicit query-category field and
-page-level Bronze acquisition metadata. Applying the checked-in schema is
-idempotent and does not rewrite immutable Bronze row payloads.
+Import tables. Migration 10 adds and backfills the explicit query-category
+field. Migration 12 adds the coordinate-derived job location scope to
+`gold.pbi_dim_area`. Migration 13 adds the shared distributed capture queue and
+request gate. The checked-in schema currently records version 13; the coverage
+report shows the highest version installed in the local database.
+Applying the checked-in schema is idempotent and does not rewrite immutable
+Bronze payloads.
 
 The Compose port is bound to `127.0.0.1:5433` so it does not collide with the other local PostgreSQL service on port 5432; the named volume `pbi104_pgdata` holds this database across container restarts. `.env` is ignored by Git. Keep the volume when stopping the service; `docker compose down -v` removes the local database.
+
+Run `python tools/report_category_coverage.py` for the current official leaf-category coverage ledger. The report opens a read-only PostgreSQL transaction and summarizes the latest committed batch per category, including its area query filter; it does not include uncommitted categories from an active capture run. Use `--format summary` for compact status counts, or `--format csv --output data/104/category-coverage.csv` to save UTF-8 rows for Excel.
 
 The Compose file also builds the geocoder backend from the sibling `WGS84_TWD97` checkout and mounts that project's SQLite data read-only. Keep both project folders beside each other. The endpoint defaults to `127.0.0.1:3301`; `PBI104_GEOCODER_PORT` can change the host port without moving or copying the address database.
 
@@ -60,9 +66,56 @@ docker compose exec -T postgres psql -U pbi_admin -d pbi_104 -c "select count(*)
 
 ## Ongoing collection
 
-Run `python tools/capture_category_matrix.py` to inspect page-one totals by top-level occupation category across all areas. Use `--depth 1` or `--depth 2` to inspect subcategories or occupations when a top-level result exceeds the API page limit. The occupation collector defaults to the verified maximum `--pagesize 30`; pagesize=31 returns HTTP 400. For file-backed capture, use `--capture`; page files are UTF-8 without BOM, two-space JSON under `data/104/categories/<jobcat>/batches/<batch-id>/`. To write job captures directly to PostgreSQL, use `python tools/capture_category_matrix.py --depth 2 --capture --direct-postgres --resume`. The direct mode keeps each fetched category in memory, validates every page, then commits that category's Bronze and eligible Silver rows in one transaction. It keeps the official taxonomy snapshot and run summary on disk, but does not write per-page job JSON files. In either mode, `--resume` skips matching same-day batches in the corresponding store. Use repeatable `--code <10-digit-code>` options to limit a run. `--category-workers` (default 2) controls simultaneous categories and `--workers` (default 2) controls page workers per category; their product is capped at 4 active page requests. `--delay` (default 0.8 seconds) is a shared minimum interval across all API requests; HTTP 429 doubles it, and successful requests gradually reduce it. Pages are reordered and validated before persistence. Transient HTTP/network failures use exponential backoff with jitter, up to five attempts total including the initial request, and cap each delay at 30 seconds. Access-denied responses stop all category workers; exhausted retries pause the run for a later `--resume`. The collector has no `area` filter by default; pass `--area <codes>` only for an explicitly regional capture. Each category is capped at 150 pages. If the API reports more, the received pages are preserved as an incomplete Bronze batch and excluded from Silver/Gold. Category batches do not replace the current keyword pointer. Import file-backed captures with `python tools/sync_lake_to_postgres.py --write`. Both paths preserve the existing `cloudscraper` and Windows system-proxy mechanism.
+Run `python tools/capture_category_matrix.py` to inspect page-one totals by top-level occupation category across all areas. Use `--depth 1` or `--depth 2` to inspect subcategories or occupations when a top-level result exceeds the API page limit. The occupation collector defaults to the verified maximum `--pagesize 30`; pagesize=31 returns HTTP 400. For file-backed capture, use `--capture`; page files are UTF-8 without BOM, two-space JSON under `data/104/categories/<jobcat>/batches/<batch-id>/`. To write job captures directly to PostgreSQL, use `python tools/capture_category_matrix.py --depth 2 --capture --direct-postgres --resume`. The direct mode keeps each fetched category in memory, validates every page, then commits that category's Bronze and eligible Silver rows in one transaction. It keeps the official taxonomy snapshot and run summary on disk, but does not write per-page job JSON files. In either mode, `--resume` skips same-day batches matching the query series, including saved pagination warnings and regardless of page size; omit `--resume` to recapture intentionally. Use repeatable `--code <10-digit-code>` options to limit a run. `--category-workers` (default 2) controls simultaneous categories and `--workers` (default 2) controls page workers per category; their product is capped at 4 active page requests. `--delay` (default 0.8 seconds) is a shared minimum interval across all API requests; HTTP 429 increases it by a factor of 1.5 up to 8 seconds; each 20 successful requests reduce it by 10% toward the configured minimum. Waiting workers recheck the shared schedule before sending. Pages are reordered and validated before persistence. Transient HTTP/network failures retry until success or operator interruption, using shared exponential backoff with jitter capped at five minutes; there is no fixed retry-count limit. Ordinary HTTP 403 responses retry with shared exponential backoff and no fixed attempt limit. Explicit 401/407/418 and detected challenge or non-JSON responses stop workers for review. The collector has no `area` filter by default; pass `--area <codes>` only for an explicitly regional capture. Each category is capped at 150 pages. If the API reports more, the received pages are preserved as an incomplete Bronze batch and excluded from Silver/Gold. Category batches do not replace the current keyword pointer. Import file-backed captures with `python tools/sync_lake_to_postgres.py --write`. Both paths preserve the existing `cloudscraper` and Windows system-proxy mechanism.
 
 The live category size checks and API pagination limitations are recorded in [docs/category-acquisition-probe.md](category-acquisition-probe.md). Category result totals are not globally unique job counts.
+
+## Read-only browser viewer
+
+Run `.\tools\launchers\view_acquisition_data.ps1` from Windows PowerShell to start the local viewer and print its URL and process ID, and open the page in the default browser. If the browser does not open, use `http://127.0.0.1:8765/`. It shows the latest distributed capture run, category queue states, each category's latest committed Bronze batch, and searchable raw job rows with their source JSON. The page refreshes every 10 seconds. The service binds only to `127.0.0.1`, accepts read requests only, and sets each PostgreSQL connection to read-only. Stop it with `Stop-Process -Id <PID>` using the printed process ID.
+
+A category's pages are committed atomically after capture validation, so its in-flight responses do not appear in this viewer. The queue status can update before the job rows become visible. This page reads PostgreSQL Bronze directly and does not change ETL or Power Query.
+
+## Scheduled distributed capture
+
+Run `.\tools\launchers\download_all_occupations_docker.bat` after PostgreSQL and Docker Desktop
+are available. The launcher defaults to `PBI104_CAPTURE_RUNTIME=host` on
+Windows: the coordinator and worker processes use the verified Windows Python
+client and connect to the shared PostgreSQL service on `127.0.0.1:5433`. The
+coordinator fetches and saves the official occupation catalogue, then queues
+one deterministic daily run. If fetching the catalogue fails, it can use the
+last checksum-verified local snapshot; without one it stops before queuing.
+Workers claim one category at a time with renewable leases. Each complete
+category is committed atomically to Bronze and eligible Silver tables. Run and
+batch dates use Asia/Taipei. Restarting on the same day resumes unfinished work
+and skips categories already captured for that query.
+
+Host and Compose worker modes use three workers by default, one page worker per
+category, and `pagesize=30`. PostgreSQL coordinates request start times across
+workers: the minimum interval defaults to 0.8 seconds, grows by 1.5 after HTTP
+429 up to 8 seconds, and drops by 10% after each 20 successful requests.
+Transient failures and ordinary 403 responses use shared exponential backoff
+without a fixed retry limit. A response marked `cf-mitigated: challenge` blocks
+the run for operator review instead of being retried as an ordinary 403. Set
+`PBI104_CAPTURE_WORKERS` and `PBI104_CAPTURE_DELAY_SECONDS` in the ignored
+`.env` to adjust the defaults; the launcher permits one to four workers.
+
+Container mode is opt-in with `PBI104_CAPTURE_RUNTIME=container`. In this
+checkout the same API request succeeds on Windows and receives a Cloudflare
+challenge from Linux containers. The container and Windows host also use
+different outbound IPs; sending container TLS through a host CONNECT tunnel
+still received the challenge, so changing only the proxy route does not resolve
+it. Cloudflare does not expose the exact fingerprint rule. Use container mode
+only when its API route has been verified. Compose services accept runtime-only
+`PBI104_HTTP_PROXY`, `PBI104_HTTPS_PROXY`, and `PBI104_ALL_PROXY` values from
+`.env`; never put proxy credentials in the image or Git.
+
+Check run progress with `python -m tools.acquisition.distributed_coordinator
+--status` from the project root. Windows-host worker logs are under
+`data/104/category-runs/host-worker-*`; container worker output is available
+with `docker compose --profile acquisition logs -f etl-worker`. Windows Task
+Scheduler should run the batch under the same Windows account that owns the
+local `.env` and PostgreSQL service.
 
 ## Address geocoding backfill
 

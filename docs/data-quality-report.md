@@ -6,7 +6,7 @@ This report separates the checked page-1 fixture from the live 55-row profile. I
 
 ### Page-1 fixture
 
-- Source: `samples/raw/api-response-page-1.sample.json`; SHA-256: `F0BE85529D50F254506882C6675B49B13CB8AB9782E540EC5EB33E822D6C19FC`.
+- Source: `tools/tests/fixtures/api-response-page-1.fixture.json`; SHA-256: `F0BE85529D50F254506882C6675B49B13CB8AB9782E540EC5EB33E822D6C19FC`.
 - 20 rows; `jobNo` duplicate count 0.
 - `custNo`: 15 distinct values, with 5 duplicate rows; company consistency conflicts 0.
 - `pcSkills`: 107 pairs, 47 codes, duplicate pairs 0.

@@ -1,0 +1,343 @@
+table FactAcquisitionCategory
+	lineageTag: ea5d659f-c051-4254-bf26-6b9078701251
+
+	measure 職類數 = COALESCE(DISTINCTCOUNT(FactAcquisitionCategory[職類代碼]), 0)
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: 6e68e075-73af-4615-94d4-0b051093b0a3
+
+	measure 已選職類數 = COALESCE(MAX(FactAcquisitionCategory[選定職類數]), 0)
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: 6c3e0f11-9489-4808-814d-88100decccb2
+
+	measure 已完成職類數 = CALCULATE([職類數], FactAcquisitionCategory[佇列狀態] = "DONE")
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: d6441483-f57c-481b-9f99-4e27e09abc19
+
+	measure 完成率 = DIVIDE([已完成職類數], [已選職類數], 0)
+		formatString: 0.0%
+		displayFolder: 擷取戰情室
+		lineageTag: 3cef9b83-59fb-493d-9697-65215b084b0c
+
+	measure 待處理職類數 = COALESCE(CALCULATE([職類數], FactAcquisitionCategory[佇列狀態] = "PENDING"), 0)
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: b8efaadb-0014-4185-9c80-08d6a9d30aa9
+
+	measure 處理中職類數 = COALESCE(CALCULATE([職類數], FactAcquisitionCategory[佇列狀態] = "LEASED"), 0)
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: 53f07fe5-11be-4650-8107-98dda3136dbd
+
+	measure 警告批次數 = COALESCE(SUM(FactAcquisitionCategory[警告旗標]), 0)
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: 985bd872-ea2d-4d60-87d5-6c581cdba409
+
+	measure 失敗職類數 = COALESCE(CALCULATE([職類數], FactAcquisitionCategory[佇列狀態] = "FAIL"), 0)
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: 32402fc3-21be-47d3-81b6-834c83103230
+
+	measure 延後職類數 = COALESCE(CALCULATE([職類數], FactAcquisitionCategory[佇列狀態] = "DEFERRED"), 0)
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: ea660d24-b81d-437a-ab44-fdd8fda23e98
+
+	measure 目前執行狀態 = SWITCH(SELECTEDVALUE(FactAcquisitionCategory[執行狀態], "無執行紀錄"), "QUEUED", "排隊中", "RUNNING", "執行中", "COMPLETE", "已完成", "COMPLETE_WITH_WARNINGS", "完成（有警告）", "PARTIAL", "部分完成", "BLOCKED", "已封鎖", SELECTEDVALUE(FactAcquisitionCategory[執行狀態], "無執行紀錄"))
+		formatString: @
+		displayFolder: 擷取戰情室
+		lineageTag: cee79c0f-be35-4434-9c89-8bbf8697510e
+
+	measure 'API 閘道狀態' = IF(COUNTROWS(FactAcquisitionCategory) = 0, "無執行紀錄", IF(MAX(FactAcquisitionCategory[閘道封鎖]) = 1, "API 暫停", "API 可請求"))
+		formatString: @
+		displayFolder: 擷取戰情室
+		lineageTag: 9acd6da3-baae-4a66-8155-ddf51d655631
+
+	measure '目前 API 間隔秒' = MAX(FactAcquisitionCategory[目前請求間隔秒])
+		formatString: 0.00
+		displayFolder: 擷取戰情室
+		lineageTag: cf2409b7-fde6-4fa2-8e01-4fa722807bc9
+
+	measure 最新資料庫讀取時間 = MAX(FactAcquisitionCategory[資料庫讀取時間])
+		formatString: yyyy/MM/dd HH:mm:ss
+		displayFolder: 擷取戰情室
+		lineageTag: 73e63298-aca3-48f8-9a10-9cc6ca73a4ee
+
+	measure 職缺總數 = COALESCE(SUM(FactAcquisitionCategory[職缺筆數]), 0)
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: ce4615c2-ca18-49b1-b762-a09bca7f7834
+
+	measure 上層職類名稱顯示 = SELECTEDVALUE(FactAcquisitionCategory[上層職類名稱])
+		formatString: @
+		lineageTag: fb471119-0cb2-4501-beb5-b2560cdf73e9
+
+	measure 佇列終態職類數 = COALESCE(SUM(FactAcquisitionCategory[佇列終態旗標]), 0)
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: f8fae507-6198-4c9b-9fbe-721c10f958d4
+
+	measure 終態處理率 = DIVIDE([佇列終態職類數], [已選職類數], 0)
+		formatString: 0.0%
+		displayFolder: 擷取戰情室
+		lineageTag: b0791d72-52be-4ed1-bdfd-a9193e6c15f4
+
+	measure 分頁完整職類數 = COALESCE(SUM(FactAcquisitionCategory[分頁完整旗標]), 0)
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: 6e094022-546e-42c5-8e43-c1655dc7169a
+
+	measure Silver可用職類數 = COALESCE(SUM(FactAcquisitionCategory[Silver可用旗標]), 0)
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: 23d767d8-7745-47de-bb11-09998c3c60a1
+
+	measure Silver封鎖職類數 = COALESCE(SUM(FactAcquisitionCategory[Silver封鎖旗標]), 0)
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: 5017c1f5-d7af-4fef-88f4-fbddf6f2fc79
+
+	measure 分頁完整率 = DIVIDE([分頁完整職類數], [已選職類數], 0)
+		formatString: 0.0%
+		displayFolder: 擷取戰情室
+		lineageTag: aec6c071-f639-4530-9872-bdc7a3235143
+
+	column 執行代碼
+		dataType: string
+		lineageTag: 1224f299-e641-425f-ae0b-ca1e407a7de5
+		summarizeBy: none
+		sourceColumn: runId
+
+	column 執行狀態
+		dataType: string
+		lineageTag: 3ae633ce-7380-4b20-a4f4-73469d851103
+		summarizeBy: none
+		sourceColumn: runStatus
+
+	column 擷取日期
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6a55fd9a-f3ad-4dd6-b3c9-c64783cf4a11
+		summarizeBy: none
+		sourceColumn: snapshotDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 選定職類數
+		dataType: int64
+		lineageTag: 79f1fe04-b433-4a61-baa6-d7c870573a21
+		summarizeBy: none
+		sourceColumn: selectedCategories
+
+	column 職類階層
+		dataType: int64
+		lineageTag: 572572c4-a64c-4fb3-a4e1-fbaf9e38448b
+		summarizeBy: none
+		sourceColumn: categoryDepth
+
+	column 地區篩選
+		dataType: string
+		lineageTag: f71fd20b-0dea-4d20-bf87-cbb9323eeae6
+		summarizeBy: none
+		sourceColumn: areaFilter
+
+	column 每頁筆數
+		dataType: int64
+		lineageTag: 88f35647-b380-4127-9ffc-7dbf6d6a9896
+		summarizeBy: none
+		sourceColumn: pageSize
+
+	column 工作程序數
+		dataType: int64
+		lineageTag: eeb74af0-eece-4f68-82a4-c4b255a51af5
+		summarizeBy: none
+		sourceColumn: workerCount
+
+	column 開始時間
+		dataType: dateTime
+		lineageTag: ad63a02e-5a62-4872-9b4e-fa719ebd2fc2
+		summarizeBy: none
+		sourceColumn: runStartedAt
+
+	column 執行更新時間
+		dataType: dateTime
+		lineageTag: 64ff3452-b7e9-461c-a6da-e38769ab843b
+		summarizeBy: none
+		sourceColumn: runUpdatedAt
+
+	column 最低請求間隔秒
+		dataType: double
+		lineageTag: 1dd50437-9204-416e-b93e-016497933943
+		summarizeBy: none
+		sourceColumn: minimumRequestIntervalSeconds
+
+	column 目前請求間隔秒
+		dataType: double
+		lineageTag: 3995350b-291b-4840-b0a5-5d66f1d90643
+		summarizeBy: none
+		sourceColumn: requestIntervalSeconds
+
+	column 閘道封鎖
+		dataType: int64
+		lineageTag: 011a9dba-198e-4a3b-9163-46cc2617f0db
+		summarizeBy: none
+		sourceColumn: gateBlocked
+
+	column 資料庫讀取時間
+		dataType: dateTime
+		lineageTag: 0457ebb4-d277-44d1-980b-d92eb683305b
+		summarizeBy: none
+		sourceColumn: sourceReadAt
+
+	column 職類代碼
+		dataType: string
+		lineageTag: 404f71e0-72a4-496d-844c-754f2d2243f7
+		summarizeBy: none
+		sourceColumn: categoryCode
+
+	column 職類名稱
+		dataType: string
+		lineageTag: 8a97b7f5-e3d3-4a7e-8e19-a6009390772f
+		summarizeBy: none
+		sourceColumn: categoryName
+
+	column 佇列狀態
+		dataType: string
+		lineageTag: eb88502f-bbe7-45f6-906e-aa2a0e8a1914
+		summarizeBy: none
+		sourceColumn: categoryState
+
+	column 嘗試次數
+		dataType: int64
+		lineageTag: f6055a5a-c26b-4772-bac2-f549831277ab
+		summarizeBy: sum
+		sourceColumn: attempts
+
+	column 類別更新時間
+		dataType: dateTime
+		lineageTag: 6b19903c-369c-475d-b9a1-e88fd8786f64
+		summarizeBy: none
+		sourceColumn: categoryUpdatedAt
+
+	column 結果狀態
+		dataType: string
+		lineageTag: 64372812-a644-4e70-a2c1-8296e35a221a
+		summarizeBy: none
+		sourceColumn: resultStatus
+
+	column 擷取批次
+		dataType: string
+		lineageTag: e2d07eef-9cc1-4cbc-bc3d-107517d75c7b
+		summarizeBy: none
+		sourceColumn: batchId
+
+	column 批次品質
+		dataType: string
+		lineageTag: 74ace87b-7716-4452-9997-cf88f15d4694
+		summarizeBy: none
+		sourceColumn: captureStatus
+
+	column 分頁狀態
+		dataType: string
+		lineageTag: ffc72670-d7aa-4f96-bd06-2f0922550434
+		summarizeBy: none
+		sourceColumn: paginationStatus
+
+	column 職缺筆數
+		dataType: int64
+		lineageTag: 3577731c-0d19-4da5-ab6b-21e509b1cd45
+		summarizeBy: sum
+		sourceColumn: jobCount
+
+	column 完成頁數
+		dataType: int64
+		lineageTag: 5df5dcfa-8e0c-453a-93d9-e5cd5c1c8e4c
+		summarizeBy: sum
+		sourceColumn: pageCount
+
+	column 警告旗標
+		dataType: int64
+		lineageTag: 7704f1c0-746f-46f5-a8f7-2956a8006216
+		summarizeBy: sum
+		sourceColumn: warningFlag
+
+	column 上層職類
+		dataType: string
+		isHidden
+		lineageTag: 1b7e8fd1-1c5a-42e0-997d-3db747f760d4
+		summarizeBy: none
+		sourceColumn: parentCategoryLabel
+
+	column 上層職類代碼
+		dataType: string
+		lineageTag: f4746805-0b89-4376-a1b9-82c4264f673c
+		summarizeBy: none
+		sourceColumn: parentCategoryCode
+
+	column 上層職類名稱
+		dataType: string
+		lineageTag: d88edf76-5791-4dcd-87d0-50f5ea8933c6
+		summarizeBy: none
+		sourceColumn: parentCategoryName
+
+	column API回報職缺數下界
+		dataType: int64
+		lineageTag: 3cc28ca5-55ec-48dc-860f-744bc6eb7fdc
+		summarizeBy: none
+		sourceColumn: apiReportedJobCountMin
+
+	column API回報職缺數上界
+		dataType: int64
+		lineageTag: 8fa031a1-d6d7-4581-8d8d-6884e1817fcf
+		summarizeBy: none
+		sourceColumn: apiReportedJobCountMax
+
+	column API回報頁數下界
+		dataType: int64
+		lineageTag: 77720497-6f8c-4320-8935-0070c684c6d5
+		summarizeBy: none
+		sourceColumn: apiReportedPageCountMin
+
+	column API回報頁數上界
+		dataType: int64
+		lineageTag: d6d5f7a6-39c6-4c7e-a8cc-a8ef9f9ae8a7
+		summarizeBy: none
+		sourceColumn: apiReportedPageCountMax
+
+	column 佇列終態旗標
+		dataType: int64
+		lineageTag: 7f74f2b7-02cf-4f66-952c-7ba37a888b10
+		summarizeBy: sum
+		sourceColumn: queueTerminalFlag
+
+	column 分頁完整旗標
+		dataType: int64
+		lineageTag: f8c8a0fc-688d-44d7-890f-0719b6f1fdf8
+		summarizeBy: sum
+		sourceColumn: captureCompleteFlag
+
+	column Silver可用旗標
+		dataType: int64
+		lineageTag: 59ecce8d-f678-4234-9618-9a1077fd8818
+		summarizeBy: sum
+		sourceColumn: silverEligibleFlag
+
+	column Silver封鎖旗標
+		dataType: int64
+		lineageTag: 0cb81432-333f-4aad-9f07-690cff35483d
+		summarizeBy: sum
+		sourceColumn: silverBlockedFlag
+
+	column 品質警告原因
+		dataType: string
+		lineageTag: f32cb807-9890-4380-8239-f9b0ed480710
+		summarizeBy: none
+		sourceColumn: warningReason
+
+	partition FactAcquisitionCategory = m
+		mode: import
+		source = mdl_FactAcquisitionCategory
+

@@ -4,7 +4,8 @@
     "page01_market_overview",
     "page02_salary",
     "page03_skills",
-    "page04_job_explorer"
+    "page04_job_explorer",
+    "page05_download_war_room"
   ],
-  "activePageName": "page01_market_overview"
+  "activePageName": "page05_download_war_room"
 }

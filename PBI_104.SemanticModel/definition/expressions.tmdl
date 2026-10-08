@@ -92,3 +92,11 @@ expression mdl_FactJobSnapshot = src_PbiFactJobSnapshots
 	lineageTag: baaa1e3e-5f8c-4565-a44b-3ae5368790b4
 	queryGroup: 04_Model
 
+expression src_PbiAcquisitionCategories = fxReadGoldView("pbi_acquisition_categories")
+	lineageTag: 17d13489-9d91-462e-88a9-2b2052275fc7
+	queryGroup: 02_Source
+
+expression mdl_FactAcquisitionCategory = src_PbiAcquisitionCategories
+	lineageTag: c5f750a8-cada-43bb-8c72-c1b14a1948dc
+	queryGroup: 04_Model
+

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "salary_jobs_card",
   "position": {
-    "x": 634,
-    "y": 176,
+    "x": 634.5360008558896,
+    "y": 175.28618808173746,
     "z": 6000,
-    "height": 88,
-    "width": 291,
+    "height": 117.44174601476409,
+    "width": 304.9979672622232,
     "tabOrder": 6000
   },
   "visual": {

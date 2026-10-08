@@ -2,7 +2,7 @@
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from .embedded_client import AccessDeniedError, RetryExhaustedError
+from .embedded_client import AccessDeniedError
 from .pagination import PageFetchAborted
 from .postgres_capture import DatabaseCaptureError
 
@@ -38,8 +38,6 @@ def process_categories(targets, request_for, capture_one, inspect_one, find_exis
                 result["paginationDiagnostics"] = error.diagnostics
             if isinstance(error, AccessDeniedError):
                 halt = "BLOCKED"
-            elif isinstance(error, RetryExhaustedError):
-                halt = "PAUSED_BACKOFF"
             elif isinstance(error, DatabaseCaptureError):
                 halt = "DATABASE_ERROR"
             else:

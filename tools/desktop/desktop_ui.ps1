@@ -3,7 +3,7 @@ param(
   [string]$Operation = 'List',
   [string]$Name,
   [string]$Scope,
-  [string]$OutputFile = 'artifacts/desktop.png',
+  [string]$OutputFile = "$env:TEMP\PBI_104\desktop.png",
   [int]$ProcessId = 0,
   [int]$X,
   [int]$Y
@@ -60,7 +60,11 @@ if ($Operation -eq 'List') {
   $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
   try {
     $graphics.CopyFromScreen($bounds.Location,[System.Drawing.Point]::Empty,$bounds.Size)
-    $path = [IO.Path]::GetFullPath((Join-Path (Get-Location) $OutputFile))
+    $path = if ([IO.Path]::IsPathRooted($OutputFile)) {
+      [IO.Path]::GetFullPath($OutputFile)
+    } else {
+      [IO.Path]::GetFullPath((Join-Path (Get-Location) $OutputFile))
+    }
     [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($path)) | Out-Null
     $bitmap.Save($path)
     Write-Output $path

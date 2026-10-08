@@ -31,6 +31,11 @@ table DimArea
 		lineageTag: f9344aaf-9bde-43c6-8803-dbe36da70d57
 		sourceColumn: areaKey
 
+	column jobLocationScope
+		dataType: string
+		lineageTag: 0efc298a-0da7-4706-99aa-caa4153f18d4
+		sourceColumn: jobLocationScope
+
 	partition DimArea = m
 		mode: import
 		source = mdl_DimArea

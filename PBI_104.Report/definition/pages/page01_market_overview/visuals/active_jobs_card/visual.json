@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "active_jobs_card",
   "position": {
-    "x": 24,
-    "y": 176,
+    "x": 24.540066331443242,
+    "y": 175.28618808173746,
     "z": 4000,
-    "height": 88,
-    "width": 291,
+    "height": 122.70033165721622,
+    "width": 299.73938161977105,
     "tabOrder": 4000
   },
   "visual": {

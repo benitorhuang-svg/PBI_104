@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "company_count_card",
   "position": {
-    "x": 329,
-    "y": 176,
+    "x": 329.5380335936664,
+    "y": 175.28618808173746,
     "z": 5000,
-    "height": 88,
-    "width": 291,
+    "height": 117.44174601476409,
+    "width": 297.98651973895369,
     "tabOrder": 5000
   },
   "visual": {

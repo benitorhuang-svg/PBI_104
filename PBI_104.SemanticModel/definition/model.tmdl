@@ -29,7 +29,7 @@ queryGroup 04_Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["pPostgresDatabase","pPostgresServer","fxReadGoldView","src_PbiBridgeJobCategory","src_PbiBridgeJobSkill","src_PbiDimArea","src_PbiDimCompany","src_PbiDimDate","src_PbiDimJobCategory","src_PbiDimSkill","src_PbiFactJobs","src_PbiFactJobSnapshots","mdl_BridgeJobCategory","mdl_BridgeJobSkill","mdl_DimArea","mdl_DimCompany","mdl_DimDate","mdl_DimJobCategory","mdl_DimSkill","mdl_FactJob","mdl_FactJobSnapshot","FactJob","FactJobSnapshot","DimCompany","DimArea","DimSkill","DimJobCategory","BridgeJobSkill","DimDate","BridgeJobCategory"]
+annotation PBI_QueryOrder = ["pPostgresDatabase","pPostgresServer","fxReadGoldView","src_PbiAcquisitionCategories","src_PbiBridgeJobCategory","src_PbiBridgeJobSkill","src_PbiDimArea","src_PbiDimCompany","src_PbiDimDate","src_PbiDimJobCategory","src_PbiDimSkill","src_PbiFactJobs","src_PbiFactJobSnapshots","mdl_BridgeJobCategory","mdl_BridgeJobSkill","mdl_DimArea","mdl_DimCompany","mdl_DimDate","mdl_DimJobCategory","mdl_DimSkill","mdl_FactAcquisitionCategory","mdl_FactJob","mdl_FactJobSnapshot","FactJob","FactJobSnapshot","DimCompany","DimArea","DimSkill","DimJobCategory","BridgeJobSkill","DimDate","BridgeJobCategory","FactAcquisitionCategory"]
 
 annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
 
@@ -42,6 +42,7 @@ ref table DimJobCategory
 ref table BridgeJobSkill
 ref table DimDate
 ref table BridgeJobCategory
+ref table FactAcquisitionCategory
 
 ref cultureInfo zh-TW
 

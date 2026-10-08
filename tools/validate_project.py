@@ -78,7 +78,8 @@ def report_symbols() -> dict[str, set[str]]:
         if not name:
             continue
         values = set(re.findall(r"(?m)^\tcolumn ([^\n]+)$", text))
-        values |= set(re.findall(r"(?m)^\tmeasure '([^']+)' =", text))
+        measures = re.findall(r"(?m)^\tmeasure (?:'([^']+)'|([^=\r\n]+?))\s*=", text)
+        values |= {quoted or unquoted.strip() for quoted, unquoted in measures}
         symbols[name[1]] = values
     return symbols
 
@@ -155,16 +156,22 @@ def main() -> int:
         if len(path.read_text(encoding="utf-8-sig").splitlines()) > 300:
             raise ValueError(f"Maintained Python file exceeds 300 lines: {path.relative_to(ROOT)}")
     desktop_parse = "UNAVAILABLE"
+    validation_scope = "STRUCTURE_ONLY"
     powershell = shutil.which("powershell") or shutil.which("pwsh")
     if powershell and os.name == "nt":
         result = subprocess.run(
-            [powershell, "-NoProfile", "-File", str(ROOT / "tools/desktop_model.ps1"), "-Operation", "Parse"],
+            [powershell, "-NoProfile", "-File", str(ROOT / "tools/desktop/desktop_model.ps1"), "-Operation", "Parse"],
             capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=90
         )
         if result.returncode:
             raise RuntimeError(result.stderr.strip() or result.stdout.strip())
         desktop_parse = json.loads(result.stdout).get("Result", "FAIL")
-    print(json.dumps({"result": "PASS", "jsonFiles": json_files, "pbirSchemas": schemas,
+        if desktop_parse != "PASS":
+            raise RuntimeError(f"Desktop TMDL parser did not pass: {desktop_parse}")
+        validation_scope = "STRUCTURE_AND_DESKTOP_TMDL"
+    result_status = "PASS" if desktop_parse == "PASS" else "STRUCTURE_PASS_DESKTOP_TMDL_UNAVAILABLE"
+    print(json.dumps({"result": result_status, "validationScope": validation_scope,
+                      "structuralChecks": "PASS", "jsonFiles": json_files, "pbirSchemas": schemas,
                       "reportFieldReferences": references, "queries": sync_result["queries"],
                       "desktopTmdlParser": desktop_parse,
                       "schemaCompatibility": SCHEMA_FALLBACKS}, ensure_ascii=False))

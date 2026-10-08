@@ -164,6 +164,9 @@ def run(output, area=DEFAULT_AREA, pagesize=30, delay=0.8, codes=None,
                "storage": "postgresql-bronze" if direct_postgres else "json-lake",
                "pageWorkersPerCategory": workers, "categoryWorkers": category_workers,
                "requestIntervalSeconds": delay,
+               "completedCategories": 0, "progressPercent": 0.0,
+               "categoryStatusCounts": {name: 0 for name in
+                   ("CAPTURED", "CAPTURED_WITH_WARNING", "SKIPPED", "FAIL", "DEFERRED", "INSPECTED")},
                "successfulCategories": 0, "warningCategories": 0,
                "totalJobs": 0, "retryAttempts": 0,
                "backoffSeconds": 0, "categories": results}
@@ -202,8 +205,15 @@ def run(output, area=DEFAULT_AREA, pagesize=30, delay=0.8, codes=None,
                     "batchId": existing["batchId"], "rows": existing["rows"],
                     "pages": len(existing["pages"])}
 
-        def on_complete(index, result, completed):
+        def on_complete(_index, result, completed):
             done = [item for item in completed if item is not None]
+            completed_count = len(done)
+            total_count = len(targets)
+            status_counts = {name: sum(item["status"] == name for item in done)
+                             for name in summary["categoryStatusCounts"]}
+            summary["completedCategories"] = completed_count
+            summary["progressPercent"] = round(100 * completed_count / total_count, 1)
+            summary["categoryStatusCounts"] = status_counts
             summary["requestIntervalSeconds"] = round(request_pacer.interval_seconds, 2)
             summary["successfulCategories"] = sum(r["status"] in
                 ("CAPTURED", "CAPTURED_WITH_WARNING", "INSPECTED", "SKIPPED") for r in done)
@@ -214,7 +224,14 @@ def run(output, area=DEFAULT_AREA, pagesize=30, delay=0.8, codes=None,
             summary["categories"] = done
             save_run(output, run_id, summary)
             metric = result.get("totalJobs", result.get("rows", 0))
-            print(f"[{index + 1}/{len(targets)}] {result['code']} {result['status']} {metric} jobs", flush=True)
+            width = 20
+            filled = round(width * completed_count / total_count)
+            bar = "#" * filled + "-" * (width - filled)
+            print(f"[{bar}] {completed_count}/{total_count} ({summary['progressPercent']:.1f}%) "
+                  f"ok:{status_counts['CAPTURED']} warn:{status_counts['CAPTURED_WITH_WARNING']} "
+                  f"skip:{status_counts['SKIPPED']} fail:{status_counts['FAIL']} "
+                  f"deferred:{status_counts['DEFERRED']} | {result['code']} "
+                  f"{result['status']} {metric} jobs", flush=True)
 
         results, halt_status = process_categories(
             targets, lambda category: make_request(category, area, pagesize),
@@ -259,7 +276,7 @@ def main(argv=None):
     parser.add_argument("--direct-postgres", action="store_true",
                         help="With --capture, store the verified batch directly in PostgreSQL Bronze")
     parser.add_argument("--resume", action="store_true",
-                        help="With --capture, skip complete or page-capped batches already captured today")
+                        help="With --capture, skip matching query-series batches already captured today")
     args = parser.parse_args(argv)
     if (args.resume or args.direct_postgres) and not args.capture:
         parser.error("--resume and --direct-postgres require --capture")

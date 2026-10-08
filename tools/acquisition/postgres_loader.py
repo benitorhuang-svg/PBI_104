@@ -9,6 +9,7 @@ from pathlib import Path
 
 from .storage import verify
 from .salary_parser import extract_salary_observations
+from .raw_payload import payload_quality_flags
 
 
 def clean_text(value):
@@ -92,6 +93,8 @@ def job_link(value):
 
 
 def normalize_batch(manifest, raw_rows):
+    if any(payload_quality_flags(raw) for _, _, raw in raw_rows):
+        raise ValueError("Source payload needs a lossy PostgreSQL-safe projection")
     unique = {}
     for page, row_index, raw in raw_rows:
         job_no = clean_text(raw.get("jobNo"))

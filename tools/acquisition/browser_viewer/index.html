@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>104 職缺資料瀏覽器</title>
+  <link rel="stylesheet" href="/viewer.css">
+  <script src="/viewer.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">104</div>
+      <div class="brand-copy"><p class="eyebrow">LOCAL DATA EXPLORER</p><h1>職缺資料瀏覽器</h1></div>
+      <span class="readonly-badge"><span></span>唯讀 · 僅本機</span>
+      <button id="refresh" class="button button-secondary" type="button">重新整理</button>
+    </header>
+
+    <section class="overview panel">
+      <div class="overview-heading">
+        <div><p class="eyebrow">目前擷取工作</p><h2 id="run-status">連線中…</h2></div>
+        <div class="run-meta"><span id="run-id">—</span><span id="snapshot-date">—</span></div>
+      </div>
+      <div class="progress-line"><div id="progress-fill"></div></div>
+      <div class="progress-caption"><strong id="progress-count">—</strong><span id="progress-percent">—</span></div>
+      <div id="blocked-banner" class="notice notice-warning" hidden>API 擷取閘道目前暫停；此頁仍可瀏覽已提交的資料。</div>
+      <div class="metrics">
+        <article class="metric"><span>已完成</span><strong id="metric-done">—</strong></article>
+        <article class="metric"><span>處理中</span><strong id="metric-running">—</strong></article>
+        <article class="metric"><span>待處理</span><strong id="metric-pending">—</strong></article>
+        <article class="metric"><span>警告批次</span><strong id="metric-warning">—</strong></article>
+        <article class="metric metric-wide"><span>API 間隔 / 下限</span><strong id="metric-interval">—</strong></article>
+      </div>
+      <p id="updated-at" class="subtle">等待資料庫回應…</p>
+    </section>
+
+    <section class="panel category-panel">
+      <div class="section-heading"><div><p class="eyebrow">OFFICIAL JOBCAT</p><h2>職業類別</h2></div><span id="category-total" class="count-chip">— 個類別</span></div>
+      <div class="toolbar">
+        <label class="search-box"><span aria-hidden="true">⌕</span><input id="category-search" type="search" placeholder="搜尋職類代碼或名稱"></label>
+        <label class="select-wrap"><span class="sr-only">佇列狀態</span><select id="state-filter"><option value="">全部狀態</option><option value="PENDING">待處理</option><option value="LEASED">處理中</option><option value="DONE">已完成</option><option value="FAIL">失敗</option><option value="DEFERRED">延後重試</option></select></label>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>代碼</th><th>職業類別</th><th>佇列狀態</th><th>嘗試</th><th>最新已提交批次</th><th>列 / 頁</th><th>資料品質</th></tr></thead><tbody id="category-rows"><tr><td colspan="7" class="empty">正在載入類別…</td></tr></tbody></table></div>
+      <div class="table-footer"><span id="category-page-label" class="subtle">—</span><div class="pager"><button id="category-prev" class="button button-secondary" type="button">上一頁</button><button id="category-next" class="button button-secondary" type="button">下一頁</button></div></div>
+    </section>
+
+    <section class="panel jobs-panel">
+      <div class="section-heading"><div><p class="eyebrow">COMMITTED BRONZE ROWS</p><h2 id="jobs-heading">職缺內容</h2></div><span id="batch-meta" class="subtle">選擇一個職類</span></div>
+      <div class="toolbar"><label class="search-box"><span aria-hidden="true">⌕</span><input id="job-search" type="search" placeholder="搜尋職缺名稱、公司或職缺編號" disabled></label></div>
+      <p id="jobs-note" class="notice" hidden></p>
+      <div class="table-wrap"><table><thead><tr><th>職缺編號</th><th>職缺名稱</th><th>公司</th><th>地區</th><th>API 薪資原值</th></tr></thead><tbody id="job-rows"><tr><td colspan="5" class="empty">從上方選擇職業類別以檢視已提交職缺。</td></tr></tbody></table></div>
+      <div class="table-footer"><span id="job-page-label" class="subtle">—</span><div class="pager"><button id="job-prev" class="button button-secondary" type="button" disabled>上一頁</button><button id="job-next" class="button button-secondary" type="button" disabled>下一頁</button></div></div>
+      <div id="job-detail" class="job-detail" hidden><div class="section-heading"><h3 id="job-detail-title">原始資料</h3><button id="close-detail" class="button button-secondary" type="button">收合</button></div><pre id="job-json"></pre></div>
+    </section>
+    <footer>此頁只讀取 PostgreSQL 已提交資料。下載中的職類會在整個職類完成並提交後，才出現在職缺明細中。</footer>
+  </main>
+</body>
+</html>

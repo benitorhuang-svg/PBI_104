@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "date_distribution",
   "position": {
-    "x": 23.467101242615605,
-    "y": 280.0407414952129,
+    "x": 24.540066331443242,
+    "y": 297.98651973895369,
     "z": 8000,
-    "height": 175.22102261152986,
-    "width": 409.8920350376859,
+    "height": 189.30908312827646,
+    "width": 1207.721835883171,
     "tabOrder": 8000
   },
   "visual": {

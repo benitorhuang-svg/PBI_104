@@ -2,7 +2,7 @@
 
 ## Project Structure
 
-Open `PBI_104.pbip` as the entry point. `PBI_104.Report/` contains PBIR definitions; `PBI_104.SemanticModel/definition/` contains TMDL tables, relationships, and culture metadata. Planning belongs in `docs/`, work specifications in `tasks/`, future M scripts in `powerquery/`, sanitized fixtures in `samples/`, and approved references in `report-design/`. Treat `.pbi/` and `cache.abf` as local state.
+Open `PBI_104.pbip` as the entry point. `PBI_104.Report/` contains PBIR definitions; `PBI_104.SemanticModel/definition/` contains TMDL tables, relationships, and culture metadata. Current planning and operating notes belong in `docs/`; historical material belongs in `docs/archive/`; M scripts belong in `powerquery/`; approved report references belong in `report-design/`. `containers/` holds the ETL Dockerfile. `tools/` groups acquisition code, Desktop helpers, launchers, probes, SQL, and tests; sanitized test fixtures belong in `tools/tests/fixtures/`. Keep generated inspiration in `docs/assets/`. `data/104/` contains project data and should be retained. Temporary Desktop screenshots default to `%TEMP%\PBI_104\desktop.png` and should not be stored in the repository. Treat `.pbi/` and `cache.abf` as local state.
 
 ## Architecture and Load Boundaries
 
@@ -21,12 +21,12 @@ Acquisition, validation, normalization, enrichment, and aggregation belong to Py
 
 - `Start-Process .\PBI_104.pbip` opens the project in Power BI Desktop.
 - `python -c "import pandas, cloudscraper; print('ok')"` checks current Python refresh dependencies.
-- Refresh in Desktop, save, close, and reopen after each TASK. Validate only the layer changed, its row/column contract, error path, and Enable Load state.
-- Read this file, `README_TASKS.md`, and the active TASK before editing. Inventory existing files and queries first; do not duplicate functionality or expand scope across TASKs.
-- When a future TASK delivers Power Query code, provide the complete code for every required query; do not replace unchanged queries with references to older versions.
+- Refresh in Desktop, save, close, and reopen after a model or report change. Validate only the layer changed, its row/column contract, error path, and Enable Load state.
+- Read this file and relevant current documents before editing. Inventory existing files and queries first; do not duplicate functionality or expand scope.
+- When changing Power Query code, provide the complete code for every required query; do not replace unchanged queries with references to older versions.
 
 ## Data, Style, and Safety Rules
 
 Use UTF-8, two-space JSON indentation, existing TMDL tab nesting, four-space Python indentation, and descriptive M step names. Preserve generated IDs and lineage tags unless Power BI Desktop intentionally regenerates them. Never guess an unverified API field, nested shape, key, pagination rule, or business meaning; mark it `BLOCKED` and record required evidence. Preserve the proven `cloudscraper` plus Windows system-proxy mechanism until a tested replacement exists. Never hard-code cookies, Cloudflare tokens, credentials, or secrets, and never manufacture rows to hide an API failure.
 
-Do not build report pages during a Power Query or model TASK. Before any PBIR edit, require a Git baseline and follow approved `report-design/*.png`; do not use a hand-drawn style. This checkout has baseline `162a193`; preserve all existing modifications. Do not commit, publish, or initialize Git unless the user explicitly requests it.
+Keep report-page changes separate from Power Query and model changes. Before any PBIR edit, require a Git baseline and follow approved `report-design/*.png`; do not use a hand-drawn style. This checkout has baseline `162a193`; preserve all existing modifications. Do not commit, publish, or initialize Git unless the user explicitly requests it.

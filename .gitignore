@@ -11,10 +11,6 @@ venv/
 .env.*
 !.env.example
 
-# Unsanitized local API captures; keep only the reviewed TASK-002 fixture
-samples/raw/*
-!samples/raw/api-response-page-1.sample.json
-
 # OS/editor noise
 .DS_Store
 Thumbs.db
@@ -22,5 +18,4 @@ Thumbs.db
 
 # Local immutable API batches and diagnostic artifacts
 data/
-artifacts/
 .optimization/

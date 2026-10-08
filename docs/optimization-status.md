@@ -1,5 +1,30 @@
 # TASK-011 and TASK-012 status (2026-10-06)
 
+## Direct capture client optimization (2026-10-06)
+
+Capture mode now skips the pandas job-table expansion and the full-response
+JSON serialize/parse round trip, while retaining the response and the same
+technical metadata for Bronze. The existing cloudscraper instance is reused
+within a worker thread; the request, headers, and Windows system-proxy setup
+remain sourced from the established client. Legacy Power Query calls still
+produce their original DataFrame outputs.
+
+This code change has not yet been measured end to end. At 21:42 Taipei time,
+the pre-change active run had completed 118 of 619 categories and its Python
+worker showed approximately 2.87 GiB working set; this is one live observation,
+not a peak or a controlled baseline. Compare elapsed time and peak working set
+on a later run with the same page/category workers, request delay, and query
+scope after the current run is terminal. Do not infer an API speedup from the
+local CPU/memory change; the shared request interval and source pagination
+behavior remain the dominant external limits.
+
+The counts and timings in this file are dated validation snapshots. For the
+latest committed official-category batches, run
+`python tools/report_category_coverage.py`; the active capture's local
+`data/104/category-runs/` summary reports in-flight progress. The coverage
+report is read-only and distinguishes all-area queries from filtered-area
+queries.
+
 All nine model tables now read PostgreSQL Gold views. Power Query handles
 connection/navigation only; acquisition, ETL, dimensions, bridges,
 deduplication, and the date calendar stay in Python/PostgreSQL. `DimDate` is
@@ -32,6 +57,12 @@ Visual IDs, positions, and page layouts were preserved.
 - The measured 28.33 seconds is a local Desktop model refresh, not a Service
   refresh benchmark. A PostgreSQL `EXPLAIN ANALYZE` FactJob count took 31.7 ms;
   that SQL count-plan timing is a separate measurement.
+
+No repeatable full-refresh speedup has been established. A new five-run
+benchmark requires a terminal category-capture status and unchanged row counts
+for all nine Gold views across every run. Record each run's timestamp,
+refresh method, nine view counts, duration, and error status before comparing
+medians or ranges.
 
 ## Data coverage and remaining limits
 
@@ -89,7 +120,7 @@ category-based FactJob scope.
 
 # TASK-007 optimization status
 
-Updated 2026-10-05. The work is local to the existing PBIP checkout and was not committed or published. The pre-work dirty state is preserved in the checkpoint ZIP recorded in `tasks/TASK-007-project-optimization.md`; local captures and diagnostic artifacts remain ignored.
+Updated 2026-10-05. The work was local to the existing PBIP checkout and was not committed or published. Its pre-work checkpoint was removed from the project workspace during the user-requested environment cleanup on 2026-10-09. Local captures and diagnostic artifacts remain outside the repository.
 
 The local `data/104/current.json` pointer was not written during this work. Its final SHA-256 is `B4D8E2C69510B0DE48E84BA6EFC67117B7BD75E08ECB1F0539F11C89771C4E1F`.
 
@@ -115,7 +146,7 @@ The local `data/104/current.json` pointer was not written during this work. Its 
 ## Limits and next evidence
 
 - The three query series have only one day each. Trend, emergence, and change-over-time claims require future complete daily batches; no live capture was run for this optimization.
-- The generated M edge-case probe at `tools/probes/staging.pq` has not completed in the native Power Query engine. The normal full-model refresh exercised the production query path, but malformed/edge fixture outcomes remain unverified by that probe. See `tools/README.md`.
+- The legacy M edge-case probe is generated at the ignored local path `.optimization/probes/staging.pq`. Its earlier native Power Query execution did not complete, so malformed/edge fixture outcomes remain unverified; it is not a gate for the active database-reader queries. See `tools/probes/README.md`.
 - Category-code descriptions, salary units/meaning (including the 9,999,999 upper bound), and unsupported experience/employment/logo details remain unresolved. Keep them labelled `BLOCKED` until verified against authoritative API evidence.
 - This checkout does not prove Power BI Service refresh, gateway configuration, external scheduling, or deployment. Those require the target environment.
 

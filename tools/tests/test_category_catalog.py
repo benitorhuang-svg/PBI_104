@@ -9,6 +9,7 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from acquisition.category_catalog import (SOURCE_URL, flatten_catalog,
     read_latest_catalog, write_catalog_snapshot)
+from acquisition.storage import series_key
 from capture_category_matrix import (DEFAULT_AREA, category_targets, completed_today,
                                      make_request)
 
@@ -45,23 +46,25 @@ class CategoryCatalogTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "children"):
             flatten_catalog([{"no": "1", "des": "A", "n": {}}])
 
-    def test_resume_does_not_skip_a_page_total_mismatch(self):
+    def test_resume_skips_a_same_day_page_total_mismatch(self):
         today = datetime.now().astimezone().date().isoformat()
-        mismatch = {"snapshotDate": today, "paginationStatus": "PAGE_TOTAL_MISMATCH"}
         request = {"baseUrl": "https://www.104.com.tw/jobs/search/api/jobs",
                    "area": None, "jobsource": "index_s", "mode": "s", "order": "15",
                    "jobcat": "2007000000", "pagesize": 20}
-        with patch("capture_category_matrix.daily_batches", return_value=[mismatch]):
-            self.assertIsNone(completed_today("data", request))
+        mismatch = {"snapshotDate": today, "seriesKey": series_key(request),
+                    "paginationStatus": "PAGE_TOTAL_MISMATCH"}
+        with patch("acquisition.category_run_storage.daily_batches", return_value=[mismatch]):
+            self.assertIs(completed_today("data", request), mismatch)
 
     def test_resume_skips_a_page_capped_batch(self):
         today = datetime.now().astimezone().date().isoformat()
-        capped = {"snapshotDate": today, "paginationStatus": "PAGE_TOTAL_MISMATCH",
-                  "paginationDiagnostics": {"pageLimitReached": True}}
         request = {"baseUrl": "https://www.104.com.tw/jobs/search/api/jobs",
                    "area": None, "jobsource": "index_s", "mode": "s", "order": "15",
                    "jobcat": "2007000000", "pagesize": 20}
-        with patch("capture_category_matrix.daily_batches", return_value=[capped]):
+        capped = {"snapshotDate": today, "seriesKey": series_key(request),
+                  "paginationStatus": "PAGE_TOTAL_MISMATCH",
+                  "paginationDiagnostics": {"pageLimitReached": True}}
+        with patch("acquisition.category_run_storage.daily_batches", return_value=[capped]):
             self.assertIs(completed_today("data", request), capped)
 
     def test_catalog_snapshot_is_immutable_and_checksum_verified(self):

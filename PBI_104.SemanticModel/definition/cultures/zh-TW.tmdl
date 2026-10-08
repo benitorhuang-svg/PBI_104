@@ -1,2 +1,32 @@
 cultureInfo zh-TW
 
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "factacquisitioncategory.column": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactAcquisitionCategory",
+			          "ConceptualProperty": "上層職類名稱顯示"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "上層職類名稱": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

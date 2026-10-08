@@ -20,13 +20,7 @@ def save_run(output, run_id, summary):
 
 
 def _resumable(item, request):
-    if item.get("paginationStatus", "PASS") == "PASS":
-        return True
-    diagnostics = item.get("paginationDiagnostics")
-    return (item.get("paginationStatus") == "PAGE_TOTAL_MISMATCH"
-            and isinstance(diagnostics, dict)
-            and diagnostics.get("pageLimitReached") is True
-            and item.get("request", {}).get("pagesize") == request.get("pagesize"))
+    return item.get("seriesKey") == series_key(request)
 
 
 def completed_today(output, request):

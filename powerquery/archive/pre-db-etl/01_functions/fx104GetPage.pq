@@ -61,6 +61,7 @@ import cloudscraper
 import pandas as pd
 
 config_row = config.iloc[0]
+capture_mode = bool(config_row.get('captureMode', False))
 
 BASE_URL = str(config_row['baseUrl'])
 
@@ -122,13 +123,14 @@ valid_proxies = {
     if key.lower() in ('http', 'https')
 }
 
-scraper = cloudscraper.create_scraper(
-    browser={
-        'browser': 'chrome',
-        'platform': 'windows',
-        'desktop': True,
-    }
-)
+if not capture_mode or 'scraper' not in globals():
+    scraper = cloudscraper.create_scraper(
+        browser={
+            'browser': 'chrome',
+            'platform': 'windows',
+            'desktop': True,
+        }
+    )
 
 if valid_proxies:
     scraper.proxies.update(valid_proxies)
@@ -178,27 +180,28 @@ if not isinstance(metadata_node, dict):
 if any(not isinstance(job, dict) for job in jobs_list):
     raise TypeError('Expected every item in $.data to be an object')
 
-df_jobs = pd.DataFrame(jobs_list)
+if not capture_mode:
+    df_jobs = pd.DataFrame(jobs_list)
 
-def serialize_complex(value):
-    if isinstance(value, (dict, list)):
-        return json.dumps(
-            value,
-            ensure_ascii=False,
-            separators=(',', ':'),
-        )
-    return value
+    def serialize_complex(value):
+        if isinstance(value, (dict, list)):
+            return json.dumps(
+                value,
+                ensure_ascii=False,
+                separators=(',', ':'),
+            )
+        return value
 
-for column_name in df_jobs.columns:
-    df_jobs[column_name] = df_jobs[column_name].map(serialize_complex)
+    for column_name in df_jobs.columns:
+        df_jobs[column_name] = df_jobs[column_name].map(serialize_complex)
 
-df_jobs['snapshotDate'] = snapshot_date
-df_jobs['snapshotDateTime'] = snapshot_datetime
-df_jobs['sourceKeyword'] = KEYWORD
-df_jobs['sourceArea'] = AREA
-df_jobs['sourceJobcat'] = JOBCAT
-df_jobs['sourcePage'] = PAGE
-df_jobs['sourcePageSize'] = PAGE_SIZE
+    df_jobs['snapshotDate'] = snapshot_date
+    df_jobs['snapshotDateTime'] = snapshot_datetime
+    df_jobs['sourceKeyword'] = KEYWORD
+    df_jobs['sourceArea'] = AREA
+    df_jobs['sourceJobcat'] = JOBCAT
+    df_jobs['sourcePage'] = PAGE
+    df_jobs['sourcePageSize'] = PAGE_SIZE
 
 pagination_node = metadata_node.get('pagination')
 filter_query_node = metadata_node.get('filterQuery')
@@ -237,15 +240,16 @@ metadata = {
 }
 
 df_metadata = pd.DataFrame([metadata])
-df_raw_response = pd.DataFrame(
-    [
-        {
-            'sourcePage': PAGE,
-            'snapshotDateTime': snapshot_datetime,
-            'rawResponseJson': json.dumps(json_data, ensure_ascii=False),
-        }
-    ]
-)
+if not capture_mode:
+    df_raw_response = pd.DataFrame(
+        [
+            {
+                'sourcePage': PAGE,
+                'snapshotDateTime': snapshot_datetime,
+                'rawResponseJson': json.dumps(json_data, ensure_ascii=False),
+            }
+        ]
+    )
 ",
             [config = Configuration]
         ),

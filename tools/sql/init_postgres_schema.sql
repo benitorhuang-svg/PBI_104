@@ -30,6 +30,9 @@ CREATE TABLE IF NOT EXISTS bronze.raw_job_rows (
     row_index INTEGER NOT NULL CHECK (row_index >= 0),
     job_no TEXT,
     payload JSONB NOT NULL CHECK (jsonb_typeof(payload) = 'object'),
+    payload_source_json TEXT,
+    payload_quality_flags JSONB NOT NULL DEFAULT '[]'::jsonb
+        CHECK (jsonb_typeof(payload_quality_flags) = 'array'),
     PRIMARY KEY (batch_id, source_page, row_index)
 );
 
@@ -440,17 +443,31 @@ WITH area_keys AS (
     SELECT DISTINCT area_key
     FROM gold.pbi_fact_job_scope
     WHERE area_key IS NOT NULL
+), effective_coordinates AS (
+    SELECT encode(convert_to(a.area_key, 'UTF8'), 'hex') AS "areaKey",
+           a.job_addr_no AS "jobAddrNo",
+           a.job_addr_no_desc AS "jobAddrNoDesc", a.job_address AS "jobAddress",
+           CASE WHEN a.latitude IS NOT NULL AND a.longitude IS NOT NULL THEN a.latitude
+                WHEN g.match_level IN ('EXACT_TEXT', 'ADDRESS_STANDARDIZED') THEN g.latitude END AS lat,
+           CASE WHEN a.latitude IS NOT NULL AND a.longitude IS NOT NULL THEN a.longitude
+                WHEN g.match_level IN ('EXACT_TEXT', 'ADDRESS_STANDARDIZED') THEN g.longitude END AS lon
+    FROM area_keys AS f
+    JOIN silver.area_dimension AS a USING (area_key)
+    LEFT JOIN silver.address_geocodes AS g USING (area_key)
 )
-SELECT encode(convert_to(a.area_key, 'UTF8'), 'hex') AS "areaKey",
-       a.job_addr_no AS "jobAddrNo",
-       a.job_addr_no_desc AS "jobAddrNoDesc", a.job_address AS "jobAddress",
-       CASE WHEN a.latitude IS NOT NULL AND a.longitude IS NOT NULL THEN a.latitude
-            WHEN g.match_level IN ('EXACT_TEXT', 'ADDRESS_STANDARDIZED') THEN g.latitude END AS lat,
-       CASE WHEN a.latitude IS NOT NULL AND a.longitude IS NOT NULL THEN a.longitude
-            WHEN g.match_level IN ('EXACT_TEXT', 'ADDRESS_STANDARDIZED') THEN g.longitude END AS lon
-FROM area_keys AS f
-JOIN silver.area_dimension AS a USING (area_key)
-LEFT JOIN silver.address_geocodes AS g USING (area_key);
+SELECT "areaKey", "jobAddrNo", "jobAddrNoDesc", "jobAddress", lat, lon,
+       CASE
+           WHEN lat IS NULL OR lon IS NULL THEN '未判定'
+           -- WGS84 envelopes cover Taiwan/Penghu and the major outlying islands.
+           WHEN (lat BETWEEN 21.8 AND 25.5 AND lon BETWEEN 119.2 AND 122.1)
+             OR (lat BETWEEN 24.3 AND 24.6 AND lon BETWEEN 118.1 AND 118.6)
+             OR (lat BETWEEN 25.9 AND 26.5 AND lon BETWEEN 119.8 AND 120.2)
+             OR (lat BETWEEN 20.5 AND 20.9 AND lon BETWEEN 116.4 AND 116.9)
+             OR (lat BETWEEN 10.3 AND 10.5 AND lon BETWEEN 114.3 AND 114.5)
+               THEN '國內'
+           ELSE '國外(台灣地區之外)'
+       END AS "jobLocationScope"
+FROM effective_coordinates;
 
 CREATE OR REPLACE VIEW gold.pbi_bridge_job_skill AS
 SELECT s.job_no AS "jobNo", s.skill_code AS "skillCode",
@@ -515,3 +532,221 @@ CREATE INDEX IF NOT EXISTS ix_capture_batches_date_jobcat
     ON bronze.capture_batches(snapshot_date, source_jobcat);
 INSERT INTO bronze.schema_migrations(version) VALUES (10) ON CONFLICT (version) DO NOTHING;
 INSERT INTO bronze.schema_migrations(version) VALUES (11) ON CONFLICT (version) DO NOTHING;
+INSERT INTO bronze.schema_migrations(version) VALUES (12) ON CONFLICT (version) DO NOTHING;
+
+CREATE TABLE IF NOT EXISTS bronze.distributed_capture_runs (
+    run_id TEXT PRIMARY KEY,
+    run_key TEXT NOT NULL UNIQUE,
+    snapshot_date DATE NOT NULL,
+    catalog_sha256 CHAR(64) NOT NULL CHECK (length(catalog_sha256) = 64),
+    category_depth INTEGER NOT NULL CHECK (category_depth BETWEEN 0 AND 2),
+    area_filter TEXT,
+    pagesize INTEGER NOT NULL CHECK (pagesize BETWEEN 1 AND 30),
+    minimum_interval_seconds DOUBLE PRECISION NOT NULL CHECK (minimum_interval_seconds >= 0),
+    worker_count INTEGER NOT NULL CHECK (worker_count >= 1),
+    status TEXT NOT NULL DEFAULT 'QUEUED' CHECK (status IN (
+        'QUEUED', 'RUNNING', 'COMPLETE', 'COMPLETE_WITH_WARNINGS', 'PARTIAL', 'BLOCKED')),
+    selected_categories INTEGER NOT NULL CHECK (selected_categories >= 0),
+    started_at TIMESTAMPTZ,
+    completed_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS bronze.distributed_capture_categories (
+    run_id TEXT NOT NULL REFERENCES bronze.distributed_capture_runs(run_id),
+    source_jobcat TEXT NOT NULL,
+    category_name TEXT NOT NULL,
+    state TEXT NOT NULL DEFAULT 'PENDING' CHECK (state IN (
+        'PENDING', 'LEASED', 'DONE', 'FAIL', 'DEFERRED')),
+    attempts INTEGER NOT NULL DEFAULT 0 CHECK (attempts >= 0),
+    available_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    lease_owner TEXT,
+    lease_expires_at TIMESTAMPTZ,
+    batch_id TEXT,
+    result JSONB CHECK (result IS NULL OR jsonb_typeof(result) = 'object'),
+    last_error TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (run_id, source_jobcat)
+);
+
+CREATE INDEX IF NOT EXISTS ix_distributed_capture_claim
+    ON bronze.distributed_capture_categories(state, available_at, lease_expires_at);
+
+CREATE TABLE IF NOT EXISTS bronze.capture_request_state (
+    channel TEXT PRIMARY KEY,
+    minimum_interval_seconds DOUBLE PRECISION NOT NULL CHECK (minimum_interval_seconds >= 0),
+    interval_seconds DOUBLE PRECISION NOT NULL CHECK (interval_seconds >= minimum_interval_seconds),
+    maximum_interval_seconds DOUBLE PRECISION NOT NULL CHECK (maximum_interval_seconds >= interval_seconds),
+    success_count INTEGER NOT NULL DEFAULT 0 CHECK (success_count >= 0),
+    next_request_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    blocked_until TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    blocked_reason TEXT,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO bronze.capture_request_state
+    (channel, minimum_interval_seconds, interval_seconds, maximum_interval_seconds)
+VALUES ('104_jobs', 0.8, 0.8, 8.0)
+ON CONFLICT (channel) DO NOTHING;
+
+INSERT INTO bronze.schema_migrations(version) VALUES (13) ON CONFLICT (version) DO NOTHING;
+
+CREATE OR REPLACE FUNCTION bronze.acquisition_category_warning(
+    category_result JSONB,
+    stored_capture_status TEXT,
+    stored_pagination_status TEXT
+)
+RETURNS BOOLEAN
+LANGUAGE SQL
+IMMUTABLE
+PARALLEL SAFE
+AS $$
+    SELECT CASE
+        WHEN category_result->>'status' = 'CAPTURED_WITH_WARNING' THEN TRUE
+        WHEN category_result->>'status' = 'SKIPPED' THEN
+            COALESCE(stored_pagination_status,
+                     category_result->>'paginationStatus') IS DISTINCT FROM 'PASS'
+            OR COALESCE(stored_capture_status,
+                        category_result->>'captureStatus') IS DISTINCT FROM 'COMPLETE'
+        ELSE FALSE
+    END
+$$;
+
+CREATE OR REPLACE VIEW gold.pbi_acquisition_categories AS
+WITH latest_run AS (
+    SELECT run_id, status, snapshot_date, selected_categories, category_depth,
+           area_filter, pagesize, worker_count, started_at, updated_at,
+           minimum_interval_seconds
+    FROM bronze.distributed_capture_runs
+    ORDER BY created_at DESC, run_id DESC
+    LIMIT 1
+), request_gate AS (
+    SELECT minimum_interval_seconds, interval_seconds, blocked_reason
+    FROM bronze.capture_request_state
+    WHERE channel = '104_jobs'
+)
+SELECT r.run_id AS "runId", r.status AS "runStatus",
+       r.snapshot_date AS "snapshotDate",
+       r.selected_categories AS "selectedCategories",
+       r.category_depth AS "categoryDepth", r.area_filter AS "areaFilter",
+       r.pagesize AS "pageSize", r.worker_count AS "workerCount",
+       r.started_at AS "runStartedAt", r.updated_at AS "runUpdatedAt",
+       COALESCE(g.minimum_interval_seconds, r.minimum_interval_seconds)
+           AS "minimumRequestIntervalSeconds",
+       COALESCE(g.interval_seconds, r.minimum_interval_seconds)
+           AS "requestIntervalSeconds",
+       CASE WHEN g.blocked_reason IS NOT NULL THEN 1 ELSE 0 END AS "gateBlocked",
+       CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Taipei' AS "sourceReadAt",
+       q.source_jobcat AS "categoryCode", q.category_name AS "categoryName",
+       q.state AS "categoryState", q.attempts AS "attempts",
+       q.updated_at AS "categoryUpdatedAt", q.result->>'status' AS "resultStatus",
+       q.batch_id AS "batchId",
+       quality.capture_status AS "captureStatus",
+       quality.pagination_status AS "paginationStatus",
+       COALESCE(b.row_count::bigint,
+           CASE WHEN q.result->>'rows' ~ '^[0-9]+$'
+                THEN (q.result->>'rows')::bigint END, 0) AS "jobCount",
+       COALESCE(p.page_count, 0) AS "pageCount",
+       quality.warning_flag AS "warningFlag",
+       CASE
+           WHEN child.parent_job_cat_code IS NOT NULL THEN
+               COALESCE(parent.job_cat_description, 'Unnamed parent category')
+                   || ' (' || child.parent_job_cat_code::text || ')'
+           WHEN child.job_cat_code IS NOT NULL THEN
+               child.job_cat_description || ' (' || child.job_cat_code::text || ')'
+           ELSE q.category_name || ' (' || q.source_jobcat || ')'
+       END AS "parentCategoryLabel",
+       CASE
+           WHEN child.parent_job_cat_code IS NOT NULL THEN
+               child.parent_job_cat_code::text
+           WHEN child.job_cat_code IS NOT NULL THEN
+               child.job_cat_code::text
+           ELSE q.source_jobcat
+       END AS "parentCategoryCode",
+       CASE
+           WHEN child.parent_job_cat_code IS NOT NULL THEN
+               COALESCE(parent.job_cat_description, 'Unnamed parent category')
+           WHEN child.job_cat_code IS NOT NULL THEN
+               COALESCE(child.job_cat_description, 'Unnamed parent category')
+           ELSE COALESCE(q.category_name, 'Unnamed category')
+       END AS "parentCategoryName",
+       COALESCE(p.reported_job_count_min,
+           CASE WHEN q.result->>'totalJobs' ~ '^[0-9]+$'
+                THEN (q.result->>'totalJobs')::bigint END) AS "apiReportedJobCountMin",
+       COALESCE(p.reported_job_count_max,
+           CASE WHEN q.result->>'totalJobs' ~ '^[0-9]+$'
+                THEN (q.result->>'totalJobs')::bigint END) AS "apiReportedJobCountMax",
+       p.reported_page_count_min AS "apiReportedPageCountMin",
+       p.reported_page_count_max AS "apiReportedPageCountMax",
+       CASE WHEN q.state IN ('DONE', 'FAIL', 'DEFERRED') THEN 1 ELSE 0
+       END AS "queueTerminalFlag",
+       CASE WHEN q.state = 'DONE' AND b.batch_id IS NOT NULL
+                 AND quality.pagination_status = 'PASS' THEN 1 ELSE 0
+       END AS "captureCompleteFlag",
+       CASE WHEN q.state = 'DONE' AND b.batch_id IS NOT NULL
+                 AND quality.pagination_status = 'PASS'
+                 AND quality.capture_status = 'COMPLETE' THEN 1 ELSE 0
+       END AS "silverEligibleFlag",
+       CASE WHEN quality.capture_status IN (
+                  'SILVER_NORMALIZATION_BLOCKED',
+                  'PAGE_TOTAL_MISMATCH_AND_SILVER_NORMALIZATION_BLOCKED')
+            THEN 1 ELSE 0 END AS "silverBlockedFlag",
+       CASE WHEN quality.warning_flag = 0 THEN NULL
+             ELSE COALESCE(NULLIF(concat_ws(', ',
+                 CASE WHEN quality.pagination_status IS DISTINCT FROM 'PASS'
+                      THEN 'PAGE_TOTAL_MISMATCH' END,
+                 CASE WHEN quality.capture_status IN (
+                          'SILVER_NORMALIZATION_BLOCKED',
+                          'PAGE_TOTAL_MISMATCH_AND_SILVER_NORMALIZATION_BLOCKED')
+                      THEN 'SILVER_NORMALIZATION_BLOCKED' END), ''),
+                 'QUALITY_STATUS_INCOMPLETE')
+        END AS "warningReason"
+FROM latest_run AS r
+JOIN bronze.distributed_capture_categories AS q USING (run_id)
+LEFT JOIN request_gate AS g ON TRUE
+LEFT JOIN bronze.capture_batches AS b ON b.batch_id = q.batch_id
+LEFT JOIN LATERAL (
+    SELECT COALESCE(b.manifest->>'paginationStatus',
+                    q.result->>'paginationStatus') AS pagination_status,
+           COALESCE(b.capture_status,
+                    q.result->>'captureStatus') AS capture_status,
+           CASE WHEN bronze.acquisition_category_warning(
+               q.result, b.capture_status, b.manifest->>'paginationStatus')
+               THEN 1 ELSE 0 END AS warning_flag
+) AS quality ON TRUE
+LEFT JOIN silver.category_dimension AS child
+    ON child.job_cat_code = CASE
+        WHEN q.source_jobcat ~ '^[0-9]{1,18}$' THEN q.source_jobcat::bigint
+    END
+LEFT JOIN silver.category_dimension AS parent
+    ON parent.job_cat_code = child.parent_job_cat_code
+LEFT JOIN LATERAL (
+    SELECT COUNT(*)::bigint AS page_count,
+           MIN(CASE WHEN cp.response_metadata #>> '{pagination,total}' ~ '^[0-9]+$'
+                    THEN (cp.response_metadata #>> '{pagination,total}')::bigint END)
+               AS reported_job_count_min,
+           MAX(CASE WHEN cp.response_metadata #>> '{pagination,total}' ~ '^[0-9]+$'
+                    THEN (cp.response_metadata #>> '{pagination,total}')::bigint END)
+               AS reported_job_count_max,
+           MIN(CASE WHEN cp.response_metadata #>> '{pagination,lastPage}' ~ '^[0-9]+$'
+                    THEN (cp.response_metadata #>> '{pagination,lastPage}')::bigint END)
+               AS reported_page_count_min,
+           MAX(CASE WHEN cp.response_metadata #>> '{pagination,lastPage}' ~ '^[0-9]+$'
+                    THEN (cp.response_metadata #>> '{pagination,lastPage}')::bigint END)
+               AS reported_page_count_max
+    FROM bronze.capture_pages AS cp
+    WHERE cp.batch_id = q.batch_id
+) AS p ON TRUE;
+
+INSERT INTO bronze.schema_migrations(version) VALUES (14) ON CONFLICT (version) DO NOTHING;
+
+ALTER TABLE bronze.raw_job_rows ADD COLUMN IF NOT EXISTS payload_source_json TEXT;
+INSERT INTO bronze.schema_migrations(version) VALUES (15) ON CONFLICT (version) DO NOTHING;
+
+ALTER TABLE bronze.raw_job_rows ADD COLUMN IF NOT EXISTS payload_quality_flags JSONB
+    NOT NULL DEFAULT '[]'::jsonb CHECK (jsonb_typeof(payload_quality_flags) = 'array');
+INSERT INTO bronze.schema_migrations(version) VALUES (16) ON CONFLICT (version) DO NOTHING;
+INSERT INTO bronze.schema_migrations(version) VALUES (17) ON CONFLICT (version) DO NOTHING;
+INSERT INTO bronze.schema_migrations(version) VALUES (18) ON CONFLICT (version) DO NOTHING;

@@ -1,8 +1,21 @@
+# Exact dependency snapshot from the project Python 3.13 environment, 2026-10-06.
 attrs==26.1.0
+certifi==2026.7.22
+charset-normalizer==3.5.2
+cloudscraper==1.2.71
+idna==3.20
 jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
+numpy==2.5.3
+pandas==3.0.6
+psycopg==3.3.6
+psycopg-binary==3.3.6
+pyparsing==3.3.3
+python-dateutil==2.9.0.post0
 referencing==0.37.0
 rpds-py==2026.9.1
-cloudscraper>=1.2,<2
-pandas>=2.2,<4
-psycopg[binary]>=3.3,<4
+requests==2.34.2
+requests-toolbelt==1.0.0
+six==1.17.0
+tzdata==2026.5
+urllib3==2.8.0

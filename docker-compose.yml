@@ -49,6 +49,78 @@ services:
       retries: 3
       start_period: 20s
 
+  etl-coordinator:
+    profiles: [acquisition]
+    image: pbi104-etl:local
+    build:
+      context: .
+      dockerfile: containers/Dockerfile.etl
+    env_file: .env
+    environment:
+      PBI104_POSTGRES_HOST: postgres
+      PBI104_POSTGRES_PORT: "5432"
+      HTTP_PROXY: ${PBI104_HTTP_PROXY:-}
+      HTTPS_PROXY: ${PBI104_HTTPS_PROXY:-}
+      ALL_PROXY: ${PBI104_ALL_PROXY:-}
+      http_proxy: ${PBI104_HTTP_PROXY:-}
+      https_proxy: ${PBI104_HTTPS_PROXY:-}
+      all_proxy: ${PBI104_ALL_PROXY:-}
+      NO_PROXY: ${PBI104_NO_PROXY:-postgres,address-geocoder,localhost,127.0.0.1}
+      no_proxy: ${PBI104_NO_PROXY:-postgres,address-geocoder,localhost,127.0.0.1}
+    volumes:
+      - ./data/104:/app/data/104
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command:
+      - python
+      - -m
+      - tools.acquisition.distributed_coordinator
+      - --depth
+      - "2"
+      - --pagesize
+      - "30"
+      - --delay
+      - ${PBI104_CAPTURE_DELAY_SECONDS:-0.8}
+      - --workers
+      - ${PBI104_CAPTURE_WORKERS:-3}
+    restart: "no"
+
+  etl-worker:
+    profiles: [acquisition]
+    image: pbi104-etl:local
+    build:
+      context: .
+      dockerfile: containers/Dockerfile.etl
+    env_file: .env
+    environment:
+      PBI104_POSTGRES_HOST: postgres
+      PBI104_POSTGRES_PORT: "5432"
+      HTTP_PROXY: ${PBI104_HTTP_PROXY:-}
+      HTTPS_PROXY: ${PBI104_HTTPS_PROXY:-}
+      ALL_PROXY: ${PBI104_ALL_PROXY:-}
+      http_proxy: ${PBI104_HTTP_PROXY:-}
+      https_proxy: ${PBI104_HTTPS_PROXY:-}
+      all_proxy: ${PBI104_ALL_PROXY:-}
+      NO_PROXY: ${PBI104_NO_PROXY:-postgres,address-geocoder,localhost,127.0.0.1}
+      no_proxy: ${PBI104_NO_PROXY:-postgres,address-geocoder,localhost,127.0.0.1}
+    volumes:
+      - ./data/104:/app/data/104
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command:
+      - python
+      - -m
+      - tools.acquisition.distributed_worker
+      - --delay
+      - ${PBI104_CAPTURE_DELAY_SECONDS:-0.8}
+      - --poll-seconds
+      - "5"
+      - --idle-exit-seconds
+      - "20"
+    restart: "no"
+
 volumes:
   pgdata:
     driver: local

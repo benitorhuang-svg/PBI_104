@@ -3,7 +3,8 @@
 import base64
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
+OUTPUT = ROOT / ".optimization/probes/staging.pq"
 
 
 def function(name):
@@ -65,9 +66,10 @@ def main():
 in Output
 '''
     code = code.replace("SKILLS", function("stg_JobSkills")).replace("CATEGORIES", function("stg_JobCategories"))
-    fixture = (ROOT / "samples/raw/api-response-page-1.sample.json").read_bytes()
+    fixture = (ROOT / "tools/tests/fixtures/api-response-page-1.fixture.json").read_bytes()
     code = code.replace("FIXTURE", base64.b64encode(fixture).decode("ascii"))
-    (ROOT / "tools/probes/staging.pq").write_text(code, encoding="utf-8", newline="\n")
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    OUTPUT.write_text(code, encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":

@@ -25,7 +25,7 @@ def result(page, rows, last=2, total=3):
 
 class PaginationTests(unittest.TestCase):
     def test_saved_real_fixture(self):
-        payload = json.loads((PROJECT / "samples/raw/api-response-page-1.sample.json").read_text(encoding="utf-8"))
+        payload = json.loads((PROJECT / "tools/tests/fixtures/api-response-page-1.fixture.json").read_text(encoding="utf-8"))
         self.assertEqual(validate_page(payload, 1)["count"], 20)
 
     def test_pages_are_requested_once(self):

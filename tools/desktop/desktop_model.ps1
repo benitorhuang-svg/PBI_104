@@ -4,7 +4,7 @@ param(
   [string]$QueryFile
 )
 $ErrorActionPreference = 'Stop'
-$projectRoot = Split-Path -Parent $PSScriptRoot
+$projectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $app = Get-AppxPackage '*PowerBI*' | Select-Object -First 1
 $bin = Join-Path $app.InstallLocation 'bin'
 foreach ($dll in @('Microsoft.PowerBI.Tabular.dll', 'Microsoft.PowerBI.Tabular.Json.dll')) {

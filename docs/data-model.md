@@ -72,7 +72,12 @@ measures remain **BLOCKED** until an external persistence mechanism exists.
 
 `DimJobCategory.jobCatDescription` is retained as the explicit value
 `BLOCKED`; the API code-to-label mapping was not evidenced. `DimArea` carries
-only observed address and coordinates and does not infer missing locations.
+observed address, effective coordinates, and `jobLocationScope`. The scope is
+`國內` when coordinates fall within the Taiwan/Penghu, Kinmen, Matsu, Dongsha,
+or Taiping coordinate envelopes; it is `國外(台灣地區之外)` for other valid
+coordinates and `未判定` when coordinates are missing. These coordinate
+envelopes are a practical location rule, not exact administrative boundary
+polygons. Missing locations are not inferred.
 `jobAddrNo` is retained as an API code, but it is not used as the sole
 dimension key because refresh validation observed multiple full location
 variants for a code. Silver retains the original composite `area_key`. Gold

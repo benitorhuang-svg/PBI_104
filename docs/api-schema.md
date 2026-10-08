@@ -7,7 +7,7 @@ This document records observations from live requests made on 2026-08-13 (Asia/T
 - Endpoint: `GET https://www.104.com.tw/jobs/search/api/jobs`
 - Parameters: `area=6001008007,6001008006`, `jobsource=index_s`, `keyword=powerbi`, `mode=s`, `order=15`, `page=1`, `pagesize=20`
 - Baseline result: HTTP 200 at `2026-08-13T15:07:33+08:00`
-- Raw fixture: `samples/raw/api-response-page-1.sample.json`
+- Reviewed test fixture: `tools/tests/fixtures/api-response-page-1.fixture.json`
 - Fixture SHA-256: `F0BE85529D50F254506882C6675B49B13CB8AB9782E540EC5EB33E822D6C19FC`
 - The request had no Cookie header. The response did include `Set-Cookie`, but response headers and cookies are not stored in the fixture.
 - `urllib.request.getproxies()` returned no HTTP/HTTPS proxy for this run. The Source implementation still preserves Windows proxy discovery and injection.

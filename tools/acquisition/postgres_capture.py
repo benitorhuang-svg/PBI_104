@@ -5,6 +5,7 @@ from datetime import datetime
 import hashlib
 from threading import Lock
 import uuid
+from zoneinfo import ZoneInfo
 
 from .pagination import validate_page
 from .postgres_loader import normalize_batch
@@ -14,7 +15,8 @@ from .storage import encoded, series_key
 
 def build_batch(request, pages, pagination_status="PASS", diagnostics=None,
                 acquired_at=None):
-    timestamp = acquired_at or datetime.now().astimezone().isoformat(timespec="seconds")
+    timestamp = acquired_at or datetime.now(
+        ZoneInfo("Asia/Taipei")).isoformat(timespec="seconds")
     parsed = datetime.fromisoformat(timestamp)
     if parsed.tzinfo is None:
         raise ValueError("Acquisition timestamp must include a timezone")
@@ -73,13 +75,7 @@ class DatabaseCaptureError(RuntimeError):
 
 
 def resume_compatible(manifest, request):
-    if manifest.get("paginationStatus", "PASS") == "PASS":
-        return True
-    diagnostics = manifest.get("paginationDiagnostics")
-    return (manifest.get("paginationStatus") == "PAGE_TOTAL_MISMATCH"
-            and isinstance(diagnostics, dict)
-            and diagnostics.get("pageLimitReached") is True
-            and manifest.get("request", {}).get("pagesize") == request.get("pagesize"))
+    return manifest.get("seriesKey") == series_key(request)
 
 
 class CaptureSink:
@@ -104,7 +100,9 @@ class CaptureSink:
             with self.lock, self.conn.transaction():
                 return _save_batch(self.conn, batch, self.Jsonb)
         except Exception as error:
-            raise DatabaseCaptureError("Category transaction failed") from error
+            diagnostic = getattr(error, "sqlstate", None) or type(error).__name__
+            raise DatabaseCaptureError(
+                f"Category transaction failed ({diagnostic})") from error
 
 
 @contextmanager
@@ -114,6 +112,8 @@ def open_capture_sink(config, schema_path, category_catalog=None):
 
     with psycopg.connect(**config) as conn:
         with conn.transaction():
+            conn.execute("SELECT pg_advisory_xact_lock(hashtextextended("
+                         "'pbi104_schema_initialization', 0))")
             apply_schema(conn, schema_path)
             if category_catalog:
                 _save_category_catalog(conn, category_catalog, Jsonb)
