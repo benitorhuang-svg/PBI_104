@@ -1,0 +1,5897 @@
+{
+  "capturedAtUtc": "2026-10-09T11:46:19.564Z",
+  "catalogFormatVersion": 1,
+  "database": "jobwant_104",
+  "relations": [
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_datetime",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "request",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "manifest_sha256",
+          "nullable": false,
+          "ordinal": 6,
+          "type": "character(64)"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "manifest",
+          "nullable": false,
+          "ordinal": 7,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "row_count",
+          "nullable": false,
+          "ordinal": 8,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "imported_at",
+          "nullable": false,
+          "ordinal": 9,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "capture_status",
+          "nullable": false,
+          "ordinal": 10,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_jobcat",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "source_platform",
+          "nullable": false,
+          "ordinal": 12,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "code_kind",
+          "nullable": false,
+          "ordinal": 13,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "native_search_code",
+          "nullable": true,
+          "ordinal": 14,
+          "type": "text"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "CHECK (capture_status = ANY (ARRAY['COMPLETE'::text, 'PAGE_TOTAL_MISMATCH'::text, 'SILVER_NORMALIZATION_BLOCKED'::text, 'PAGE_TOTAL_MISMATCH_AND_SILVER_NORMALIZATION_BLOCKED'::text]))",
+          "kind": "c",
+          "name": "capture_batches_capture_status_check"
+        },
+        {
+          "definition": "CHECK (length(manifest_sha256) = 64)",
+          "kind": "c",
+          "name": "capture_batches_manifest_sha256_check"
+        },
+        {
+          "definition": "PRIMARY KEY (batch_id)",
+          "kind": "p",
+          "name": "capture_batches_pkey"
+        },
+        {
+          "definition": "CHECK (row_count >= 0)",
+          "kind": "c",
+          "name": "capture_batches_row_count_check"
+        },
+        {
+          "definition": "UNIQUE (series_key, snapshot_date, batch_id)",
+          "kind": "u",
+          "name": "capture_batches_series_key_snapshot_date_batch_id_key"
+        },
+        {
+          "definition": "CHECK (source_platform = ANY (ARRAY['104'::text, 'yes123'::text]))",
+          "kind": "c",
+          "name": "chk_capture_batches_platform"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX capture_batches_pkey ON bronze.capture_batches USING btree (batch_id)",
+          "name": "capture_batches_pkey",
+          "primary": true,
+          "unique": true
+        },
+        {
+          "definition": "CREATE UNIQUE INDEX capture_batches_series_key_snapshot_date_batch_id_key ON bronze.capture_batches USING btree (series_key, snapshot_date, batch_id)",
+          "name": "capture_batches_series_key_snapshot_date_batch_id_key",
+          "primary": false,
+          "unique": true
+        },
+        {
+          "definition": "CREATE INDEX ix_capture_batches_date_jobcat ON bronze.capture_batches USING btree (snapshot_date, source_jobcat)",
+          "name": "ix_capture_batches_date_jobcat",
+          "primary": false,
+          "unique": false
+        }
+      ],
+      "kind": "table",
+      "name": "capture_batches",
+      "schema": "bronze",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_page",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "response_sha256",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "character(64)"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "row_count",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "response_metadata",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "technical_metadata",
+          "nullable": false,
+          "ordinal": 6,
+          "type": "jsonb"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "FOREIGN KEY (batch_id) REFERENCES bronze.capture_batches(batch_id)",
+          "kind": "f",
+          "name": "capture_pages_batch_id_fkey"
+        },
+        {
+          "definition": "PRIMARY KEY (batch_id, source_page)",
+          "kind": "p",
+          "name": "capture_pages_pkey"
+        },
+        {
+          "definition": "CHECK (jsonb_typeof(response_metadata) = 'object'::text)",
+          "kind": "c",
+          "name": "capture_pages_response_metadata_check"
+        },
+        {
+          "definition": "CHECK (length(response_sha256) = 64)",
+          "kind": "c",
+          "name": "capture_pages_response_sha256_check"
+        },
+        {
+          "definition": "CHECK (row_count >= 0)",
+          "kind": "c",
+          "name": "capture_pages_row_count_check"
+        },
+        {
+          "definition": "CHECK (source_page >= 1)",
+          "kind": "c",
+          "name": "capture_pages_source_page_check"
+        },
+        {
+          "definition": "CHECK (jsonb_typeof(technical_metadata) = 'object'::text)",
+          "kind": "c",
+          "name": "capture_pages_technical_metadata_check"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX capture_pages_pkey ON bronze.capture_pages USING btree (batch_id, source_page)",
+          "name": "capture_pages_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "capture_pages",
+      "schema": "bronze",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "channel",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "minimum_interval_seconds",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "double precision"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "interval_seconds",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "double precision"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "maximum_interval_seconds",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "double precision"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "success_count",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "next_request_at",
+          "nullable": false,
+          "ordinal": 6,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "blocked_until",
+          "nullable": false,
+          "ordinal": 7,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "blocked_reason",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "updated_at",
+          "nullable": false,
+          "ordinal": 9,
+          "type": "timestamp with time zone"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "CHECK (interval_seconds >= minimum_interval_seconds)",
+          "kind": "c",
+          "name": "capture_request_state_check"
+        },
+        {
+          "definition": "CHECK (maximum_interval_seconds >= interval_seconds)",
+          "kind": "c",
+          "name": "capture_request_state_check1"
+        },
+        {
+          "definition": "CHECK (minimum_interval_seconds >= 0::double precision)",
+          "kind": "c",
+          "name": "capture_request_state_minimum_interval_seconds_check"
+        },
+        {
+          "definition": "PRIMARY KEY (channel)",
+          "kind": "p",
+          "name": "capture_request_state_pkey"
+        },
+        {
+          "definition": "CHECK (success_count >= 0)",
+          "kind": "c",
+          "name": "capture_request_state_success_count_check"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX capture_request_state_pkey ON bronze.capture_request_state USING btree (channel)",
+          "name": "capture_request_state_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "capture_request_state",
+      "schema": "bronze",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "run_id",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_jobcat",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "category_name",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "state",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "attempts",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "available_at",
+          "nullable": false,
+          "ordinal": 6,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "lease_owner",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "lease_expires_at",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "result",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "last_error",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "created_at",
+          "nullable": false,
+          "ordinal": 12,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "updated_at",
+          "nullable": false,
+          "ordinal": 13,
+          "type": "timestamp with time zone"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "CHECK (attempts >= 0)",
+          "kind": "c",
+          "name": "distributed_capture_categories_attempts_check"
+        },
+        {
+          "definition": "PRIMARY KEY (run_id, source_jobcat)",
+          "kind": "p",
+          "name": "distributed_capture_categories_pkey"
+        },
+        {
+          "definition": "CHECK (result IS NULL OR jsonb_typeof(result) = 'object'::text)",
+          "kind": "c",
+          "name": "distributed_capture_categories_result_check"
+        },
+        {
+          "definition": "FOREIGN KEY (run_id) REFERENCES bronze.distributed_capture_runs(run_id)",
+          "kind": "f",
+          "name": "distributed_capture_categories_run_id_fkey"
+        },
+        {
+          "definition": "CHECK (state = ANY (ARRAY['PENDING'::text, 'LEASED'::text, 'DONE'::text, 'FAIL'::text, 'DEFERRED'::text]))",
+          "kind": "c",
+          "name": "distributed_capture_categories_state_check"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX distributed_capture_categories_pkey ON bronze.distributed_capture_categories USING btree (run_id, source_jobcat)",
+          "name": "distributed_capture_categories_pkey",
+          "primary": true,
+          "unique": true
+        },
+        {
+          "definition": "CREATE INDEX ix_distributed_capture_claim ON bronze.distributed_capture_categories USING btree (state, available_at, lease_expires_at)",
+          "name": "ix_distributed_capture_claim",
+          "primary": false,
+          "unique": false
+        }
+      ],
+      "kind": "table",
+      "name": "distributed_capture_categories",
+      "schema": "bronze",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "run_id",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "run_key",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "catalog_sha256",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "character(64)"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "category_depth",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "area_filter",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "pagesize",
+          "nullable": false,
+          "ordinal": 7,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "minimum_interval_seconds",
+          "nullable": false,
+          "ordinal": 8,
+          "type": "double precision"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "worker_count",
+          "nullable": false,
+          "ordinal": 9,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "status",
+          "nullable": false,
+          "ordinal": 10,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "selected_categories",
+          "nullable": false,
+          "ordinal": 11,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "started_at",
+          "nullable": true,
+          "ordinal": 12,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "completed_at",
+          "nullable": true,
+          "ordinal": 13,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "created_at",
+          "nullable": false,
+          "ordinal": 14,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "updated_at",
+          "nullable": false,
+          "ordinal": 15,
+          "type": "timestamp with time zone"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "CHECK (length(catalog_sha256) = 64)",
+          "kind": "c",
+          "name": "distributed_capture_runs_catalog_sha256_check"
+        },
+        {
+          "definition": "CHECK (category_depth >= 0 AND category_depth <= 2)",
+          "kind": "c",
+          "name": "distributed_capture_runs_category_depth_check"
+        },
+        {
+          "definition": "CHECK (minimum_interval_seconds >= 0::double precision)",
+          "kind": "c",
+          "name": "distributed_capture_runs_minimum_interval_seconds_check"
+        },
+        {
+          "definition": "CHECK (pagesize >= 1 AND pagesize <= 30)",
+          "kind": "c",
+          "name": "distributed_capture_runs_pagesize_check"
+        },
+        {
+          "definition": "PRIMARY KEY (run_id)",
+          "kind": "p",
+          "name": "distributed_capture_runs_pkey"
+        },
+        {
+          "definition": "UNIQUE (run_key)",
+          "kind": "u",
+          "name": "distributed_capture_runs_run_key_key"
+        },
+        {
+          "definition": "CHECK (selected_categories >= 0)",
+          "kind": "c",
+          "name": "distributed_capture_runs_selected_categories_check"
+        },
+        {
+          "definition": "CHECK (status = ANY (ARRAY['QUEUED'::text, 'RUNNING'::text, 'COMPLETE'::text, 'COMPLETE_WITH_WARNINGS'::text, 'PARTIAL'::text, 'BLOCKED'::text]))",
+          "kind": "c",
+          "name": "distributed_capture_runs_status_check"
+        },
+        {
+          "definition": "CHECK (worker_count >= 1)",
+          "kind": "c",
+          "name": "distributed_capture_runs_worker_count_check"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX distributed_capture_runs_pkey ON bronze.distributed_capture_runs USING btree (run_id)",
+          "name": "distributed_capture_runs_pkey",
+          "primary": true,
+          "unique": true
+        },
+        {
+          "definition": "CREATE UNIQUE INDEX distributed_capture_runs_run_key_key ON bronze.distributed_capture_runs USING btree (run_key)",
+          "name": "distributed_capture_runs_run_key_key",
+          "primary": false,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "distributed_capture_runs",
+      "schema": "bronze",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "catalog_sha256",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "character(64)"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_cat_code",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "parent_job_cat_code",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "category_name",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "english_name",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "hierarchy_depth",
+          "nullable": false,
+          "ordinal": 6,
+          "type": "smallint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "path_codes",
+          "nullable": false,
+          "ordinal": 7,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "is_leaf",
+          "nullable": false,
+          "ordinal": 8,
+          "type": "boolean"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "FOREIGN KEY (catalog_sha256) REFERENCES bronze.job_category_catalogs(catalog_sha256)",
+          "kind": "f",
+          "name": "job_category_catalog_rows_catalog_sha256_fkey"
+        },
+        {
+          "definition": "CHECK (hierarchy_depth >= 0)",
+          "kind": "c",
+          "name": "job_category_catalog_rows_hierarchy_depth_check"
+        },
+        {
+          "definition": "CHECK (jsonb_typeof(path_codes) = 'array'::text)",
+          "kind": "c",
+          "name": "job_category_catalog_rows_path_codes_check"
+        },
+        {
+          "definition": "PRIMARY KEY (catalog_sha256, job_cat_code)",
+          "kind": "p",
+          "name": "job_category_catalog_rows_pkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX job_category_catalog_rows_pkey ON bronze.job_category_catalog_rows USING btree (catalog_sha256, job_cat_code)",
+          "name": "job_category_catalog_rows_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "job_category_catalog_rows",
+      "schema": "bronze",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "catalog_sha256",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "character(64)"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_url",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "captured_at",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "root_count",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "row_count",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "payload",
+          "nullable": false,
+          "ordinal": 6,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "manifest",
+          "nullable": false,
+          "ordinal": 7,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "imported_at",
+          "nullable": false,
+          "ordinal": 8,
+          "type": "timestamp with time zone"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "CHECK (length(catalog_sha256) = 64)",
+          "kind": "c",
+          "name": "job_category_catalogs_catalog_sha256_check"
+        },
+        {
+          "definition": "CHECK (jsonb_typeof(manifest) = 'object'::text)",
+          "kind": "c",
+          "name": "job_category_catalogs_manifest_check"
+        },
+        {
+          "definition": "CHECK (jsonb_typeof(payload) = 'array'::text)",
+          "kind": "c",
+          "name": "job_category_catalogs_payload_check"
+        },
+        {
+          "definition": "PRIMARY KEY (catalog_sha256)",
+          "kind": "p",
+          "name": "job_category_catalogs_pkey"
+        },
+        {
+          "definition": "CHECK (root_count >= 0)",
+          "kind": "c",
+          "name": "job_category_catalogs_root_count_check"
+        },
+        {
+          "definition": "CHECK (row_count >= 0)",
+          "kind": "c",
+          "name": "job_category_catalogs_row_count_check"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX job_category_catalogs_pkey ON bronze.job_category_catalogs USING btree (catalog_sha256)",
+          "name": "job_category_catalogs_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "job_category_catalogs",
+      "schema": "bronze",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_page",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "row_index",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "payload",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "payload_source_json",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "payload_quality_flags",
+          "nullable": false,
+          "ordinal": 7,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "source_platform",
+          "nullable": false,
+          "ordinal": 8,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "native_job_id",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "text"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "FOREIGN KEY (batch_id) REFERENCES bronze.capture_batches(batch_id)",
+          "kind": "f",
+          "name": "raw_job_rows_batch_id_fkey"
+        },
+        {
+          "definition": "CHECK (jsonb_typeof(payload) = 'object'::text)",
+          "kind": "c",
+          "name": "raw_job_rows_payload_check"
+        },
+        {
+          "definition": "CHECK (jsonb_typeof(payload_quality_flags) = 'array'::text)",
+          "kind": "c",
+          "name": "raw_job_rows_payload_quality_flags_check"
+        },
+        {
+          "definition": "PRIMARY KEY (batch_id, source_page, row_index)",
+          "kind": "p",
+          "name": "raw_job_rows_pkey"
+        },
+        {
+          "definition": "CHECK (row_index >= 0)",
+          "kind": "c",
+          "name": "raw_job_rows_row_index_check"
+        },
+        {
+          "definition": "CHECK (source_page >= 1)",
+          "kind": "c",
+          "name": "raw_job_rows_source_page_check"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE INDEX ix_raw_job_rows_job ON bronze.raw_job_rows USING btree (job_no)",
+          "name": "ix_raw_job_rows_job",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "definition": "CREATE UNIQUE INDEX raw_job_rows_pkey ON bronze.raw_job_rows USING btree (batch_id, source_page, row_index)",
+          "name": "raw_job_rows_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "raw_job_rows",
+      "schema": "bronze",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "version",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "applied_at",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "timestamp with time zone"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "PRIMARY KEY (version)",
+          "kind": "p",
+          "name": "schema_migrations_pkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX schema_migrations_pkey ON bronze.schema_migrations USING btree (version)",
+          "name": "schema_migrations_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "schema_migrations",
+      "schema": "bronze",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "area_key",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_addr_no",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_addr_no_desc",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_address",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "latitude",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "longitude",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "numeric"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "foreign_table",
+      "name": "area_dimension",
+      "schema": "fdw_yes123",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_platform",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "native_category_code",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "native_category_name",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "canonical_job_cat_code",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "mapping_status",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "match_confidence",
+          "nullable": false,
+          "ordinal": 6,
+          "type": "numeric(3,2)"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "notes",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "created_at",
+          "nullable": false,
+          "ordinal": 8,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "updated_at",
+          "nullable": false,
+          "ordinal": 9,
+          "type": "timestamp with time zone"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "foreign_table",
+      "name": "category_crosswalk",
+      "schema": "fdw_yes123",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "cust_no",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "company_name",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "co_industry",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "co_industry_desc",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "updated_at",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "timestamp with time zone"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "foreign_table",
+      "name": "company_dimension",
+      "schema": "fdw_yes123",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_cat_code",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "bigint"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "foreign_table",
+      "name": "job_category_snapshots",
+      "schema": "fdw_yes123",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "cust_no",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_name",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "description",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "desc_snippet",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "area_key",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low_raw",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high_raw",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date_raw",
+          "nullable": true,
+          "ordinal": 12,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "apply_cnt",
+          "nullable": true,
+          "ordinal": 13,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "remote_work_type",
+          "nullable": true,
+          "ordinal": 14,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_link",
+          "nullable": true,
+          "ordinal": 15,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "first_seen_date",
+          "nullable": false,
+          "ordinal": 16,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "last_seen_date",
+          "nullable": false,
+          "ordinal": 17,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "last_observed_at",
+          "nullable": false,
+          "ordinal": 18,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_series_key",
+          "nullable": false,
+          "ordinal": 19,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_keyword",
+          "nullable": true,
+          "ordinal": 20,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_jobcat",
+          "nullable": true,
+          "ordinal": 21,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_area",
+          "nullable": true,
+          "ordinal": 22,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "quality_issues",
+          "nullable": false,
+          "ordinal": 23,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "updated_at",
+          "nullable": false,
+          "ordinal": 24,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_platform",
+          "nullable": false,
+          "ordinal": 25,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "native_job_id",
+          "nullable": true,
+          "ordinal": 26,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_job_key",
+          "nullable": true,
+          "ordinal": 27,
+          "type": "text"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "foreign_table",
+      "name": "job_current",
+      "schema": "fdw_yes123",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_datetime",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "cust_no",
+          "nullable": false,
+          "ordinal": 6,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "area_key",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low_raw",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high_raw",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date",
+          "nullable": true,
+          "ordinal": 12,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date_raw",
+          "nullable": true,
+          "ordinal": 13,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "apply_cnt",
+          "nullable": true,
+          "ordinal": 14,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "remote_work_type",
+          "nullable": true,
+          "ordinal": 15,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_keyword",
+          "nullable": true,
+          "ordinal": 16,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_jobcat",
+          "nullable": true,
+          "ordinal": 17,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_area",
+          "nullable": true,
+          "ordinal": 18,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_page",
+          "nullable": false,
+          "ordinal": 19,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_page_size",
+          "nullable": true,
+          "ordinal": 20,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "quality_issues",
+          "nullable": false,
+          "ordinal": 21,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_platform",
+          "nullable": false,
+          "ordinal": 22,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "native_job_id",
+          "nullable": true,
+          "ordinal": 23,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_job_key",
+          "nullable": true,
+          "ordinal": 24,
+          "type": "text"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "foreign_table",
+      "name": "job_snapshots",
+      "schema": "fdw_yes123",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "area_key",
+          "nullable": true,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "api_latitude",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "api_longitude",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "geocode_match_level",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "geocode_matched_address",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "geocode_latitude",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "geocode_longitude",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "latitude_effective",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "longitude_effective",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "coordinate_source",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "geocode_canonical_address",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "google_maps_search_url",
+          "nullable": true,
+          "ordinal": 12,
+          "type": "text"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "view",
+      "name": "area_geocodes",
+      "schema": "gold",
+      "viewDefinitionMd5": "49207d3a8eed4ce211c942d588921db5"
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": true,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_datetime",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "search_keyword",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "search_area",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "row_count",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "imported_at",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "search_jobcat",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "capture_status",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "text"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "view",
+      "name": "capture_history",
+      "schema": "gold",
+      "viewDefinitionMd5": "b67825fe27a510b65c9748f98ed4f8f6"
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": true,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_cat_code",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "bigint"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "view",
+      "name": "latest_job_categories",
+      "schema": "gold",
+      "viewDefinitionMd5": "71cfa38288b449601bf9669bb2df51f0"
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": true,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_kind",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "observation_index",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "raw_value_min",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "raw_value_max",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "amount_min",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "amount_max",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "currency_code",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "character(3)"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "currency_basis",
+          "nullable": true,
+          "ordinal": 12,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "pay_period",
+          "nullable": true,
+          "ordinal": 13,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "range_kind",
+          "nullable": true,
+          "ordinal": 14,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "compensation_component",
+          "nullable": true,
+          "ordinal": 15,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "evidence_text",
+          "nullable": true,
+          "ordinal": 16,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "evidence_start",
+          "nullable": true,
+          "ordinal": 17,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "evidence_end",
+          "nullable": true,
+          "ordinal": 18,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "parse_status",
+          "nullable": true,
+          "ordinal": 19,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "quality_flags",
+          "nullable": true,
+          "ordinal": 20,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "confidence",
+          "nullable": true,
+          "ordinal": 21,
+          "type": "numeric(4,3)"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "parser_version",
+          "nullable": true,
+          "ordinal": 22,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "created_at",
+          "nullable": true,
+          "ordinal": 23,
+          "type": "timestamp with time zone"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "view",
+      "name": "latest_job_salary_observations",
+      "schema": "gold",
+      "viewDefinitionMd5": "624cffc39629319b6af85fc658100750"
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": true,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "skill_code",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "skill_description",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "text"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "view",
+      "name": "latest_job_skills",
+      "schema": "gold",
+      "viewDefinitionMd5": "4cab8b5241ebbf13be17f789fe82f49c"
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": true,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_datetime",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "cust_no",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "area_key",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low_raw",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high_raw",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date",
+          "nullable": true,
+          "ordinal": 12,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date_raw",
+          "nullable": true,
+          "ordinal": 13,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "apply_cnt",
+          "nullable": true,
+          "ordinal": 14,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "remote_work_type",
+          "nullable": true,
+          "ordinal": 15,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_keyword",
+          "nullable": true,
+          "ordinal": 16,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_area",
+          "nullable": true,
+          "ordinal": 17,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_page",
+          "nullable": true,
+          "ordinal": 18,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_page_size",
+          "nullable": true,
+          "ordinal": 19,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "quality_issues",
+          "nullable": true,
+          "ordinal": 20,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_jobcat",
+          "nullable": true,
+          "ordinal": 21,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_platform",
+          "nullable": true,
+          "ordinal": 22,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "native_job_id",
+          "nullable": true,
+          "ordinal": 23,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_job_key",
+          "nullable": true,
+          "ordinal": 24,
+          "type": "text"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "view",
+      "name": "latest_job_snapshots",
+      "schema": "gold",
+      "viewDefinitionMd5": "2ce6c7390dcd6f23d82a865e71659502"
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": true,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "cust_no",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_name",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "description",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "desc_snippet",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "area_key",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low_raw",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high_raw",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date_raw",
+          "nullable": true,
+          "ordinal": 12,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "apply_cnt",
+          "nullable": true,
+          "ordinal": 13,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "remote_work_type",
+          "nullable": true,
+          "ordinal": 14,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_link",
+          "nullable": true,
+          "ordinal": 15,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "first_seen_date",
+          "nullable": true,
+          "ordinal": 16,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "last_seen_date",
+          "nullable": true,
+          "ordinal": 17,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "last_observed_at",
+          "nullable": true,
+          "ordinal": 18,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_series_key",
+          "nullable": true,
+          "ordinal": 19,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_keyword",
+          "nullable": true,
+          "ordinal": 20,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_area",
+          "nullable": true,
+          "ordinal": 21,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "quality_issues",
+          "nullable": true,
+          "ordinal": 22,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "updated_at",
+          "nullable": true,
+          "ordinal": 23,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "company_name",
+          "nullable": true,
+          "ordinal": 24,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "co_industry",
+          "nullable": true,
+          "ordinal": 25,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "co_industry_desc",
+          "nullable": true,
+          "ordinal": 26,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_addr_no",
+          "nullable": true,
+          "ordinal": 27,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_addr_no_desc",
+          "nullable": true,
+          "ordinal": 28,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_address",
+          "nullable": true,
+          "ordinal": 29,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "latitude",
+          "nullable": true,
+          "ordinal": 30,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "longitude",
+          "nullable": true,
+          "ordinal": 31,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_jobcat",
+          "nullable": true,
+          "ordinal": 32,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "geocode_match_level",
+          "nullable": true,
+          "ordinal": 33,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "geocode_matched_address",
+          "nullable": true,
+          "ordinal": 34,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "geocode_latitude",
+          "nullable": true,
+          "ordinal": 35,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "geocode_longitude",
+          "nullable": true,
+          "ordinal": 36,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "latitude_effective",
+          "nullable": true,
+          "ordinal": 37,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "longitude_effective",
+          "nullable": true,
+          "ordinal": 38,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "coordinate_source",
+          "nullable": true,
+          "ordinal": 39,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "geocode_canonical_address",
+          "nullable": true,
+          "ordinal": 40,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "google_maps_search_url",
+          "nullable": true,
+          "ordinal": 41,
+          "type": "text"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "view",
+      "name": "latest_observed_jobs",
+      "schema": "gold",
+      "viewDefinitionMd5": "84ca76db9901af536451f483180a975e"
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "runId",
+          "nullable": true,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "runStatus",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshotDate",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "selectedCategories",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "categoryDepth",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "areaFilter",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "pageSize",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "workerCount",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "runStartedAt",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "runUpdatedAt",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "minimumRequestIntervalSeconds",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "double precision"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "requestIntervalSeconds",
+          "nullable": true,
+          "ordinal": 12,
+          "type": "double precision"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "gateBlocked",
+          "nullable": true,
+          "ordinal": 13,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "sourceReadAt",
+          "nullable": true,
+          "ordinal": 14,
+          "type": "timestamp without time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "categoryCode",
+          "nullable": true,
+          "ordinal": 15,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "categoryName",
+          "nullable": true,
+          "ordinal": 16,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "categoryState",
+          "nullable": true,
+          "ordinal": 17,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "attempts",
+          "nullable": true,
+          "ordinal": 18,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "categoryUpdatedAt",
+          "nullable": true,
+          "ordinal": 19,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "resultStatus",
+          "nullable": true,
+          "ordinal": 20,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batchId",
+          "nullable": true,
+          "ordinal": 21,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "captureStatus",
+          "nullable": true,
+          "ordinal": 22,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "paginationStatus",
+          "nullable": true,
+          "ordinal": 23,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "jobCount",
+          "nullable": true,
+          "ordinal": 24,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "pageCount",
+          "nullable": true,
+          "ordinal": 25,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "warningFlag",
+          "nullable": true,
+          "ordinal": 26,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "parentCategoryLabel",
+          "nullable": true,
+          "ordinal": 27,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "parentCategoryCode",
+          "nullable": true,
+          "ordinal": 28,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "parentCategoryName",
+          "nullable": true,
+          "ordinal": 29,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "apiReportedJobCountMin",
+          "nullable": true,
+          "ordinal": 30,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "apiReportedJobCountMax",
+          "nullable": true,
+          "ordinal": 31,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "apiReportedPageCountMin",
+          "nullable": true,
+          "ordinal": 32,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "apiReportedPageCountMax",
+          "nullable": true,
+          "ordinal": 33,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "queueTerminalFlag",
+          "nullable": true,
+          "ordinal": 34,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "captureCompleteFlag",
+          "nullable": true,
+          "ordinal": 35,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "silverEligibleFlag",
+          "nullable": true,
+          "ordinal": 36,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "silverBlockedFlag",
+          "nullable": true,
+          "ordinal": 37,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "warningReason",
+          "nullable": true,
+          "ordinal": 38,
+          "type": "text"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "view",
+      "name": "pbi_acquisition_categories",
+      "schema": "gold",
+      "viewDefinitionMd5": "794a28f3e8177abe77464d6fba3e0169"
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "jobNo",
+          "nullable": true,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "jobCatCode",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "jobCatDescription",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "text"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "view",
+      "name": "pbi_bridge_job_category",
+      "schema": "gold",
+      "viewDefinitionMd5": "1d388228719f2f23cbdcaffdefcf0629"
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": true,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "cust_no",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "area_key",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_datetime",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "timestamp without time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_keyword",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_area",
+          "nullable": true,
+          "ordinal": 12,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_jobcat",
+          "nullable": true,
+          "ordinal": 13,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_name",
+          "nullable": true,
+          "ordinal": 14,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "desc_snippet",
+          "nullable": true,
+          "ordinal": 15,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_link",
+          "nullable": true,
+          "ordinal": 16,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "company_name",
+          "nullable": true,
+          "ordinal": 17,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "co_industry",
+          "nullable": true,
+          "ordinal": 18,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "co_industry_desc",
+          "nullable": true,
+          "ordinal": 19,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_addr_no",
+          "nullable": true,
+          "ordinal": 20,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_addr_no_desc",
+          "nullable": true,
+          "ordinal": 21,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_address",
+          "nullable": true,
+          "ordinal": 22,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_platform",
+          "nullable": true,
+          "ordinal": 23,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "native_job_id",
+          "nullable": true,
+          "ordinal": 24,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_job_key",
+          "nullable": true,
+          "ordinal": 25,
+          "type": "text"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "view",
+      "name": "pbi_fact_job_scope",
+      "schema": "gold",
+      "viewDefinitionMd5": "e2621e7b369d3f1e22de7d28edac1e6e"
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "querySeriesKey",
+          "nullable": true,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshotDate",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshotDateTime",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "timestamp without time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "jobNo",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "custNo",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salaryLow",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salaryHigh",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appearDate",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "sourceKeyword",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "sourceArea",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "text"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "view",
+      "name": "pbi_fact_job_snapshots",
+      "schema": "gold",
+      "viewDefinitionMd5": "e257b5425a4471d54b2f3750c9121e40"
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "jobNo",
+          "nullable": true,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "custNo",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "areaKey",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "jobName",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "descSnippet",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "jobAddress",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "jobAddrNoDesc",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salaryLow",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salaryHigh",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appearDate",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "jobLink",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshotDate",
+          "nullable": true,
+          "ordinal": 12,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshotDateTime",
+          "nullable": true,
+          "ordinal": 13,
+          "type": "timestamp without time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "sourceKeyword",
+          "nullable": true,
+          "ordinal": 14,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "sourceArea",
+          "nullable": true,
+          "ordinal": 15,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "sourcePlatform",
+          "nullable": true,
+          "ordinal": 16,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "nativeJobId",
+          "nullable": true,
+          "ordinal": 17,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "sourceJobKey",
+          "nullable": true,
+          "ordinal": 18,
+          "type": "text"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "view",
+      "name": "pbi_fact_jobs",
+      "schema": "gold",
+      "viewDefinitionMd5": "5d03bc8a36d772797c1e077b747e8370"
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": true,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_datetime",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "timestamp without time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "cust_no",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_keyword",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_area",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "text"
+        }
+      ],
+      "constraints": [],
+      "indexes": [],
+      "kind": "view",
+      "name": "pbi_job_snapshots",
+      "schema": "gold",
+      "viewDefinitionMd5": "ce8e71e039ddb2e2b0a915c31687274f"
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "area_key",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "address_hash",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "character(64)"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "normalized_address",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "input_address",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "matched_address",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "latitude",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "longitude",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "match_level",
+          "nullable": false,
+          "ordinal": 8,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "strategy",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "geocoder_name",
+          "nullable": false,
+          "ordinal": 10,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "geocoded_at",
+          "nullable": false,
+          "ordinal": 11,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "canonical_address",
+          "nullable": true,
+          "ordinal": 12,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "standardization_version",
+          "nullable": true,
+          "ordinal": 13,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "google_maps_search_url",
+          "nullable": true,
+          "ordinal": 14,
+          "type": "text"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "CHECK (length(address_hash) = 64)",
+          "kind": "c",
+          "name": "address_geocodes_address_hash_check"
+        },
+        {
+          "definition": "FOREIGN KEY (area_key) REFERENCES silver.area_dimension(area_key)",
+          "kind": "f",
+          "name": "address_geocodes_area_key_fkey"
+        },
+        {
+          "definition": "CHECK ((latitude IS NULL) = (longitude IS NULL))",
+          "kind": "c",
+          "name": "address_geocodes_check"
+        },
+        {
+          "definition": "CHECK ((match_level = 'NOT_FOUND'::text) = (latitude IS NULL))",
+          "kind": "c",
+          "name": "address_geocodes_check1"
+        },
+        {
+          "definition": "CHECK (latitude IS NULL OR latitude >= '-90'::integer::numeric AND latitude <= 90::numeric)",
+          "kind": "c",
+          "name": "address_geocodes_latitude_check"
+        },
+        {
+          "definition": "CHECK (longitude IS NULL OR longitude >= '-180'::integer::numeric AND longitude <= 180::numeric)",
+          "kind": "c",
+          "name": "address_geocodes_longitude_check"
+        },
+        {
+          "definition": "CHECK (match_level = ANY (ARRAY['EXACT_TEXT'::text, 'ADDRESS_STANDARDIZED'::text, 'ADDRESS_VARIANT'::text, 'STREET_FALLBACK'::text, 'POI_ALIAS'::text, 'NOT_FOUND'::text]))",
+          "kind": "c",
+          "name": "address_geocodes_match_level_check"
+        },
+        {
+          "definition": "PRIMARY KEY (area_key)",
+          "kind": "p",
+          "name": "address_geocodes_pkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX address_geocodes_pkey ON silver.address_geocodes USING btree (area_key)",
+          "name": "address_geocodes_pkey",
+          "primary": true,
+          "unique": true
+        },
+        {
+          "definition": "CREATE INDEX ix_address_geocodes_address_hash ON silver.address_geocodes USING btree (address_hash)",
+          "name": "ix_address_geocodes_address_hash",
+          "primary": false,
+          "unique": false
+        }
+      ],
+      "kind": "table",
+      "name": "address_geocodes",
+      "schema": "silver",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "area_key",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_addr_no",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_addr_no_desc",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_address",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "latitude",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "longitude",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "numeric"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "PRIMARY KEY (area_key)",
+          "kind": "p",
+          "name": "area_dimension_pkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX area_dimension_pkey ON silver.area_dimension USING btree (area_key)",
+          "name": "area_dimension_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "area_dimension",
+      "schema": "silver",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_platform",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "native_category_code",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "native_category_name",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "canonical_job_cat_code",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "mapping_status",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "match_confidence",
+          "nullable": false,
+          "ordinal": 6,
+          "type": "numeric(3,2)"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "notes",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "created_at",
+          "nullable": false,
+          "ordinal": 8,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "updated_at",
+          "nullable": false,
+          "ordinal": 9,
+          "type": "timestamp with time zone"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "FOREIGN KEY (canonical_job_cat_code) REFERENCES silver.category_dimension(job_cat_code)",
+          "kind": "f",
+          "name": "category_crosswalk_canonical_job_cat_code_fkey"
+        },
+        {
+          "definition": "CHECK (mapping_status = ANY (ARRAY['CONFIRMED'::text, 'PENDING_REVIEW'::text, 'UNMAPPED'::text, 'BLOCKED'::text]))",
+          "kind": "c",
+          "name": "category_crosswalk_mapping_status_check"
+        },
+        {
+          "definition": "PRIMARY KEY (source_platform, native_category_code)",
+          "kind": "p",
+          "name": "category_crosswalk_pkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX category_crosswalk_pkey ON silver.category_crosswalk USING btree (source_platform, native_category_code)",
+          "name": "category_crosswalk_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "category_crosswalk",
+      "schema": "silver",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_cat_code",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "job_cat_description",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_cat_english_name",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "parent_job_cat_code",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "hierarchy_depth",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "smallint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "path_codes",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "is_leaf",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "boolean"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "catalog_sha256",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "character(64)"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "PRIMARY KEY (job_cat_code)",
+          "kind": "p",
+          "name": "category_dimension_pkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX category_dimension_pkey ON silver.category_dimension USING btree (job_cat_code)",
+          "name": "category_dimension_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "category_dimension",
+      "schema": "silver",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "cust_no",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "company_name",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "co_industry",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "co_industry_desc",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "updated_at",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "timestamp with time zone"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "PRIMARY KEY (cust_no)",
+          "kind": "p",
+          "name": "company_dimension_pkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX company_dimension_pkey ON silver.company_dimension USING btree (cust_no)",
+          "name": "company_dimension_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "company_dimension",
+      "schema": "silver",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "company_master_sk",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "display_name",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "normalized_name",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "business_tax_id",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "character(8)"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "created_at",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "timestamp with time zone"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "CHECK (business_tax_id IS NULL OR business_tax_id ~ '^[0-9]{8}$'::text)",
+          "kind": "c",
+          "name": "company_master_business_tax_id_check"
+        },
+        {
+          "definition": "PRIMARY KEY (company_master_sk)",
+          "kind": "p",
+          "name": "company_master_pkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX company_master_pkey ON silver.company_master USING btree (company_master_sk)",
+          "name": "company_master_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "company_master",
+      "schema": "silver",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_platform",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "native_company_id",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "raw_company_name",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "company_master_sk",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "match_method",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "matched_at",
+          "nullable": false,
+          "ordinal": 6,
+          "type": "timestamp with time zone"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "FOREIGN KEY (company_master_sk) REFERENCES silver.company_master(company_master_sk)",
+          "kind": "f",
+          "name": "company_source_mapping_company_master_sk_fkey"
+        },
+        {
+          "definition": "CHECK (match_method = ANY (ARRAY['TAX_ID_EXACT'::text, 'NORMALIZED_NAME'::text, 'MANUAL_OVERRIDE'::text, 'PLATFORM_DEFAULT'::text]))",
+          "kind": "c",
+          "name": "company_source_mapping_match_method_check"
+        },
+        {
+          "definition": "PRIMARY KEY (source_platform, native_company_id)",
+          "kind": "p",
+          "name": "company_source_mapping_pkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX company_source_mapping_pkey ON silver.company_source_mapping USING btree (source_platform, native_company_id)",
+          "name": "company_source_mapping_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "company_source_mapping",
+      "schema": "silver",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_cat_code",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "bigint"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "FOREIGN KEY (batch_id) REFERENCES bronze.capture_batches(batch_id)",
+          "kind": "f",
+          "name": "job_category_snapshots_batch_id_fkey"
+        },
+        {
+          "definition": "FOREIGN KEY (job_cat_code) REFERENCES silver.category_dimension(job_cat_code)",
+          "kind": "f",
+          "name": "job_category_snapshots_job_cat_code_fkey"
+        },
+        {
+          "definition": "FOREIGN KEY (job_no) REFERENCES silver.job_current(job_no)",
+          "kind": "f",
+          "name": "job_category_snapshots_job_no_fkey"
+        },
+        {
+          "definition": "PRIMARY KEY (series_key, snapshot_date, batch_id, job_no, job_cat_code)",
+          "kind": "p",
+          "name": "job_category_snapshots_pkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE INDEX ix_job_categories_category ON silver.job_category_snapshots USING btree (job_cat_code, snapshot_date)",
+          "name": "ix_job_categories_category",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "definition": "CREATE UNIQUE INDEX job_category_snapshots_pkey ON silver.job_category_snapshots USING btree (series_key, snapshot_date, batch_id, job_no, job_cat_code)",
+          "name": "job_category_snapshots_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "job_category_snapshots",
+      "schema": "silver",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "cust_no",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_name",
+          "nullable": true,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "description",
+          "nullable": true,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "desc_snippet",
+          "nullable": true,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "area_key",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low_raw",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high_raw",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date_raw",
+          "nullable": true,
+          "ordinal": 12,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "apply_cnt",
+          "nullable": true,
+          "ordinal": 13,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "remote_work_type",
+          "nullable": true,
+          "ordinal": 14,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_link",
+          "nullable": true,
+          "ordinal": 15,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "first_seen_date",
+          "nullable": false,
+          "ordinal": 16,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "last_seen_date",
+          "nullable": false,
+          "ordinal": 17,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "last_observed_at",
+          "nullable": false,
+          "ordinal": 18,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_series_key",
+          "nullable": false,
+          "ordinal": 19,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_keyword",
+          "nullable": true,
+          "ordinal": 20,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_area",
+          "nullable": true,
+          "ordinal": 21,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "quality_issues",
+          "nullable": false,
+          "ordinal": 22,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "updated_at",
+          "nullable": false,
+          "ordinal": 23,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_jobcat",
+          "nullable": true,
+          "ordinal": 24,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "source_platform",
+          "nullable": false,
+          "ordinal": 25,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "native_job_id",
+          "nullable": true,
+          "ordinal": 26,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_job_key",
+          "nullable": true,
+          "ordinal": 27,
+          "type": "text"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "FOREIGN KEY (area_key) REFERENCES silver.area_dimension(area_key)",
+          "kind": "f",
+          "name": "job_current_area_key_fkey"
+        },
+        {
+          "definition": "FOREIGN KEY (cust_no) REFERENCES silver.company_dimension(cust_no)",
+          "kind": "f",
+          "name": "job_current_cust_no_fkey"
+        },
+        {
+          "definition": "PRIMARY KEY (job_no)",
+          "kind": "p",
+          "name": "job_current_pkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX job_current_pkey ON silver.job_current USING btree (job_no)",
+          "name": "job_current_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "job_current",
+      "schema": "silver",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_kind",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "observation_index",
+          "nullable": false,
+          "ordinal": 6,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "raw_value_min",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "raw_value_max",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "amount_min",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "amount_max",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "currency_code",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "character(3)"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "currency_basis",
+          "nullable": false,
+          "ordinal": 12,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "pay_period",
+          "nullable": false,
+          "ordinal": 13,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "range_kind",
+          "nullable": false,
+          "ordinal": 14,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "compensation_component",
+          "nullable": false,
+          "ordinal": 15,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "evidence_text",
+          "nullable": true,
+          "ordinal": 16,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "evidence_start",
+          "nullable": true,
+          "ordinal": 17,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "evidence_end",
+          "nullable": true,
+          "ordinal": 18,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "parse_status",
+          "nullable": false,
+          "ordinal": 19,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "quality_flags",
+          "nullable": false,
+          "ordinal": 20,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "confidence",
+          "nullable": false,
+          "ordinal": 21,
+          "type": "numeric(4,3)"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "parser_version",
+          "nullable": false,
+          "ordinal": 22,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "created_at",
+          "nullable": false,
+          "ordinal": 23,
+          "type": "timestamp with time zone"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "CHECK (amount_max IS NULL OR amount_max >= 0::numeric)",
+          "kind": "c",
+          "name": "job_salary_observations_amount_max_check"
+        },
+        {
+          "definition": "CHECK (amount_min IS NULL OR amount_min >= 0::numeric)",
+          "kind": "c",
+          "name": "job_salary_observations_amount_min_check"
+        },
+        {
+          "definition": "CHECK (evidence_end IS NULL OR evidence_end >= evidence_start)",
+          "kind": "c",
+          "name": "job_salary_observations_check"
+        },
+        {
+          "definition": "CHECK (amount_min IS NULL OR amount_max IS NULL OR amount_min <= amount_max)",
+          "kind": "c",
+          "name": "job_salary_observations_check1"
+        },
+        {
+          "definition": "CHECK (evidence_start IS NULL AND evidence_end IS NULL OR evidence_start IS NOT NULL AND evidence_end IS NOT NULL)",
+          "kind": "c",
+          "name": "job_salary_observations_check2"
+        },
+        {
+          "definition": "CHECK (compensation_component = ANY (ARRAY['BASE'::text, 'VARIABLE'::text, 'UNKNOWN'::text]))",
+          "kind": "c",
+          "name": "job_salary_observations_compensation_component_check"
+        },
+        {
+          "definition": "CHECK (confidence >= 0::numeric AND confidence <= 1::numeric)",
+          "kind": "c",
+          "name": "job_salary_observations_confidence_check"
+        },
+        {
+          "definition": "CHECK (currency_basis = ANY (ARRAY['EXPLICIT_TEXT'::text, 'PLATFORM_DEFAULT'::text, 'UNKNOWN'::text]))",
+          "kind": "c",
+          "name": "job_salary_observations_currency_basis_check"
+        },
+        {
+          "definition": "CHECK (evidence_start IS NULL OR evidence_start >= 0)",
+          "kind": "c",
+          "name": "job_salary_observations_evidence_start_check"
+        },
+        {
+          "definition": "CHECK (observation_index >= 0)",
+          "kind": "c",
+          "name": "job_salary_observations_observation_index_check"
+        },
+        {
+          "definition": "CHECK (parse_status = ANY (ARRAY['PARSED'::text, 'NEEDS_REVIEW'::text, 'NEGOTIABLE'::text, 'NOT_DISCLOSED'::text, 'API_UNIT_UNMAPPED'::text, 'SENTINEL_CANDIDATE'::text]))",
+          "kind": "c",
+          "name": "job_salary_observations_parse_status_check"
+        },
+        {
+          "definition": "CHECK (pay_period = ANY (ARRAY['HOUR'::text, 'DAY'::text, 'WEEK'::text, 'MONTH'::text, 'YEAR'::text, 'UNKNOWN'::text]))",
+          "kind": "c",
+          "name": "job_salary_observations_pay_period_check"
+        },
+        {
+          "definition": "PRIMARY KEY (series_key, snapshot_date, batch_id, job_no, source_kind, observation_index)",
+          "kind": "p",
+          "name": "job_salary_observations_pkey"
+        },
+        {
+          "definition": "CHECK (jsonb_typeof(quality_flags) = 'array'::text)",
+          "kind": "c",
+          "name": "job_salary_observations_quality_flags_check"
+        },
+        {
+          "definition": "CHECK (range_kind = ANY (ARRAY['RANGE'::text, 'FIXED'::text, 'MIN_ONLY'::text, 'MAX_ONLY'::text, 'NEGOTIABLE'::text, 'NOT_DISCLOSED'::text, 'UNRESOLVED'::text]))",
+          "kind": "c",
+          "name": "job_salary_observations_range_kind_check"
+        },
+        {
+          "definition": "FOREIGN KEY (series_key, snapshot_date, batch_id, job_no) REFERENCES silver.job_snapshots(series_key, snapshot_date, batch_id, job_no)",
+          "kind": "f",
+          "name": "job_salary_observations_series_key_snapshot_date_batch_id__fkey"
+        },
+        {
+          "definition": "CHECK (source_kind = ANY (ARRAY['API_FIELDS'::text, 'DESCRIPTION'::text]))",
+          "kind": "c",
+          "name": "job_salary_observations_source_kind_check"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE INDEX ix_salary_observations_job ON silver.job_salary_observations USING btree (job_no, snapshot_date)",
+          "name": "ix_salary_observations_job",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "definition": "CREATE INDEX ix_salary_observations_period ON silver.job_salary_observations USING btree (pay_period, currency_code, parse_status)",
+          "name": "ix_salary_observations_period",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "definition": "CREATE UNIQUE INDEX job_salary_observations_pkey ON silver.job_salary_observations USING btree (series_key, snapshot_date, batch_id, job_no, source_kind, observation_index)",
+          "name": "job_salary_observations_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "job_salary_observations",
+      "schema": "silver",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "skill_code",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "skill_description",
+          "nullable": true,
+          "ordinal": 6,
+          "type": "text"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "FOREIGN KEY (batch_id) REFERENCES bronze.capture_batches(batch_id)",
+          "kind": "f",
+          "name": "job_skill_snapshots_batch_id_fkey"
+        },
+        {
+          "definition": "FOREIGN KEY (job_no) REFERENCES silver.job_current(job_no)",
+          "kind": "f",
+          "name": "job_skill_snapshots_job_no_fkey"
+        },
+        {
+          "definition": "PRIMARY KEY (series_key, snapshot_date, batch_id, job_no, skill_code)",
+          "kind": "p",
+          "name": "job_skill_snapshots_pkey"
+        },
+        {
+          "definition": "FOREIGN KEY (skill_code) REFERENCES silver.skill_dimension(skill_code)",
+          "kind": "f",
+          "name": "job_skill_snapshots_skill_code_fkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE INDEX ix_job_skills_skill ON silver.job_skill_snapshots USING btree (skill_code, snapshot_date)",
+          "name": "ix_job_skills_skill",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "definition": "CREATE UNIQUE INDEX job_skill_snapshots_pkey ON silver.job_skill_snapshots USING btree (series_key, snapshot_date, batch_id, job_no, skill_code)",
+          "name": "job_skill_snapshots_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "job_skill_snapshots",
+      "schema": "silver",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "series_key",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_date",
+          "nullable": false,
+          "ordinal": 2,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "batch_id",
+          "nullable": false,
+          "ordinal": 3,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "job_no",
+          "nullable": false,
+          "ordinal": 4,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "snapshot_datetime",
+          "nullable": false,
+          "ordinal": 5,
+          "type": "timestamp with time zone"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "cust_no",
+          "nullable": false,
+          "ordinal": 6,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "area_key",
+          "nullable": true,
+          "ordinal": 7,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low",
+          "nullable": true,
+          "ordinal": 8,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high",
+          "nullable": true,
+          "ordinal": 9,
+          "type": "numeric"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_low_raw",
+          "nullable": true,
+          "ordinal": 10,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "salary_high_raw",
+          "nullable": true,
+          "ordinal": 11,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date",
+          "nullable": true,
+          "ordinal": 12,
+          "type": "date"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "appear_date_raw",
+          "nullable": true,
+          "ordinal": 13,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "apply_cnt",
+          "nullable": true,
+          "ordinal": 14,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "remote_work_type",
+          "nullable": true,
+          "ordinal": 15,
+          "type": "bigint"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_keyword",
+          "nullable": true,
+          "ordinal": 16,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_area",
+          "nullable": true,
+          "ordinal": 17,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_page",
+          "nullable": false,
+          "ordinal": 18,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_page_size",
+          "nullable": true,
+          "ordinal": 19,
+          "type": "integer"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "quality_issues",
+          "nullable": false,
+          "ordinal": 20,
+          "type": "jsonb"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_jobcat",
+          "nullable": true,
+          "ordinal": 21,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": true,
+          "identity": "",
+          "name": "source_platform",
+          "nullable": false,
+          "ordinal": 22,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "native_job_id",
+          "nullable": true,
+          "ordinal": 23,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "source_job_key",
+          "nullable": true,
+          "ordinal": 24,
+          "type": "text"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "FOREIGN KEY (batch_id) REFERENCES bronze.capture_batches(batch_id)",
+          "kind": "f",
+          "name": "job_snapshots_batch_id_fkey"
+        },
+        {
+          "definition": "FOREIGN KEY (job_no) REFERENCES silver.job_current(job_no)",
+          "kind": "f",
+          "name": "job_snapshots_job_no_fkey"
+        },
+        {
+          "definition": "PRIMARY KEY (series_key, snapshot_date, batch_id, job_no)",
+          "kind": "p",
+          "name": "job_snapshots_pkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE INDEX ix_job_snapshots_date ON silver.job_snapshots USING btree (snapshot_date, job_no)",
+          "name": "ix_job_snapshots_date",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "definition": "CREATE INDEX ix_job_snapshots_series ON silver.job_snapshots USING btree (series_key, snapshot_date)",
+          "name": "ix_job_snapshots_series",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "definition": "CREATE UNIQUE INDEX job_snapshots_pkey ON silver.job_snapshots USING btree (series_key, snapshot_date, batch_id, job_no)",
+          "name": "job_snapshots_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "job_snapshots",
+      "schema": "silver",
+      "viewDefinitionMd5": null
+    },
+    {
+      "columns": [
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "skill_code",
+          "nullable": false,
+          "ordinal": 1,
+          "type": "text"
+        },
+        {
+          "generated": "",
+          "hasDefault": false,
+          "identity": "",
+          "name": "skill_description",
+          "nullable": true,
+          "ordinal": 2,
+          "type": "text"
+        }
+      ],
+      "constraints": [
+        {
+          "definition": "PRIMARY KEY (skill_code)",
+          "kind": "p",
+          "name": "skill_dimension_pkey"
+        }
+      ],
+      "indexes": [
+        {
+          "definition": "CREATE UNIQUE INDEX skill_dimension_pkey ON silver.skill_dimension USING btree (skill_code)",
+          "name": "skill_dimension_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "kind": "table",
+      "name": "skill_dimension",
+      "schema": "silver",
+      "viewDefinitionMd5": null
+    }
+  ],
+  "schemas": [
+    "bronze",
+    "fdw_yes123",
+    "gold",
+    "silver"
+  ],
+  "serverVersion": "16.15"
+}

@@ -4,9 +4,9 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from acquisition.postgres_capture import (CaptureSink, DatabaseCaptureError,
+from acquisition.platforms.jobwant_104.persistence.capture import (CaptureSink, DatabaseCaptureError,
                                            build_batch, resume_compatible)
-from acquisition.storage import series_key
+from acquisition.platforms.jobwant_104.capture.storage import series_key
 
 
 REQUEST = {"baseUrl": "https://www.104.com.tw/jobs/search/api/jobs",
@@ -110,7 +110,7 @@ class DirectCaptureTests(unittest.TestCase):
     def test_database_write_runs_inside_category_transaction(self):
         connection = FakeConnection()
         sink = CaptureSink(connection, lambda value: value)
-        with patch("acquisition.postgres_capture._save_batch",
+        with patch("acquisition.platforms.jobwant_104.persistence.capture._save_batch",
                    side_effect=lambda *args: self.assertTrue(connection.active) or {"status": "loaded"}):
             self.assertEqual(sink.save({"manifest": {}}), {"status": "loaded"})
         self.assertEqual(connection.commits, 1)
@@ -119,7 +119,7 @@ class DirectCaptureTests(unittest.TestCase):
     def test_database_write_error_rolls_back_category_transaction(self):
         connection = FakeConnection()
         sink = CaptureSink(connection, lambda value: value)
-        with patch("acquisition.postgres_capture._save_batch", side_effect=ValueError("write failed")):
+        with patch("acquisition.platforms.jobwant_104.persistence.capture._save_batch", side_effect=ValueError("write failed")):
             with self.assertRaisesRegex(DatabaseCaptureError, "Category transaction failed"):
                 sink.save({"manifest": {}})
         self.assertEqual(connection.commits, 0)

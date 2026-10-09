@@ -39,7 +39,7 @@ $env:PBI104_CAPTURE_DELAY_SECONDS = $delay
 if ($workerRuntime -eq 'host') {
     & python -X utf8 -c "import cloudscraper, pandas, psycopg"
     if ($LASTEXITCODE -ne 0) { throw 'Host ETL dependencies are unavailable.' }
-    & python -X utf8 -m tools.acquisition.distributed_coordinator `
+    & python -X utf8 -m tools.acquisition.platforms.jobwant_104.distributed.coordinator `
         --depth 2 --pagesize 30 --delay $delay --workers $workerCount
 } else {
     docker compose --profile acquisition run --build --rm etl-coordinator
@@ -52,7 +52,7 @@ if ($workerRuntime -eq 'container') {
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
     docker compose --profile acquisition run --rm etl-coordinator `
-        python -m tools.acquisition.distributed_coordinator --status
+        python -m tools.acquisition.platforms.jobwant_104.distributed.coordinator --status
     exit $LASTEXITCODE
 }
 
@@ -64,7 +64,7 @@ $pythonPath = (Get-Command python -ErrorAction Stop).Source
 for ($worker = 1; $worker -le $workerCount; $worker++) {
     $stdout = Join-Path $logDirectory "host-worker-$runStamp-$worker.stdout.log"
     $stderr = Join-Path $logDirectory "host-worker-$runStamp-$worker.stderr.log"
-    $arguments = @('-X', 'utf8', '-m', 'tools.acquisition.distributed_worker',
+$arguments = @('-X', 'utf8', '-m', 'tools.acquisition.platforms.jobwant_104.distributed.worker',
                    '--delay', $delay, '--poll-seconds', '5',
                    '--idle-exit-seconds', '20')
     $process = Start-Process -FilePath $pythonPath -ArgumentList $arguments `
@@ -72,5 +72,5 @@ for ($worker = 1; $worker -le $workerCount; $worker++) {
         -RedirectStandardOutput $stdout -RedirectStandardError $stderr
     Write-Output "Started host ETL worker PID $($process.Id); log: $stdout"
 }
-& python -X utf8 -m tools.acquisition.distributed_coordinator --status
+& python -X utf8 -m tools.acquisition.platforms.jobwant_104.distributed.coordinator --status
 exit $LASTEXITCODE

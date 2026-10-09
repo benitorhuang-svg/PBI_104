@@ -7,11 +7,11 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from acquisition.category_catalog import (SOURCE_URL, flatten_catalog,
+from acquisition.platforms.jobwant_104.capture.category_catalog import (SOURCE_URL, flatten_catalog,
     read_latest_catalog, write_catalog_snapshot)
-from acquisition.storage import series_key
-from capture_category_matrix import (DEFAULT_AREA, category_targets, completed_today,
-                                     make_request)
+from acquisition.platforms.jobwant_104.capture.storage import series_key
+from acquisition.platforms.jobwant_104.capture.capture_category_matrix import (
+    DEFAULT_AREA, category_targets, completed_today, make_request)
 
 
 PAYLOAD = [{"no": "2007000000", "des": "資訊軟體系統類", "eng": "IT", "n": [
@@ -53,7 +53,7 @@ class CategoryCatalogTests(unittest.TestCase):
                    "jobcat": "2007000000", "pagesize": 20}
         mismatch = {"snapshotDate": today, "seriesKey": series_key(request),
                     "paginationStatus": "PAGE_TOTAL_MISMATCH"}
-        with patch("acquisition.category_run_storage.daily_batches", return_value=[mismatch]):
+        with patch("acquisition.platforms.jobwant_104.capture.category_run_storage.daily_batches", return_value=[mismatch]):
             self.assertIs(completed_today("data", request), mismatch)
 
     def test_resume_skips_a_page_capped_batch(self):
@@ -64,7 +64,7 @@ class CategoryCatalogTests(unittest.TestCase):
         capped = {"snapshotDate": today, "seriesKey": series_key(request),
                   "paginationStatus": "PAGE_TOTAL_MISMATCH",
                   "paginationDiagnostics": {"pageLimitReached": True}}
-        with patch("acquisition.category_run_storage.daily_batches", return_value=[capped]):
+        with patch("acquisition.platforms.jobwant_104.capture.category_run_storage.daily_batches", return_value=[capped]):
             self.assertIs(completed_today("data", request), capped)
 
     def test_catalog_snapshot_is_immutable_and_checksum_verified(self):

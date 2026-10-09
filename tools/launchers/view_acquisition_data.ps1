@@ -24,7 +24,7 @@ if (Test-Path -LiteralPath $venvPython) {
 } else {
     $pythonPath = (Get-Command python -ErrorAction Stop).Source
 }
-$arguments = @('-X', 'utf8', '-m', 'tools.acquisition.browser_data_viewer', '--port', [string]$Port)
+$arguments = @('-X', 'utf8', '-m', 'tools.acquisition.platforms.jobwant_104.reporting.viewer', '--port', [string]$Port)
 $process = Start-Process -FilePath $pythonPath -ArgumentList $arguments `
     -WorkingDirectory $projectRoot -WindowStyle Hidden -PassThru `
     -RedirectStandardOutput $stdout -RedirectStandardError $stderr

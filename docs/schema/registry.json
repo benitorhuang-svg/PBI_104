@@ -1,0 +1,24 @@
+{
+  "registryVersion": 1,
+  "platforms": [
+    {
+      "platformId": "104",
+      "displayName": "104 \u4eba\u529b\u9280\u884c",
+      "adapterPath": "tools/acquisition/platforms/jobwant_104/",
+      "sourceSchemaPath": "docs/schema/platforms/104/source-schema.md",
+      "evidencePath": "docs/data-reference/api-schema.md",
+      "schemaStatus": "observed-limited",
+      "lastObservedDate": "2026-08-13"
+    },
+    {
+      "platformId": "yes123",
+      "displayName": "yes123",
+      "adapterPath": "tools/acquisition/platforms/yes123/",
+      "sourceSchemaPath": "docs/schema/platforms/yes123/source-schema.md",
+      "captureSchemaPath": "docs/schema/platforms/yes123/capture-batch-v1.schema.json",
+      "schemaStatus": "adapter-capture-observed",
+      "onboardingGate": "BLOCKED",
+      "lastObservedDate": "2026-10-09"
+    }
+  ]
+}

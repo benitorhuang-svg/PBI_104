@@ -1,0 +1,210 @@
+table FactJob
+	lineageTag: e01bc894-c60a-4e83-849b-cde9f0a28fda
+
+	/// Distinct current jobNo values after optional skill/category filters. Multi-select within each bridge is OR; the two bridges intersect and other model filters remain intersections.
+	measure 'Active Jobs' =
+			VAR HasSkillFilter = ISFILTERED(DimSkill[skillDescription]) || ISFILTERED(DimSkill[skillCode])
+			VAR HasCategoryFilter = ISFILTERED(DimJobCategory[jobCatDescription]) || ISFILTERED(DimJobCategory[jobCatCode])
+			RETURN
+			    IF(
+			        HasSkillFilter || HasCategoryFilter,
+			        CALCULATE(
+			            DISTINCTCOUNT(FactJob[jobNo]),
+			            CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH),
+			            CROSSFILTER(BridgeJobCategory[jobNo], FactJob[jobNo], BOTH)
+			        ),
+			        DISTINCTCOUNT(FactJob[jobNo])
+			    )
+		formatString: #,0
+		displayFolder: Jobs
+		lineageTag: 5a72a91a-af34-48a4-8758-7e082876aa35
+
+	/// Distinct companies in the currently matched job set.
+	measure 'Company Count' = CALCULATE(DISTINCTCOUNT(FactJob[custNo]), CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH), CROSSFILTER(BridgeJobCategory[jobNo], FactJob[jobNo], BOTH))
+		formatString: #,0
+		displayFolder: Jobs
+		lineageTag: d79a642c-479c-4e17-b1fe-e81a5568ad8d
+
+	/// Matched jobs with both numeric API salary bounds present; this does not interpret either bound as disclosed salary.
+	measure 'Jobs with Salary' = CALCULATE(COUNTROWS(FILTER(FactJob, NOT ISBLANK(FactJob[salaryLow]) && NOT ISBLANK(FactJob[salaryHigh]))), CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH), CROSSFILTER(BridgeJobCategory[jobNo], FactJob[jobNo], BOTH))
+		formatString: #,0
+		displayFolder: Jobs
+		lineageTag: ddd9a331-14db-43b8-9316-6e0da72efdc2
+
+	/// Matched jobs with both raw numeric salary bounds divided by matched current jobs.
+	measure 'Salary Coverage %' = DIVIDE([Jobs with Salary], [Active Jobs], 0)
+		formatString: 0.0%
+		displayFolder: Jobs
+		lineageTag: 1a453a7e-4a28-4c7b-b5b0-9fced4a7ca4d
+
+	/// Distinct jobs matching the selected normalized skill set and all other filters.
+	measure 'Skill Job Count' = [Active Jobs]
+		formatString: #,0
+		displayFolder: Jobs
+		lineageTag: cac87f8d-6ddc-4a9f-bd2f-86fab1d4368c
+
+	/// Share of matched jobs associated with the selected normalized skills; describes association, not causation.
+	measure 'Skill Share %' = DIVIDE([Skill Job Count], CALCULATE([Active Jobs], REMOVEFILTERS(DimSkill)), 0)
+		formatString: 0.0%
+		displayFolder: Jobs
+		lineageTag: fbac9dd5-be67-471f-8cc8-0f0d3537c804
+
+	/// Distinct jobs matching the selected observed category codes and all other filters.
+	measure 'Category Job Count' = [Active Jobs]
+		formatString: #,0
+		displayFolder: Jobs
+		lineageTag: c314b901-7fa2-4be0-82a1-a7b2184c901e
+
+	/// Share of matched jobs associated with the selected category codes.
+	measure 'Category Share %' = DIVIDE([Category Job Count], CALCULATE([Active Jobs], REMOVEFILTERS(DimJobCategory)), 0)
+		formatString: 0.0%
+		displayFolder: Jobs
+		lineageTag: d85a2104-51bc-4e4b-9e0a-bf1930b8c6e2
+
+	/// Distinct normalized skill descriptions for the currently selected job.
+	measure 'Job Skills' =
+			VAR SkillNames = CALCULATETABLE(VALUES(BridgeJobSkill[skillDescription]), CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH))
+			RETURN CONCATENATEX(FILTER(SkillNames, NOT ISBLANK([skillDescription])), [skillDescription], ", ", [skillDescription], ASC)
+		formatString: @
+		displayFolder: Jobs
+		lineageTag: 732335da-adee-4143-9b7a-f47b31082ad4
+
+	column jobNo
+		dataType: string
+		lineageTag: 9e519c02-2e56-4cdd-bf69-face09cdc81c
+		summarizeBy: none
+		sourceColumn: jobNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column custNo
+		dataType: string
+		lineageTag: a16bf240-101b-4224-91c6-d9a5ae145e5a
+		summarizeBy: none
+		sourceColumn: custNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column jobName
+		dataType: string
+		lineageTag: c81ad7f4-7158-4390-89c8-aeab2a881964
+		summarizeBy: none
+		sourceColumn: jobName
+
+		annotation SummarizationSetBy = Automatic
+
+	column descSnippet
+		dataType: string
+		lineageTag: 7f136376-b59a-411d-b1bf-278ce519a71e
+		summarizeBy: none
+		sourceColumn: descSnippet
+
+		annotation SummarizationSetBy = Automatic
+
+	column jobAddress
+		dataType: string
+		lineageTag: c8d4d68b-cb16-41e5-ad61-843f8d2cd85d
+		summarizeBy: none
+		sourceColumn: jobAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column jobAddrNoDesc
+		dataType: string
+		lineageTag: f06acbb7-5d00-4996-98df-8660f73cf6d3
+		summarizeBy: none
+		sourceColumn: jobAddrNoDesc
+
+		annotation SummarizationSetBy = Automatic
+
+	column salaryLow
+		dataType: double
+		lineageTag: 2c44fe09-5c39-4de9-b601-53d821b1f9fa
+		summarizeBy: sum
+		sourceColumn: salaryLow
+
+		annotation SummarizationSetBy = Automatic
+
+	column salaryHigh
+		dataType: double
+		lineageTag: f633579c-f042-4cfc-b4f7-2112ca3b0b94
+		summarizeBy: sum
+		sourceColumn: salaryHigh
+
+		annotation SummarizationSetBy = Automatic
+
+	column appearDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 71a0f7db-3638-40dc-aeca-789bcf00beb2
+		summarizeBy: none
+		sourceColumn: appearDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column snapshotDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b25df2d0-069a-4038-a3d2-e444922df616
+		summarizeBy: none
+		sourceColumn: snapshotDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column snapshotDateTime
+		dataType: dateTime
+		lineageTag: 162179e5-89a8-4671-9f6b-a926f0a849f7
+		summarizeBy: none
+		sourceColumn: snapshotDateTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column sourceKeyword
+		dataType: string
+		lineageTag: f2af6b80-2b57-462b-8633-1c1da55e367e
+		summarizeBy: none
+		sourceColumn: sourceKeyword
+
+		annotation SummarizationSetBy = Automatic
+
+	column sourceArea
+		dataType: string
+		lineageTag: adaa80bf-24cb-4dc6-8689-1295148f046c
+		summarizeBy: none
+		sourceColumn: sourceArea
+
+		annotation SummarizationSetBy = Automatic
+
+	column jobLink
+		dataType: string
+		lineageTag: 718f7652-8091-491b-9253-9819e4d07daf
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: jobLink
+
+		annotation SummarizationSetBy = Automatic
+
+	column areaKey
+		dataType: string
+		lineageTag: 9ef053dd-8e9c-46ce-b11c-44b62d7820c1
+		summarizeBy: none
+		sourceColumn: areaKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column sourcePlatform
+		dataType: string
+		lineageTag: d4e5f6a7-b8c9-40d1-e2f3-a4b5c6d7e8f9
+		summarizeBy: none
+		sourceColumn: sourcePlatform
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactJob = m
+		mode: import
+		source = mdl_FactJob
+

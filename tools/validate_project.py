@@ -61,18 +61,45 @@ def official_schema(url: str) -> dict:
 
 
 def check_json() -> int:
-    files = [ROOT / "PBI_104.pbip"]
-    files += list((ROOT / "PBI_104.Report/definition").rglob("*.json"))
-    files += list((ROOT / "PBI_104.SemanticModel/definition").rglob("*.json"))
+    files = [ROOT / "PBI_JobWant.pbip"]
+    files += list((ROOT / "PBI_JobWant.Report/definition").rglob("*.json"))
+    files += list((ROOT / "PBI_JobWant.SemanticModel/definition").rglob("*.json"))
     for path in files:
         with path.open("r", encoding="utf-8-sig") as source:
             json.load(source)
     return len(files)
 
 
+def check_project_artifact_paths() -> int:
+    project = json.loads((ROOT / "PBI_JobWant.pbip").read_text(encoding="utf-8-sig"))
+    root = ROOT.resolve()
+    checked = 0
+    for artifact in project.get("artifacts", []):
+        report = artifact.get("report")
+        if not isinstance(report, dict) or not isinstance(report.get("path"), str):
+            raise ValueError("PBIP artifact is missing its report path")
+        report_path = (root / report["path"]).resolve()
+        if not report_path.is_relative_to(root) or not report_path.is_dir():
+            raise ValueError(f"PBIP report path is invalid: {report['path']}")
+        report_file = report_path / "definition.pbir"
+        if not report_file.is_file():
+            raise ValueError(f"PBIR definition is missing: {report_file.relative_to(root)}")
+        report_definition = json.loads(report_file.read_text(encoding="utf-8-sig"))
+        model_reference = report_definition.get("datasetReference", {}).get("byPath", {}).get("path")
+        if not isinstance(model_reference, str):
+            raise ValueError(f"PBIR semantic-model path is missing: {report_file.relative_to(root)}")
+        model_path = (report_path / model_reference).resolve()
+        if not model_path.is_relative_to(root) or not (model_path / "definition.pbism").is_file():
+            raise ValueError(f"PBIR semantic-model path is invalid: {model_reference}")
+        checked += 2
+    if checked == 0:
+        raise ValueError("PBIP contains no report-to-semantic-model paths")
+    return checked
+
+
 def report_symbols() -> dict[str, set[str]]:
     symbols: dict[str, set[str]] = {}
-    for table in (ROOT / "PBI_104.SemanticModel/definition/tables").glob("*.tmdl"):
+    for table in (ROOT / "PBI_JobWant.SemanticModel/definition/tables").glob("*.tmdl"):
         text = table.read_text(encoding="utf-8-sig")
         name = re.search(r"(?m)^table (.+)$", text)
         if not name:
@@ -87,7 +114,7 @@ def report_symbols() -> dict[str, set[str]]:
 def check_report_references() -> int:
     symbols = report_symbols()
     checked = 0
-    for path in (ROOT / "PBI_104.Report/definition/pages").rglob("visual.json"):
+    for path in (ROOT / "PBI_JobWant.Report/definition/pages").rglob("visual.json"):
         visual = json.loads(path.read_text(encoding="utf-8-sig"))
 
         def visit(value):
@@ -128,7 +155,7 @@ def check_schemas() -> int:
 
     registry = Registry(retrieve=retrieve)
     checked = 0
-    for path in (ROOT / "PBI_104.Report/definition").rglob("*.json"):
+    for path in (ROOT / "PBI_JobWant.Report/definition").rglob("*.json"):
         document = json.loads(path.read_text(encoding="utf-8-sig"))
         schema_url = document.get("$schema")
         if not schema_url:
@@ -145,6 +172,7 @@ def check_schemas() -> int:
 
 def main() -> int:
     json_files = check_json()
+    artifact_links = check_project_artifact_paths()
     references = check_report_references()
     schemas = check_schemas()
     from sync_queries import sync
@@ -172,6 +200,7 @@ def main() -> int:
     result_status = "PASS" if desktop_parse == "PASS" else "STRUCTURE_PASS_DESKTOP_TMDL_UNAVAILABLE"
     print(json.dumps({"result": result_status, "validationScope": validation_scope,
                       "structuralChecks": "PASS", "jsonFiles": json_files, "pbirSchemas": schemas,
+                      "projectArtifactLinks": artifact_links,
                       "reportFieldReferences": references, "queries": sync_result["queries"],
                       "desktopTmdlParser": desktop_parse,
                       "schemaCompatibility": SCHEMA_FALLBACKS}, ensure_ascii=False))

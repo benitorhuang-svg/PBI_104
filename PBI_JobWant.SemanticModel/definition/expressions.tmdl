@@ -1,0 +1,102 @@
+expression pPostgresDatabase = "jobwant_104" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 810e7d0a-f8d1-4493-b661-c3a7f9f155e1
+	queryGroup: 00_Parameters
+
+	annotation PBI_ResultType = Text
+
+expression pPostgresServer = "127.0.0.1:5433" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 8af947ff-b60d-4624-a81c-48991cd2e651
+	queryGroup: 00_Parameters
+
+	annotation PBI_ResultType = Text
+
+expression fxReadGoldView =
+		(viewName as text) as table =>
+		let
+		    Database = PostgreSQL.Database(pPostgresServer, pPostgresDatabase),
+		    GoldView = Database{[Schema = "gold", Item = viewName]}[Data]
+		in
+		    GoldView
+	lineageTag: 92ea488c-496d-4499-a9bd-0e9959f95fd7
+	queryGroup: 01_Functions
+
+expression src_PbiBridgeJobCategory = fxReadGoldView("pbi_bridge_job_category")
+	lineageTag: 0e8fb2e8-9200-4c28-9b69-6705de71bd51
+	queryGroup: 02_Source
+
+expression src_PbiBridgeJobSkill = fxReadGoldView("pbi_bridge_job_skill")
+	lineageTag: eb790deb-8ec0-4c1d-b4e8-422a19bd0cb6
+	queryGroup: 02_Source
+
+expression src_PbiDimArea = fxReadGoldView("pbi_dim_area")
+	lineageTag: aa5507dd-8ebb-4262-ad27-e64d41fd48eb
+	queryGroup: 02_Source
+
+expression src_PbiDimCompany = fxReadGoldView("pbi_dim_company")
+	lineageTag: 1189b66e-69b7-444a-8bd3-9030cd360fbb
+	queryGroup: 02_Source
+
+expression src_PbiDimDate = fxReadGoldView("pbi_dim_date")
+	lineageTag: e331bbb2-d0be-4ce3-9a70-56d376d5c1cb
+	queryGroup: 02_Source
+
+expression src_PbiDimJobCategory = fxReadGoldView("pbi_dim_job_category")
+	lineageTag: 3f2289da-40e2-49ed-81b2-ca26499a46a6
+	queryGroup: 02_Source
+
+expression src_PbiDimSkill = fxReadGoldView("pbi_dim_skill")
+	lineageTag: 9a0957ac-fee7-4a54-b627-b0072dad06ec
+	queryGroup: 02_Source
+
+expression src_PbiFactJobs = fxReadGoldView("pbi_fact_jobs")
+	lineageTag: ebe19a48-fe6f-4501-b369-68fe55dac200
+	queryGroup: 02_Source
+
+expression src_PbiFactJobSnapshots = fxReadGoldView("pbi_fact_job_snapshots")
+	lineageTag: 88feaed8-2d5a-411d-bda5-00226ccf89bb
+	queryGroup: 02_Source
+
+expression mdl_BridgeJobCategory = src_PbiBridgeJobCategory
+	lineageTag: 6840c8e5-0683-4f97-96a3-17459fd074d0
+	queryGroup: 04_Model
+
+expression mdl_BridgeJobSkill = src_PbiBridgeJobSkill
+	lineageTag: 3a05a3c8-433a-4580-bede-e2b035e04291
+	queryGroup: 04_Model
+
+expression mdl_DimArea = src_PbiDimArea
+	lineageTag: 53e1ca26-5a3e-4bce-9ce9-1af568822ea9
+	queryGroup: 04_Model
+
+expression mdl_DimCompany = src_PbiDimCompany
+	lineageTag: 25c5d03d-bdaa-4f2e-899f-5dbcf490580d
+	queryGroup: 04_Model
+
+expression mdl_DimDate = src_PbiDimDate
+	lineageTag: 6e6e40f8-0b26-413f-aa49-a568640440e7
+	queryGroup: 04_Model
+
+expression mdl_DimJobCategory = src_PbiDimJobCategory
+	lineageTag: aa110a6a-5fbf-4f05-980f-17c9594d5b20
+	queryGroup: 04_Model
+
+expression mdl_DimSkill = src_PbiDimSkill
+	lineageTag: 9d20db91-1bf3-4595-813e-ca5e5f6044fc
+	queryGroup: 04_Model
+
+expression mdl_FactJob = src_PbiFactJobs
+	lineageTag: 3c4666d3-5681-4c52-a1b5-826641c3cd48
+	queryGroup: 04_Model
+
+expression mdl_FactJobSnapshot = src_PbiFactJobSnapshots
+	lineageTag: baaa1e3e-5f8c-4565-a44b-3ae5368790b4
+	queryGroup: 04_Model
+
+expression src_PbiAcquisitionCategories = fxReadGoldView("pbi_acquisition_categories")
+	lineageTag: 17d13489-9d91-462e-88a9-2b2052275fc7
+	queryGroup: 02_Source
+
+expression mdl_FactAcquisitionCategory = src_PbiAcquisitionCategories
+	lineageTag: c5f750a8-cada-43bb-8c72-c1b14a1948dc
+	queryGroup: 04_Model
+

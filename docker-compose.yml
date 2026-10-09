@@ -6,14 +6,14 @@ services:
     ports:
       - "127.0.0.1:${PBI104_POSTGRES_PORT:-5433}:5432"
     environment:
-      POSTGRES_DB: ${PBI104_POSTGRES_DB:-pbi_104}
+      POSTGRES_DB: ${PBI104_POSTGRES_DB:-jobwant_104}
       POSTGRES_USER: ${PBI104_POSTGRES_USER:-pbi_admin}
       POSTGRES_PASSWORD: ${PBI104_POSTGRES_PASSWORD:?Set PBI104_POSTGRES_PASSWORD in the ignored .env file}
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./tools/sql/init_postgres_schema.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${PBI104_POSTGRES_USER:-pbi_admin} -d ${PBI104_POSTGRES_DB:-pbi_104}"]
+      test: ["CMD-SHELL", "pg_isready -U ${PBI104_POSTGRES_USER:-pbi_admin} -d ${PBI104_POSTGRES_DB:-jobwant_104}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -36,7 +36,7 @@ services:
       - type: bind
         source: ../WGS84_TWD97
         target: /data/source
-        read_only: true
+        read_only: false
     restart: unless-stopped
     healthcheck:
       test:
@@ -54,7 +54,7 @@ services:
     image: pbi104-etl:local
     build:
       context: .
-      dockerfile: containers/Dockerfile.etl
+      dockerfile: tools/deployment/containers/Dockerfile.etl
     env_file: .env
     environment:
       PBI104_POSTGRES_HOST: postgres
@@ -75,7 +75,7 @@ services:
     command:
       - python
       - -m
-      - tools.acquisition.distributed_coordinator
+      - tools.acquisition.platforms.jobwant_104.distributed.coordinator
       - --depth
       - "2"
       - --pagesize
@@ -91,7 +91,7 @@ services:
     image: pbi104-etl:local
     build:
       context: .
-      dockerfile: containers/Dockerfile.etl
+      dockerfile: tools/deployment/containers/Dockerfile.etl
     env_file: .env
     environment:
       PBI104_POSTGRES_HOST: postgres
@@ -112,7 +112,7 @@ services:
     command:
       - python
       - -m
-      - tools.acquisition.distributed_worker
+      - tools.acquisition.platforms.jobwant_104.distributed.worker
       - --delay
       - ${PBI104_CAPTURE_DELAY_SECONDS:-0.8}
       - --poll-seconds

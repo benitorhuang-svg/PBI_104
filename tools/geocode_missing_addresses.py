@@ -8,8 +8,8 @@ import sys
 TOOLS = Path(__file__).resolve().parent
 sys.path.insert(0, str(TOOLS))
 
-from acquisition.geocoding import geocode_candidates, group_candidates, stored_rows
-from acquisition.postgres_loader import read_db_config
+from acquisition.shared.geocoding import geocode_candidates, group_candidates, stored_rows
+from acquisition.platforms.jobwant_104.persistence.loader import read_db_config
 
 
 INSERT_SQL = """INSERT INTO silver.address_geocodes

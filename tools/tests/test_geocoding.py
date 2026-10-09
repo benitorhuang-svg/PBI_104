@@ -4,7 +4,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from acquisition.geocoding import (address_equivalence_key, address_hash,
+from acquisition.shared.geocoding import (address_equivalence_key, address_hash,
                                    addresses_equivalent_after_standardization,
                                    geocode_batch, geocode_candidates,
                                    google_maps_search_url, group_candidates,

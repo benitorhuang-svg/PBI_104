@@ -7,8 +7,8 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from acquisition.pagination import PaginationTotalMismatch, collect, validate_page
-from acquisition.storage import daily_batches, publish, series_key, verify
+from acquisition.platforms.jobwant_104.client.pagination import PaginationTotalMismatch, collect, validate_page
+from acquisition.platforms.jobwant_104.capture.storage import daily_batches, publish, series_key, verify
 
 PROJECT = Path(__file__).resolve().parents[2]
 REQUEST = {"baseUrl": "https://www.104.com.tw/jobs/search/api/jobs", "keyword": "powerbi",
@@ -159,7 +159,7 @@ class StorageTests(unittest.TestCase):
     def test_failure_preserves_current(self):
         publish(self.root, REQUEST, self.pages)
         before = (self.root / "current.json").read_bytes()
-        with patch("acquisition.storage.os.replace", side_effect=OSError("simulated")):
+        with patch("acquisition.platforms.jobwant_104.capture.storage.os.replace", side_effect=OSError("simulated")):
             with self.assertRaises(OSError):
                 publish(self.root, REQUEST, self.pages)
         self.assertEqual((self.root / "current.json").read_bytes(), before)

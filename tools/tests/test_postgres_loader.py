@@ -5,8 +5,8 @@ import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from acquisition.postgres_loader import normalize_batch, read_batches, summary
-from acquisition.storage import publish
+from acquisition.platforms.jobwant_104.persistence.loader import normalize_batch, read_batches, summary
+from acquisition.platforms.jobwant_104.capture.storage import publish
 
 
 REQUEST = {"baseUrl": "https://www.104.com.tw/jobs/search/api/jobs", "keyword": "python",

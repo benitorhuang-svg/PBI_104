@@ -11,9 +11,9 @@ artifacts
 .optimization
 .pbi
 cache.abf
-PBI_104.Report
-PBI_104.SemanticModel
-PBI_104.pbip
+PBI_JobWant.Report
+PBI_JobWant.SemanticModel
+PBI_JobWant.pbip
 docs
 report-design
 powerquery/00_parameters

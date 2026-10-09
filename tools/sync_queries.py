@@ -27,7 +27,7 @@ def split_expression(match):
 
 
 def expressions(root):
-    path = root / "PBI_104.SemanticModel/definition/expressions.tmdl"
+    path = root / "PBI_JobWant.SemanticModel/definition/expressions.tmdl"
     original = path.read_text(encoding="utf-8-sig")
     existing = {m[1]: m for m in BLOCK.finditer(original)}
     if len(existing) != len(re.findall(r"^expression ", original, re.M)):
@@ -58,14 +58,13 @@ def expressions(root):
 
 def sync(root, write=False):
     path, content, names, mismatches = expressions(root)
-    model_path = root / "PBI_104.SemanticModel/definition/model.tmdl"
+    model_path = root / "PBI_JobWant.SemanticModel/definition/model.tmdl"
     model = model_path.read_text(encoding="utf-8-sig")
     order_match = re.search(r"(?m)^annotation PBI_QueryOrder = (.+)$", model)
     old_order = json.loads(order_match[1])
     table_names = set(re.findall(r"(?m)^ref table (.+)$", model))
     preserved_tables = [name for name in old_order if name not in names and name in table_names]
-    legacy_query_tables = [name for name in old_order if name not in names and name == "查詢"]
-    order = names + preserved_tables + [name for name in legacy_query_tables if name not in preserved_tables]
+    order = names + preserved_tables
     updated = model[:order_match.start(1)] + json.dumps(order, ensure_ascii=False) + model[order_match.end(1):]
     if write:
         path.write_text(content, encoding="utf-8", newline="\n")

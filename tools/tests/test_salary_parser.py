@@ -4,7 +4,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from acquisition.salary_parser import extract_salary_observations
+from acquisition.shared.salary_parser import extract_salary_observations
 
 
 class SalaryParserTests(unittest.TestCase):

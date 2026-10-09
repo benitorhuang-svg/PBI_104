@@ -10,7 +10,7 @@ $bin = Join-Path $app.InstallLocation 'bin'
 foreach ($dll in @('Microsoft.PowerBI.Tabular.dll', 'Microsoft.PowerBI.Tabular.Json.dll')) {
   [Reflection.Assembly]::LoadFrom((Join-Path $bin $dll)) | Out-Null
 }
-$definition = Join-Path $projectRoot 'PBI_104.SemanticModel\definition'
+$definition = Join-Path $projectRoot 'PBI_JobWant.SemanticModel\definition'
 if ($Operation -eq 'Parse') {
   $database = [Microsoft.AnalysisServices.Tabular.TmdlSerializer]::DeserializeDatabaseFromFolder($definition)
   [pscustomobject]@{Result='PASS'; Tables=$database.Model.Tables.Count; Expressions=$database.Model.Expressions.Count; Relationships=$database.Model.Relationships.Count} | ConvertTo-Json -Compress

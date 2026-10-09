@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:jobwant:schema:platforms:yes123:capture-batch-v1",
+  "title": "JobWant yes123 adapter capture batch v1",
+  "description": "Observed JobWant capture-file contract; this is not an official yes123 API schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest",
+    "manifest_sha256",
+    "series_key",
+    "batch_id",
+    "snapshot_date",
+    "snapshot_datetime",
+    "capture_status",
+    "reported_total",
+    "jobs",
+    "raw_rows",
+    "pages"
+  ],
+  "properties": {
+    "manifest": { "$ref": "#/$defs/manifest" },
+    "manifest_sha256": { "$ref": "#/$defs/sha256" },
+    "series_key": { "$ref": "#/$defs/seriesKey" },
+    "batch_id": { "type": "string", "minLength": 1 },
+    "snapshot_date": { "type": "string", "format": "date" },
+    "snapshot_datetime": { "type": "string", "format": "date-time" },
+    "capture_status": { "type": "string" },
+    "reported_total": { "type": ["integer", "null"], "minimum": 0 },
+    "jobs": { "type": "array", "items": { "$ref": "#/$defs/job" } },
+    "raw_rows": { "type": "array", "items": { "$ref": "#/$defs/rawRow" } },
+    "pages": { "type": "array", "items": { "$ref": "#/$defs/page" } }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "seriesKey": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{20}$"
+    },
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "sourcePlatform",
+        "codeKind",
+        "nativeSearchCode",
+        "seriesKey",
+        "batchId",
+        "snapshotDate",
+        "snapshotDateTime",
+        "request",
+        "reportedTotal",
+        "pages",
+        "rows",
+        "paginationStatus",
+        "manifestSha256"
+      ],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "sourcePlatform": { "const": "yes123" },
+        "codeKind": { "type": "string" },
+        "nativeSearchCode": { "type": "string" },
+        "seriesKey": { "$ref": "#/$defs/seriesKey" },
+        "batchId": { "type": "string", "minLength": 1 },
+        "snapshotDate": { "type": "string", "format": "date" },
+        "snapshotDateTime": { "type": "string", "format": "date-time" },
+        "request": { "$ref": "#/$defs/request" },
+        "reportedTotal": { "type": ["integer", "null"], "minimum": 0 },
+        "pages": { "type": "array", "items": { "$ref": "#/$defs/page" } },
+        "rows": { "type": "integer", "minimum": 0 },
+        "paginationStatus": { "type": "string" },
+        "manifestSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform", "category_code", "keyword", "baseUrl"],
+      "properties": {
+        "platform": { "const": "yes123" },
+        "category_code": { "type": ["string", "null"] },
+        "keyword": { "type": ["string", "null"] },
+        "baseUrl": { "type": "string", "format": "uri" }
+      }
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["page", "strrec", "status_code", "sha256", "bytes_length", "rows_found", "new_rows"],
+      "properties": {
+        "page": { "type": "integer", "minimum": 1 },
+        "strrec": { "type": "integer", "minimum": 0 },
+        "status_code": { "type": "integer" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes_length": { "type": "integer", "minimum": 0 },
+        "rows_found": { "type": "integer", "minimum": 0 },
+        "new_rows": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "rawRow": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "integer", "minimum": 1 },
+        { "type": "integer", "minimum": 0 },
+        { "$ref": "#/$defs/job" }
+      ],
+      "items": false,
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "job": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_platform",
+        "source_job_key",
+        "source_company_key",
+        "native_job_id",
+        "native_company_id",
+        "job_title",
+        "company_name",
+        "raw_salary",
+        "salary_observations",
+        "raw_area",
+        "standardized_address",
+        "appear_date_raw",
+        "job_url"
+      ],
+      "properties": {
+        "source_platform": { "const": "yes123" },
+        "source_job_key": { "type": "string", "minLength": 1 },
+        "source_company_key": { "type": "string" },
+        "native_job_id": { "type": "string", "minLength": 1 },
+        "native_company_id": { "type": "string" },
+        "job_title": { "type": "string" },
+        "company_name": { "type": "string" },
+        "raw_salary": { "type": "string" },
+        "salary_observations": { "type": "array", "items": { "$ref": "#/$defs/salaryObservation" } },
+        "raw_area": { "type": "string" },
+        "standardized_address": { "type": "string" },
+        "appear_date_raw": { "type": "string" },
+        "job_url": { "type": "string", "format": "uri" }
+      }
+    },
+    "salaryObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_kind",
+        "observation_index",
+        "raw_value_min",
+        "raw_value_max",
+        "amount_min",
+        "amount_max",
+        "currency_code",
+        "currency_basis",
+        "pay_period",
+        "range_kind",
+        "compensation_component",
+        "evidence_text",
+        "evidence_start",
+        "evidence_end",
+        "parse_status",
+        "quality_flags",
+        "confidence",
+        "parser_version"
+      ],
+      "properties": {
+        "source_kind": { "type": "string" },
+        "observation_index": { "type": "integer", "minimum": 0 },
+        "raw_value_min": { "type": ["string", "null"] },
+        "raw_value_max": { "type": ["string", "null"] },
+        "amount_min": { "type": ["string", "null"] },
+        "amount_max": { "type": ["string", "null"] },
+        "currency_code": { "type": ["string", "null"] },
+        "currency_basis": { "type": "string" },
+        "pay_period": { "type": "string" },
+        "range_kind": { "type": "string" },
+        "compensation_component": { "type": "string" },
+        "evidence_text": { "type": ["string", "null"] },
+        "evidence_start": { "type": ["integer", "null"] },
+        "evidence_end": { "type": ["integer", "null"] },
+        "parse_status": { "type": "string" },
+        "quality_flags": { "type": "array", "items": { "type": "string" } },
+        "confidence": { "type": ["string", "null"] },
+        "parser_version": { "type": "string" }
+      }
+    }
+  }
+}
