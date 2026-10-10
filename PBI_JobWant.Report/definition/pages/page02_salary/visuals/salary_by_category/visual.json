@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimJobCategory"
+                      "Entity": "dim_職類"
                     }
                   },
-                  "Property": "jobCatCode"
+                  "Property": "職類代碼"
                 }
               },
-              "queryRef": "DimJobCategory.jobCatCode",
+              "queryRef": "dim_職類.職類代碼",
               "active": true
             }
           ]
@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "Jobs with Salary"
+                  "Property": "具備薪資上下限的職缺數"
                 }
               },
-              "queryRef": "FactJob.Jobs with Salary"
+              "queryRef": "目前職缺.具備薪資上下限的職缺數"
             }
           ]
         }

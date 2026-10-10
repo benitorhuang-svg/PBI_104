@@ -1,4 +1,355 @@
 cultureInfo zh-TW
+	translations
+		model Model
+			table 目前職缺
+				caption: 目前職缺
+				description: 每個來源職缺一列的目前職缺資料。薪資上下限保留來源數值投影，不代表薪資單位已可跨來源比較。
+				column 職缺編號
+					caption: 職缺編號
+				column 公司代碼
+					caption: 公司代碼
+				column 職缺名稱
+					caption: 職缺名稱
+				column 職缺摘要
+					caption: 職缺摘要
+				column 職缺地址
+					caption: 職缺地址
+				column 職缺地區
+					caption: 職缺地區
+				column 薪資下限
+					caption: 薪資下限
+				column 薪資上限
+					caption: 薪資上限
+				column 刊登日期
+					caption: 刊登日期
+				column 快照日期
+					caption: 快照日期
+				column 快照時間
+					caption: 快照時間
+				column 擷取關鍵字
+					caption: 擷取關鍵字
+				column 擷取地區
+					caption: 擷取地區
+				column 職缺來源連結
+					caption: 職缺來源連結
+				column 地點識別碼
+					caption: 地點識別碼
+				column 職缺平台
+					caption: 職缺平台
+				measure 目前符合條件職缺數
+					caption: 目前符合條件職缺數
+					displayFolder: 職缺分析
+				measure 符合條件公司數
+					caption: 符合條件公司數
+					displayFolder: 職缺分析
+				measure 具備薪資上下限的職缺數
+					caption: 具備薪資上下限的職缺數
+					displayFolder: 職缺分析
+				measure 薪資上下限涵蓋率
+					caption: 薪資上下限涵蓋率
+					displayFolder: 職缺分析
+				measure 技能篩選職缺數
+					caption: 技能篩選職缺數
+					displayFolder: 職缺分析
+				measure 技能職缺占比
+					caption: 技能職缺占比
+					displayFolder: 職缺分析
+				measure 職類篩選職缺數
+					caption: 職類篩選職缺數
+					displayFolder: 職缺分析
+				measure 職類職缺占比
+					caption: 職類職缺占比
+					displayFolder: 職缺分析
+				measure 職缺技能清單
+					caption: 職缺技能清單
+					displayFolder: 職缺分析
+				measure 所選職缺公司名稱
+					caption: 所選職缺公司名稱
+					displayFolder: 職缺分析\所選職缺
+			table 職缺快照
+				caption: 職缺快照
+				description: 每列代表一個來源職缺的一次已保存快照；與目前職缺表粒度不同，適合追溯觀測。
+				column 快照日期
+					caption: 快照日期
+				column 快照時間
+					caption: 快照時間
+				column 職缺編號
+					caption: 職缺編號
+				column 公司代碼
+					caption: 公司代碼
+				column 刊登日期
+					caption: 刊登日期
+				column 薪資下限
+					caption: 薪資下限
+				column 薪資上限
+					caption: 薪資上限
+				column 擷取關鍵字
+					caption: 擷取關鍵字
+				column 擷取地區
+					caption: 擷取地區
+				column 查詢序列識別碼
+					caption: 查詢序列識別碼
+				column 職缺平台
+					caption: 職缺平台
+			table dim_公司
+				caption: dim_公司
+				description: 公司名稱與產業描述；公司代碼是模型關聯鍵。
+				column 公司代碼
+					caption: 公司代碼
+				column 公司名稱
+					caption: 公司名稱
+				column 產業代碼
+					caption: 產業代碼
+				column 產業類別
+					caption: 產業類別
+			table dim_地區
+				caption: dim_地區
+				description: 地區、地址與座標描述；每列代表模型定義的一種觀測地點。
+				column 來源地區代碼
+					caption: 來源地區代碼
+				column 地區
+					caption: 地區
+				column 地址
+					caption: 地址
+				column 緯度
+					caption: 緯度
+				column 經度
+					caption: 經度
+				column 地點識別碼
+					caption: 地點識別碼
+				column 地點範圍
+					caption: 地點範圍
+			table dim_技能
+				caption: dim_技能
+				description: 模型可用的技能代碼與描述，供技能分析與篩選。
+				column 技能代碼
+					caption: 技能代碼
+				column 技能名稱
+					caption: 技能名稱
+			table dim_職類
+				caption: dim_職類
+				description: 職缺分類代碼與描述，供分類分析與篩選；來源分類是否對應標準分類仍依已確認的 crosswalk。
+				column 職類代碼
+					caption: 職類代碼
+				column 職類名稱
+					caption: 職類名稱
+			table 職缺技能對照
+				caption: 職缺技能對照
+				description: 中介對照表，一列代表一個職缺與一個技能的關聯；支援技能篩選與職缺追蹤。
+				column 職缺編號
+					caption: 職缺編號
+				column 技能代碼
+					caption: 技能代碼
+				column 技能名稱
+					caption: 技能名稱
+			table dim_日期
+				caption: dim_日期
+				description: 日曆日期維度，用於刊登日期與快照日期篩選。
+				column 日期
+					caption: 日期
+				column 年
+					caption: 年
+				column 月份序號
+					caption: 月份序號
+				column 年月
+					caption: 年月
+				column 季度序號
+					caption: 季度序號
+				column 季度
+					caption: 季度
+				column 日
+					caption: 日
+			table 職缺職類對照
+				caption: 職缺職類對照
+				description: 中介對照表，一列代表一個職缺與一個職類的關聯；一般分析請使用職類維度篩選。
+				column 職缺編號
+					caption: 職缺編號
+				column 職類代碼
+					caption: 職類代碼
+				column 職類名稱
+					caption: 職類名稱
+			table 職類擷取進度
+				caption: 職類擷取進度
+				description: 各平台原生職類的擷取與批次品質狀態；yes123 狀態來自已保存批次，不代表即時佇列。
+				column 執行代碼
+					caption: 執行代碼
+				column 執行狀態
+					caption: 執行狀態
+				column 擷取日期
+					caption: 擷取日期
+				column 選定職類數
+					caption: 選定職類數
+				column 職類階層
+					caption: 職類階層
+				column 地區篩選
+					caption: 地區篩選
+				column 每頁筆數
+					caption: 每頁筆數
+				column 工作程序數
+					caption: 工作程序數
+				column 開始時間
+					caption: 開始時間
+				column 執行更新時間
+					caption: 執行更新時間
+				column 最低請求間隔秒
+					caption: 最低請求間隔秒
+				column 目前請求間隔秒
+					caption: 目前請求間隔秒
+				column 閘道封鎖
+					caption: 閘道封鎖
+				column 資料庫讀取時間
+					caption: 資料庫讀取時間
+				column 職類代碼
+					caption: 職類代碼
+				column 職類名稱
+					caption: 職類名稱
+				column 佇列狀態
+					caption: 佇列狀態
+				column 嘗試次數
+					caption: 嘗試次數
+				column 類別更新時間
+					caption: 類別更新時間
+				column 結果狀態
+					caption: 結果狀態
+				column 擷取批次
+					caption: 擷取批次
+				column 批次品質
+					caption: 批次品質
+				column 分頁狀態
+					caption: 分頁狀態
+				column 職缺筆數
+					caption: 職缺筆數
+				column 完成頁數
+					caption: 完成頁數
+				column 警告旗標
+					caption: 警告旗標
+				column 上層職類
+					caption: 上層職類
+				column 來源職類代碼原始
+					caption: 來源職類代碼原始
+				column 來源職類名稱
+					caption: 來源職類名稱
+				column API回報職缺數下界
+					caption: API回報職缺數下界
+				column API回報職缺數上界
+					caption: API回報職缺數上界
+				column API回報頁數下界
+					caption: API回報頁數下界
+				column API回報頁數上界
+					caption: API回報頁數上界
+				column 佇列終態旗標
+					caption: 佇列終態旗標
+				column 分頁完整旗標
+					caption: 分頁完整旗標
+				column Silver層可用旗標
+					caption: Silver層可用旗標
+				column Silver層封鎖旗標
+					caption: Silver層封鎖旗標
+				column 品質警告原因
+					caption: 品質警告原因
+				column 已記錄批次數
+					caption: 已記錄批次數
+				column 職缺平台
+					caption: 職缺平台
+				column 職類階層顯示用
+					caption: 職類階層顯示用
+				column 來源職類代碼
+					caption: 來源職類代碼
+				measure 職類數
+					caption: 職類數
+				measure 已選職類數
+					caption: 已選職類數
+				measure 已完成職類數
+					caption: 已完成職類數
+				measure 完成率
+					caption: 完成率
+				measure 待處理職類數
+					caption: 待處理職類數
+				measure 處理中職類數
+					caption: 處理中職類數
+				measure 警告批次數
+					caption: 警告批次數
+				measure 失敗職類數
+					caption: 失敗職類數
+				measure 延後職類數
+					caption: 延後職類數
+				measure 目前執行狀態
+					caption: 目前執行狀態
+				measure 來源請求狀態
+					caption: 來源請求狀態
+				measure 目前請求間隔秒最大值
+					caption: 目前請求間隔秒最大值
+				measure 最新資料庫讀取時間
+					caption: 最新資料庫讀取時間
+				measure 職缺總數
+					caption: 職缺總數
+				measure 來源職類名稱顯示
+					caption: 來源職類名稱顯示
+				measure 佇列終態職類數
+					caption: 佇列終態職類數
+				measure 終態處理率
+					caption: 終態處理率
+				measure 分頁完整職類數
+					caption: 分頁完整職類數
+				measure Silver層可用職類數
+					caption: Silver層可用職類數
+				measure Silver層封鎖職類數
+					caption: Silver層封鎖職類數
+				measure 分頁完整率
+					caption: 分頁完整率
+				measure 來源職類數
+					caption: 來源職類數
+				measure 來源職缺總數
+					caption: 來源職缺總數
+			table 薪資觀測
+				caption: 薪資觀測
+				description: 每列代表一筆薪資來源或提及觀測；保留原始文字、幣別、給薪週期與解析狀態，尚未確認可跨週期比較。
+				column 查詢序列識別碼
+					caption: 查詢序列識別碼
+				column 快照日期
+					caption: 快照日期
+				column 擷取批次識別碼
+					caption: 擷取批次識別碼
+				column 職缺編號
+					caption: 職缺編號
+				column 職缺平台
+					caption: 職缺平台
+				column 薪資來源類型
+					caption: 薪資來源類型
+				column 觀測序號
+					caption: 觀測序號
+				column 原始薪資下限文字
+					caption: 原始薪資下限文字
+				column 原始薪資上限文字
+					caption: 原始薪資上限文字
+				column 解析薪資下限
+					caption: 解析薪資下限
+				column 解析薪資上限
+					caption: 解析薪資上限
+				column 幣別代碼
+					caption: 幣別代碼
+				column 幣別依據
+					caption: 幣別依據
+				column 給薪週期
+					caption: 給薪週期
+				column 薪資區間類型
+					caption: 薪資區間類型
+				column 薪酬項目
+					caption: 薪酬項目
+				column 原始佐證文字
+					caption: 原始佐證文字
+				column 佐證文字起始位置
+					caption: 佐證文字起始位置
+				column 佐證文字結束位置
+					caption: 佐證文字結束位置
+				column 解析狀態
+					caption: 解析狀態
+				column 品質旗標
+					caption: 品質旗標
+				column 解析信心度
+					caption: 解析信心度
+				column 解析器版本
+					caption: 解析器版本
 
 	linguisticMetadata =
 			{
@@ -12,10 +363,418 @@ cultureInfo zh-TW
 			          "ConceptualProperty": "上層職類名稱顯示"
 			        }
 			      },
+			      "State": "Generated"
+			    },
+			    "factjob.descsnippet": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactJob",
+			          "ConceptualProperty": "descSnippet"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factjob.jobname": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactJob",
+			          "ConceptualProperty": "jobName"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factjob.jobno": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactJob",
+			          "ConceptualProperty": "jobNo"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factjob.salarylow": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactJob",
+			          "ConceptualProperty": "salaryLow"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factjob.salaryhigh": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactJob",
+			          "ConceptualProperty": "salaryHigh"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factjob.appeardate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactJob",
+			          "ConceptualProperty": "appearDate"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factjob.joblink": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactJob",
+			          "ConceptualProperty": "jobLink"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factjob.selected_job_company": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactJob",
+			          "ConceptualProperty": "Selected Job Company"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factjob.jobaddrnodesc": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactJob",
+			          "ConceptualProperty": "jobAddrNoDesc"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "dimarea.jobaddrnodesc": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DimArea",
+			          "ConceptualProperty": "jobAddrNoDesc"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factacquisitioncategory.column1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactAcquisitionCategory",
+			          "ConceptualProperty": "來源職類代碼"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factacquisitioncategory.column2": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactAcquisitionCategory",
+			          "ConceptualProperty": "來源職類名稱顯示"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factacquisitioncategory.column3": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactAcquisitionCategory",
+			          "ConceptualProperty": "來源職類數"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "factacquisitioncategory.column4": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactAcquisitionCategory",
+			          "ConceptualProperty": "來源職缺總數"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "table.column": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "職缺摘要"
+			        }
+			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "上層職類名稱": {
+			          "職缺內容摘要 / Source summary": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table.column1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "職缺名稱"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職缺名稱 / Job title": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table.column2": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "職缺編號"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職缺編號 / Job ID": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table.column3": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "薪資下限"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "薪資下限 / Raw lower bound": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table.column4": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "薪資上限"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "薪資上限 / Raw upper bound": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table.column5": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "刊登日期"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "刊登日 / Posted": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table.column6": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "職缺來源連結"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "原始職缺 / Source link": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table.column7": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "所選職缺公司名稱"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "公司 / Company": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table.column8": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "職缺地區"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "地區 / Area": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_.column": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_地區",
+			          "ConceptualProperty": "地區"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "地區 / Area": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table.column9": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "來源職類代碼"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "來源職類代碼（L2）": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table.column10": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "來源職類名稱顯示"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "來源職類名稱": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table.column11": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "來源職類數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職類數": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table.column12": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "來源職缺總數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職缺總數": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",

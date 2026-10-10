@@ -10,7 +10,7 @@
     "tabOrder": 10000
   },
   "visual": {
-    "visualType": "donutChart",
+    "visualType": "barChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimCompany"
+                      "Entity": "dim_公司"
                     }
                   },
-                  "Property": "coIndustryDesc"
+                  "Property": "產業類別"
                 }
               },
-              "queryRef": "DimCompany.coIndustryDesc",
+              "queryRef": "dim_公司.產業類別",
               "active": true
             }
           ]
@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "Active Jobs"
+                  "Property": "目前符合條件職缺數"
                 }
               },
-              "queryRef": "FactJob.Active Jobs"
+              "queryRef": "目前職缺.目前符合條件職缺數"
             }
           ]
         }
@@ -64,7 +64,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'產業分布 / Industries'"
+                  "Value": "'產業職缺分布 / Jobs by Industry'"
                 }
               }
             }

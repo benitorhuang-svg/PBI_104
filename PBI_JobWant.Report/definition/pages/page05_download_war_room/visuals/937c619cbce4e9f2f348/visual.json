@@ -22,7 +22,7 @@
                     "Column": {
                       "Expression": {
                         "SourceRef": {
-                          "Entity": "FactAcquisitionCategory"
+                          "Entity": "職類擷取進度"
                         }
                       },
                       "Property": "職缺筆數"
@@ -47,7 +47,7 @@
                   "Column": {
                     "Expression": {
                       "SourceRef": {
-                        "Entity": "FactAcquisitionCategory"
+                        "Entity": "職類擷取進度"
                       }
                     },
                     "Property": "職缺筆數"
@@ -250,7 +250,7 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "FactAcquisitionCategory"
+                    "Entity": "職類擷取進度"
                   }
                 },
                 "Property": "職缺筆數"

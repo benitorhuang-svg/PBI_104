@@ -3,9 +3,9 @@
   "name": "completion_rate",
   "position": {
     "x": 24.603884402322631,
-    "y": 110.71747981045183,
+    "y": 158,
     "z": 2000,
-    "height": 178.37816191683908,
+    "height": 136,
     "width": 261.41627177467797,
     "tabOrder": 2000
   },
@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
                   "Property": "已選職類數"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.已選職類數"
+              "queryRef": "職類擷取進度.已選職類數"
             }
           ]
         },
@@ -37,13 +37,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
                   "Property": "佇列終態職類數"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.佇列終態職類數"
+              "queryRef": "職類擷取進度.佇列終態職類數"
             }
           ]
         }

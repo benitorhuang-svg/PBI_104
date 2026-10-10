@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "area_slicer",
   "position": {
-    "x": 504,
+    "x": 558,
     "y": 88,
     "z": 2000,
     "height": 72,
-    "width": 220,
+    "width": 280,
     "tabOrder": 2000
   },
   "visual": {
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimArea"
+                      "Entity": "dim_地區"
                     }
                   },
-                  "Property": "jobAddrNoDesc"
+                  "Property": "地區"
                 }
               },
-              "queryRef": "DimArea.jobAddrNoDesc",
+              "queryRef": "dim_地區.地區",
               "active": true
             }
           ]

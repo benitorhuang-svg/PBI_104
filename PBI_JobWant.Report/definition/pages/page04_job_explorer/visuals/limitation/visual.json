@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "limitation",
   "position": {
-    "x": 804,
+    "x": 780,
     "y": 18,
     "z": 1000,
     "height": 58,
-    "width": 250,
+    "width": 220,
     "tabOrder": 1000
   },
   "visual": {
@@ -19,11 +19,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "Experience / employment type",
+                    "value": "職缺摘要 / JOB DETAILS",
                     "textStyle": {
                       "fontSize": "10pt",
                       "fontWeight": "bold",
-                      "color": "#7B61D1"
+                      "color": "#8064C8"
                     }
                   }
                 ]
@@ -31,10 +31,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "BLOCKED · source field not validated；yes123 職類與技能對照尚未完整。",
+                    "value": "顯示來源摘要；全文由職缺連結開啟。",
                     "textStyle": {
                       "fontSize": "9pt",
-                      "color": "#6B7280"
+                      "color": "#596579"
                     }
                   }
                 ]
@@ -44,6 +44,39 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }

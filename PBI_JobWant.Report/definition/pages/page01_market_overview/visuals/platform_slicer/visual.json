@@ -6,8 +6,8 @@
     "y": 88,
     "z": 8500,
     "height": 72,
-    "width": 180,
-    "tabOrder": 8500
+    "width": 230,
+    "tabOrder": 500
   },
   "visual": {
     "visualType": "slicer",
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "sourcePlatform"
+                  "Property": "職缺平台"
                 }
               },
-              "queryRef": "FactJob.sourcePlatform",
+              "queryRef": "目前職缺.職缺平台",
               "active": true
             }
           ]

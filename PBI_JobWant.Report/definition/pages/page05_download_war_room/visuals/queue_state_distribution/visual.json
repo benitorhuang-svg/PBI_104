@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
-                  "Property": "佇列狀態"
+                  "Property": "結果狀態"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.佇列狀態",
+              "queryRef": "職類擷取進度.結果狀態",
               "active": true
             }
           ]
@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
                   "Property": "職類數"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.職類數"
+              "queryRef": "職類擷取進度.職類數"
             }
           ]
         }
@@ -117,7 +117,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'佇列狀態分布 / QUEUE STATE'"
+                  "Value": "'下載結果分布 / CAPTURE RESULT'"
                 }
               }
             },

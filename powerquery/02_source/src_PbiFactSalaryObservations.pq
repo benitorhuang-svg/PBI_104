@@ -1,0 +1,1 @@
+fxReadGoldView("pbi_fact_salary_observations_v21")

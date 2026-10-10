@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "jobName"
+                  "Property": "職缺名稱"
                 }
               },
-              "queryRef": "FactJob.jobName",
+              "queryRef": "目前職缺.職缺名稱",
               "active": true
             },
             {
@@ -34,13 +34,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimArea"
+                      "Entity": "dim_地區"
                     }
                   },
-                  "Property": "jobAddrNoDesc"
+                  "Property": "地區"
                 }
               },
-              "queryRef": "DimArea.jobAddrNoDesc",
+              "queryRef": "dim_地區.地區",
               "active": true
             },
             {
@@ -48,13 +48,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "salaryLow"
+                  "Property": "薪資下限"
                 }
               },
-              "queryRef": "FactJob.salaryLow",
+              "queryRef": "目前職缺.薪資下限",
               "active": true
             },
             {
@@ -62,13 +62,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "salaryHigh"
+                  "Property": "薪資上限"
                 }
               },
-              "queryRef": "FactJob.salaryHigh",
+              "queryRef": "目前職缺.薪資上限",
               "active": true
             }
           ]
@@ -80,13 +80,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "Jobs with Salary"
+                  "Property": "具備薪資上下限的職缺數"
                 }
               },
-              "queryRef": "FactJob.Jobs with Salary"
+              "queryRef": "目前職缺.具備薪資上下限的職缺數"
             }
           ]
         }

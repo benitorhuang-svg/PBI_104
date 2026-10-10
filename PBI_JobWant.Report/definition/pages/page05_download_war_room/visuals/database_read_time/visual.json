@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
                   "Property": "最新資料庫讀取時間"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.最新資料庫讀取時間"
+              "queryRef": "職類擷取進度.最新資料庫讀取時間"
             }
           ]
         }

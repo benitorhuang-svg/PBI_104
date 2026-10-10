@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "skill_slicer",
   "position": {
-    "x": 681,
-    "y": 88,
+    "x": 837,
+    "y": 92,
     "z": 6000,
-    "height": 72,
-    "width": 135,
+    "height": 68,
+    "width": 145,
     "tabOrder": 6000
   },
   "visual": {
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimSkill"
+                      "Entity": "dim_技能"
                     }
                   },
-                  "Property": "skillDescription"
+                  "Property": "技能名稱"
                 }
               },
-              "queryRef": "DimSkill.skillDescription",
+              "queryRef": "dim_技能.技能名稱",
               "active": true
             }
           ]

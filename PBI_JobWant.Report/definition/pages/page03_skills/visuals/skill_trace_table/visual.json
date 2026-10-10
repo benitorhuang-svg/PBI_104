@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimSkill"
+                      "Entity": "dim_技能"
                     }
                   },
-                  "Property": "skillDescription"
+                  "Property": "技能名稱"
                 }
               },
-              "queryRef": "DimSkill.skillDescription",
+              "queryRef": "dim_技能.技能名稱",
               "active": true
             },
             {
@@ -34,13 +34,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "BridgeJobSkill"
+                      "Entity": "職缺技能對照"
                     }
                   },
-                  "Property": "jobNo"
+                  "Property": "職缺編號"
                 }
               },
-              "queryRef": "BridgeJobSkill.jobNo",
+              "queryRef": "職缺技能對照.職缺編號",
               "active": true
             }
           ]
@@ -52,13 +52,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "Skill Job Count"
+                  "Property": "技能篩選職缺數"
                 }
               },
-              "queryRef": "FactJob.Skill Job Count"
+              "queryRef": "目前職缺.技能篩選職缺數"
             }
           ]
         }

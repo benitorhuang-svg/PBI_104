@@ -31,7 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "104 官方職類擷取 · Power BI 重新整理後更新",
+                    "value": "平台原生職類擷取 · 分類碼不跨平台對照",
                     "textStyle": {
                       "fontSize": "10pt",
                       "color": "#667085"
@@ -46,6 +46,19 @@
     },
     "visualContainerObjects": {
       "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
         {
           "properties": {
             "show": {

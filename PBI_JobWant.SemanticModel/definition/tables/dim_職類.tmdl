@@ -1,12 +1,13 @@
-table DimJobCategory
+table dim_職類
 	lineageTag: 93995401-31c6-47e0-a7d6-72ee2622e376
 
-	column jobCatCode
+	column 職類代碼
 		dataType: int64
 		lineageTag: 6e5fdec6-4786-4273-90f9-a001ab912ed3
+		summarizeBy: none
 		sourceColumn: jobCatCode
 
-	column jobCatDescription
+	column 職類名稱
 		dataType: string
 		lineageTag: 531ab141-43b4-422e-acd9-cf5b26635445
 		sourceColumn: jobCatDescription

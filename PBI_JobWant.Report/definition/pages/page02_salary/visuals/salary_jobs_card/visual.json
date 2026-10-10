@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "salary_jobs_card",
   "position": {
-    "x": 344,
+    "x": 428,
     "y": 176,
     "z": 6000,
     "height": 88,
-    "width": 300,
+    "width": 388,
     "tabOrder": 6000
   },
   "visual": {
@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "Jobs with Salary"
+                  "Property": "具備薪資上下限的職缺數"
                 }
               },
-              "queryRef": "FactJob.Jobs with Salary"
+              "queryRef": "目前職缺.具備薪資上下限的職缺數"
             }
           ]
         }

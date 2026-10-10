@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "keyword_slicer",
   "position": {
-    "x": 464,
+    "x": 720,
     "y": 88,
     "z": 3000,
     "height": 72,
-    "width": 210,
+    "width": 220,
     "tabOrder": 3000
   },
   "visual": {
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimJobCategory"
+                      "Entity": "dim_職類"
                     }
                   },
-                  "Property": "jobCatDescription"
+                  "Property": "職類名稱"
                 }
               },
-              "queryRef": "DimJobCategory.jobCatDescription",
+              "queryRef": "dim_職類.職類名稱",
               "active": true
             }
           ]

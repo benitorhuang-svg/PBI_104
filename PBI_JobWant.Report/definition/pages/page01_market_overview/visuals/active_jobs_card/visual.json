@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "Active Jobs"
+                  "Property": "目前符合條件職缺數"
                 }
               },
-              "queryRef": "FactJob.Active Jobs"
+              "queryRef": "目前職缺.目前符合條件職缺數"
             }
           ]
         }

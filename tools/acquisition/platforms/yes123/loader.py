@@ -57,7 +57,7 @@ def save_yes123_batch(conn: Any, batch: Dict[str, Any], Jsonb: Any) -> Dict[str,
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) ON CONFLICT (batch_id, source_page, row_index) DO NOTHING""", raws)
 
     jobs = batch["jobs"]
-    if not jobs: return {"batch_id": bid, "status": "loaded-empty", "rows": 0}
+    if not jobs: return {"batch_id": bid, "status": "loaded-empty", "rows": 0, "jobs": 0}
 
     comps: Dict[str, Dict[str, Any]] = {}
     for j in jobs:

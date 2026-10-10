@@ -20,13 +20,27 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
+                    }
+                  },
+                  "Property": "職缺平台"
+                }
+              },
+              "queryRef": "職類擷取進度.職缺平台",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "職類擷取進度"
                     }
                   },
                   "Property": "職類代碼"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.職類代碼",
+              "queryRef": "職類擷取進度.職類代碼",
               "active": true
             },
             {
@@ -34,13 +48,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
                   "Property": "職類名稱"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.職類名稱",
+              "queryRef": "職類擷取進度.職類名稱",
               "active": true
             },
             {
@@ -48,13 +62,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
                   "Property": "佇列狀態"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.佇列狀態",
+              "queryRef": "職類擷取進度.佇列狀態",
               "active": true
             },
             {
@@ -62,13 +76,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
                   "Property": "結果狀態"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.結果狀態",
+              "queryRef": "職類擷取進度.結果狀態",
               "active": true
             },
             {
@@ -76,13 +90,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
-                  "Property": "嘗試次數"
+                  "Property": "已記錄批次數"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.嘗試次數",
+              "queryRef": "職類擷取進度.已記錄批次數",
               "active": true
             },
             {
@@ -90,13 +104,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
                   "Property": "職缺筆數"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.職缺筆數",
+              "queryRef": "職類擷取進度.職缺筆數",
               "active": true
             },
             {
@@ -104,13 +118,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
                   "Property": "批次品質"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.批次品質",
+              "queryRef": "職類擷取進度.批次品質",
               "active": true
             },
             {
@@ -118,13 +132,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
                   "Property": "分頁狀態"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.分頁狀態",
+              "queryRef": "職類擷取進度.分頁狀態",
               "active": true
             }
           ]
@@ -137,7 +151,7 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "FactAcquisitionCategory"
+                    "Entity": "職類擷取進度"
                   }
                 },
                 "Property": "批次品質"
@@ -532,5 +546,64 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "9f6a1b7a07c3e3c472a1",
+        "displayName": "職類階層（L3）",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "職類擷取進度"
+              }
+            },
+            "Property": "職類階層顯示用"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "level",
+              "Entity": "職類擷取進度",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "level"
+                          }
+                        },
+                        "Property": "職類階層顯示用"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "2L"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
   }
 }

@@ -1,12 +1,18 @@
 # yes123 職務分類目錄與取得方式盤點
 
-> 本文件的網站與條款觀察是 2026-10-09 的查核快照。文件下方的「JobWant 現況」原始盤點也記錄了當時尚未建立 adapter 的基準；之後已新增 yes123 adapter、capture schema、測試批次及本機資料庫。這些新增工作不會解除資料授權或代碼映射閘門，現況請同時參考 [yes123 source schema](../schema/platforms/yes123/source-schema.md) 與 [schema registry](../schema/README.md)。
+> 本文件的網站與條款觀察是 2026-10-09 的查核快照。文件下方的「JobWant 現況」原始盤點也記錄了當時尚未建立 adapter 的基準；其後已新增 yes123 adapter、capture schema、資料庫及本機 Power BI 讀取。`jobwant_104` migration 21–23 現以唯讀 FDW 投影接入 yes123 Gold scope、快照與薪資觀測；這是技術連線證據，不解除資料授權、批量擷取或代碼映射閘門。現況請同時參考 [yes123 source schema](../schema/platforms/yes123/source-schema.md)、[schema registry](../schema/README.md) 與 [本機資料庫操作](../operations/local-database.md)。
 
 ## 查核範圍
 
 - 查核日期：2026-10-09（Asia/Taipei）
 - 本次只讀公開頁面、JSON 目錄、robots.txt、網站條款與兩個工作樹中的 acquisition 程式；未呼叫登入功能、未擷取職缺批次、未修改外部 crawler 工作樹、`data/104/` 或模型。
 - 導入狀態：**進行中**；職缺批次擷取維持 **BLOCKED**，直到資料使用授權與分類代碼對應確認。
+
+## 目前專案範圍（2026-10-10）
+
+- yes123 類別擷取器、完成批次判斷及 Page 05 Gold view 僅納入 `YES123_WORK_MODE`（`2_`）類別。已從 yes123 來源資料庫刪除 402 個 `YES123_JOB_MODE`（`3_`）批次、78,782 筆原始職缺列、78,782 筆快照、157,442 筆薪資觀測及 402 筆 `3_` crosswalk；共用的 39,392 筆目前職缺均由 WORK_MODE 批次支撐，予以保留。
+- 本機 `data/yes123/` 原本就沒有 `3_` 批次檔。報表端唯讀 FDW 現在回傳 574 個 WORK_MODE 類別；Migration 025 另備妥 view 層的範圍限制，但尚未套用。
+- 這是專案目前選用的資料範圍，不代表已證明 yes123 官方目錄、`WcodeList` 與 104 `jobcat` 逐碼相等或可直接建立 crosswalk；未確認的來源語意仍維持 **BLOCKED**。
 
 ## 已核實的公開入口
 
@@ -37,7 +43,7 @@
 
 ## JobWant 導入基準與可沿用範圍（查核當時）
 
-- 初始查核時 Git 工作目錄乾淨，HEAD 為 `3290b6c`；當時的 `docs/`、`tools/`、`data/` 尚無 yes123 專用實作或資料。其後已建立獨立 adapter 與 capture 契約，但仍未取得批量保存/分析/展示授權，也尚未完成中央 Gold 導入。
+- 初始查核時 Git 工作目錄乾淨，HEAD 為 `3290b6c`；當時的 `docs/`、`tools/`、`data/` 尚無 yes123 專用實作或資料。其後已建立獨立 adapter、capture 契約和本機唯讀 Gold 接入；仍未取得批量保存/分析/展示授權，且分類映射尚未證實。
 - `tools/acquisition/platforms/jobwant_104/capture/category_catalog.py` 固定使用 104 `JobCat.json` URL，並依 `no`、`des`、`eng`、`n` 欄位解析；`tools/capture_category_matrix.py` 是其穩定命令入口，使用 104 搜尋 API 與 `jobcat` 查詢。這些來源契約不能直接當成 yes123 解析器。
 - 可沿用的是資料取得原則：保存原始來源證據、checksum、來源版本與批次狀態，並以來源回報總量驗證完整性。yes123 的分頁大小、限制、排序和重複職缺規則都尚未驗證。
 - yes123 導入期間，來源代碼必須與 104 `jobcat` 分開保存；取得書面使用授權並確認代碼映射後，才將 yes123 批次接入 Silver/Gold。跨平台分類對照另建可人工覆核的關聯，不覆寫任何來源原始代碼。
@@ -57,4 +63,4 @@
 3. 官方確認分類樹欄位、穩定 ID、父子關係和層級，並說明 `JcodeList`、`WcodeList` 與 JSON 子代碼的對應方式。
 4. 官方分頁／終止條件、總量欄位、速率限制、分類更新與停用語意，以及資料變動時的完整性判定方式。
 
-以上證據是啟用持久化擷取的閘門。架構工作已開始：yes123 必須以獨立來源代碼與來源職缺鍵進入 Bronze/Silver，確認跨來源自然鍵與分類對照後，才接入 Gold；本階段不變更 Power Query、TMDL 或 PBIR。
+以上證據是新增持久化擷取及正式分析/展示的閘門。現有本機模型透過 Power Query Import 讀取報表 Gold；它只證明本地資料路徑可運作，不構成 yes123 授權、taxonomy 對照或報表頁指標驗收。不要以此盤點文件作為發布許可。

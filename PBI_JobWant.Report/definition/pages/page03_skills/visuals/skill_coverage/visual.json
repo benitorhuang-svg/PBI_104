@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimSkill"
+                      "Entity": "dim_技能"
                     }
                   },
-                  "Property": "skillDescription"
+                  "Property": "技能名稱"
                 }
               },
-              "queryRef": "DimSkill.skillDescription",
+              "queryRef": "dim_技能.技能名稱",
               "active": true
             }
           ]
@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "Skill Share %"
+                  "Property": "技能職缺占比"
                 }
               },
-              "queryRef": "FactJob.Skill Share %"
+              "queryRef": "目前職缺.技能職缺占比"
             }
           ]
         }

@@ -1,7 +1,7 @@
-table DimDate
+table dim_日期
 	lineageTag: b91a1d05-8fa3-46be-aeec-ca54790e04df
 
-	column Date
+	column 日期
 		dataType: dateTime
 		formatString: Long Date
 		lineageTag: d02c3286-0fb9-4acd-842f-a223dc3d139e
@@ -12,25 +12,25 @@ table DimDate
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	column Year
+	column 年
 		dataType: int64
 		formatString: 0
 		lineageTag: 0f151222-7853-4ca3-adc8-c204d1041c73
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Year
 
 		annotation SummarizationSetBy = Automatic
 
-	column MonthNo
+	column 月份序號
 		dataType: int64
 		formatString: 0
 		lineageTag: 65459dd6-6331-4092-8d8a-bc3a9f8cf802
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: MonthNo
 
 		annotation SummarizationSetBy = Automatic
 
-	column Month
+	column 年月
 		dataType: string
 		lineageTag: a062fec4-f1c6-441b-92d5-c97c31d4e2b6
 		summarizeBy: none
@@ -38,16 +38,16 @@ table DimDate
 
 		annotation SummarizationSetBy = Automatic
 
-	column QuarterNo
+	column 季度序號
 		dataType: int64
 		formatString: 0
 		lineageTag: d1c0828f-4b47-4752-8339-4cf7bf311fbe
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: QuarterNo
 
 		annotation SummarizationSetBy = Automatic
 
-	column Quarter
+	column 季度
 		dataType: string
 		lineageTag: 4d2e2b9f-d5d1-4e93-898e-29429db4e549
 		summarizeBy: none
@@ -55,11 +55,11 @@ table DimDate
 
 		annotation SummarizationSetBy = Automatic
 
-	column Day
+	column 日
 		dataType: int64
 		formatString: 0
 		lineageTag: d14f47df-cee4-4385-bdd1-f954dde27870
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Day
 
 		annotation SummarizationSetBy = Automatic

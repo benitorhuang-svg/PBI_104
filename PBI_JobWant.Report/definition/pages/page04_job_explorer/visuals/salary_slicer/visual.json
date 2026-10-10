@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "salary_slicer",
   "position": {
-    "x": 967,
-    "y": 88,
+    "x": 992,
+    "y": 92,
     "z": 7000,
-    "height": 72,
-    "width": 260,
+    "height": 68,
+    "width": 238,
     "tabOrder": 7000
   },
   "visual": {
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "salaryLow"
+                  "Property": "薪資下限"
                 }
               },
-              "queryRef": "FactJob.salaryLow",
+              "queryRef": "目前職缺.薪資下限",
               "active": true
             }
           ]

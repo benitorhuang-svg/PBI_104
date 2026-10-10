@@ -1,22 +1,25 @@
-table DimCompany
+table dim_公司
 	lineageTag: b842679e-dd95-41aa-a9d2-8beb20593b13
 
-	column custNo
+	column 公司代碼
 		dataType: string
+		isHidden
 		lineageTag: 09a6f3bd-060a-45ce-aa1e-84350a2b7e6d
 		sourceColumn: custNo
 
-	column custName
+	column 公司名稱
 		dataType: string
 		lineageTag: 1acb45d4-e1d0-455f-b79f-42593590099d
 		sourceColumn: custName
 
-	column coIndustry
+	column 產業代碼
 		dataType: int64
+		isHidden
 		lineageTag: 0c84ec61-7d9e-4c55-b698-614d146c7f3e
+		summarizeBy: none
 		sourceColumn: coIndustry
 
-	column coIndustryDesc
+	column 產業類別
 		dataType: string
 		lineageTag: 15d76be8-b032-4220-a6d1-bcd40421ef7a
 		sourceColumn: coIndustryDesc

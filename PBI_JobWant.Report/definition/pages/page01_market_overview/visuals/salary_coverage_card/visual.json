@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "Salary Coverage %"
+                  "Property": "薪資上下限涵蓋率"
                 }
               },
-              "queryRef": "FactJob.Salary Coverage %"
+              "queryRef": "目前職缺.薪資上下限涵蓋率"
             }
           ]
         }

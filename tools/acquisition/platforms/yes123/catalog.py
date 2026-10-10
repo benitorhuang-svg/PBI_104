@@ -19,16 +19,8 @@ DEFAULT_HEADERS = {
 }
 
 
-def fetch_work_mode_catalog(
-    url: str = WORK_MODE_JSON_URL,
-    timeout: float = 15.0,
-) -> List[Dict[str, str]]:
-    """Fetch official yes123 work_mode.json and parse into flattened category list."""
-    resp = requests.get(url, headers=DEFAULT_HEADERS, timeout=timeout)
-    resp.encoding = "utf-8-sig"
-    payload = resp.json()
+def _parse_category_tree(payload: Dict[str, Any], kind_label: str) -> List[Dict[str, str]]:
     root_list = payload.get("listObj", [])
-
     categories: List[Dict[str, str]] = []
     for group in root_list:
         group_name = str(group.get("level_1_name") or "").strip()
@@ -40,14 +32,25 @@ def fetch_work_mode_catalog(
                     "code": code,
                     "name": name,
                     "group_name": group_name,
+                    "taxonomy": kind_label,
                 })
     return categories
+
+
+def fetch_work_mode_catalog(
+    url: str = WORK_MODE_JSON_URL,
+    timeout: float = 15.0,
+) -> List[Dict[str, str]]:
+    """Fetch official yes123 work_mode.json (職務類別) and parse into category list."""
+    resp = requests.get(url, headers=DEFAULT_HEADERS, timeout=timeout)
+    resp.encoding = "utf-8-sig"
+    return _parse_category_tree(resp.json(), "work_mode")
 
 
 def seed_categories_to_crosswalk(conn: Any, categories: List[Dict[str, str]]) -> int:
     """Register all yes123 categories into silver.category_crosswalk idempotently."""
     rows = [
-        ("yes123", c["code"], c["name"], "UNMAPPED", 0.0, f"Auto-seeded from yes123 work_mode.json ({c['group_name']})")
+        ("yes123", c["code"], c["name"], "UNMAPPED", 0.0, f"Auto-seeded from yes123 {c.get('taxonomy', 'catalog')} ({c['group_name']})")
         for c in categories
     ]
     with conn.cursor() as cur:
@@ -72,6 +75,7 @@ def get_completed_category_codes(conn: Any) -> Set[str]:
             """SELECT DISTINCT native_search_code
             FROM bronze.capture_batches
             WHERE source_platform = 'yes123'
+              AND code_kind = 'YES123_WORK_MODE'
               AND snapshot_date = CURRENT_DATE
               AND capture_status = 'COMPLETE'
               AND native_search_code IS NOT NULL"""

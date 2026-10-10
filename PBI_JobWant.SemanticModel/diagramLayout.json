@@ -10,138 +10,151 @@
       "nodes": [
         {
           "location": {
-            "x": 300.68436411272239,
-            "y": 784.23632144030353
+            "x": 140.484916983067,
+            "y": 191.96578468122465
           },
-          "nodeIndex": "BridgeJobSkill",
+          "nodeIndex": "職缺技能對照",
           "nodeLineageTag": "a0b1a084-dd93-42d7-b600-3e22a5192eb9",
           "size": {
             "height": 152,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
-            "x": 947.15166009655263,
-            "y": -50
+            "x": 492.57850245718453,
+            "y": 323.9717373602798
           },
-          "nodeIndex": "DimArea",
-          "nodeLineageTag": "8759c2f2-37c9-4ca5-9167-93818b4696a4",
-          "size": {
-            "height": 224,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 347.03940074796355,
-            "y": 243.53138289671358
-          },
-          "nodeIndex": "DimCompany",
-          "nodeLineageTag": "b842679e-dd95-41aa-a9d2-8beb20593b13",
-          "size": {
-            "height": 176,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 873.10380634725277,
-            "y": 225.81857183057571
-          },
-          "nodeIndex": "DimDate",
-          "nodeLineageTag": "b91a1d05-8fa3-46be-aeec-ca54790e04df",
-          "size": {
-            "height": 248,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 1420.9453408445884,
-            "y": 519.13793007281561
-          },
-          "nodeIndex": "DimJobCategory",
-          "nodeLineageTag": "93995401-31c6-47e0-a7d6-72ee2622e376",
-          "size": {
-            "height": 128,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 50,
-            "y": 988.27586014563121
-          },
-          "nodeIndex": "DimSkill",
-          "nodeLineageTag": "d2b10723-4051-4970-9a74-96fe0c24a95a",
-          "size": {
-            "height": 128,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 587.74003217809263,
-            "y": 472.592977078406
-          },
-          "nodeIndex": "FactJob",
+          "nodeIndex": "目前職缺",
           "nodeLineageTag": "e01bc894-c60a-4e83-849b-cde9f0a28fda",
           "size": {
-            "height": 300,
+            "height": 530.06634444135307,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 2
         },
         {
           "location": {
-            "x": 1186.9453408445884,
-            "y": 227.56835206369828
+            "x": 1287.4453408445881,
+            "y": 315.88401126412987
           },
-          "nodeIndex": "FactJobSnapshot",
+          "nodeIndex": "職缺快照",
           "nodeLineageTag": "b3392bee-cb0a-453d-9823-e3d0760b3593",
           "size": {
-            "height": 300,
+            "height": 470,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 3
         },
         {
           "location": {
-            "x": 1654.9453408445884,
-            "y": 507.13793007281561
+            "x": 129.92009196930121,
+            "y": 603.52198101867259
           },
-          "nodeIndex": "BridgeJobCategory",
+          "nodeIndex": "職缺職類對照",
           "nodeLineageTag": "a890a5c5-1e0d-4917-a02d-a8d7d6c09d6f",
           "size": {
             "height": 152,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 4
         },
         {
           "location": {
-            "x": 1888.9453408445884,
-            "y": 433.13793007281561
+            "x": 1605.5843639940242,
+            "y": 0.02537516754631497
           },
-          "nodeIndex": "FactAcquisitionCategory",
+          "nodeIndex": "職類擷取進度",
           "nodeLineageTag": "ea5d659f-c051-4254-bf26-6b9078701251",
           "size": {
-            "height": 300,
+            "height": 478.33333333333326,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 899.7066203606189,
+            "y": 324.70635222567591
+          },
+          "nodeIndex": "薪資觀測",
+          "nodeLineageTag": "0fa96ef4-d5e3-41ff-a263-68ddbda79682",
+          "size": {
+            "height": 473.13941490712409,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 796.6634048178131,
+            "y": 1.3919679895894674
+          },
+          "nodeIndex": "dim_公司",
+          "nodeLineageTag": "b842679e-dd95-41aa-a9d2-8beb20593b13",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1123.7108325490758,
+            "y": 0
+          },
+          "nodeIndex": "dim_日期",
+          "nodeLineageTag": "b91a1d05-8fa3-46be-aeec-ca54790e04df",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 486.53910519128351,
+            "y": 1.9289103705764603
+          },
+          "nodeIndex": "dim_地區",
+          "nodeLineageTag": "8759c2f2-37c9-4ca5-9167-93818b4696a4",
+          "size": {
+            "height": 256,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 139.66666666666666,
+            "y": 6.6091934789644995
+          },
+          "nodeIndex": "dim_技能",
+          "nodeLineageTag": "d2b10723-4051-4970-9a74-96fe0c24a95a",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 132.98565289527869,
+            "y": 426.29747895737682
+          },
+          "nodeIndex": "dim_職類",
+          "nodeLineageTag": "93995401-31c6-47e0-a7d6-72ee2622e376",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 10
         }
       ],
       "name": "所有資料表",
-      "zoomValue": 100,
-      "pinKeyFieldsToTop": false,
+      "zoomValue": 50,
+      "pinKeyFieldsToTop": true,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
       "tablesLocked": false

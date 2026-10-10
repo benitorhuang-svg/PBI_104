@@ -1,1 +1,1 @@
-fxReadGoldView("pbi_dim_company")
+fxReadGoldView("pbi_dim_company_v21")

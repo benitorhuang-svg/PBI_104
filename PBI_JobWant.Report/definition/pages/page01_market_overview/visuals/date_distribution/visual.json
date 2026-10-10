@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimDate"
+                      "Entity": "dim_日期"
                     }
                   },
-                  "Property": "Date"
+                  "Property": "日期"
                 }
               },
-              "queryRef": "DimDate.Date",
+              "queryRef": "dim_日期.日期",
               "active": true
             }
           ]
@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "Active Jobs"
+                  "Property": "目前符合條件職缺數"
                 }
               },
-              "queryRef": "FactJob.Active Jobs"
+              "queryRef": "目前職缺.目前符合條件職缺數"
             }
           ]
         }

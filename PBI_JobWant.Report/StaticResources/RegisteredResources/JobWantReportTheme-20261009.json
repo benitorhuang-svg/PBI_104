@@ -1,0 +1,69 @@
+{
+  "name": "JobWantReportTheme-20261009.json",
+  "dataColors": [
+    "#F2B705",
+    "#3478D4",
+    "#21A6A1",
+    "#8064C8",
+    "#E58B31",
+    "#667085"
+  ],
+  "foreground": "#1F2937",
+  "background": "#F5F7FA",
+  "tableAccent": "#3478D4",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#E3E8EF"
+              }
+            },
+            "radius": 8,
+            "width": 1
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "fontFamily": "'Segoe UI Semibold'",
+            "fontSize": 12,
+            "fontColor": {
+              "solid": {
+                "color": "#263445"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "textbox": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ]
+      }
+    }
+  }
+}

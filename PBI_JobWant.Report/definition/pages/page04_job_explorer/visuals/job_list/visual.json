@@ -3,10 +3,10 @@
   "name": "job_list",
   "position": {
     "x": 24,
-    "y": 286,
+    "y": 480,
     "z": 11000,
-    "height": 390,
-    "width": 560,
+    "height": 216,
+    "width": 464,
     "tabOrder": 11000
   },
   "visual": {
@@ -20,84 +20,32 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "jobName"
+                  "Property": "職缺名稱"
                 }
               },
-              "queryRef": "FactJob.jobName",
-              "active": true
+              "queryRef": "目前職缺.職缺名稱",
+              "active": true,
+              "nativeQueryRef": "職缺名稱",
+              "displayName": "職缺名稱 / Job title"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimArea"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "jobAddrNoDesc"
+                  "Property": "職缺編號"
                 }
               },
-              "queryRef": "DimArea.jobAddrNoDesc",
-              "active": true
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "FactJob"
-                    }
-                  },
-                  "Property": "salaryLow"
-                }
-              },
-              "queryRef": "FactJob.salaryLow",
-              "active": true
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "FactJob"
-                    }
-                  },
-                  "Property": "salaryHigh"
-                }
-              },
-              "queryRef": "FactJob.salaryHigh",
-              "active": true
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "FactJob"
-                    }
-                  },
-                  "Property": "appearDate"
-                }
-              },
-              "queryRef": "FactJob.appearDate",
-              "active": true
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "DimCompany"
-                    }
-                  },
-                  "Property": "custName"
-                }
-              },
-              "queryRef": "DimCompany.custName",
-              "active": true
+              "queryRef": "目前職缺.職缺編號",
+              "nativeQueryRef": "職缺編號",
+              "active": true,
+              "displayName": "職缺編號 / Job ID"
             }
           ]
         }
@@ -109,10 +57,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "FactJob"
+                    "Entity": "目前職缺"
                   }
                 },
-                "Property": "appearDate"
+                "Property": "刊登日期"
               }
             },
             "direction": "Descending"
@@ -122,10 +70,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "FactJob"
+                    "Entity": "目前職缺"
                   }
                 },
-                "Property": "jobName"
+                "Property": "職缺名稱"
               }
             },
             "direction": "Ascending"
@@ -135,10 +83,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "DimCompany"
+                    "Entity": "dim_公司"
                   }
                 },
-                "Property": "custName"
+                "Property": "公司名稱"
               }
             },
             "direction": "Ascending"
@@ -160,7 +108,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'職缺清單 / Job List'"
+                  "Value": "'職缺清單 / Select a job'"
                 }
               }
             }
@@ -168,6 +116,78 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "autoSizeColumnWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'growToFit'"
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "280D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactJob.jobName"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "160D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactJob.jobNo"
+          }
+        }
+      ]
+    }
   }
 }

@@ -1,75 +1,83 @@
-table FactJob
+table 目前職缺
 	lineageTag: e01bc894-c60a-4e83-849b-cde9f0a28fda
 
 	/// Distinct current jobNo values after optional skill/category filters. Multi-select within each bridge is OR; the two bridges intersect and other model filters remain intersections.
-	measure 'Active Jobs' =
-			VAR HasSkillFilter = ISFILTERED(DimSkill[skillDescription]) || ISFILTERED(DimSkill[skillCode])
-			VAR HasCategoryFilter = ISFILTERED(DimJobCategory[jobCatDescription]) || ISFILTERED(DimJobCategory[jobCatCode])
+	measure 目前符合條件職缺數 =
+			VAR HasSkillFilter = ISFILTERED('dim_技能'[技能名稱]) || ISFILTERED('dim_技能'[技能代碼])
+			VAR HasCategoryFilter = ISFILTERED('dim_職類'[職類名稱]) || ISFILTERED('dim_職類'[職類代碼])
 			RETURN
 			    IF(
 			        HasSkillFilter || HasCategoryFilter,
 			        CALCULATE(
-			            DISTINCTCOUNT(FactJob[jobNo]),
-			            CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH),
-			            CROSSFILTER(BridgeJobCategory[jobNo], FactJob[jobNo], BOTH)
+			            DISTINCTCOUNT('目前職缺'[職缺編號]),
+			            CROSSFILTER('職缺技能對照'[職缺編號], '目前職缺'[職缺編號], BOTH),
+			            CROSSFILTER('職缺職類對照'[職缺編號], '目前職缺'[職缺編號], BOTH)
 			        ),
-			        DISTINCTCOUNT(FactJob[jobNo])
+			        DISTINCTCOUNT('目前職缺'[職缺編號])
 			    )
 		formatString: #,0
-		displayFolder: Jobs
+		displayFolder: 職缺分析
 		lineageTag: 5a72a91a-af34-48a4-8758-7e082876aa35
 
 	/// Distinct companies in the currently matched job set.
-	measure 'Company Count' = CALCULATE(DISTINCTCOUNT(FactJob[custNo]), CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH), CROSSFILTER(BridgeJobCategory[jobNo], FactJob[jobNo], BOTH))
+	measure 符合條件公司數 = CALCULATE(DISTINCTCOUNT('目前職缺'[公司代碼]), CROSSFILTER('職缺技能對照'[職缺編號], '目前職缺'[職缺編號], BOTH), CROSSFILTER('職缺職類對照'[職缺編號], '目前職缺'[職缺編號], BOTH))
 		formatString: #,0
-		displayFolder: Jobs
+		displayFolder: 職缺分析
 		lineageTag: d79a642c-479c-4e17-b1fe-e81a5568ad8d
 
 	/// Matched jobs with both numeric API salary bounds present; this does not interpret either bound as disclosed salary.
-	measure 'Jobs with Salary' = CALCULATE(COUNTROWS(FILTER(FactJob, NOT ISBLANK(FactJob[salaryLow]) && NOT ISBLANK(FactJob[salaryHigh]))), CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH), CROSSFILTER(BridgeJobCategory[jobNo], FactJob[jobNo], BOTH))
+	measure 具備薪資上下限的職缺數 = CALCULATE(COUNTROWS(FILTER('目前職缺', NOT ISBLANK('目前職缺'[薪資下限]) && NOT ISBLANK('目前職缺'[薪資上限]))), CROSSFILTER('職缺技能對照'[職缺編號], '目前職缺'[職缺編號], BOTH), CROSSFILTER('職缺職類對照'[職缺編號], '目前職缺'[職缺編號], BOTH))
 		formatString: #,0
-		displayFolder: Jobs
+		displayFolder: 職缺分析
 		lineageTag: ddd9a331-14db-43b8-9316-6e0da72efdc2
 
 	/// Matched jobs with both raw numeric salary bounds divided by matched current jobs.
-	measure 'Salary Coverage %' = DIVIDE([Jobs with Salary], [Active Jobs], 0)
+	measure 薪資上下限涵蓋率 = DIVIDE([具備薪資上下限的職缺數], [目前符合條件職缺數], 0)
 		formatString: 0.0%
-		displayFolder: Jobs
+		displayFolder: 職缺分析
 		lineageTag: 1a453a7e-4a28-4c7b-b5b0-9fced4a7ca4d
 
 	/// Distinct jobs matching the selected normalized skill set and all other filters.
-	measure 'Skill Job Count' = [Active Jobs]
+	measure 技能篩選職缺數 = [目前符合條件職缺數]
 		formatString: #,0
-		displayFolder: Jobs
+		displayFolder: 職缺分析
 		lineageTag: cac87f8d-6ddc-4a9f-bd2f-86fab1d4368c
 
 	/// Share of matched jobs associated with the selected normalized skills; describes association, not causation.
-	measure 'Skill Share %' = DIVIDE([Skill Job Count], CALCULATE([Active Jobs], REMOVEFILTERS(DimSkill)), 0)
+	measure 技能職缺占比 = DIVIDE([技能篩選職缺數], CALCULATE([目前符合條件職缺數], REMOVEFILTERS('dim_技能')), 0)
 		formatString: 0.0%
-		displayFolder: Jobs
+		displayFolder: 職缺分析
 		lineageTag: fbac9dd5-be67-471f-8cc8-0f0d3537c804
 
 	/// Distinct jobs matching the selected observed category codes and all other filters.
-	measure 'Category Job Count' = [Active Jobs]
+	measure 職類篩選職缺數 = [目前符合條件職缺數]
 		formatString: #,0
-		displayFolder: Jobs
+		displayFolder: 職缺分析
 		lineageTag: c314b901-7fa2-4be0-82a1-a7b2184c901e
 
 	/// Share of matched jobs associated with the selected category codes.
-	measure 'Category Share %' = DIVIDE([Category Job Count], CALCULATE([Active Jobs], REMOVEFILTERS(DimJobCategory)), 0)
+	measure 職類職缺占比 = DIVIDE([職類篩選職缺數], CALCULATE([目前符合條件職缺數], REMOVEFILTERS('dim_職類')), 0)
 		formatString: 0.0%
-		displayFolder: Jobs
+		displayFolder: 職缺分析
 		lineageTag: d85a2104-51bc-4e4b-9e0a-bf1930b8c6e2
 
 	/// Distinct normalized skill descriptions for the currently selected job.
-	measure 'Job Skills' =
-			VAR SkillNames = CALCULATETABLE(VALUES(BridgeJobSkill[skillDescription]), CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], BOTH))
-			RETURN CONCATENATEX(FILTER(SkillNames, NOT ISBLANK([skillDescription])), [skillDescription], ", ", [skillDescription], ASC)
+	measure 職缺技能清單 =
+			VAR SkillNames = CALCULATETABLE(VALUES('職缺技能對照'[技能名稱]), CROSSFILTER('職缺技能對照'[職缺編號], '目前職缺'[職缺編號], BOTH))
+			RETURN CONCATENATEX(FILTER(SkillNames, NOT ISBLANK([技能名稱])), [技能名稱], ", ", [技能名稱], ASC)
 		formatString: @
-		displayFolder: Jobs
+		displayFolder: 職缺分析
 		lineageTag: 732335da-adee-4143-9b7a-f47b31082ad4
 
-	column jobNo
+	/// Company name resolved from the currently selected job.
+	measure 所選職缺公司名稱 =
+			VAR CompanyName = CALCULATE(SELECTEDVALUE('dim_公司'[公司名稱]), CROSSFILTER('目前職缺'[公司代碼], 'dim_公司'[公司代碼], BOTH))
+			RETURN COALESCE(CompanyName, "來源未提供")
+		formatString: @
+		displayFolder: 職缺分析\所選職缺
+		lineageTag: 1e8ac704-b889-4b8a-9be3-4a1d516dabec
+
+	column 職缺編號
 		dataType: string
 		lineageTag: 9e519c02-2e56-4cdd-bf69-face09cdc81c
 		summarizeBy: none
@@ -77,15 +85,16 @@ table FactJob
 
 		annotation SummarizationSetBy = Automatic
 
-	column custNo
+	column 公司代碼
 		dataType: string
+		isHidden
 		lineageTag: a16bf240-101b-4224-91c6-d9a5ae145e5a
 		summarizeBy: none
 		sourceColumn: custNo
 
 		annotation SummarizationSetBy = Automatic
 
-	column jobName
+	column 職缺名稱
 		dataType: string
 		lineageTag: c81ad7f4-7158-4390-89c8-aeab2a881964
 		summarizeBy: none
@@ -93,7 +102,7 @@ table FactJob
 
 		annotation SummarizationSetBy = Automatic
 
-	column descSnippet
+	column 職缺摘要
 		dataType: string
 		lineageTag: 7f136376-b59a-411d-b1bf-278ce519a71e
 		summarizeBy: none
@@ -101,15 +110,16 @@ table FactJob
 
 		annotation SummarizationSetBy = Automatic
 
-	column jobAddress
+	column 職缺地址
 		dataType: string
+		isHidden
 		lineageTag: c8d4d68b-cb16-41e5-ad61-843f8d2cd85d
 		summarizeBy: none
 		sourceColumn: jobAddress
 
 		annotation SummarizationSetBy = Automatic
 
-	column jobAddrNoDesc
+	column 職缺地區
 		dataType: string
 		lineageTag: f06acbb7-5d00-4996-98df-8660f73cf6d3
 		summarizeBy: none
@@ -117,23 +127,23 @@ table FactJob
 
 		annotation SummarizationSetBy = Automatic
 
-	column salaryLow
+	column 薪資下限
 		dataType: double
 		lineageTag: 2c44fe09-5c39-4de9-b601-53d821b1f9fa
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: salaryLow
 
 		annotation SummarizationSetBy = Automatic
 
-	column salaryHigh
+	column 薪資上限
 		dataType: double
 		lineageTag: f633579c-f042-4cfc-b4f7-2112ca3b0b94
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: salaryHigh
 
 		annotation SummarizationSetBy = Automatic
 
-	column appearDate
+	column 刊登日期
 		dataType: dateTime
 		formatString: Long Date
 		lineageTag: 71a0f7db-3638-40dc-aeca-789bcf00beb2
@@ -144,8 +154,9 @@ table FactJob
 
 		annotation SummarizationSetBy = Automatic
 
-	column snapshotDate
+	column 快照日期
 		dataType: dateTime
+		isHidden
 		formatString: Long Date
 		lineageTag: b25df2d0-069a-4038-a3d2-e444922df616
 		summarizeBy: none
@@ -155,31 +166,34 @@ table FactJob
 
 		annotation SummarizationSetBy = Automatic
 
-	column snapshotDateTime
+	column 快照時間
 		dataType: dateTime
+		isHidden
 		lineageTag: 162179e5-89a8-4671-9f6b-a926f0a849f7
 		summarizeBy: none
 		sourceColumn: snapshotDateTime
 
 		annotation SummarizationSetBy = Automatic
 
-	column sourceKeyword
+	column 擷取關鍵字
 		dataType: string
+		isHidden
 		lineageTag: f2af6b80-2b57-462b-8633-1c1da55e367e
 		summarizeBy: none
 		sourceColumn: sourceKeyword
 
 		annotation SummarizationSetBy = Automatic
 
-	column sourceArea
+	column 擷取地區
 		dataType: string
+		isHidden
 		lineageTag: adaa80bf-24cb-4dc6-8689-1295148f046c
 		summarizeBy: none
 		sourceColumn: sourceArea
 
 		annotation SummarizationSetBy = Automatic
 
-	column jobLink
+	column 職缺來源連結
 		dataType: string
 		lineageTag: 718f7652-8091-491b-9253-9819e4d07daf
 		dataCategory: WebUrl
@@ -188,15 +202,16 @@ table FactJob
 
 		annotation SummarizationSetBy = Automatic
 
-	column areaKey
+	column 地點識別碼
 		dataType: string
+		isHidden
 		lineageTag: 9ef053dd-8e9c-46ce-b11c-44b62d7820c1
 		summarizeBy: none
 		sourceColumn: areaKey
 
 		annotation SummarizationSetBy = Automatic
 
-	column sourcePlatform
+	column 職缺平台
 		dataType: string
 		lineageTag: d4e5f6a7-b8c9-40d1-e2f3-a4b5c6d7e8f9
 		summarizeBy: none

@@ -62,6 +62,8 @@ class Yes123Client:
         """Fetch single search page with adaptive retry and return parsed records."""
         params: Dict[str, Any] = {"strrec": strrec}
         if category_code:
+            if not category_code.startswith("2_"):
+                raise ValueError("Only yes123 WORK_MODE category codes are supported")
             params["find_work_mode1"] = category_code
         if keyword:
             params["find_key1"] = keyword

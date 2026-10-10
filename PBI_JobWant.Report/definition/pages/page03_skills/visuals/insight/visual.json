@@ -31,7 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "yes123 尚無技能橋接資料；選擇 yes123 時，本頁技能視覺會是空白。104 技能關聯以 distinct jobNo × normalized skillCode 計算，不代表因果。",
+                    "value": "技能需求以 distinct jobNo × normalized skillCode bridge 計算；數字描述關聯，不代表技能造成職缺或薪資差異。",
                     "textStyle": {
                       "fontSize": "10pt",
                       "color": "#4B5563"
@@ -63,6 +63,13 @@
                       "Value": "'#FFFFFF'"
                     }
                   }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }

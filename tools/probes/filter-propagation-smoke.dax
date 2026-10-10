@@ -1,1 +1,1 @@
-﻿EVALUATE ROW("ActiveJobs", IF(ISFILTERED(DimSkill[skillDescription]) || ISFILTERED(DimSkill[skillCode]), CALCULATE(DISTINCTCOUNT(FactJob[jobNo]), CROSSFILTER(BridgeJobSkill[jobNo], FactJob[jobNo], Both)), DISTINCTCOUNT(FactJob[jobNo])))
+﻿EVALUATE ROW("ActiveJobs", IF(ISFILTERED('dim_技能'[技能名稱]) || ISFILTERED('dim_技能'[技能代碼]), CALCULATE(DISTINCTCOUNT('目前職缺'[職缺編號]), CROSSFILTER('職缺技能對照'[職缺編號], '目前職缺'[職缺編號], Both)), DISTINCTCOUNT('目前職缺'[職缺編號])))

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "industry_slicer",
   "position": {
-    "x": 523,
-    "y": 88,
+    "x": 682,
+    "y": 92,
     "z": 5000,
-    "height": 72,
-    "width": 150,
+    "height": 68,
+    "width": 145,
     "tabOrder": 5000
   },
   "visual": {
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimCompany"
+                      "Entity": "dim_公司"
                     }
                   },
-                  "Property": "coIndustryDesc"
+                  "Property": "產業類別"
                 }
               },
-              "queryRef": "DimCompany.coIndustryDesc",
+              "queryRef": "dim_公司.產業類別",
               "active": true
             }
           ]

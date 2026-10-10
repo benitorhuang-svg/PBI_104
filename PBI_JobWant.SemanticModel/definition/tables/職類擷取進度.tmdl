@@ -1,17 +1,17 @@
-table FactAcquisitionCategory
+table 職類擷取進度
 	lineageTag: ea5d659f-c051-4254-bf26-6b9078701251
 
-	measure 職類數 = COALESCE(DISTINCTCOUNT(FactAcquisitionCategory[職類代碼]), 0)
+	measure 職類數 = COALESCE(COUNTROWS('職類擷取進度'), 0)
 		formatString: #,0
 		displayFolder: 擷取戰情室
 		lineageTag: 6e68e075-73af-4615-94d4-0b051093b0a3
 
-	measure 已選職類數 = COALESCE(MAX(FactAcquisitionCategory[選定職類數]), 0)
+	measure 已選職類數 = COALESCE(SUMX(VALUES('職類擷取進度'[職缺平台]), CALCULATE(MAX('職類擷取進度'[選定職類數]))), 0)
 		formatString: #,0
 		displayFolder: 擷取戰情室
 		lineageTag: 6c3e0f11-9489-4808-814d-88100decccb2
 
-	measure 已完成職類數 = CALCULATE([職類數], FactAcquisitionCategory[佇列狀態] = "DONE")
+	measure 已完成職類數 = CALCULATE([職類數], '職類擷取進度'[佇列狀態] = "DONE")
 		formatString: #,0
 		displayFolder: 擷取戰情室
 		lineageTag: d6441483-f57c-481b-9f99-4e27e09abc19
@@ -21,61 +21,61 @@ table FactAcquisitionCategory
 		displayFolder: 擷取戰情室
 		lineageTag: 3cef9b83-59fb-493d-9697-65215b084b0c
 
-	measure 待處理職類數 = COALESCE(CALCULATE([職類數], FactAcquisitionCategory[佇列狀態] = "PENDING"), 0)
+	measure 待處理職類數 = COALESCE(CALCULATE([職類數], '職類擷取進度'[佇列狀態] IN {"PENDING", "NOT_CAPTURED", "STALE"}), 0)
 		formatString: #,0
 		displayFolder: 擷取戰情室
 		lineageTag: b8efaadb-0014-4185-9c80-08d6a9d30aa9
 
-	measure 處理中職類數 = COALESCE(CALCULATE([職類數], FactAcquisitionCategory[佇列狀態] = "LEASED"), 0)
+	measure 處理中職類數 = COALESCE(CALCULATE([職類數], '職類擷取進度'[佇列狀態] = "LEASED"), 0)
 		formatString: #,0
 		displayFolder: 擷取戰情室
 		lineageTag: 53f07fe5-11be-4650-8107-98dda3136dbd
 
-	measure 警告批次數 = COALESCE(SUM(FactAcquisitionCategory[警告旗標]), 0)
+	measure 警告批次數 = COALESCE(SUM('職類擷取進度'[警告旗標]), 0)
 		formatString: #,0
 		displayFolder: 擷取戰情室
 		lineageTag: 985bd872-ea2d-4d60-87d5-6c581cdba409
 
-	measure 失敗職類數 = COALESCE(CALCULATE([職類數], FactAcquisitionCategory[佇列狀態] = "FAIL"), 0)
+	measure 失敗職類數 = COALESCE(CALCULATE([職類數], '職類擷取進度'[佇列狀態] = "FAIL"), 0)
 		formatString: #,0
 		displayFolder: 擷取戰情室
 		lineageTag: 32402fc3-21be-47d3-81b6-834c83103230
 
-	measure 延後職類數 = COALESCE(CALCULATE([職類數], FactAcquisitionCategory[佇列狀態] = "DEFERRED"), 0)
+	measure 延後職類數 = COALESCE(CALCULATE([職類數], '職類擷取進度'[佇列狀態] = "DEFERRED"), 0)
 		formatString: #,0
 		displayFolder: 擷取戰情室
 		lineageTag: ea660d24-b81d-437a-ab44-fdd8fda23e98
 
-	measure 目前執行狀態 = SWITCH(SELECTEDVALUE(FactAcquisitionCategory[執行狀態], "無執行紀錄"), "QUEUED", "排隊中", "RUNNING", "執行中", "COMPLETE", "已完成", "COMPLETE_WITH_WARNINGS", "完成（有警告）", "PARTIAL", "部分完成", "BLOCKED", "已封鎖", SELECTEDVALUE(FactAcquisitionCategory[執行狀態], "無執行紀錄"))
+	measure 目前執行狀態 = VAR StatusText = CONCATENATEX(VALUES('職類擷取進度'[執行狀態]), SWITCH('職類擷取進度'[執行狀態], "QUEUED", "排隊中", "RUNNING", "執行中", "COMPLETE", "已完成", "COMPLETE_WITH_WARNINGS", "完成（有警告）", "PARTIAL", "部分完成", "BLOCKED", "已封鎖", "NOT_STARTED", "尚未開始", '職類擷取進度'[執行狀態]), " / ") RETURN IF(StatusText = "", "無執行紀錄", StatusText)
 		formatString: @
 		displayFolder: 擷取戰情室
 		lineageTag: cee79c0f-be35-4434-9c89-8bbf8697510e
 
-	measure 'API 閘道狀態' = IF(COUNTROWS(FactAcquisitionCategory) = 0, "無執行紀錄", IF(MAX(FactAcquisitionCategory[閘道封鎖]) = 1, "API 暫停", "API 可請求"))
+	measure 來源請求狀態 = IF(COUNTROWS('職類擷取進度') = 0, "無執行紀錄", IF(NOT HASONEVALUE('職類擷取進度'[職缺平台]), "請選擇單一平台", IF(COUNT('職類擷取進度'[閘道封鎖]) = 0, "來源端未提供", IF(MAX('職類擷取進度'[閘道封鎖]) = 1, "API 暫停", "API 可請求"))))
 		formatString: @
 		displayFolder: 擷取戰情室
 		lineageTag: 9acd6da3-baae-4a66-8155-ddf51d655631
 
-	measure '目前 API 間隔秒' = MAX(FactAcquisitionCategory[目前請求間隔秒])
+	measure 目前請求間隔秒最大值 = MAX('職類擷取進度'[目前請求間隔秒])
 		formatString: 0.00
 		displayFolder: 擷取戰情室
 		lineageTag: cf2409b7-fde6-4fa2-8e01-4fa722807bc9
 
-	measure 最新資料庫讀取時間 = MAX(FactAcquisitionCategory[資料庫讀取時間])
+	measure 最新資料庫讀取時間 = MAX('職類擷取進度'[資料庫讀取時間])
 		formatString: yyyy/MM/dd HH:mm:ss
 		displayFolder: 擷取戰情室
 		lineageTag: 73e63298-aca3-48f8-9a10-9cc6ca73a4ee
 
-	measure 職缺總數 = COALESCE(SUM(FactAcquisitionCategory[職缺筆數]), 0)
+	measure 職缺總數 = COALESCE(SUM('職類擷取進度'[職缺筆數]), 0)
 		formatString: #,0
 		displayFolder: 擷取戰情室
 		lineageTag: ce4615c2-ca18-49b1-b762-a09bca7f7834
 
-	measure 上層職類名稱顯示 = SELECTEDVALUE(FactAcquisitionCategory[上層職類名稱])
+	measure 來源職類名稱顯示 = VAR Platform = MAX('職類擷取進度'[職缺平台]) RETURN IF(Platform = "yes123", CALCULATE(SELECTEDVALUE('職類擷取進度'[來源職類名稱]), '職類擷取進度'[職類階層顯示用] = 0), SELECTEDVALUE('職類擷取進度'[來源職類名稱]))
 		formatString: @
 		lineageTag: fb471119-0cb2-4501-beb5-b2560cdf73e9
 
-	measure 佇列終態職類數 = COALESCE(SUM(FactAcquisitionCategory[佇列終態旗標]), 0)
+	measure 佇列終態職類數 = COALESCE(SUM('職類擷取進度'[佇列終態旗標]), 0)
 		formatString: #,0
 		displayFolder: 擷取戰情室
 		lineageTag: f8fae507-6198-4c9b-9fbe-721c10f958d4
@@ -85,17 +85,17 @@ table FactAcquisitionCategory
 		displayFolder: 擷取戰情室
 		lineageTag: b0791d72-52be-4ed1-bdfd-a9193e6c15f4
 
-	measure 分頁完整職類數 = COALESCE(SUM(FactAcquisitionCategory[分頁完整旗標]), 0)
+	measure 分頁完整職類數 = COALESCE(SUM('職類擷取進度'[分頁完整旗標]), 0)
 		formatString: #,0
 		displayFolder: 擷取戰情室
 		lineageTag: 6e094022-546e-42c5-8e43-c1655dc7169a
 
-	measure Silver可用職類數 = COALESCE(SUM(FactAcquisitionCategory[Silver可用旗標]), 0)
+	measure Silver層可用職類數 = COALESCE(SUM('職類擷取進度'[Silver層可用旗標]), 0)
 		formatString: #,0
 		displayFolder: 擷取戰情室
 		lineageTag: 23d767d8-7745-47de-bb11-09998c3c60a1
 
-	measure Silver封鎖職類數 = COALESCE(SUM(FactAcquisitionCategory[Silver封鎖旗標]), 0)
+	measure Silver層封鎖職類數 = COALESCE(SUM('職類擷取進度'[Silver層封鎖旗標]), 0)
 		formatString: #,0
 		displayFolder: 擷取戰情室
 		lineageTag: 5017c1f5-d7af-4fef-88f4-fbddf6f2fc79
@@ -105,8 +105,19 @@ table FactAcquisitionCategory
 		displayFolder: 擷取戰情室
 		lineageTag: aec6c071-f639-4530-9872-bdc7a3235143
 
+	measure 來源職類數 = VAR Platform = MAX('職類擷取進度'[職缺平台]) RETURN IF(Platform = "yes123", CALCULATE(COUNTROWS('職類擷取進度'), '職類擷取進度'[職類階層顯示用] = 0), COUNTROWS('職類擷取進度'))
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: 2bcf7fb6-01e3-4fc5-817c-aff1dfe7b3ea
+
+	measure 來源職缺總數 = VAR Platform = MAX('職類擷取進度'[職缺平台]) RETURN IF(Platform = "yes123", CALCULATE(SUM('職類擷取進度'[職缺筆數]), '職類擷取進度'[職類階層顯示用] = 0), SUM('職類擷取進度'[職缺筆數]))
+		formatString: #,0
+		displayFolder: 擷取戰情室
+		lineageTag: 45ebb793-b9b6-498d-8164-a106203ec150
+
 	column 執行代碼
 		dataType: string
+		isHidden
 		lineageTag: 1224f299-e641-425f-ae0b-ca1e407a7de5
 		summarizeBy: none
 		sourceColumn: runId
@@ -128,6 +139,7 @@ table FactAcquisitionCategory
 
 	column 選定職類數
 		dataType: int64
+		isHidden
 		lineageTag: 79f1fe04-b433-4a61-baa6-d7c870573a21
 		summarizeBy: none
 		sourceColumn: selectedCategories
@@ -182,12 +194,14 @@ table FactAcquisitionCategory
 
 	column 閘道封鎖
 		dataType: int64
+		isHidden
 		lineageTag: 011a9dba-198e-4a3b-9163-46cc2617f0db
 		summarizeBy: none
 		sourceColumn: gateBlocked
 
 	column 資料庫讀取時間
 		dataType: dateTime
+		isHidden
 		lineageTag: 0457ebb4-d277-44d1-980b-d92eb683305b
 		summarizeBy: none
 		sourceColumn: sourceReadAt
@@ -260,8 +274,9 @@ table FactAcquisitionCategory
 
 	column 警告旗標
 		dataType: int64
+		isHidden
 		lineageTag: 7704f1c0-746f-46f5-a8f7-2956a8006216
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: warningFlag
 
 	column 上層職類
@@ -271,64 +286,74 @@ table FactAcquisitionCategory
 		summarizeBy: none
 		sourceColumn: parentCategoryLabel
 
-	column 上層職類代碼
+	column 來源職類代碼原始
 		dataType: string
+		isHidden
 		lineageTag: f4746805-0b89-4376-a1b9-82c4264f673c
 		summarizeBy: none
 		sourceColumn: parentCategoryCode
 
-	column 上層職類名稱
+	column 來源職類名稱
 		dataType: string
+		isHidden
 		lineageTag: d88edf76-5791-4dcd-87d0-50f5ea8933c6
 		summarizeBy: none
 		sourceColumn: parentCategoryName
 
 	column API回報職缺數下界
 		dataType: int64
+		isHidden
 		lineageTag: 3cc28ca5-55ec-48dc-860f-744bc6eb7fdc
 		summarizeBy: none
 		sourceColumn: apiReportedJobCountMin
 
 	column API回報職缺數上界
 		dataType: int64
+		isHidden
 		lineageTag: 8fa031a1-d6d7-4581-8d8d-6884e1817fcf
 		summarizeBy: none
 		sourceColumn: apiReportedJobCountMax
 
 	column API回報頁數下界
 		dataType: int64
+		isHidden
 		lineageTag: 77720497-6f8c-4320-8935-0070c684c6d5
 		summarizeBy: none
 		sourceColumn: apiReportedPageCountMin
 
 	column API回報頁數上界
 		dataType: int64
+		isHidden
 		lineageTag: d6d5f7a6-39c6-4c7e-a8cc-a8ef9f9ae8a7
 		summarizeBy: none
 		sourceColumn: apiReportedPageCountMax
 
 	column 佇列終態旗標
 		dataType: int64
+		isHidden
 		lineageTag: 7f74f2b7-02cf-4f66-952c-7ba37a888b10
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: queueTerminalFlag
 
 	column 分頁完整旗標
 		dataType: int64
+		isHidden
 		lineageTag: f8c8a0fc-688d-44d7-890f-0719b6f1fdf8
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: captureCompleteFlag
 
-	column Silver可用旗標
+	column Silver層可用旗標
 		dataType: int64
+		isHidden
 		lineageTag: 59ecce8d-f678-4234-9618-9a1077fd8818
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: silverEligibleFlag
 
-	column Silver封鎖旗標
+	column Silver層封鎖旗標
 		dataType: int64
+		isHidden
 		lineageTag: 0cb81432-333f-4aad-9f07-690cff35483d
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: silverBlockedFlag
 
 	column 品質警告原因
@@ -336,6 +361,46 @@ table FactAcquisitionCategory
 		lineageTag: f32cb807-9890-4380-8239-f9b0ed480710
 		summarizeBy: none
 		sourceColumn: warningReason
+
+	column 已記錄批次數
+		dataType: int64
+		lineageTag: a463aa4b-a7aa-4ce8-8a3a-95d8bd7b1b2c
+		summarizeBy: none
+		sourceColumn: batchCount
+
+	column 職缺平台
+		dataType: string
+		lineageTag: 6906177d-4a54-4bed-a20d-d66588bfa493
+		summarizeBy: none
+		sourceColumn: sourcePlatform
+
+	column 職類階層顯示用 =
+			VAR Platform = '職類擷取進度'[職缺平台]
+			VAR NativeCode = '職類擷取進度'[職類代碼]
+			RETURN
+				IF(
+					Platform = "yes123" && LEFT(NativeCode, 2) = "2_",
+					IF(RIGHT(NativeCode, 5) = "_0000", 0, 2),
+					'職類擷取進度'[職類階層]
+				)
+		dataType: int64
+		isHidden
+		lineageTag: 734f64bb-16df-4f76-8de5-feb784070769
+		summarizeBy: none
+
+	column 來源職類代碼 =
+			VAR Platform = '職類擷取進度'[職缺平台]
+			VAR NativeCode = '職類擷取進度'[職類代碼]
+			VAR ParentCode = '職類擷取進度'[來源職類代碼原始]
+			RETURN
+				IF(
+					Platform = "yes123" && LEFT(NativeCode, 2) = "2_",
+					"2_" & MID(NativeCode, 3, 9),
+					ParentCode
+				)
+		dataType: string
+		lineageTag: 4c9e25c4-1b6a-4f50-9aa1-99823c93f014
+		summarizeBy: none
 
 	partition FactAcquisitionCategory = m
 		mode: import

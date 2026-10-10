@@ -1,36 +1,41 @@
 relationship FactJob_DimCompany_custNo
-	fromColumn: FactJob.custNo
-	toColumn: DimCompany.custNo
+	fromColumn: 目前職缺.公司代碼
+	toColumn: dim_公司.公司代碼
 
 relationship FactJob_DimArea_areaKey
-	fromColumn: FactJob.areaKey
-	toColumn: DimArea.areaKey
+	fromColumn: 目前職缺.地點識別碼
+	toColumn: dim_地區.地點識別碼
 
 relationship BridgeJobSkill_FactJob_jobNo
 	crossFilteringBehavior: bothDirections
-	fromColumn: BridgeJobSkill.jobNo
-	toColumn: FactJob.jobNo
+	fromColumn: 職缺技能對照.職缺編號
+	toColumn: 目前職缺.職缺編號
 
 relationship BridgeJobSkill_DimSkill_skillCode
-	fromColumn: BridgeJobSkill.skillCode
-	toColumn: DimSkill.skillCode
+	fromColumn: 職缺技能對照.技能代碼
+	toColumn: dim_技能.技能代碼
 
 relationship BridgeJobCategory_FactJob_jobNo
 	crossFilteringBehavior: bothDirections
-	fromColumn: BridgeJobCategory.jobNo
-	toColumn: FactJob.jobNo
+	fromColumn: 職缺職類對照.職缺編號
+	toColumn: 目前職缺.職缺編號
 
 relationship BridgeJobCategory_DimJobCategory_jobCatCode
-	fromColumn: BridgeJobCategory.jobCatCode
-	toColumn: DimJobCategory.jobCatCode
+	fromColumn: 職缺職類對照.職類代碼
+	toColumn: dim_職類.職類代碼
 
 relationship FactJobSnapshot_DimDate_snapshotDate
 	joinOnDateBehavior: datePartOnly
-	fromColumn: FactJobSnapshot.snapshotDate
-	toColumn: DimDate.Date
+	fromColumn: 職缺快照.快照日期
+	toColumn: dim_日期.日期
 
 relationship FactJob_DimDate_appearDate
 	joinOnDateBehavior: datePartOnly
-	fromColumn: FactJob.appearDate
-	toColumn: DimDate.Date
+	fromColumn: 目前職缺.刊登日期
+	toColumn: dim_日期.日期
+
+relationship FactSalaryObservation_DimDate_snapshotDate
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 薪資觀測.快照日期
+	toColumn: dim_日期.日期
 

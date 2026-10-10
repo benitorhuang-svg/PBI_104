@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "Company Count"
+                  "Property": "符合條件公司數"
                 }
               },
-              "queryRef": "FactJob.Company Count"
+              "queryRef": "目前職缺.符合條件公司數"
             }
           ]
         }

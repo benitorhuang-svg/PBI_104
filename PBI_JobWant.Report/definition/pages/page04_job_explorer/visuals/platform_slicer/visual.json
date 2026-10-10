@@ -3,11 +3,11 @@
   "name": "platform_slicer",
   "position": {
     "x": 24,
-    "y": 88,
+    "y": 92,
     "z": 8500,
-    "height": 72,
-    "width": 150,
-    "tabOrder": 8500
+    "height": 68,
+    "width": 165,
+    "tabOrder": 500
   },
   "visual": {
     "visualType": "slicer",
@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactJob"
+                      "Entity": "目前職缺"
                     }
                   },
-                  "Property": "sourcePlatform"
+                  "Property": "職缺平台"
                 }
               },
-              "queryRef": "FactJob.sourcePlatform",
+              "queryRef": "目前職缺.職缺平台",
               "active": true
             }
           ]

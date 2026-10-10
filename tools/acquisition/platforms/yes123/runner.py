@@ -16,7 +16,11 @@ TOOLS = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(TOOLS))
 
 from .annealer import AnnealingPacer
-from .catalog import fetch_work_mode_catalog, get_completed_category_codes, seed_categories_to_crosswalk
+from .catalog import (
+    fetch_work_mode_catalog,
+    get_completed_category_codes,
+    seed_categories_to_crosswalk,
+)
 from .client import Yes123Client
 from .loader import save_yes123_batch
 from ..jobwant_104.persistence.loader import read_db_config
@@ -31,13 +35,13 @@ def run_catalog_acquisition(
     workers: int = 3,
     dbname: str = "jobwant_yes123",
 ) -> Dict[str, Any]:
-    """Execute concurrent catalog run across all yes123 work mode categories."""
+    """Acquire only yes123 WORK_MODE categories."""
     db_config = read_db_config(env_file)
     db_config["dbname"] = dbname
     import psycopg
     from psycopg.types.json import Jsonb
 
-    print(f"Fetching official yes123 work_mode.json catalog (Concurrency: {workers} workers, min_interval: {min_interval}s)...")
+    print(f"Fetching yes123 WORK_MODE catalog (Concurrency: {workers} workers, min_interval: {min_interval}s)...")
     catalog = fetch_work_mode_catalog()
     total_in_catalog = len(catalog)
 
@@ -90,7 +94,7 @@ def run_catalog_acquisition(
                 print(
                     f"[W{worker_id}] [{curr_idx}/{total_pending}] ({curr_pct:4.1f}%) "
                     f"Code: {code} ({name} | {group}) -> Jobs: {jobs_count} (Reported: {batch['reported_total']}) | "
-                    f"Silver: {ingest_summary['jobs']}"
+                    f"Silver: {ingest_summary.get('jobs', 0)}"
                 )
             return (1, jobs_count)
         except Exception as exc:

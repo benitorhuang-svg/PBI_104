@@ -2,7 +2,7 @@
 
 ## 目的與狀態
 
-本文件定義多平台資料進入 Power BI 前的資料庫責任、鍵、粒度與欄位契約。它是後續 migration、ETL 與 Gold views 的設計基準；**目前只是規範提案，不代表資料庫已符合，也沒有在本次套用任何 migration**。
+本文件定義多平台資料進入 Power BI 前的資料庫責任、鍵、粒度與欄位契約。它仍是目標契約；本機 `jobwant_104` 已局部實作 migrations 21–23，但此組 migration 尚未納入正式 schema runner，不能視為所有契約和寫入路徑均已完成。
 
 本機目錄與資料庫盤點日期：2026-10-09。Power Query 的正式輸入仍限定為集中報表資料庫中的 `gold.pbi_*` views；來源 JSON、Bronze、Silver 不直接提供給語意模型。
 
@@ -21,7 +21,7 @@ Bronze → Silver           Bronze → Silver             Bronze → Silver
 
 - 每個平台保留自己的來源代碼、原始批次與平台專屬正規化規則。來源資料庫可在同一 PostgreSQL cluster 中，但以資料庫和權限界定來源責任。
 - 集中報表資料庫只發布共用 Gold 契約。Power BI 不在資料庫間切換；平台選擇是 Gold `sourcePlatform` 欄位上的 slicer。
-- FDW 可作為初期唯讀取數方式。需要穩定刷新、來源離線時仍可報表或控制查詢成本時，改由 ETL 增量落地到集中資料庫，再由 Gold views 發布。
+- FDW 可作為唯讀取數方式。本機 migration 23 透過 yes123 的 Gold scope view 一次投影職缺，避免逐筆遠端 join；來源快照與薪資觀測仍經 FDW 讀取。需要來源離線時仍可報表或進一步控制查詢成本時，再評估 ETL 增量落地到集中資料庫。
 - 目前 `jobwant_104` 同時承載 104 資料與報表 Gold，是過渡狀態。可評估 `jobwant_warehouse` 作為集中報表資料庫名稱；本規範不改資料庫名稱或連線參數。
 
 ## 命名與共同型別
@@ -69,16 +69,17 @@ Bronze → Silver           Bronze → Silver             Bronze → Silver
 
 | Power BI 載入表 | Gold view | 一列代表／唯一性要求 |
 |---|---|---|
-| `FactJob` | `gold.pbi_fact_jobs` | 每個平台來源職缺的最新合格完整觀測一列；目前模型以 `jobNo` 作全域唯一鍵，且已宣告 `sourcePlatform`。DB view 的 `nativeJobId`、`sourceJobKey` 尚未宣告在 TMDL，須在模型升版時一併加入，或移出 PBI view。 |
-| `FactJobSnapshot` | `gold.pbi_fact_job_snapshots` | 一個來源職缺的一次已保存快照；批次、系列、日期及職缺鍵可回溯。若納入多平台歷史，view 與 TMDL 都須明確加入平台和來源鍵。 |
-| `BridgeJobCategory` | `gold.pbi_bridge_job_category` | 每個 `jobNo × confirmed canonical job category` 一列。 |
-| `BridgeJobSkill` | `gold.pbi_bridge_job_skill` | 每個 `jobNo × confirmed canonical skill` 一列；來源沒有技能時維持無橋接列，不推測技能。 |
-| `DimCompany` | `gold.pbi_dim_company` | 每個模型公司鍵一列；不能因同名自動跨平台合併。 |
-| `DimArea` | `gold.pbi_dim_area` | 每個已定義位置鍵一列；未能標準化的位置保留未知狀態。 |
-| `DimJobCategory` | `gold.pbi_dim_job_category` | 每個確認的標準職類鍵一列；未映射來源碼不可冒充標準職類。 |
-| `DimSkill` | `gold.pbi_dim_skill` | 每個確認的標準技能鍵一列。 |
-| `DimDate` | `gold.pbi_dim_date` | 每個日曆日期一列，日期範圍涵蓋事實日期。 |
-| `FactAcquisitionCategory` | `gold.pbi_acquisition_categories` | 擷取監控列；目前模型和視覺是 104 專用。若納入其他平台，view 和 TMDL 必須加入來源平台與來源代碼種類，不與職缺事實粒度混合。 |
+| `FactJob` | `gold.pbi_fact_jobs_v21` | 每個平台來源職缺的最新合格觀測一列；模型以 namespaced `jobNo` 作相容鍵並宣告 `sourcePlatform`。DB view 的 `nativeJobId`、`sourceJobKey` 尚未宣告在 TMDL。yes123 的 `salaryLow`、`salaryHigh` 維持 null，避免未知給薪週期混算。 |
+| `FactJobSnapshot` | `gold.pbi_fact_job_snapshots_v21` | 一個來源職缺的一次已保存快照；TMDL 包含 `sourcePlatform`，批次、系列、日期及職缺鍵可回溯。 |
+| `FactSalaryObservation` | `gold.pbi_fact_salary_observations_v21` | 每一來源／查詢系列／日期／批次／職缺／薪資來源類型／提及序號一列；保留原始值、幣別、週期和解析狀態。它只連到 DimDate，不與 FactJob 合併或過濾歷史觀測。 |
+| `BridgeJobCategory` | `gold.pbi_bridge_job_category_v21` | 每個 `jobNo × confirmed canonical job category` 一列。 |
+| `BridgeJobSkill` | `gold.pbi_bridge_job_skill_v21` | 每個 `jobNo × confirmed canonical skill` 一列；來源沒有技能時維持無橋接列，不推測技能。 |
+| `DimCompany` | `gold.pbi_dim_company_v21` | 每個模型公司鍵一列；不能因同名自動跨平台合併。 |
+| `DimArea` | `gold.pbi_dim_area_v21` | 每個已定義位置鍵一列；未能標準化的位置保留未知狀態。 |
+| `DimJobCategory` | `gold.pbi_dim_job_category_v21` | 每個確認的標準職類鍵一列；未映射來源碼不可冒充標準職類。 |
+| `DimSkill` | `gold.pbi_dim_skill_v21` | 每個確認的標準技能鍵一列。 |
+| `DimDate` | `gold.pbi_dim_date_v21` | 每個日曆日期一列，日期範圍涵蓋事實日期。 |
+| `FactAcquisitionCategory` | `gold.pbi_acquisition_categories` | 每個來源平台與原生職類一列；保留 104 佇列狀態及 yes123 已記錄批次狀態，另帶 `sourcePlatform`、`batchCount`。yes123 的 `STALE`、`NOT_CAPTURED` 表示最新批次日期上的觀測狀態，不是即時佇列狀態；原生分類碼不跨平台合併。 |
 
 PBI view 的欄位契約以目前 TMDL 欄位為相容基準；DB view 多出的 lineage 欄位需明確列為內部欄位，不能默認已存在於 Semantic Model。新增模型欄位只可追加；移除、改名、改型別或改粒度都需先升版並同步 TMDL。Power Query 保持 Import reader：只導航 Gold view，不做欄位修正、聯結、正規化或資料品質補救。
 
@@ -99,25 +100,25 @@ PBI view 的欄位契約以目前 TMDL 欄位為相容基準；DB view 多出的
 4. 原始 Bronze 批次不可由 schema migration 重寫或刪除；改鍵須先有可回復的 backfill、孤兒檢查和舊新鍵對照。
 5. 新增或修改契約時，先列出 Gold view 存在性、欄位/型別、grain、鍵唯一性、bridge orphan 和每平台筆數驗收條件。通過後才刷新 Desktop、儲存並重開 PBIP。
 
-## 本機現況與差距（2026-10-09，只讀盤點）
+## 本機現況與差距（2026-10-09）
 
 | 資料庫 | Schema 登記 | `gold.pbi_*` 實況 |
 |---|---:|---|
-| `jobwant_104` | migration 1–20 | 有 `pbi_fact_jobs`、`pbi_fact_job_snapshots`、`pbi_fact_job_scope`、`pbi_bridge_job_category`、`pbi_acquisition_categories`、`pbi_job_snapshots`；缺 `pbi_bridge_job_skill`、`pbi_dim_area`、`pbi_dim_company`、`pbi_dim_date`、`pbi_dim_job_category`、`pbi_dim_skill`。 |
-| `jobwant_yes123` | migration 1–19 | 有上述缺少的 6 個 views，並有一份平台資料庫自己的 `pbi_*` views；它不應是 Power BI 的第二個資料來源。 |
+| `jobwant_104` | migration 1–24 | Power BI 有 11 張模型表；十張讀取 versioned `_v21` projections，FactAcquisitionCategory 讀取跨平台 `gold.pbi_acquisition_categories`。Migration 22 修正 salary currency FDW 為 `CHAR(3)`；migration 23 將 yes123 Gold scope 作單次 foreign projection；migration 24 將 yes123 原生類別與批次狀態併入監控 view。這些 local migrations 尚未納入 `tools/sync_lake_to_postgres.py` 的 schema runner。 |
+| `jobwant_yes123` | migration 1–19 | 提供平台自己的 Gold PBI views；migration 23 使用 `gold.pbi_fact_job_scope` 作唯讀來源。Power Query 不直接連接此資料庫。 |
 
 目前 `silver.job_current` 在兩個資料庫都以 `job_no` 作單欄主鍵；yes123 loader 使用 `yes123:` 前綴寫入 `job_no` 和 `source_job_key`，目前可避免兩平台常見 ID 碰撞，但資料庫尚未用 `(source_platform, native_job_id)` 唯一約束表達正式身份。需採分階段 migration 保護 `job_snapshots`、兩種 bridge 及 TMDL 關聯。
 
-資料庫版本差異、重複發布 PBI views 與實際 Gold view 缺漏表示：**migration version 相同不代表 schema contract 相同**。本機 `jobwant_104` 中 yes123 Gold 職缺目前為 25 筆；該筆數是實際資料狀態，不代表 yes123 的資料使用授權、分類 mapping 或報表涵蓋已解除阻擋。
+截至本次 Desktop 表級刷新，模型載入 39,392 筆 yes123 FactJob、216,488 筆 yes123 FactJobSnapshot、430,812 筆 yes123 FactSalaryObservation。來源庫仍在寫入；刷新後讀到的 Silver 原始快照和薪資數高於模型載入快照，因此以上模型數字不是持續即時值。接入數量不代表資料使用授權、分類 mapping、薪資週期比較或技能涵蓋已解除阻擋。
 
-`tools/sql/init_postgres_schema.sql` 建立原有完整 PBI view set；單獨的 migration 020 以 `DROP SCHEMA fdw_yes123 CASCADE` 替換 foreign tables，之後只重建職缺與職類橋接中的部分 views。這和 `jobwant_104` 缺少依賴 view、而 `jobwant_yes123` 的 migration 仍停在 19 的 catalog 現況相符，是目前刷新缺 view 的主要根因。migration 020 還含有內嵌的 user-mapping credential；不可再把它當成可安全重播的 migration，也不要將 credential 複製到文件或新 migration。
+`tools/sql/init_postgres_schema.sql` 建立原有單平台 PBI view set；未由正式 runner 管理的 migration 020–023 在 `jobwant_104` 建立 FDW 與 versioned model views。Migration 020 的舊 FDW lifecycle 不安全，不可盲目重播；credential 必須只透過環境 secret 管理。此次 FactJob 初版透過多個 FDW 表逐筆 join，造成遠端往返過多；migration 23 改成讀取來源 Gold scope view。正式 ETL 寫入前仍須先把 migrations 20–23 納入可重播 runner。
 
 ### 尚未解除的導入閘門
 
 - yes123 資料批次的保存、分析及展示權限仍須依 [yes123 導入盤點](../../data-reference/yes123-category-acquisition-probe.md) 記載的證據閘門確認。
 - yes123 的 `WcodeList`、`JcodeList` 與候選 JSON 目錄彼此映射未完成；既有 crosswalk seed 必須重新對照來源證據，確認前不得當成全平台 taxonomy。
 - yes123 已確認欄位目前不足以建立技能橋接；沒有技能資料時維持空橋接，不補猜值。
-- 來源資料庫與報表資料庫的職缺/公司/地點鍵、薪資欄位映射和時區契約須在新 migration 前完成對照與驗收條件。
+- 來源資料庫與報表資料庫的正式複合職缺鍵、公司/地點跨平台 matching 與完整時區契約仍須列入後續 migration；薪資觀測的原始幣別與週期欄位已接入，但正規化和跨週期比較仍未完成。
 
 ## 實作順序
 

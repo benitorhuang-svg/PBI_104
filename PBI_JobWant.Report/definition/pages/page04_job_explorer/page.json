@@ -4,5 +4,78 @@
   "displayName": "職缺搜尋器",
   "displayOption": "FitToPage",
   "height": 720,
-  "width": 1280
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F5F7FA'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "job_map",
+      "target": "job_list",
+      "type": "DataFilter"
+    },
+    {
+      "source": "job_map",
+      "target": "job_preview",
+      "type": "DataFilter"
+    },
+    {
+      "source": "job_map",
+      "target": "job_pay_source",
+      "type": "DataFilter"
+    },
+    {
+      "source": "job_map",
+      "target": "job_description",
+      "type": "DataFilter"
+    },
+    {
+      "source": "job_map",
+      "target": "matched_jobs_card",
+      "type": "DataFilter"
+    },
+    {
+      "source": "job_list",
+      "target": "job_preview",
+      "type": "DataFilter"
+    },
+    {
+      "source": "job_list",
+      "target": "job_pay_source",
+      "type": "DataFilter"
+    },
+    {
+      "source": "job_list",
+      "target": "job_description",
+      "type": "DataFilter"
+    },
+    {
+      "source": "job_list",
+      "target": "matched_jobs_card",
+      "type": "DataFilter"
+    }
+  ]
 }

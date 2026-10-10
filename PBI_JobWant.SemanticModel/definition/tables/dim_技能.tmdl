@@ -1,12 +1,13 @@
-table DimSkill
+table dim_技能
 	lineageTag: d2b10723-4051-4970-9a74-96fe0c24a95a
 
-	column skillCode
+	column 技能代碼
 		dataType: string
+		isHidden
 		lineageTag: 3e363cf0-c4b3-4c98-860c-a2a31a8dabad
 		sourceColumn: skillCode
 
-	column skillDescription
+	column 技能名稱
 		dataType: string
 		lineageTag: 176e782a-9c8d-4745-9197-9345a70aa5a9
 		sourceColumn: skillDescription

@@ -1,0 +1,149 @@
+table 薪資觀測
+	isHidden
+	lineageTag: 0fa96ef4-d5e3-41ff-a263-68ddbda79682
+
+	column 查詢序列識別碼
+		dataType: string
+		lineageTag: 2a3cbf90-164b-4b0e-88c4-8bcd67852410
+		summarizeBy: none
+		sourceColumn: querySeriesKey
+
+	column 快照日期
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2630d869-83f8-41eb-ab38-180fe919ac7d
+		summarizeBy: none
+		sourceColumn: snapshotDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 擷取批次識別碼
+		dataType: string
+		lineageTag: f2ae4da5-c5cf-4731-833c-dd60b3d1e28b
+		summarizeBy: none
+		sourceColumn: batchId
+
+	column 職缺編號
+		dataType: string
+		lineageTag: a43f5d0f-0036-4a49-9d0b-85ef9f20df61
+		summarizeBy: none
+		sourceColumn: jobNo
+
+	column 職缺平台
+		dataType: string
+		lineageTag: 5e52d820-dd55-47ed-90ad-7a2d5e3cd8eb
+		summarizeBy: none
+		sourceColumn: sourcePlatform
+
+	column 薪資來源類型
+		dataType: string
+		lineageTag: 3255c758-ce8c-4392-9ac6-f37eab611f61
+		summarizeBy: none
+		sourceColumn: sourceKind
+
+	column 觀測序號
+		dataType: int64
+		lineageTag: 98a1f508-3222-4c6e-97eb-bd4edcc322c9
+		summarizeBy: none
+		sourceColumn: observationIndex
+
+	column 原始薪資下限文字
+		dataType: string
+		lineageTag: fd620e70-f411-4029-9124-dafbc633b97a
+		summarizeBy: none
+		sourceColumn: rawValueMin
+
+	column 原始薪資上限文字
+		dataType: string
+		lineageTag: ff2b3592-6ddd-4f59-9685-f3da03b7b2aa
+		summarizeBy: none
+		sourceColumn: rawValueMax
+
+	column 解析薪資下限
+		dataType: double
+		lineageTag: dcc3c7a0-aec2-4cb1-8c44-4b1a509ba863
+		summarizeBy: none
+		sourceColumn: amountMin
+
+	column 解析薪資上限
+		dataType: double
+		lineageTag: 3c0e25ec-9b99-4af1-ab57-ed52bafd7d2a
+		summarizeBy: none
+		sourceColumn: amountMax
+
+	column 幣別代碼
+		dataType: string
+		lineageTag: b47d9e58-8807-475f-97c6-cb9fa97ef292
+		summarizeBy: none
+		sourceColumn: currencyCode
+
+	column 幣別依據
+		dataType: string
+		lineageTag: a728b30e-c786-45f4-93db-24c161d755f5
+		summarizeBy: none
+		sourceColumn: currencyBasis
+
+	column 給薪週期
+		dataType: string
+		lineageTag: ed097a96-e285-49d3-b154-53dfe07adf78
+		summarizeBy: none
+		sourceColumn: payPeriod
+
+	column 薪資區間類型
+		dataType: string
+		lineageTag: e055cffe-e0e6-4084-ac4f-0b91d8e2f1e1
+		summarizeBy: none
+		sourceColumn: rangeKind
+
+	column 薪酬項目
+		dataType: string
+		lineageTag: fb78b3c4-ac04-4cc0-8b9a-e3046083b865
+		summarizeBy: none
+		sourceColumn: compensationComponent
+
+	column 原始佐證文字
+		dataType: string
+		lineageTag: a78afdf7-e8ba-403d-b59c-a7d44778d079
+		summarizeBy: none
+		sourceColumn: evidenceText
+
+	column 佐證文字起始位置
+		dataType: int64
+		lineageTag: 383dc37b-0c41-47bc-9540-8562e8d52b7c
+		summarizeBy: none
+		sourceColumn: evidenceStart
+
+	column 佐證文字結束位置
+		dataType: int64
+		lineageTag: 4a726286-95ee-4978-b5f2-fd7b40231d93
+		summarizeBy: none
+		sourceColumn: evidenceEnd
+
+	column 解析狀態
+		dataType: string
+		lineageTag: 80064c73-e915-4188-8806-4fe53aa943dd
+		summarizeBy: none
+		sourceColumn: parseStatus
+
+	column 品質旗標
+		dataType: string
+		lineageTag: d348799e-e3af-4892-8e4c-848765ccc48d
+		summarizeBy: none
+		sourceColumn: qualityFlags
+
+	column 解析信心度
+		dataType: double
+		lineageTag: 44635e47-133d-4125-9ec9-1f77206fd92f
+		summarizeBy: none
+		sourceColumn: confidence
+
+	column 解析器版本
+		dataType: string
+		lineageTag: 59207b81-375c-4032-9db2-68c4efce68e2
+		summarizeBy: none
+		sourceColumn: parserVersion
+
+	partition FactSalaryObservation = m
+		mode: import
+		source = mdl_FactSalaryObservation
+

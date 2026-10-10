@@ -1,4 +1,7 @@
 -- Migration 020: Federated FDW Architecture between jobwant_104 and jobwant_yes123
+-- Legacy one-time bootstrap only. Do not replay: it replaces fdw_yes123 with CASCADE.
+-- When bootstrapping a new local cluster, pass yes123_fdw_password as a psql variable
+-- from the ignored local secret store; never put the password in this file.
 
 CREATE EXTENSION IF NOT EXISTS postgres_fdw;
 
@@ -18,7 +21,7 @@ BEGIN
     ) THEN
         CREATE USER MAPPING FOR pbi_admin
             SERVER srv_jobwant_yes123
-            OPTIONS (user 'pbi_admin', password '64634F989C4DBB3AFCD1E393003BF25B709266E288D52C71958EAD58FA381D89');
+            OPTIONS (user 'pbi_admin', password :'yes123_fdw_password');
     END IF;
 END $$;
 

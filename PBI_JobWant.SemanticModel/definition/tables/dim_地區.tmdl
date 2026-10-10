@@ -1,37 +1,44 @@
-table DimArea
+table dim_地區
 	lineageTag: 8759c2f2-37c9-4ca5-9167-93818b4696a4
 
-	column jobAddrNo
+	column 來源地區代碼
 		dataType: int64
+		isHidden
 		lineageTag: f4228e65-e052-41ae-8423-cddaa85d4080
+		summarizeBy: none
 		sourceColumn: jobAddrNo
 
-	column jobAddrNoDesc
+	column 地區
 		dataType: string
 		lineageTag: 23b2f60a-aab6-4f11-8200-381d986b5695
 		sourceColumn: jobAddrNoDesc
 
-	column jobAddress
+	column 地址
 		dataType: string
 		lineageTag: 16130fca-f330-4b61-87fa-e9a723863de7
 		sourceColumn: jobAddress
 
-	column lat
+	column 緯度
 		dataType: double
 		lineageTag: 6056921c-dc58-4db3-9a3a-f9e413bb4c75
+		dataCategory: Latitude
+		summarizeBy: none
 		sourceColumn: lat
 
-	column lon
+	column 經度
 		dataType: double
 		lineageTag: 12d61b81-8c6c-4f49-aca0-a8996d10f4b4
+		dataCategory: Longitude
+		summarizeBy: none
 		sourceColumn: lon
 
-	column areaKey
+	column 地點識別碼
 		dataType: string
+		isHidden
 		lineageTag: f9344aaf-9bde-43c6-8803-dbe36da70d57
 		sourceColumn: areaKey
 
-	column jobLocationScope
+	column 地點範圍
 		dataType: string
 		lineageTag: 0efc298a-0da7-4706-99aa-caa4153f18d4
 		sourceColumn: jobLocationScope

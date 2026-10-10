@@ -1,0 +1,1262 @@
+{
+    "contractVersion":  1,
+    "culture":  "zh-TW",
+    "semanticModel":  "PBI_JobWant",
+    "sourceContract":  "database-schema-contract-v1",
+    "sourceFieldsChanged":  false,
+    "tables":  [
+                   {
+                       "previousName":  "FactJob",
+                       "name":  "目前職缺",
+                       "tmdlFile":  "FactJob.tmdl",
+                       "sourceQuery":  "mdl_FactJob",
+                       "hidden":  false,
+                       "columns":  [
+                                       {
+                                           "previousName":  "jobNo",
+                                           "name":  "職缺編號",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobNo"
+                                       },
+                                       {
+                                           "previousName":  "custNo",
+                                           "name":  "公司代碼",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "custNo"
+                                       },
+                                       {
+                                           "previousName":  "jobName",
+                                           "name":  "職缺名稱",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobName"
+                                       },
+                                       {
+                                           "previousName":  "descSnippet",
+                                           "name":  "職缺摘要",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "descSnippet"
+                                       },
+                                       {
+                                           "previousName":  "jobAddress",
+                                           "name":  "職缺地址",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobAddress"
+                                       },
+                                       {
+                                           "previousName":  "jobAddrNoDesc",
+                                           "name":  "職缺地區",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobAddrNoDesc"
+                                       },
+                                       {
+                                           "previousName":  "salaryLow",
+                                           "name":  "薪資下限",
+                                           "dataType":  "Double",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "salaryLow"
+                                       },
+                                       {
+                                           "previousName":  "salaryHigh",
+                                           "name":  "薪資上限",
+                                           "dataType":  "Double",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "salaryHigh"
+                                       },
+                                       {
+                                           "previousName":  "appearDate",
+                                           "name":  "刊登日期",
+                                           "dataType":  "DateTime",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "appearDate"
+                                       },
+                                       {
+                                           "previousName":  "snapshotDate",
+                                           "name":  "快照日期",
+                                           "dataType":  "DateTime",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "snapshotDate"
+                                       },
+                                       {
+                                           "previousName":  "snapshotDateTime",
+                                           "name":  "快照時間",
+                                           "dataType":  "DateTime",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "snapshotDateTime"
+                                       },
+                                       {
+                                           "previousName":  "sourceKeyword",
+                                           "name":  "擷取關鍵字",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "sourceKeyword"
+                                       },
+                                       {
+                                           "previousName":  "sourceArea",
+                                           "name":  "擷取地區",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "sourceArea"
+                                       },
+                                       {
+                                           "previousName":  "jobLink",
+                                           "name":  "職缺來源連結",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobLink"
+                                       },
+                                       {
+                                           "previousName":  "areaKey",
+                                           "name":  "地點識別碼",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "areaKey"
+                                       },
+                                       {
+                                           "previousName":  "sourcePlatform",
+                                           "name":  "職缺平台",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "sourcePlatform"
+                                       }
+                                   ],
+                       "measures":  [
+                                        {
+                                            "previousName":  "Active Jobs",
+                                            "name":  "目前符合條件職缺數",
+                                            "displayFolder":  "職缺分析"
+                                        },
+                                        {
+                                            "previousName":  "Company Count",
+                                            "name":  "符合條件公司數",
+                                            "displayFolder":  "職缺分析"
+                                        },
+                                        {
+                                            "previousName":  "Jobs with Salary",
+                                            "name":  "具備薪資上下限的職缺數",
+                                            "displayFolder":  "職缺分析"
+                                        },
+                                        {
+                                            "previousName":  "Salary Coverage %",
+                                            "name":  "薪資上下限涵蓋率",
+                                            "displayFolder":  "職缺分析"
+                                        },
+                                        {
+                                            "previousName":  "Skill Job Count",
+                                            "name":  "技能篩選職缺數",
+                                            "displayFolder":  "職缺分析"
+                                        },
+                                        {
+                                            "previousName":  "Skill Share %",
+                                            "name":  "技能職缺占比",
+                                            "displayFolder":  "職缺分析"
+                                        },
+                                        {
+                                            "previousName":  "Category Job Count",
+                                            "name":  "職類篩選職缺數",
+                                            "displayFolder":  "職缺分析"
+                                        },
+                                        {
+                                            "previousName":  "Category Share %",
+                                            "name":  "職類職缺占比",
+                                            "displayFolder":  "職缺分析"
+                                        },
+                                        {
+                                            "previousName":  "Job Skills",
+                                            "name":  "職缺技能清單",
+                                            "displayFolder":  "職缺分析"
+                                        },
+                                        {
+                                            "previousName":  "Selected Job Company",
+                                            "name":  "所選職缺公司名稱",
+                                            "displayFolder":  "職缺分析\\所選職缺"
+                                        }
+                                    ]
+                   },
+                   {
+                       "previousName":  "FactJobSnapshot",
+                       "name":  "職缺快照",
+                       "tmdlFile":  "FactJobSnapshot.tmdl",
+                       "sourceQuery":  "mdl_FactJobSnapshot",
+                       "hidden":  true,
+                       "columns":  [
+                                       {
+                                           "previousName":  "snapshotDate",
+                                           "name":  "快照日期",
+                                           "dataType":  "DateTime",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "snapshotDate"
+                                       },
+                                       {
+                                           "previousName":  "snapshotDateTime",
+                                           "name":  "快照時間",
+                                           "dataType":  "DateTime",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "snapshotDateTime"
+                                       },
+                                       {
+                                           "previousName":  "jobNo",
+                                           "name":  "職缺編號",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobNo"
+                                       },
+                                       {
+                                           "previousName":  "custNo",
+                                           "name":  "公司代碼",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "custNo"
+                                       },
+                                       {
+                                           "previousName":  "appearDate",
+                                           "name":  "刊登日期",
+                                           "dataType":  "DateTime",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "appearDate"
+                                       },
+                                       {
+                                           "previousName":  "salaryLow",
+                                           "name":  "薪資下限",
+                                           "dataType":  "Double",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "salaryLow"
+                                       },
+                                       {
+                                           "previousName":  "salaryHigh",
+                                           "name":  "薪資上限",
+                                           "dataType":  "Double",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "salaryHigh"
+                                       },
+                                       {
+                                           "previousName":  "sourceKeyword",
+                                           "name":  "擷取關鍵字",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "sourceKeyword"
+                                       },
+                                       {
+                                           "previousName":  "sourceArea",
+                                           "name":  "擷取地區",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "sourceArea"
+                                       },
+                                       {
+                                           "previousName":  "querySeriesKey",
+                                           "name":  "查詢序列識別碼",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "querySeriesKey"
+                                       },
+                                       {
+                                           "previousName":  "sourcePlatform",
+                                           "name":  "職缺平台",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "sourcePlatform"
+                                       }
+                                   ],
+                       "measures":  [
+
+                                    ]
+                   },
+                   {
+                       "previousName":  "DimCompany",
+                       "name":  "dim_公司",
+                       "tmdlFile":  "DimCompany.tmdl",
+                       "sourceQuery":  "mdl_DimCompany",
+                       "hidden":  false,
+                       "columns":  [
+                                       {
+                                           "previousName":  "custNo",
+                                           "name":  "公司代碼",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "custNo"
+                                       },
+                                       {
+                                           "previousName":  "custName",
+                                           "name":  "公司名稱",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "custName"
+                                       },
+                                       {
+                                           "previousName":  "coIndustry",
+                                           "name":  "產業代碼",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "coIndustry"
+                                       },
+                                       {
+                                           "previousName":  "coIndustryDesc",
+                                           "name":  "產業類別",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "coIndustryDesc"
+                                       }
+                                   ],
+                       "measures":  [
+
+                                    ]
+                   },
+                   {
+                       "previousName":  "DimArea",
+                       "name":  "dim_地區",
+                       "tmdlFile":  "DimArea.tmdl",
+                       "sourceQuery":  "mdl_DimArea",
+                       "hidden":  false,
+                       "columns":  [
+                                       {
+                                           "previousName":  "jobAddrNo",
+                                           "name":  "來源地區代碼",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobAddrNo"
+                                       },
+                                       {
+                                           "previousName":  "jobAddrNoDesc",
+                                           "name":  "地區",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobAddrNoDesc"
+                                       },
+                                       {
+                                           "previousName":  "jobAddress",
+                                           "name":  "地址",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobAddress"
+                                       },
+                                       {
+                                           "previousName":  "lat",
+                                           "name":  "緯度",
+                                           "dataType":  "Double",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "lat"
+                                       },
+                                       {
+                                           "previousName":  "lon",
+                                           "name":  "經度",
+                                           "dataType":  "Double",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "lon"
+                                       },
+                                       {
+                                           "previousName":  "areaKey",
+                                           "name":  "地點識別碼",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "areaKey"
+                                       },
+                                       {
+                                           "previousName":  "jobLocationScope",
+                                           "name":  "地點範圍",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobLocationScope"
+                                       }
+                                   ],
+                       "measures":  [
+
+                                    ]
+                   },
+                   {
+                       "previousName":  "DimSkill",
+                       "name":  "dim_技能",
+                       "tmdlFile":  "DimSkill.tmdl",
+                       "sourceQuery":  "mdl_DimSkill",
+                       "hidden":  false,
+                       "columns":  [
+                                       {
+                                           "previousName":  "skillCode",
+                                           "name":  "技能代碼",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "skillCode"
+                                       },
+                                       {
+                                           "previousName":  "skillDescription",
+                                           "name":  "技能名稱",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "skillDescription"
+                                       }
+                                   ],
+                       "measures":  [
+
+                                    ]
+                   },
+                   {
+                       "previousName":  "DimJobCategory",
+                       "name":  "dim_職類",
+                       "tmdlFile":  "DimJobCategory.tmdl",
+                       "sourceQuery":  "mdl_DimJobCategory",
+                       "hidden":  false,
+                       "columns":  [
+                                       {
+                                           "previousName":  "jobCatCode",
+                                           "name":  "職類代碼",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobCatCode"
+                                       },
+                                       {
+                                           "previousName":  "jobCatDescription",
+                                           "name":  "職類名稱",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobCatDescription"
+                                       }
+                                   ],
+                       "measures":  [
+
+                                    ]
+                   },
+                   {
+                       "previousName":  "BridgeJobSkill",
+                       "name":  "職缺技能對照",
+                       "tmdlFile":  "BridgeJobSkill.tmdl",
+                       "sourceQuery":  "mdl_BridgeJobSkill",
+                       "hidden":  false,
+                       "columns":  [
+                                       {
+                                           "previousName":  "jobNo",
+                                           "name":  "職缺編號",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobNo"
+                                       },
+                                       {
+                                           "previousName":  "skillCode",
+                                           "name":  "技能代碼",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "skillCode"
+                                       },
+                                       {
+                                           "previousName":  "skillDescription",
+                                           "name":  "技能名稱",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "skillDescription"
+                                       }
+                                   ],
+                       "measures":  [
+
+                                    ]
+                   },
+                   {
+                       "previousName":  "DimDate",
+                       "name":  "dim_日期",
+                       "tmdlFile":  "DimDate.tmdl",
+                       "sourceQuery":  "mdl_DimDate",
+                       "hidden":  false,
+                       "columns":  [
+                                       {
+                                           "previousName":  "Date",
+                                           "name":  "日期",
+                                           "dataType":  "DateTime",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "Date"
+                                       },
+                                       {
+                                           "previousName":  "Year",
+                                           "name":  "年",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "Year"
+                                       },
+                                       {
+                                           "previousName":  "MonthNo",
+                                           "name":  "月份序號",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "MonthNo"
+                                       },
+                                       {
+                                           "previousName":  "Month",
+                                           "name":  "年月",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "Month"
+                                       },
+                                       {
+                                           "previousName":  "QuarterNo",
+                                           "name":  "季度序號",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "QuarterNo"
+                                       },
+                                       {
+                                           "previousName":  "Quarter",
+                                           "name":  "季度",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "Quarter"
+                                       },
+                                       {
+                                           "previousName":  "Day",
+                                           "name":  "日",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "Day"
+                                       }
+                                   ],
+                       "measures":  [
+
+                                    ]
+                   },
+                   {
+                       "previousName":  "BridgeJobCategory",
+                       "name":  "職缺職類對照",
+                       "tmdlFile":  "BridgeJobCategory.tmdl",
+                       "sourceQuery":  "mdl_BridgeJobCategory",
+                       "hidden":  true,
+                       "columns":  [
+                                       {
+                                           "previousName":  "jobNo",
+                                           "name":  "職缺編號",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobNo"
+                                       },
+                                       {
+                                           "previousName":  "jobCatCode",
+                                           "name":  "職類代碼",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobCatCode"
+                                       },
+                                       {
+                                           "previousName":  "jobCatDescription",
+                                           "name":  "職類名稱",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobCatDescription"
+                                       }
+                                   ],
+                       "measures":  [
+
+                                    ]
+                   },
+                   {
+                       "previousName":  "FactAcquisitionCategory",
+                       "name":  "職類擷取進度",
+                       "tmdlFile":  "FactAcquisitionCategory.tmdl",
+                       "sourceQuery":  "mdl_FactAcquisitionCategory",
+                       "hidden":  false,
+                       "columns":  [
+                                       {
+                                           "previousName":  "執行代碼",
+                                           "name":  "執行代碼",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "runId"
+                                       },
+                                       {
+                                           "previousName":  "執行狀態",
+                                           "name":  "執行狀態",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "runStatus"
+                                       },
+                                       {
+                                           "previousName":  "擷取日期",
+                                           "name":  "擷取日期",
+                                           "dataType":  "DateTime",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "snapshotDate"
+                                       },
+                                       {
+                                           "previousName":  "選定職類數",
+                                           "name":  "選定職類數",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "selectedCategories"
+                                       },
+                                       {
+                                           "previousName":  "職類階層",
+                                           "name":  "職類階層",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "categoryDepth"
+                                       },
+                                       {
+                                           "previousName":  "地區篩選",
+                                           "name":  "地區篩選",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "areaFilter"
+                                       },
+                                       {
+                                           "previousName":  "每頁筆數",
+                                           "name":  "每頁筆數",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "pageSize"
+                                       },
+                                       {
+                                           "previousName":  "工作程序數",
+                                           "name":  "工作程序數",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "workerCount"
+                                       },
+                                       {
+                                           "previousName":  "開始時間",
+                                           "name":  "開始時間",
+                                           "dataType":  "DateTime",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "runStartedAt"
+                                       },
+                                       {
+                                           "previousName":  "執行更新時間",
+                                           "name":  "執行更新時間",
+                                           "dataType":  "DateTime",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "runUpdatedAt"
+                                       },
+                                       {
+                                           "previousName":  "最低請求間隔秒",
+                                           "name":  "最低請求間隔秒",
+                                           "dataType":  "Double",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "minimumRequestIntervalSeconds"
+                                       },
+                                       {
+                                           "previousName":  "目前請求間隔秒",
+                                           "name":  "目前請求間隔秒",
+                                           "dataType":  "Double",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "requestIntervalSeconds"
+                                       },
+                                       {
+                                           "previousName":  "閘道封鎖",
+                                           "name":  "閘道封鎖",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "gateBlocked"
+                                       },
+                                       {
+                                           "previousName":  "資料庫讀取時間",
+                                           "name":  "資料庫讀取時間",
+                                           "dataType":  "DateTime",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "sourceReadAt"
+                                       },
+                                       {
+                                           "previousName":  "職類代碼",
+                                           "name":  "職類代碼",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "categoryCode"
+                                       },
+                                       {
+                                           "previousName":  "職類名稱",
+                                           "name":  "職類名稱",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "categoryName"
+                                       },
+                                       {
+                                           "previousName":  "佇列狀態",
+                                           "name":  "佇列狀態",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "categoryState"
+                                       },
+                                       {
+                                           "previousName":  "嘗試次數",
+                                           "name":  "嘗試次數",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "attempts"
+                                       },
+                                       {
+                                           "previousName":  "類別更新時間",
+                                           "name":  "類別更新時間",
+                                           "dataType":  "DateTime",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "categoryUpdatedAt"
+                                       },
+                                       {
+                                           "previousName":  "結果狀態",
+                                           "name":  "結果狀態",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "resultStatus"
+                                       },
+                                       {
+                                           "previousName":  "擷取批次",
+                                           "name":  "擷取批次",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "batchId"
+                                       },
+                                       {
+                                           "previousName":  "批次品質",
+                                           "name":  "批次品質",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "captureStatus"
+                                       },
+                                       {
+                                           "previousName":  "分頁狀態",
+                                           "name":  "分頁狀態",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "paginationStatus"
+                                       },
+                                       {
+                                           "previousName":  "職缺筆數",
+                                           "name":  "職缺筆數",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobCount"
+                                       },
+                                       {
+                                           "previousName":  "完成頁數",
+                                           "name":  "完成頁數",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "pageCount"
+                                       },
+                                       {
+                                           "previousName":  "警告旗標",
+                                           "name":  "警告旗標",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "warningFlag"
+                                       },
+                                       {
+                                           "previousName":  "上層職類",
+                                           "name":  "上層職類",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "parentCategoryLabel"
+                                       },
+                                       {
+                                           "previousName":  "來源職類代碼原始",
+                                           "name":  "來源職類代碼原始",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "parentCategoryCode"
+                                       },
+                                       {
+                                           "previousName":  "來源職類名稱",
+                                           "name":  "來源職類名稱",
+                                           "dataType":  "String",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "parentCategoryName"
+                                       },
+                                       {
+                                           "previousName":  "API回報職缺數下界",
+                                           "name":  "API回報職缺數下界",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "apiReportedJobCountMin"
+                                       },
+                                       {
+                                           "previousName":  "API回報職缺數上界",
+                                           "name":  "API回報職缺數上界",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "apiReportedJobCountMax"
+                                       },
+                                       {
+                                           "previousName":  "API回報頁數下界",
+                                           "name":  "API回報頁數下界",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "apiReportedPageCountMin"
+                                       },
+                                       {
+                                           "previousName":  "API回報頁數上界",
+                                           "name":  "API回報頁數上界",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "apiReportedPageCountMax"
+                                       },
+                                       {
+                                           "previousName":  "佇列終態旗標",
+                                           "name":  "佇列終態旗標",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "queueTerminalFlag"
+                                       },
+                                       {
+                                           "previousName":  "分頁完整旗標",
+                                           "name":  "分頁完整旗標",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "captureCompleteFlag"
+                                       },
+                                       {
+                                           "previousName":  "Silver可用旗標",
+                                           "name":  "Silver層可用旗標",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "silverEligibleFlag"
+                                       },
+                                       {
+                                           "previousName":  "Silver封鎖旗標",
+                                           "name":  "Silver層封鎖旗標",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  false,
+                                           "sourceColumn":  "silverBlockedFlag"
+                                       },
+                                       {
+                                           "previousName":  "品質警告原因",
+                                           "name":  "品質警告原因",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "warningReason"
+                                       },
+                                       {
+                                           "previousName":  "已記錄批次數",
+                                           "name":  "已記錄批次數",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "batchCount"
+                                       },
+                                       {
+                                           "previousName":  "職缺平台",
+                                           "name":  "職缺平台",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "sourcePlatform"
+                                       },
+                                       {
+                                           "previousName":  "職類階層顯示用",
+                                           "name":  "職類階層顯示用",
+                                           "dataType":  "Int64",
+                                           "hidden":  true,
+                                           "calculated":  true
+                                       },
+                                       {
+                                           "previousName":  "來源職類代碼",
+                                           "name":  "來源職類代碼",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  true
+                                       }
+                                   ],
+                       "measures":  [
+                                        {
+                                            "previousName":  "職類數",
+                                            "name":  "職類數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "已選職類數",
+                                            "name":  "已選職類數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "已完成職類數",
+                                            "name":  "已完成職類數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "完成率",
+                                            "name":  "完成率",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "待處理職類數",
+                                            "name":  "待處理職類數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "處理中職類數",
+                                            "name":  "處理中職類數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "警告批次數",
+                                            "name":  "警告批次數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "失敗職類數",
+                                            "name":  "失敗職類數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "延後職類數",
+                                            "name":  "延後職類數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "目前執行狀態",
+                                            "name":  "目前執行狀態",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "API 閘道狀態",
+                                            "name":  "來源請求狀態",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "目前 API 間隔秒",
+                                            "name":  "目前請求間隔秒最大值",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "最新資料庫讀取時間",
+                                            "name":  "最新資料庫讀取時間",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "職缺總數",
+                                            "name":  "職缺總數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "來源職類名稱顯示",
+                                            "name":  "來源職類名稱顯示",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "佇列終態職類數",
+                                            "name":  "佇列終態職類數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "終態處理率",
+                                            "name":  "終態處理率",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "分頁完整職類數",
+                                            "name":  "分頁完整職類數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "Silver可用職類數",
+                                            "name":  "Silver層可用職類數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "Silver封鎖職類數",
+                                            "name":  "Silver層封鎖職類數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "分頁完整率",
+                                            "name":  "分頁完整率",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "來源職類數",
+                                            "name":  "來源職類數",
+                                            "displayFolder":  null
+                                        },
+                                        {
+                                            "previousName":  "來源職缺總數",
+                                            "name":  "來源職缺總數",
+                                            "displayFolder":  null
+                                        }
+                                    ]
+                   },
+                   {
+                       "previousName":  "FactSalaryObservation",
+                       "name":  "薪資觀測",
+                       "tmdlFile":  "FactSalaryObservation.tmdl",
+                       "sourceQuery":  "mdl_FactSalaryObservation",
+                       "hidden":  true,
+                       "columns":  [
+                                       {
+                                           "previousName":  "querySeriesKey",
+                                           "name":  "查詢序列識別碼",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "querySeriesKey"
+                                       },
+                                       {
+                                           "previousName":  "snapshotDate",
+                                           "name":  "快照日期",
+                                           "dataType":  "DateTime",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "snapshotDate"
+                                       },
+                                       {
+                                           "previousName":  "batchId",
+                                           "name":  "擷取批次識別碼",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "batchId"
+                                       },
+                                       {
+                                           "previousName":  "jobNo",
+                                           "name":  "職缺編號",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "jobNo"
+                                       },
+                                       {
+                                           "previousName":  "sourcePlatform",
+                                           "name":  "職缺平台",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "sourcePlatform"
+                                       },
+                                       {
+                                           "previousName":  "sourceKind",
+                                           "name":  "薪資來源類型",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "sourceKind"
+                                       },
+                                       {
+                                           "previousName":  "observationIndex",
+                                           "name":  "觀測序號",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "observationIndex"
+                                       },
+                                       {
+                                           "previousName":  "rawValueMin",
+                                           "name":  "原始薪資下限文字",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "rawValueMin"
+                                       },
+                                       {
+                                           "previousName":  "rawValueMax",
+                                           "name":  "原始薪資上限文字",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "rawValueMax"
+                                       },
+                                       {
+                                           "previousName":  "amountMin",
+                                           "name":  "解析薪資下限",
+                                           "dataType":  "Double",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "amountMin"
+                                       },
+                                       {
+                                           "previousName":  "amountMax",
+                                           "name":  "解析薪資上限",
+                                           "dataType":  "Double",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "amountMax"
+                                       },
+                                       {
+                                           "previousName":  "currencyCode",
+                                           "name":  "幣別代碼",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "currencyCode"
+                                       },
+                                       {
+                                           "previousName":  "currencyBasis",
+                                           "name":  "幣別依據",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "currencyBasis"
+                                       },
+                                       {
+                                           "previousName":  "payPeriod",
+                                           "name":  "給薪週期",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "payPeriod"
+                                       },
+                                       {
+                                           "previousName":  "rangeKind",
+                                           "name":  "薪資區間類型",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "rangeKind"
+                                       },
+                                       {
+                                           "previousName":  "compensationComponent",
+                                           "name":  "薪酬項目",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "compensationComponent"
+                                       },
+                                       {
+                                           "previousName":  "evidenceText",
+                                           "name":  "原始佐證文字",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "evidenceText"
+                                       },
+                                       {
+                                           "previousName":  "evidenceStart",
+                                           "name":  "佐證文字起始位置",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "evidenceStart"
+                                       },
+                                       {
+                                           "previousName":  "evidenceEnd",
+                                           "name":  "佐證文字結束位置",
+                                           "dataType":  "Int64",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "evidenceEnd"
+                                       },
+                                       {
+                                           "previousName":  "parseStatus",
+                                           "name":  "解析狀態",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "parseStatus"
+                                       },
+                                       {
+                                           "previousName":  "qualityFlags",
+                                           "name":  "品質旗標",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "qualityFlags"
+                                       },
+                                       {
+                                           "previousName":  "confidence",
+                                           "name":  "解析信心度",
+                                           "dataType":  "Double",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "confidence"
+                                       },
+                                       {
+                                           "previousName":  "parserVersion",
+                                           "name":  "解析器版本",
+                                           "dataType":  "String",
+                                           "hidden":  false,
+                                           "calculated":  false,
+                                           "sourceColumn":  "parserVersion"
+                                       }
+                                   ],
+                       "measures":  [
+
+                                    ]
+                   }
+               ]
+}

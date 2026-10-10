@@ -20,15 +20,16 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
-                  "Property": "上層職類代碼"
+                  "Property": "來源職類代碼"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.上層職類代碼",
-              "nativeQueryRef": "上層職類代碼",
-              "active": true
+              "queryRef": "職類擷取進度.來源職類代碼",
+              "nativeQueryRef": "來源職類代碼",
+              "active": true,
+              "displayName": "來源職類代碼（L2）"
             }
           ]
         },
@@ -39,43 +40,45 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
-                  "Property": "上層職類名稱顯示"
+                  "Property": "來源職類名稱顯示"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.上層職類名稱顯示",
-              "nativeQueryRef": "上層職類名稱顯示",
-              "displayName": "上層職類名稱"
+              "queryRef": "職類擷取進度.來源職類名稱顯示",
+              "nativeQueryRef": "來源職類名稱顯示",
+              "displayName": "來源職類名稱"
             },
             {
               "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
-                  "Property": "職類數"
+                  "Property": "來源職類數"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.職類數",
-              "nativeQueryRef": "職類數"
+              "queryRef": "職類擷取進度.來源職類數",
+              "nativeQueryRef": "來源職類數",
+              "displayName": "職類數"
             },
             {
               "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
-                  "Property": "職缺總數"
+                  "Property": "來源職缺總數"
                 }
               },
-              "queryRef": "FactAcquisitionCategory.職缺總數",
-              "nativeQueryRef": "職缺總數"
+              "queryRef": "職類擷取進度.來源職缺總數",
+              "nativeQueryRef": "來源職缺總數",
+              "displayName": "職缺總數"
             }
           ]
         }
@@ -84,13 +87,13 @@
         "sort": [
           {
             "field": {
-              "Column": {
+              "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "FactAcquisitionCategory"
+                    "Entity": "職類擷取進度"
                   }
                 },
-                "Property": "上層職類代碼"
+                "Property": "來源職類名稱顯示"
               }
             },
             "direction": "Ascending"
@@ -106,17 +109,17 @@
         "levels": [
           {
             "queryRefs": [
-              "FactAcquisitionCategory.上層職類代碼"
+              "FactAcquisitionCategory.來源職類代碼"
             ],
             "identityKeys": [
               {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactAcquisitionCategory"
+                      "Entity": "職類擷取進度"
                     }
                   },
-                  "Property": "上層職類代碼"
+                  "Property": "來源職類代碼"
                 }
               }
             ],
@@ -415,7 +418,7 @@
             }
           },
           "selector": {
-            "metadata": "FactAcquisitionCategory.上層職類名稱顯示"
+            "metadata": "FactAcquisitionCategory.來源職類名稱顯示"
           }
         },
         {
@@ -423,13 +426,13 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "110.99222607082187D"
+                  "Value": "133.7802368675446D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "FactAcquisitionCategory.上層職類代碼"
+            "metadata": "FactAcquisitionCategory.來源職類代碼"
           }
         }
       ]
@@ -448,7 +451,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'上層職類 / PARENT CATEGORY'"
+                  "Value": "'來源職類 / SOURCE CATEGORY'"
                 }
               }
             },
