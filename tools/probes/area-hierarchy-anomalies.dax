@@ -1,0 +1,25 @@
+DEFINE
+    VAR AreaRows =
+        SUMMARIZECOLUMNS(
+            '目前職缺'[職缺平台],
+            'dim_地區'[縣市],
+            'dim_地區'[鄉鎮市區],
+            'dim_地區'[來源地區],
+            'dim_地區'[地址],
+            "Jobs", [目前符合條件職缺數]
+        )
+EVALUATE
+TOPN(
+    100,
+    FILTER(
+        AreaRows,
+        NOT ISBLANK('dim_地區'[鄉鎮市區])
+            && (
+                CONTAINSSTRING('dim_地區'[鄉鎮市區], "臺中")
+                || CONTAINSSTRING('dim_地區'[鄉鎮市區], "台中")
+            )
+    ),
+    'dim_地區'[縣市], ASC,
+    'dim_地區'[鄉鎮市區], ASC,
+    [Jobs], DESC
+)

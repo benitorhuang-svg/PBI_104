@@ -29,12 +29,11 @@ queryGroup 04_Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["pPostgresDatabase", "pPostgresServer", "fxReadGoldView", "src_PbiAcquisitionCategories", "src_PbiBridgeJobCategory", "src_PbiBridgeJobSkill", "src_PbiDimArea", "src_PbiDimCompany", "src_PbiDimDate", "src_PbiDimJobCategory", "src_PbiDimSkill", "src_PbiFactJobs", "src_PbiFactJobSnapshots", "src_PbiFactSalaryObservations", "mdl_BridgeJobCategory", "mdl_BridgeJobSkill", "mdl_DimArea", "mdl_DimCompany", "mdl_DimDate", "mdl_DimJobCategory", "mdl_DimSkill", "mdl_FactAcquisitionCategory", "mdl_FactJob", "mdl_FactJobSnapshot", "mdl_FactSalaryObservation", "FactJob", "FactJobSnapshot", "DimCompany", "DimArea", "DimSkill", "DimJobCategory", "BridgeJobSkill", "DimDate", "BridgeJobCategory", "FactAcquisitionCategory"]
+annotation PBI_QueryOrder = ["pPostgresDatabase","pPostgresServer","fxReadGoldView","src_PbiAcquisitionCategories","src_PbiBridgeJobCategory","src_PbiBridgeJobSkill","src_PbiDimArea","src_PbiDimCompany","src_PbiDimDate","src_PbiDimJobCategory","src_PbiDimSkill","src_PbiFactJobs","mdl_BridgeJobCategory","mdl_BridgeJobSkill","mdl_DimArea","mdl_DimCompany","mdl_DimDate","mdl_DimJobCategory","mdl_DimSkill","mdl_FactAcquisitionCategory","mdl_FactJob","目前職缺","dim_公司","dim_技能","dim_職類","職缺技能對照","dim_日期","職缺職類對照","職類擷取進度","dim_地區"]
 
 annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
 
 ref table 目前職缺
-ref table 職缺快照
 ref table dim_公司
 ref table dim_地區
 ref table dim_技能
@@ -43,7 +42,6 @@ ref table 職缺技能對照
 ref table dim_日期
 ref table 職缺職類對照
 ref table 職類擷取進度
-ref table 薪資觀測
 
 ref cultureInfo zh-TW
 

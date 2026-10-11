@@ -20,15 +20,15 @@ expression fxReadGoldView =
 	lineageTag: 92ea488c-496d-4499-a9bd-0e9959f95fd7
 	queryGroup: 01_Functions
 
-expression src_PbiBridgeJobCategory = fxReadGoldView("pbi_bridge_job_category_v21")
+expression src_PbiBridgeJobCategory = fxReadGoldView("pbi_bridge_job_category_keys_v21")
 	lineageTag: 0e8fb2e8-9200-4c28-9b69-6705de71bd51
 	queryGroup: 02_Source
 
-expression src_PbiBridgeJobSkill = fxReadGoldView("pbi_bridge_job_skill_v21")
+expression src_PbiBridgeJobSkill = fxReadGoldView("pbi_bridge_job_skill_keys_v21")
 	lineageTag: eb790deb-8ec0-4c1d-b4e8-422a19bd0cb6
 	queryGroup: 02_Source
 
-expression src_PbiDimArea = fxReadGoldView("pbi_dim_area_v21")
+expression src_PbiDimArea = fxReadGoldView("pbi_dim_area_v22")
 	lineageTag: aa5507dd-8ebb-4262-ad27-e64d41fd48eb
 	queryGroup: 02_Source
 
@@ -48,12 +48,8 @@ expression src_PbiDimSkill = fxReadGoldView("pbi_dim_skill_v21")
 	lineageTag: 9a0957ac-fee7-4a54-b627-b0072dad06ec
 	queryGroup: 02_Source
 
-expression src_PbiFactJobs = fxReadGoldView("pbi_fact_jobs_v21")
+expression src_PbiFactJobs = fxReadGoldView("pbi_fact_jobs_report_v22")
 	lineageTag: ebe19a48-fe6f-4501-b369-68fe55dac200
-	queryGroup: 02_Source
-
-expression src_PbiFactJobSnapshots = fxReadGoldView("pbi_fact_job_snapshots_v21")
-	lineageTag: 88feaed8-2d5a-411d-bda5-00226ccf89bb
 	queryGroup: 02_Source
 
 expression mdl_BridgeJobCategory = src_PbiBridgeJobCategory
@@ -88,23 +84,11 @@ expression mdl_FactJob = src_PbiFactJobs
 	lineageTag: 3c4666d3-5681-4c52-a1b5-826641c3cd48
 	queryGroup: 04_Model
 
-expression mdl_FactJobSnapshot = src_PbiFactJobSnapshots
-	lineageTag: baaa1e3e-5f8c-4565-a44b-3ae5368790b4
-	queryGroup: 04_Model
-
 expression src_PbiAcquisitionCategories = fxReadGoldView("pbi_acquisition_categories")
 	lineageTag: 17d13489-9d91-462e-88a9-2b2052275fc7
 	queryGroup: 02_Source
 
 expression mdl_FactAcquisitionCategory = src_PbiAcquisitionCategories
 	lineageTag: c5f750a8-cada-43bb-8c72-c1b14a1948dc
-	queryGroup: 04_Model
-
-expression src_PbiFactSalaryObservations = fxReadGoldView("pbi_fact_salary_observations_v21")
-	lineageTag: de5e3f56-4b27-42bb-9d30-1e077a4996c3
-	queryGroup: 02_Source
-
-expression mdl_FactSalaryObservation = src_PbiFactSalaryObservations
-	lineageTag: 48c7c401-47be-4eb3-930f-90cbf711271e
 	queryGroup: 04_Model
 

@@ -11,7 +11,8 @@ table dim_地區
 	column 地區
 		dataType: string
 		lineageTag: 23b2f60a-aab6-4f11-8200-381d986b5695
-		sourceColumn: jobAddrNoDesc
+		dataCategory: StateOrProvince
+		sourceColumn: jobRegion
 
 	column 地址
 		dataType: string
@@ -38,10 +39,56 @@ table dim_地區
 		lineageTag: f9344aaf-9bde-43c6-8803-dbe36da70d57
 		sourceColumn: areaKey
 
-	column 地點範圍
+	column 工作地點範圍
 		dataType: string
 		lineageTag: 0efc298a-0da7-4706-99aa-caa4153f18d4
 		sourceColumn: jobLocationScope
+
+		changedProperty = Name
+
+	column 鄉鎮市區
+		dataType: string
+		lineageTag: c9a4b270-38e1-45da-98d7-5ea83c01bf24
+		sourceColumn: jobTownship
+
+	column 縣市
+		dataType: string
+		lineageTag: a1b2c3d4-e5f6-47a8-9b0c-1d2e3f4a5b6c
+		dataCategory: StateOrProvince
+		sourceColumn: jobCounty
+
+	column 來源地區
+		dataType: string
+		isHidden
+		lineageTag: 7f4dfb12-28b7-4f5e-a2a1-9e3b18a6d4c7
+		sourceColumn: jobAddrNoDesc
+
+	column sourcePlatform
+		dataType: string
+		lineageTag: d042cd90-8d0d-432c-b27d-542fc93bbad6
+		summarizeBy: none
+		sourceColumn: sourcePlatform
+
+		annotation SummarizationSetBy = Automatic
+
+	column nativeAreaKey
+		dataType: string
+		lineageTag: b33c5944-18a4-40ad-9669-9e289e47a9a5
+		summarizeBy: none
+		sourceColumn: nativeAreaKey
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 地區階層
+		lineageTag: 3d3d54ec-2ef3-4af8-9c03-0b2a0c1d7e61
+
+		level 縣市
+			lineageTag: 4a9d8b72-9e25-4c22-9f86-0bc0a2a72f01
+			column: 縣市
+
+		level 鄉鎮市區
+			lineageTag: 5f20a0f8-62bf-43f2-9d50-6f0ecf6f8e2d
+			column: 鄉鎮市區
 
 	partition DimArea = m
 		mode: import

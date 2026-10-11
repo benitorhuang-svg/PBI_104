@@ -38,14 +38,9 @@ DEFINE
         DISTINCT(SELECTCOLUMNS(FILTER('目前職缺', NOT ISBLANK('目前職缺'[刊登日期])), "Date", '目前職缺'[刊登日期])),
         SELECTCOLUMNS('dim_日期', "Date", 'dim_日期'[日期])
     )), 0)
-    VAR OrphanSnapshotDates = COALESCE(COUNTROWS(EXCEPT(
-        DISTINCT(SELECTCOLUMNS(FILTER('職缺快照', NOT ISBLANK('職缺快照'[快照日期])), "Date", '職缺快照'[快照日期])),
-        SELECTCOLUMNS('dim_日期', "Date", 'dim_日期'[日期])
-    )), 0)
 EVALUATE
 ROW(
     "FactJobs", COUNTROWS('目前職缺'),
-    "SnapshotRows", COUNTROWS('職缺快照'),
     "ActiveJobs", [目前符合條件職缺數],
     "Companies", [符合條件公司數],
     "SalaryCoverage", [薪資上下限涵蓋率],
@@ -58,9 +53,8 @@ ROW(
     "IntersectionPairFound", COUNTROWS(ChosenPair) = 1,
     "JobSkillsPopulated", NOT ISBLANK(JobSkillsText),
     "OrphanAppearDates", OrphanAppearDates,
-    "OrphanSnapshotDates", OrphanSnapshotDates,
     "SkillPassed", ActualSkill = ExpectedSkill,
     "CategoryPassed", ActualCategory = ExpectedCategory,
     "IntersectionPassed", ActualIntersection = ExpectedIntersection,
-    "DateContractPassed", OrphanAppearDates = 0 && OrphanSnapshotDates = 0
+    "DateContractPassed", OrphanAppearDates = 0
 )

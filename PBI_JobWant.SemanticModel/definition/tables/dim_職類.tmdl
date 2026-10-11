@@ -12,6 +12,18 @@ table dim_職類
 		lineageTag: 531ab141-43b4-422e-acd9-cf5b26635445
 		sourceColumn: jobCatDescription
 
+	column GoldenL1代碼
+		dataType: int64
+		isHidden
+		lineageTag: 0e6ecc2d-6ff1-4ba3-8c93-5ef0811c2f1a
+		summarizeBy: none
+		sourceColumn: goldenL1Code
+
+	column GoldenL1
+		dataType: string
+		lineageTag: b1f935d4-2c58-4406-bf5a-2451ed02a0ad
+		sourceColumn: goldenL1Name
+
 	partition DimJobCategory = m
 		mode: import
 		source = mdl_DimJobCategory

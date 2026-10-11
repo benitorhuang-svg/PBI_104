@@ -101,22 +101,6 @@
                                            "sourceColumn":  "snapshotDateTime"
                                        },
                                        {
-                                           "previousName":  "sourceKeyword",
-                                           "name":  "擷取關鍵字",
-                                           "dataType":  "String",
-                                           "hidden":  true,
-                                           "calculated":  false,
-                                           "sourceColumn":  "sourceKeyword"
-                                       },
-                                       {
-                                           "previousName":  "sourceArea",
-                                           "name":  "擷取地區",
-                                           "dataType":  "String",
-                                           "hidden":  true,
-                                           "calculated":  false,
-                                           "sourceColumn":  "sourceArea"
-                                       },
-                                       {
                                            "previousName":  "jobLink",
                                            "name":  "職缺來源連結",
                                            "dataType":  "String",
@@ -456,6 +440,22 @@
                                            "hidden":  false,
                                            "calculated":  false,
                                            "sourceColumn":  "jobCatDescription"
+                    },
+                    {
+                        "previousName":  "platformL1Code",
+                        "name":  "GoldenL1代碼",
+                        "dataType":  "Int64",
+                        "hidden":  true,
+                        "calculated":  false,
+                        "sourceColumn":  "goldenL1Code"
+                    },
+                    {
+                        "previousName":  "platformL1Name",
+                        "name":  "GoldenL1",
+                        "dataType":  "String",
+                        "hidden":  false,
+                        "calculated":  false,
+                        "sourceColumn":  "goldenL1Name"
                                        }
                                    ],
                        "measures":  [
@@ -484,14 +484,6 @@
                                            "hidden":  true,
                                            "calculated":  false,
                                            "sourceColumn":  "skillCode"
-                                       },
-                                       {
-                                           "previousName":  "skillDescription",
-                                           "name":  "技能名稱",
-                                           "dataType":  "String",
-                                           "hidden":  true,
-                                           "calculated":  false,
-                                           "sourceColumn":  "skillDescription"
                                        }
                                    ],
                        "measures":  [

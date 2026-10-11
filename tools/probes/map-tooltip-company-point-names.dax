@@ -1,0 +1,19 @@
+DEFINE
+    VAR PointCompanyCodes =
+        CALCULATETABLE(
+            VALUES('目前職缺'[公司代碼]),
+            TREATAS({"104"}, '目前職缺'[職缺平台]),
+            TREATAS({24.176665}, 'dim_地區'[緯度]),
+            TREATAS({120.615749}, 'dim_地區'[經度])
+        )
+    VAR PointCompanyNames =
+        CALCULATETABLE(
+            VALUES('dim_公司'[公司名稱]),
+            TREATAS(PointCompanyCodes, 'dim_公司'[公司代碼])
+        )
+EVALUATE
+    FILTER(
+        PointCompanyNames,
+        NOT ISBLANK('dim_公司'[公司名稱])
+    )
+

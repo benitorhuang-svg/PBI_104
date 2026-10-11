@@ -3,6 +3,7 @@ relationship FactJob_DimCompany_custNo
 	toColumn: dim_公司.公司代碼
 
 relationship FactJob_DimArea_areaKey
+	crossFilteringBehavior: bothDirections
 	fromColumn: 目前職缺.地點識別碼
 	toColumn: dim_地區.地點識別碼
 
@@ -21,21 +22,12 @@ relationship BridgeJobCategory_FactJob_jobNo
 	toColumn: 目前職缺.職缺編號
 
 relationship BridgeJobCategory_DimJobCategory_jobCatCode
+	crossFilteringBehavior: bothDirections
 	fromColumn: 職缺職類對照.職類代碼
 	toColumn: dim_職類.職類代碼
-
-relationship FactJobSnapshot_DimDate_snapshotDate
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 職缺快照.快照日期
-	toColumn: dim_日期.日期
 
 relationship FactJob_DimDate_appearDate
 	joinOnDateBehavior: datePartOnly
 	fromColumn: 目前職缺.刊登日期
-	toColumn: dim_日期.日期
-
-relationship FactSalaryObservation_DimDate_snapshotDate
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 薪資觀測.快照日期
 	toColumn: dim_日期.日期
 

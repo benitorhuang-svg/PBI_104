@@ -104,7 +104,11 @@ def report_symbols() -> dict[str, set[str]]:
         name = re.search(r"(?m)^table (.+)$", text)
         if not name:
             continue
-        values = set(re.findall(r"(?m)^\tcolumn ([^\n]+)$", text))
+        columns = re.findall(
+            r"(?m)^\tcolumn (?:'([^']+)'|([^=\r\n]+?))(?:\s*=\s*)?$",
+            text,
+        )
+        values = {quoted or unquoted.strip() for quoted, unquoted in columns}
         measures = re.findall(r"(?m)^\tmeasure (?:'([^']+)'|([^=\r\n]+?))\s*=", text)
         values |= {quoted or unquoted.strip() for quoted, unquoted in measures}
         symbols[name[1]] = values

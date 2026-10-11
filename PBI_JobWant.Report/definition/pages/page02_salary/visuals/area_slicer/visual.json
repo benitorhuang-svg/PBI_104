@@ -23,10 +23,24 @@
                       "Entity": "dim_地區"
                     }
                   },
-                  "Property": "地區"
+                  "Property": "縣市"
                 }
               },
-              "queryRef": "dim_地區.地區",
+              "queryRef": "dim_地區.縣市",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_地區"
+                    }
+                  },
+                  "Property": "鄉鎮市區"
+                }
+              },
+              "queryRef": "dim_地區.鄉鎮市區",
               "active": true
             }
           ]

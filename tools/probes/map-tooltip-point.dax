@@ -1,0 +1,16 @@
+DEFINE
+    VAR PointRows =
+        SUMMARIZECOLUMNS(
+            'dim_地區'[地點識別碼],
+            'dim_地區'[地址],
+            'dim_地區'[緯度],
+            'dim_地區'[經度],
+            TREATAS({24.176665}, 'dim_地區'[緯度]),
+            TREATAS({120.615749}, 'dim_地區'[經度]),
+            "Jobs", [目前符合條件職缺數],
+            "CompanyTip", [地圖提示公司名稱],
+            "AddressTip", [地圖提示地址]
+        )
+EVALUATE
+    PointRows
+

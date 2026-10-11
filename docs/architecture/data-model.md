@@ -1,15 +1,22 @@
 # TASK-004 Model Table Contract
 
-## Current artifact state (2026-10-09)
+## Current artifact state (2026-10-10)
 
-The on-disk semantic model defines 10 tables with M partitions, including
-`FactAcquisitionCategory`. The latest recorded Desktop acceptance is from
-2026-10-06 and covers an earlier nine-table model; the 10-table model has not
-been Desktop-refresh-verified. The 2026-10-09 `jobwant_104` catalog is missing
-six Gold views required by the model, so a complete refresh is currently
-blocked. See the [schema contract](../schema/contracts/database-schema-contract-v1.md)
-for the target view set and [local database status](../operations/local-database.md)
-before attempting a write or refresh.
+The on-disk semantic model defines 9 tables with M partitions, including
+`FactAcquisitionCategory`. `FactJobSnapshot` and `FactSalaryObservation` remain
+in the PostgreSQL Gold contract but are paused as Power BI imports. The updated
+definition completed a full Desktop refresh, was saved, closed, and reopened;
+all 9 partitions are `Ready`, with 21 expressions and 7 relationships. A DAX
+equivalence probe found zero mismatches for skill/category filter measures and
+a 100-job skill-list sample. Migration 038 then reduced the active category
+bridge to its relationship keys without changing its 394,580-row key set;
+migration 039 did the same for the 225,299-row skill bridge. Migration 040
+reduced the active FactJob Import payload to 14 source columns while retaining
+the canonical v22 view. Recent full refreshes measured 42.33, 56.26, and 37.16
+seconds; Desktop timing remains variable. See the [schema
+contract](../schema/contracts/database-schema-contract-v1.md) for the target
+view set and [local database status](../operations/local-database.md) before
+attempting a write or refresh.
 
 The TASK-004 profile and table contract below are historical. In that
 2026-10-06 model, `FactJob` selected one latest complete 104 occupational-category
@@ -17,13 +24,14 @@ observation per `jobNo`; it had no keyword or area predicate. The bridge and
 dimension grain checks below belong to that earlier model revision and must
 not be read as Desktop acceptance for the current 10-table definition.
 
-`FactJobSnapshot` remains the complete-series history at
+The v21 `FactJobSnapshot` Gold view still preserves complete-series history at
 `querySeriesKey × snapshotDate × jobNo`, including retained legacy keyword
-series. Current category facts are based on batches imported so far, not a
-claim of all-Taiwan coverage. The existing complete category batches were
-captured with the earlier two-area filter; nationwide category captures will
-expand the same Gold views when they pass ETL validation. Power Query performs
-no shaping or grain checks, and the DAX measures are unchanged.
+series; it is not currently imported into the semantic model. Current category
+facts are based on batches imported so far, not a claim of all-Taiwan coverage.
+The existing complete category batches were captured with the earlier two-area
+filter; nationwide category captures will expand the same Gold views when they
+pass ETL validation. Power Query performs no shaping or grain checks, and the
+current DAX measures retain the existing report semantics.
 
 See [current architecture](README.md) and
 [database refresh status](../operations/optimization-status.md) for Gold view names and

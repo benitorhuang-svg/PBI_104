@@ -1,1 +1,1 @@
-fxReadGoldView("pbi_bridge_job_skill_v21")
+fxReadGoldView("pbi_bridge_job_skill_keys_v21")

@@ -1,0 +1,59 @@
+DEFINE
+    VAR AreaCategoryPairs = FILTER(
+        SUMMARIZECOLUMNS(
+            'dim_地區'[縣市],
+            'dim_職類'[職類名稱],
+            "Jobs", [目前符合條件職缺數]
+        ),
+        [Jobs] > 0
+            && NOT ISBLANK('dim_地區'[縣市])
+            && NOT ISBLANK('dim_職類'[職類名稱])
+    )
+    VAR ChosenPair = TOPN(
+        1,
+        AreaCategoryPairs,
+        'dim_地區'[縣市], ASC,
+        'dim_職類'[職類名稱], ASC
+    )
+    VAR ChosenCounties = SELECTCOLUMNS(ChosenPair, "County", 'dim_地區'[縣市])
+    VAR ChosenCategories = SELECTCOLUMNS(ChosenPair, "Category", 'dim_職類'[職類名稱])
+    VAR CategoriesAfterCounty = CALCULATETABLE(
+        VALUES('dim_職類'[職類名稱]),
+        TREATAS(ChosenCounties, 'dim_地區'[縣市])
+    )
+    VAR CategoriesWithJobsAfterCounty = FILTER(
+        CategoriesAfterCounty,
+        CALCULATE([目前符合條件職缺數]) > 0
+    )
+    VAR CountiesAfterCategory = CALCULATETABLE(
+        VALUES('dim_地區'[縣市]),
+        TREATAS(ChosenCategories, 'dim_職類'[職類名稱])
+    )
+    VAR CountiesWithJobsAfterCategory = FILTER(
+        CountiesAfterCategory,
+        CALCULATE([目前符合條件職缺數]) > 0
+    )
+EVALUATE
+ROW(
+    "ChosenCounty", CONCATENATEX(ChosenCounties, [County], ", "),
+    "ChosenCategory", CONCATENATEX(ChosenCategories, [Category], ", "),
+    "CountyJobs", CALCULATE(
+        [目前符合條件職缺數],
+        TREATAS(ChosenCounties, 'dim_地區'[縣市])
+    ),
+    "CategoryJobs", CALCULATE(
+        [目前符合條件職缺數],
+        TREATAS(ChosenCategories, 'dim_職類'[職類名稱])
+    ),
+    "IntersectionJobs", CALCULATE(
+        [目前符合條件職缺數],
+        TREATAS(ChosenCounties, 'dim_地區'[縣市]),
+        TREATAS(ChosenCategories, 'dim_職類'[職類名稱])
+    ),
+    "TotalCategoryDimensionRows", COUNTROWS(ALL('dim_職類'[職類名稱])),
+    "CategoryDimensionRowsAfterCounty", COUNTROWS(CategoriesAfterCounty),
+    "CategoriesWithJobsAfterCounty", COUNTROWS(CategoriesWithJobsAfterCounty),
+    "TotalCountyDimensionRows", COUNTROWS(ALL('dim_地區'[縣市])),
+    "CountyDimensionRowsAfterCategory", COUNTROWS(CountiesAfterCategory),
+    "CountiesWithJobsAfterCategory", COUNTROWS(CountiesWithJobsAfterCategory)
+)

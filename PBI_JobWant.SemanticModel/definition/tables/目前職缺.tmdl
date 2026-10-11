@@ -1,32 +1,20 @@
 table 目前職缺
 	lineageTag: e01bc894-c60a-4e83-849b-cde9f0a28fda
 
-	/// Distinct current jobNo values after optional skill/category filters. Multi-select within each bridge is OR; the two bridges intersect and other model filters remain intersections.
-	measure 目前符合條件職缺數 =
-			VAR HasSkillFilter = ISFILTERED('dim_技能'[技能名稱]) || ISFILTERED('dim_技能'[技能代碼])
-			VAR HasCategoryFilter = ISFILTERED('dim_職類'[職類名稱]) || ISFILTERED('dim_職類'[職類代碼])
-			RETURN
-			    IF(
-			        HasSkillFilter || HasCategoryFilter,
-			        CALCULATE(
-			            DISTINCTCOUNT('目前職缺'[職缺編號]),
-			            CROSSFILTER('職缺技能對照'[職缺編號], '目前職缺'[職缺編號], BOTH),
-			            CROSSFILTER('職缺職類對照'[職缺編號], '目前職缺'[職缺編號], BOTH)
-			        ),
-			        DISTINCTCOUNT('目前職缺'[職缺編號])
-			    )
+	/// Current FactJob is one row per unique jobNo; row counting avoids a repeated distinct hash for map groups. Multi-select within each bridge is OR; the two bridges intersect and other model filters remain intersections.
+	measure 目前符合條件職缺數 = COUNTROWS('目前職缺')
 		formatString: #,0
 		displayFolder: 職缺分析
 		lineageTag: 5a72a91a-af34-48a4-8758-7e082876aa35
 
 	/// Distinct companies in the currently matched job set.
-	measure 符合條件公司數 = CALCULATE(DISTINCTCOUNT('目前職缺'[公司代碼]), CROSSFILTER('職缺技能對照'[職缺編號], '目前職缺'[職缺編號], BOTH), CROSSFILTER('職缺職類對照'[職缺編號], '目前職缺'[職缺編號], BOTH))
+	measure 符合條件公司數 = DISTINCTCOUNT('目前職缺'[公司代碼])
 		formatString: #,0
 		displayFolder: 職缺分析
 		lineageTag: d79a642c-479c-4e17-b1fe-e81a5568ad8d
 
 	/// Matched jobs with both numeric API salary bounds present; this does not interpret either bound as disclosed salary.
-	measure 具備薪資上下限的職缺數 = CALCULATE(COUNTROWS(FILTER('目前職缺', NOT ISBLANK('目前職缺'[薪資下限]) && NOT ISBLANK('目前職缺'[薪資上限]))), CROSSFILTER('職缺技能對照'[職缺編號], '目前職缺'[職缺編號], BOTH), CROSSFILTER('職缺職類對照'[職缺編號], '目前職缺'[職缺編號], BOTH))
+	measure 具備薪資上下限的職缺數 = COUNTROWS(FILTER('目前職缺', NOT ISBLANK('目前職缺'[薪資下限]) && NOT ISBLANK('目前職缺'[薪資上限])))
 		formatString: #,0
 		displayFolder: 職缺分析
 		lineageTag: ddd9a331-14db-43b8-9316-6e0da72efdc2
@@ -63,8 +51,13 @@ table 目前職缺
 
 	/// Distinct normalized skill descriptions for the currently selected job.
 	measure 職缺技能清單 =
-			VAR SkillNames = CALCULATETABLE(VALUES('職缺技能對照'[技能名稱]), CROSSFILTER('職缺技能對照'[職缺編號], '目前職缺'[職缺編號], BOTH))
-			RETURN CONCATENATEX(FILTER(SkillNames, NOT ISBLANK([技能名稱])), [技能名稱], ", ", [技能名稱], ASC)
+			VAR SkillCodes = VALUES('職缺技能對照'[技能代碼])
+			VAR SkillNames =
+				CALCULATETABLE(
+					VALUES('dim_技能'[技能名稱]),
+					TREATAS(SkillCodes, 'dim_技能'[技能代碼])
+				)
+			RETURN CONCATENATEX(FILTER(SkillNames, NOT ISBLANK('dim_技能'[技能名稱])), 'dim_技能'[技能名稱], ", ", 'dim_技能'[技能名稱], ASC)
 		formatString: @
 		displayFolder: 職缺分析
 		lineageTag: 732335da-adee-4143-9b7a-f47b31082ad4
@@ -76,6 +69,80 @@ table 目前職缺
 		formatString: @
 		displayFolder: 職缺分析\所選職缺
 		lineageTag: 1e8ac704-b889-4b8a-9be3-4a1d516dabec
+
+	/// Allows coordinate-bearing area points when the selected location set stays within the 5,000-point render limit.
+	measure 地圖點位可繪製旗標 =
+			VAR SelectedMapPointCount =
+				CALCULATE(
+					COUNTROWS(VALUES('dim_地區'[地點識別碼])),
+					ALLSELECTED('dim_地區'),
+					KEEPFILTERS(NOT ISBLANK('dim_地區'[鄉鎮市區])),
+					KEEPFILTERS(NOT ISBLANK('dim_地區'[緯度])),
+					KEEPFILTERS(NOT ISBLANK('dim_地區'[經度]))
+				)
+			RETURN
+				IF(SelectedMapPointCount > 0 && SelectedMapPointCount <= 5000, 1, 0)
+		formatString: 0
+		displayFolder: 職缺分析\地圖
+		lineageTag: 3d62c421-82d2-4b50-bc54-590f919ce690
+
+	/// Reuses the row-count job measure and keeps matching locations with coordinates while excluding blank-coordinate rows from the map query.
+	measure 地圖點位有職缺旗標 =
+			VAR HasMatchingJobs = [目前符合條件職缺數] > 0
+			VAR HasCoordinates =
+				NOT ISBLANK(AVERAGE('dim_地區'[緯度]))
+					&& NOT ISBLANK(AVERAGE('dim_地區'[經度]))
+			RETURN IF(HasMatchingJobs && HasCoordinates, 1, 0)
+		formatString: 0
+		displayFolder: 職缺分析\地圖
+		lineageTag: 758c5f27-c51e-4084-b36b-95665fd192fc
+
+	/// Tooltip measure returns one area label without adding it as another map grouping key.
+	measure 地圖提示地區 = SELECTEDVALUE('dim_地區'[地區])
+		formatString: @
+		displayFolder: 職缺分析\地圖
+		lineageTag: 719c5ab7-5d39-40fd-a49c-c2a51765091d
+
+	/// Tooltip measure is blank for area summaries and returns the address after drilling to a single location key.
+	measure 地圖提示地址 = SELECTEDVALUE('dim_地區'[地址])
+		formatString: @
+		displayFolder: 職缺分析\地圖
+		lineageTag: 39fe0085-0529-4f94-889d-3e80da654dc4
+
+	/// Counts the coordinate-bearing area groups currently represented by matching jobs.
+	measure 地圖目前叢集數 =
+			VAR VisibleAreas =
+				FILTER(
+					VALUES('dim_地區'[地點識別碼]),
+					NOT ISBLANK('dim_地區'[鄉鎮市區])
+						&& NOT ISBLANK(CALCULATE(AVERAGE('dim_地區'[緯度])))
+						&& NOT ISBLANK(CALCULATE(AVERAGE('dim_地區'[經度])))
+						&& CALCULATE([目前符合條件職缺數]) > 0
+				)
+			RETURN COUNTROWS(VisibleAreas)
+		formatString: #,0
+		displayFolder: 職缺分析\地圖
+		lineageTag: 5be16b35-9518-43cc-9f56-7d1ec9705a20
+
+	/// Shows the selected job title at a single-job point and an explicit instruction when several jobs share one address.
+	measure 地圖提示職缺名稱 =
+			VAR JobCount = [目前符合條件職缺數]
+			RETURN IF(JobCount = 1, SELECTEDVALUE('目前職缺'[職缺名稱]), "多筆職缺，請從清單選取")
+		formatString: @
+		displayFolder: 職缺分析\地圖
+		lineageTag: 4a2f5f87-2c2d-4d0d-8a73-2e19f4e2b0d1
+
+	/// Resolves the company represented by the hovered map location instead of taking an arbitrary Min() from the company dimension.
+	measure 地圖提示公司名稱 =
+			VAR CompanyName =
+				CALCULATE(
+					SELECTEDVALUE('dim_公司'[公司名稱]),
+					CROSSFILTER('目前職缺'[公司代碼], 'dim_公司'[公司代碼], BOTH)
+				)
+			RETURN COALESCE(CompanyName, "多家公司／請選取")
+		formatString: @
+		displayFolder: 職缺分析\地圖
+		lineageTag: 6c0f0d76-2b7b-4d9b-9b0c-8c2d4e1f6a73
 
 	column 職缺編號
 		dataType: string
@@ -172,24 +239,6 @@ table 目前職缺
 		lineageTag: 162179e5-89a8-4671-9f6b-a926f0a849f7
 		summarizeBy: none
 		sourceColumn: snapshotDateTime
-
-		annotation SummarizationSetBy = Automatic
-
-	column 擷取關鍵字
-		dataType: string
-		isHidden
-		lineageTag: f2af6b80-2b57-462b-8633-1c1da55e367e
-		summarizeBy: none
-		sourceColumn: sourceKeyword
-
-		annotation SummarizationSetBy = Automatic
-
-	column 擷取地區
-		dataType: string
-		isHidden
-		lineageTag: adaa80bf-24cb-4dc6-8689-1295148f046c
-		summarizeBy: none
-		sourceColumn: sourceArea
 
 		annotation SummarizationSetBy = Automatic
 

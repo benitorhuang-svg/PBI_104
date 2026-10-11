@@ -2,7 +2,7 @@
 
 ## Page purpose
 
-讓使用者依職稱、官方職類、地區、產業、技能與薪資篩選目前職缺，查看清單欄位與可追溯的原始 104 link。
+讓使用者依平台、職稱、官方職類、地區、產業、技能與薪資篩選目前職缺，查看清單欄位與可追溯的來源 link。
 
 ## Canvas and grid
 
@@ -12,7 +12,7 @@
 
 ## Filters
 
-- `FactJob[sourcePlatform]`（平台；只代表目前 Gold 實際載入的來源）、`FactJob[jobName]`（職稱）、`DimJobCategory[jobCatDescription]`（官方職類）、`DimArea[jobAddrNoDesc]`、`DimCompany[coIndustryDesc]`、`DimSkill[skillDescription]`。
+- `FactJob[sourcePlatform]`（平台；只代表目前 Gold 實際載入的來源）、`FactJob[jobName]`（職稱）、`DimJobCategory[goldenL1Name]`（跨平台 Golden L1；以 104 的 18 個官方根類別作 canonical baseline，未確認 crosswalk 統一進入 `待對照／BLOCKED`）、`DimArea[jobLocationScope]`（國內／國外／未判定範圍，先縮小地理範圍）、`DimArea[縣市]` → `DimArea[鄉鎮市區]`（兩層地區階層）、`DimCompany[coIndustryDesc]`、`DimSkill[skillDescription]`。來源原始地區值保留在隱藏欄位 `DimArea[來源地區]`；FactJob 與 DimArea 目前讀 v22 Gold，其他相容查詢仍讀 v21。
 - Salary 以 `salaryLow`/`salaryHigh` numeric filters；不建立 experience filter，因模型未提供可靠 experience group。
 
 ## KPI card
@@ -21,8 +21,9 @@
 
 ## Main visuals
 
-- Map：`DimArea[areaKey]` 定位類別、`DimArea[lat]` / `[lon]` 作座標、`FactJob[Active Jobs]` 作泡泡大小；點選地區篩選清單。
-- Job list table：`FactJob[jobName]`、`DimCompany[custName]`、`DimArea[jobAddrNoDesc]`；選取職缺後 cross-filter 右側內容。
+- Map：以 `DimArea[縣市]` → `DimArea[鄉鎮市區]` 作探索層級，`DimArea[lat]` / `[lon]` 提供座標，`FactJob[sourcePlatform]` 作來源 Legend；Azure Map 在低縮放層級使用叢集，預設最多繪製 5,000 個區域點。來源原始地區描述仍保留在 `DimArea[來源地區]`，不以外國區域或未判定值冒充台灣縣市。選取職缺清單後，FactJob → DimArea 關聯會把該區域點縮到所選職缺的精確經緯度；同一區域的多筆職缺以泡泡大小與 tooltip 顯示筆數，tooltip 會提示從清單選取以取得單筆地址。`地圖點位可繪製旗標` 以目前篩選後的有效區域座標點數作 5,000 點上限，`地圖點位有職缺旗標` 排除無座標資料。
+- Job list table：`FactJob[jobName]`、`DimCompany[custName]`、`DimArea[來源地區]`；選取職缺後 cross-filter 右側內容。
+ - Job list table：`FactJob[jobName]`、`DimCompany[custName]`、`DimArea[來源地區]`；選取職缺後 cross-filter 右側內容。
 - Selected-job panel：職缺概要（公司、職稱、地區、技能）、薪資原值／刊登日／`jobLink`，以及獨立的寬幅 `descSnippet` 區塊。
 - `FactJob` 目前只有 `descSnippet`，沒有 `description` 或 `pcSkillsRaw`；摘要不得標示成完整職務說明。完整原文由來源職缺連結開啟。
 

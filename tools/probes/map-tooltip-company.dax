@@ -1,0 +1,22 @@
+DEFINE
+    VAR LocationRows =
+        TOPN(
+            10,
+            SUMMARIZECOLUMNS(
+                'dim_地區'[地點識別碼],
+                'dim_地區'[地址],
+                'dim_地區'[緯度],
+                'dim_地區'[經度],
+                "Jobs", [目前符合條件職缺數]
+            ),
+            [Jobs], DESC
+        )
+    VAR LocationTips =
+        ADDCOLUMNS(
+            LocationRows,
+            "CompanyTip", CALCULATE([地圖提示公司名稱]),
+            "AddressTip", CALCULATE([地圖提示地址])
+        )
+EVALUATE
+    LocationTips
+

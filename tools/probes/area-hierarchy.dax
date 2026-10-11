@@ -1,0 +1,34 @@
+DEFINE
+    VAR AreaLevels =
+        SUMMARIZECOLUMNS(
+            '目前職缺'[職缺平台],
+            'dim_地區'[縣市],
+            'dim_地區'[鄉鎮市區],
+            "Locations", DISTINCTCOUNT('dim_地區'[地點識別碼]),
+            "Jobs", [目前符合條件職缺數]
+        )
+EVALUATE
+    UNION(
+        TOPN(
+            5,
+            FILTER(
+                AreaLevels,
+                '目前職缺'[職缺平台] = "104"
+                    && NOT ISBLANK('dim_地區'[縣市])
+                    && NOT ISBLANK('dim_地區'[鄉鎮市區])
+            ),
+            'dim_地區'[縣市], ASC,
+            'dim_地區'[鄉鎮市區], ASC
+        ),
+        TOPN(
+            5,
+            FILTER(
+                AreaLevels,
+                '目前職缺'[職缺平台] = "yes123"
+                    && NOT ISBLANK('dim_地區'[縣市])
+                    && NOT ISBLANK('dim_地區'[鄉鎮市區])
+            ),
+            'dim_地區'[縣市], ASC,
+            'dim_地區'[鄉鎮市區], ASC
+        )
+    )

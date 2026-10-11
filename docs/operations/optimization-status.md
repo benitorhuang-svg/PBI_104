@@ -27,6 +27,89 @@ latest committed official-category batches, run
 report is read-only and distinguishes all-area queries from filtered-area
 queries.
 
+## Current Page 04 runtime acceptance (2026-10-10)
+
+Power BI Desktop was reopened from `PBI_JobWant.pbip`. After the background
+refresh settled, all nine model partitions reported `Ready`; the model had 21
+expressions and seven relationships. The Azure Map X/Y projections request
+`Average` for longitude and latitude, matching the Desktop visual contract.
+The v22 FactJob view returned 195,332 rows: 155,940 from 104 and 39,392 from
+yes123. After migration 035, a read-only DAX scope check returned 104
+`未判定` 54, `國內` 154,024, and `國外(台灣地區之外)` 1,862; yes123 returned
+`未判定` 0, `國內` 39,317, and `國外(台灣地區之外)` 75. Migration 035 uses
+only explicit source-provided county or overseas-region labels when coordinates
+are absent; it does not create coordinates, and unrecognized values remain
+`未判定`.
+
+The map path was optimized at two boundaries:
+
+- `gold.pbi_dim_area_v22` now selects one current job per `(platform,
+  sourceAreaKey)` before address/geocode and county work. Migrations 031–040 are applied; the migration check reports versions 1–40, no
+  pending versions, no missing migration files, and `READY`.
+- `目前符合條件職缺數` uses `COUNTROWS` because the current FactJob contains
+  195,332 rows and 195,332 distinct `jobNo` values. The map presence flag
+  reuses that measure instead of repeating a `DISTINCTCOUNT` for every map
+  group.
+
+Read-only database checks show current v22 area representatives for both
+platforms. 104 returns 73,631 domestic rows (73,058 with coordinates), 585
+overseas rows (582 with coordinates), and 12 unresolved rows; yes123 returns
+410 domestic rows (64 with coordinates), eight overseas rows, and no unresolved
+rows. The platform-scope DAX probe returns yes123 `39,317` domestic jobs,
+`75` overseas jobs, and `0` unresolved jobs. The map remains coordinate-gated;
+the text classification changes the scope label only and does not add map
+points.
+Four interleaved warm DAX proxy runs (excluding the first cold run) had median
+times of about `0.67s` with the old distinct-count expression and `0.61s` with
+the row-count measure. This is a semantic-query proxy, not a measured mouse
+click latency or a Service benchmark.
+
+The first post-migration Desktop helper call timed out while saving even though
+the background queries continued; after the active database queries drained,
+the model inventory showed all nine partitions `Ready`. A later Desktop UI
+refresh completed the visual queries without trace errors. Selecting `國內`
+changed the KPI to 193,341 and rendered the map; selecting `yes123` with
+`國內` kept both slicers active, changed the KPI to 39,317, and rendered the
+Taiwan point set. This acceptance does not claim nationwide data coverage.
+The observed v22 area query runtime was about 8.8 seconds; it is a database
+view observation, not a repeatable end-to-end Desktop refresh benchmark.
+
+Migration 038 applies a key-only payload to the active category bridge. The
+legacy and new bridge key sets are exactly equal: 394,580 rows, zero old-only
+rows, and zero new-only rows. The redundant `jobCatDescription` string remains
+available in `dim_職類`; the hidden bridge now imports only `jobNo` and
+`jobCatCode`. Its table refresh measured 23.57s and 34.18s in two consecutive
+runs after the change, compared with 38.74s immediately before it and 56.26s
+in the earlier table-level baseline.
+
+The full-model Desktop refresh then measured 42.17s and 39.34s in two runs,
+versus the prior 64.94s and 67.36s observations. This is now a repeatable
+directional improvement, although Desktop timing still varies with cache and
+model state. Migration 037 still supplies the isolated `dim_技能` gain from
+19.72s to 3.06s. The category DAX contract, bridge intersection, row counts,
+map gates, and platform scope counts remain unchanged.
+
+Migration 039 applies the same relationship-key reduction to the active skill
+bridge. The legacy and key-only bridge sets are exactly equal at 225,299 rows
+and 59,988 jobs; `old_only` and `new_only` are both zero. All 225,299 legacy
+bridge descriptions match `silver.skill_dimension`, so `職缺技能清單` now
+resolves names from `dim_技能` with `TREATAS` and the bridge imports only
+`jobNo` and `skillCode`. Two full refreshes after migration 039 measured
+42.02s and 43.00s; this is a payload reduction without an isolated full-refresh
+gain beyond normal Desktop variation.
+
+Migration 040 publishes `gold.pbi_fact_jobs_report_v22`, a model-specific
+projection of the unchanged canonical v22 FactJob view. It removes seven
+unused legacy/lineage columns from the active Import path while retaining the
+report fields, company/area/date relationships, and all source data in the
+canonical view and Silver. The projection has 195,332 rows and its retained
+payload has zero old-only/new-only differences. The active FactJob table now
+has 14 source columns (15 Desktop columns including the automatic RowNumber)
+instead of 21 source columns. FactJob table refreshes measured 20.21s and
+16.70s; three subsequent full refreshes measured 42.33s, 56.26s, and 37.16s.
+Because the range is still cache/connection sensitive, record this as a
+validated model-payload reduction, not a certified end-to-end speedup.
+
 All nine model tables now read PostgreSQL Gold views. Power Query handles
 connection/navigation only; acquisition, ETL, dimensions, bridges,
 deduplication, and the date calendar stay in Python/PostgreSQL. `DimDate` is

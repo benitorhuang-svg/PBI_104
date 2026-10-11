@@ -1,0 +1,157 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "9bbe7b0b65850c47453c",
+  "position": {
+    "x": 596.64419675632382,
+    "y": 418.26603483948475,
+    "z": 8000,
+    "height": 301.39758392845221,
+    "width": 641.23873723553356,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "目前職缺"
+                    }
+                  },
+                  "Property": "職缺摘要"
+                }
+              },
+              "queryRef": "目前職缺.職缺摘要",
+              "nativeQueryRef": "職缺摘要",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "目前職缺"
+                    }
+                  },
+                  "Property": "職缺來源連結"
+                }
+              },
+              "queryRef": "目前職缺.職缺來源連結",
+              "nativeQueryRef": "職缺來源連結",
+              "active": true
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "目前職缺"
+                  }
+                },
+                "Property": "職缺摘要"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "目前職缺.職缺摘要"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "目前職缺"
+                    }
+                  },
+                  "Property": "職缺摘要"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "目前職缺.職缺來源連結"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'1.針對預約客人進行確認2.美容諮詢，針對顧客膚質判斷所需療程並建議其產品使用，提供顧客高品質服務3.服務客人進行皮膚保養、面部頸部按摩、修描睫毛及眉毛、去除不必要之毛髮和化妝4.提供相關的保養建議、醫學美容相關業務、保養品銷售5.周一~周六:11:00~21:00/周日11:00~18:00，月休8天/享勞、健保，國內外員工旅遊*無經驗可'"
+                  }
+                }
+              ],
+              "isToggled": true
+            }
+          ]
+        }
+      }
+    ],
+    "objects": {
+      "subTotals": [
+        {
+          "properties": {
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "rowSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

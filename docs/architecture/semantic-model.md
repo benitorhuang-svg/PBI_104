@@ -1,11 +1,21 @@
 # TASK-005 Semantic Model Validation
 
-## Desktop acceptance snapshot (2026-10-06; historical)
+## Current Desktop acceptance (2026-10-10)
 
-> This acceptance is for the earlier nine-table model. The current on-disk
-> TMDL defines 10 model tables, and the 2026-10-09 `jobwant_104` catalog is
-> missing six required Gold views. No Desktop refresh acceptance is recorded
-> for the 10-table definition; see the [current database status](../operations/local-database.md).
+The optimized nine-table model completed a Golden L1 category refresh, was
+saved, closed, and reopened. All nine partitions reported `Ready`; the model
+contains 21 expressions and seven relationships. A DAX equivalence probe
+returned zero mismatches for skill/category filters and a 100-job sample.
+Migrations 044–046 expanded the active category bridge to 433,972
+cross-platform relationship rows covering 195,332 jobs; only confirmed
+crosswalk rows receive a canonical Golden L1 and unresolved yes123 rows remain
+`待對照／BLOCKED`. Migration 039 reduced the skill bridge to its exact
+225,299-row key set. Migration 040 reduced the active FactJob Import payload
+to 14 source columns while retaining the canonical v22 view.
+See the [current database status](../operations/local-database.md)
+before future database writes or contract changes.
+
+## Desktop acceptance snapshot (2026-10-06; historical)
 
 The nine imported tables use PostgreSQL Gold views, including database-provided
 `DimDate`. Power BI Desktop refreshed, saved, closed, and reopened the project

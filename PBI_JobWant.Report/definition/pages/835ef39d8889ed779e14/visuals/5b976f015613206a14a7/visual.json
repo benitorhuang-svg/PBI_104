@@ -1,0 +1,197 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "5b976f015613206a14a7",
+  "position": {
+    "x": 0,
+    "y": 89.189080958419538,
+    "z": 2000,
+    "height": 329.07695388106521,
+    "width": 1264.0245611693251,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_公司"
+                    }
+                  },
+                  "Property": "公司名稱"
+                }
+              },
+              "queryRef": "dim_公司.公司名稱",
+              "nativeQueryRef": "公司名稱",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "目前職缺"
+                    }
+                  },
+                  "Property": "職缺名稱"
+                }
+              },
+              "queryRef": "目前職缺.職缺名稱",
+              "nativeQueryRef": "職缺名稱",
+              "active": true,
+              "displayName": "職缺名稱 / Job title"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "目前職缺"
+                    }
+                  },
+                  "Property": "薪資下限"
+                }
+              },
+              "queryRef": "目前職缺.薪資下限",
+              "nativeQueryRef": "薪資下限",
+              "active": true,
+              "format": "#,0"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "目前職缺"
+                    }
+                  },
+                  "Property": "薪資上限"
+                }
+              },
+              "queryRef": "目前職缺.薪資上限",
+              "nativeQueryRef": "薪資上限",
+              "active": true,
+              "format": "#,0"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "目前職缺"
+                  }
+                },
+                "Property": "職缺名稱"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "autoSizeColumnWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'growToFit'"
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "336.5426393219291D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_公司.公司名稱"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'單點職缺 / Select a job'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

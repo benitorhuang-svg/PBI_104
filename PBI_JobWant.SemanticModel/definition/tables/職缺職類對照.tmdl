@@ -12,11 +12,6 @@ table 職缺職類對照
 		lineageTag: c39530a2-68ce-46b3-a676-2f34dc412087
 		sourceColumn: jobCatCode
 
-	column 職類名稱
-		dataType: string
-		lineageTag: b8442128-c5ec-4ab0-8ee0-df3966a43a86
-		sourceColumn: jobCatDescription
-
 	partition BridgeJobCategory = m
 		mode: import
 		source = mdl_BridgeJobCategory

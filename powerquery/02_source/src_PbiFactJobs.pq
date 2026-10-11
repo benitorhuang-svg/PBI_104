@@ -1,1 +1,1 @@
-fxReadGoldView("pbi_fact_jobs_v21")
+fxReadGoldView("pbi_fact_jobs_report_v22")

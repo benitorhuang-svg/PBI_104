@@ -1,0 +1,40 @@
+DEFINE
+    VAR DomesticMap =
+        SUMMARIZECOLUMNS(
+            'dim_地區'[地區],
+            TREATAS({"國內"}, 'dim_地區'[地點範圍]),
+            "Jobs", [目前符合條件職缺數],
+            "Presence", [地圖點位有職缺旗標],
+            "Gate", [地圖點位可繪製旗標]
+        )
+    VAR OverseasMap =
+        SUMMARIZECOLUMNS(
+            'dim_地區'[地區],
+            TREATAS({"國外(台灣地區之外)"}, 'dim_地區'[地點範圍]),
+            "Jobs", [目前符合條件職缺數],
+            "Presence", [地圖點位有職缺旗標],
+            "Gate", [地圖點位可繪製旗標]
+        )
+    VAR UnknownMap =
+        SUMMARIZECOLUMNS(
+            'dim_地區'[地區],
+            TREATAS({"未判定"}, 'dim_地區'[地點範圍]),
+            "Jobs", [目前符合條件職缺數],
+            "Presence", [地圖點位有職缺旗標],
+            "Gate", [地圖點位可繪製旗標]
+        )
+EVALUATE
+    ROW(
+        "FactRows", COUNTROWS('目前職缺'),
+        "DistinctJobs", DISTINCTCOUNT('目前職缺'[職缺編號]),
+        "FactUnique", COUNTROWS('目前職缺') = DISTINCTCOUNT('目前職缺'[職缺編號]),
+        "DomesticRows", COUNTROWS(DomesticMap),
+        "DomesticPoints", COUNTROWS(FILTER(DomesticMap, [Presence] = 1)),
+        "DomesticGate", MAXX(DomesticMap, [Gate]),
+        "OverseasRows", COUNTROWS(OverseasMap),
+        "OverseasPoints", COUNTROWS(FILTER(OverseasMap, [Presence] = 1)),
+        "OverseasGate", MAXX(OverseasMap, [Gate]),
+        "UnknownRows", COUNTROWS(UnknownMap),
+        "UnknownPoints", COUNTROWS(FILTER(UnknownMap, [Presence] = 1)),
+        "UnknownGate", MAXX(UnknownMap, [Gate])
+    )

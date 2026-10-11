@@ -11,6 +11,7 @@ docs/schema/
   catalog_snapshot.sql
   contracts/
     database-schema-contract-v1.md
+    powerbi-fact-constellation-v22-design.md
   platforms/
     _template/source-schema.md
     104/source-schema.md
@@ -21,6 +22,7 @@ docs/schema/
 ```
 
 - [共用資料庫契約](contracts/database-schema-contract-v1.md)：Bronze/Silver/Gold 職責、鍵、粒度、型別與 migration 規則。
+- [Power BI fact constellation v22 設計](contracts/powerbi-fact-constellation-v22-design.md)：未來共用職缺維度、事實表粒度與 migration 驗收閘門；尚未發布為 migration。
 - [Semantic Model 繁中顯示契約 v1](contracts/semantic-model-display-contract-v1.md)：Power BI 表格、欄位與量值的繁體中文名稱，以及對應的 Gold `sourceColumn`。
 - [平台登錄表](registry.json)：每個平台的識別碼、adapter、schema 狀態、證據文件和阻擋項目。
 - `platforms/<platform>/source-schema.md`：來源契約和 adapter 輸出；逐項標示觀察日期、查詢範圍、資料型別證據及未知項目。

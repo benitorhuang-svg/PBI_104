@@ -26,10 +26,6 @@ cultureInfo zh-TW
 					caption: 快照日期
 				column 快照時間
 					caption: 快照時間
-				column 擷取關鍵字
-					caption: 擷取關鍵字
-				column 擷取地區
-					caption: 擷取地區
 				column 職缺來源連結
 					caption: 職缺來源連結
 				column 地點識別碼
@@ -66,31 +62,12 @@ cultureInfo zh-TW
 				measure 所選職缺公司名稱
 					caption: 所選職缺公司名稱
 					displayFolder: 職缺分析\所選職缺
-			table 職缺快照
-				caption: 職缺快照
-				description: 每列代表一個來源職缺的一次已保存快照；與目前職缺表粒度不同，適合追溯觀測。
-				column 快照日期
-					caption: 快照日期
-				column 快照時間
-					caption: 快照時間
-				column 職缺編號
-					caption: 職缺編號
-				column 公司代碼
-					caption: 公司代碼
-				column 刊登日期
-					caption: 刊登日期
-				column 薪資下限
-					caption: 薪資下限
-				column 薪資上限
-					caption: 薪資上限
-				column 擷取關鍵字
-					caption: 擷取關鍵字
-				column 擷取地區
-					caption: 擷取地區
-				column 查詢序列識別碼
-					caption: 查詢序列識別碼
-				column 職缺平台
-					caption: 職缺平台
+				measure 地圖點位可繪製旗標
+					caption: 地圖點位可繪製旗標
+					displayFolder: 職缺分析\地圖
+				measure 地圖點位有職缺旗標
+					caption: 地圖點位有職缺旗標
+					displayFolder: 職缺分析\地圖
 			table dim_公司
 				caption: dim_公司
 				description: 公司名稱與產業描述；公司代碼是模型關聯鍵。
@@ -117,8 +94,14 @@ cultureInfo zh-TW
 					caption: 經度
 				column 地點識別碼
 					caption: 地點識別碼
-				column 地點範圍
+				column 工作地點範圍
 					caption: 地點範圍
+				column 鄉鎮市區
+					caption: 鄉鎮市區
+				column 縣市
+					caption: 縣市
+				column 來源地區
+					caption: 來源地區
 			table dim_技能
 				caption: dim_技能
 				description: 模型可用的技能代碼與描述，供技能分析與篩選。
@@ -133,6 +116,10 @@ cultureInfo zh-TW
 					caption: 職類代碼
 				column 職類名稱
 					caption: 職類名稱
+				column GoldenL1代碼
+					caption: Golden L1代碼
+				column GoldenL1
+					caption: Golden L1
 			table 職缺技能對照
 				caption: 職缺技能對照
 				description: 中介對照表，一列代表一個職缺與一個技能的關聯；支援技能篩選與職缺追蹤。
@@ -140,8 +127,6 @@ cultureInfo zh-TW
 					caption: 職缺編號
 				column 技能代碼
 					caption: 技能代碼
-				column 技能名稱
-					caption: 技能名稱
 			table dim_日期
 				caption: dim_日期
 				description: 日曆日期維度，用於刊登日期與快照日期篩選。
@@ -166,8 +151,6 @@ cultureInfo zh-TW
 					caption: 職缺編號
 				column 職類代碼
 					caption: 職類代碼
-				column 職類名稱
-					caption: 職類名稱
 			table 職類擷取進度
 				caption: 職類擷取進度
 				description: 各平台原生職類的擷取與批次品質狀態；yes123 狀態來自已保存批次，不代表即時佇列。
@@ -301,197 +284,281 @@ cultureInfo zh-TW
 					caption: 來源職類數
 				measure 來源職缺總數
 					caption: 來源職缺總數
-			table 薪資觀測
-				caption: 薪資觀測
-				description: 每列代表一筆薪資來源或提及觀測；保留原始文字、幣別、給薪週期與解析狀態，尚未確認可跨週期比較。
-				column 查詢序列識別碼
-					caption: 查詢序列識別碼
-				column 快照日期
-					caption: 快照日期
-				column 擷取批次識別碼
-					caption: 擷取批次識別碼
-				column 職缺編號
-					caption: 職缺編號
-				column 職缺平台
-					caption: 職缺平台
-				column 薪資來源類型
-					caption: 薪資來源類型
-				column 觀測序號
-					caption: 觀測序號
-				column 原始薪資下限文字
-					caption: 原始薪資下限文字
-				column 原始薪資上限文字
-					caption: 原始薪資上限文字
-				column 解析薪資下限
-					caption: 解析薪資下限
-				column 解析薪資上限
-					caption: 解析薪資上限
-				column 幣別代碼
-					caption: 幣別代碼
-				column 幣別依據
-					caption: 幣別依據
-				column 給薪週期
-					caption: 給薪週期
-				column 薪資區間類型
-					caption: 薪資區間類型
-				column 薪酬項目
-					caption: 薪酬項目
-				column 原始佐證文字
-					caption: 原始佐證文字
-				column 佐證文字起始位置
-					caption: 佐證文字起始位置
-				column 佐證文字結束位置
-					caption: 佐證文字結束位置
-				column 解析狀態
-					caption: 解析狀態
-				column 品質旗標
-					caption: 品質旗標
-				column 解析信心度
-					caption: 解析信心度
-				column 解析器版本
-					caption: 解析器版本
 
 	linguisticMetadata =
 			{
-			  "Version": "2.0.0",
+			  "Version": "4.1.0",
 			  "Language": "en-US",
 			  "Entities": {
-			    "factacquisitioncategory.column": {
+			    "目前職缺.地圖點位可繪製旗標": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactAcquisitionCategory",
-			          "ConceptualProperty": "上層職類名稱顯示"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "地圖點位可繪製旗標"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "地圖點位可繪製旗標": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    },
-			    "factjob.descsnippet": {
+			    "目前職缺.職缺技能清單": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactJob",
-			          "ConceptualProperty": "descSnippet"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "職缺技能清單"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職缺技能清單": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    },
-			    "factjob.jobname": {
+			    "目前職缺.職類職缺占比": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactJob",
-			          "ConceptualProperty": "jobName"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "職類職缺占比"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職類職缺占比": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    },
-			    "factjob.jobno": {
+			    "目前職缺.職類篩選職缺數": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactJob",
-			          "ConceptualProperty": "jobNo"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "職類篩選職缺數"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職類篩選職缺數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    },
-			    "factjob.salarylow": {
+			    "目前職缺.技能職缺占比": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactJob",
-			          "ConceptualProperty": "salaryLow"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "技能職缺占比"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "技能職缺占比": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    },
-			    "factjob.salaryhigh": {
+			    "目前職缺.技能篩選職缺數": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactJob",
-			          "ConceptualProperty": "salaryHigh"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "技能篩選職缺數"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "技能篩選職缺數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    },
-			    "factjob.appeardate": {
+			    "目前職缺.薪資上下限涵蓋率": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactJob",
-			          "ConceptualProperty": "appearDate"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "薪資上下限涵蓋率"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "薪資上下限涵蓋率": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    },
-			    "factjob.joblink": {
+			    "目前職缺.具備薪資上下限的職缺數": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactJob",
-			          "ConceptualProperty": "jobLink"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "具備薪資上下限的職缺數"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "具備薪資上下限的職缺數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    },
-			    "factjob.selected_job_company": {
+			    "目前職缺.符合條件公司數": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactJob",
-			          "ConceptualProperty": "Selected Job Company"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "符合條件公司數"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "符合條件公司數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    },
-			    "factjob.jobaddrnodesc": {
+			    "目前職缺.地點識別碼": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactJob",
-			          "ConceptualProperty": "jobAddrNoDesc"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "地點識別碼"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "地點識別碼": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    },
-			    "dimarea.jobaddrnodesc": {
+			    "目前職缺.快照時間": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DimArea",
-			          "ConceptualProperty": "jobAddrNoDesc"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "快照時間"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "快照時間": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
 			    },
-			    "factacquisitioncategory.column1": {
+			    "目前職缺.快照日期": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactAcquisitionCategory",
-			          "ConceptualProperty": "來源職類代碼"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "快照日期"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "快照日期": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
 			    },
-			    "factacquisitioncategory.column2": {
+			    "目前職缺.職缺地址": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactAcquisitionCategory",
-			          "ConceptualProperty": "來源職類名稱顯示"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "職缺地址"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "職缺地址": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    },
-			    "factacquisitioncategory.column3": {
+			    "目前職缺.公司代碼": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactAcquisitionCategory",
-			          "ConceptualProperty": "來源職類數"
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "公司代碼"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "公司代碼": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    },
-			    "factacquisitioncategory.column4": {
+			    "目前職缺": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "FactAcquisitionCategory",
-			          "ConceptualProperty": "來源職缺總數"
+			          "ConceptualEntity": "目前職缺"
 			        }
 			      },
-			      "State": "Generated"
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "目前職缺": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    },
-			    "table.column": {
+			    "目前職缺.職缺摘要": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "目前職缺",
@@ -501,18 +568,13 @@ cultureInfo zh-TW
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "職缺內容摘要 / Source summary": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
+			          "職缺摘要": {
+			            "State": "Generated"
 			          }
 			        }
 			      ]
 			    },
-			    "table.column1": {
+			    "目前職缺.職缺名稱": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "目前職缺",
@@ -521,6 +583,11 @@ cultureInfo zh-TW
 			      },
 			      "State": "Generated",
 			      "Terms": [
+			        {
+			          "職缺名稱": {
+			            "State": "Generated"
+			          }
+			        },
 			        {
 			          "職缺名稱 / Job title": {
 			            "State": "Suggested",
@@ -533,7 +600,7 @@ cultureInfo zh-TW
 			        }
 			      ]
 			    },
-			    "table.column2": {
+			    "目前職缺.職缺編號": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "目前職缺",
@@ -543,18 +610,13 @@ cultureInfo zh-TW
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "職缺編號 / Job ID": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
+			          "職缺編號": {
+			            "State": "Generated"
 			          }
 			        }
 			      ]
 			    },
-			    "table.column3": {
+			    "目前職缺.薪資下限": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "目前職缺",
@@ -564,18 +626,13 @@ cultureInfo zh-TW
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "薪資下限 / Raw lower bound": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
+			          "薪資下限": {
+			            "State": "Generated"
 			          }
 			        }
 			      ]
 			    },
-			    "table.column4": {
+			    "目前職缺.薪資上限": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "目前職缺",
@@ -585,18 +642,13 @@ cultureInfo zh-TW
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "薪資上限 / Raw upper bound": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
+			          "薪資上限": {
+			            "State": "Generated"
 			          }
 			        }
 			      ]
 			    },
-			    "table.column5": {
+			    "目前職缺.刊登日期": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "目前職缺",
@@ -606,18 +658,20 @@ cultureInfo zh-TW
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "刊登日 / Posted": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
+			          "刊登日期": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
 			          }
 			        }
-			      ]
+			      ],
+			      "SemanticType": "Time"
 			    },
-			    "table.column6": {
+			    "目前職缺.職缺來源連結": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "目前職缺",
@@ -627,18 +681,13 @@ cultureInfo zh-TW
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "原始職缺 / Source link": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
+			          "職缺來源連結": {
+			            "State": "Generated"
 			          }
 			        }
 			      ]
 			    },
-			    "table.column7": {
+			    "目前職缺.所選職缺公司名稱": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "目前職缺",
@@ -648,18 +697,13 @@ cultureInfo zh-TW
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "公司 / Company": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
+			          "所選職缺公司名稱": {
+			            "State": "Generated"
 			          }
 			        }
 			      ]
 			    },
-			    "table.column8": {
+			    "目前職缺.職缺地區": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "目前職缺",
@@ -669,18 +713,13 @@ cultureInfo zh-TW
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "地區 / Area": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
+			          "職缺地區": {
+			            "State": "Generated"
 			          }
 			        }
 			      ]
 			    },
-			    "dim_.column": {
+			    "dim_地區.地區": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "dim_地區",
@@ -690,18 +729,20 @@ cultureInfo zh-TW
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "地區 / Area": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
+			          "地區": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "state or province": {
+			            "State": "Generated",
+			            "Weight": 0.7
 			          }
 			        }
-			      ]
+			      ],
+			      "SemanticType": "Location"
 			    },
-			    "table.column9": {
+			    "職類擷取進度.來源職類代碼": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "職類擷取進度",
@@ -710,6 +751,11 @@ cultureInfo zh-TW
 			      },
 			      "State": "Generated",
 			      "Terms": [
+			        {
+			          "來源職類代碼": {
+			            "State": "Generated"
+			          }
+			        },
 			        {
 			          "來源職類代碼（L2）": {
 			            "State": "Suggested",
@@ -722,7 +768,7 @@ cultureInfo zh-TW
 			        }
 			      ]
 			    },
-			    "table.column10": {
+			    "職類擷取進度.來源職類名稱顯示": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "職類擷取進度",
@@ -731,6 +777,11 @@ cultureInfo zh-TW
 			      },
 			      "State": "Generated",
 			      "Terms": [
+			        {
+			          "來源職類名稱顯示": {
+			            "State": "Generated"
+			          }
+			        },
 			        {
 			          "來源職類名稱": {
 			            "State": "Suggested",
@@ -743,7 +794,7 @@ cultureInfo zh-TW
 			        }
 			      ]
 			    },
-			    "table.column11": {
+			    "職類擷取進度.來源職類數": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "職類擷取進度",
@@ -752,6 +803,11 @@ cultureInfo zh-TW
 			      },
 			      "State": "Generated",
 			      "Terms": [
+			        {
+			          "來源職類數": {
+			            "State": "Generated"
+			          }
+			        },
 			        {
 			          "職類數": {
 			            "State": "Suggested",
@@ -764,7 +820,7 @@ cultureInfo zh-TW
 			        }
 			      ]
 			    },
-			    "table.column12": {
+			    "職類擷取進度.來源職缺總數": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "職類擷取進度",
@@ -773,6 +829,11 @@ cultureInfo zh-TW
 			      },
 			      "State": "Generated",
 			      "Terms": [
+			        {
+			          "來源職缺總數": {
+			            "State": "Generated"
+			          }
+			        },
 			        {
 			          "職缺總數": {
 			            "State": "Suggested",
@@ -784,6 +845,5462 @@ cultureInfo zh-TW
 			          }
 			        }
 			      ]
+			    },
+			    "dim_地區.地點識別碼": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_地區",
+			          "ConceptualProperty": "地點識別碼"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "地點識別碼": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_地區.緯度": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_地區",
+			          "ConceptualProperty": "緯度"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "緯度": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_地區.經度": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_地區",
+			          "ConceptualProperty": "經度"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "經度": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "目前職缺.職缺平台": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "職缺平台"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職缺平台": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "目前職缺.地圖提示職缺名稱": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "地圖提示職缺名稱"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "地圖提示職缺名稱": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "目前職缺.地圖提示地區": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "地圖提示地區"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "地圖提示地區": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "目前職缺.地圖提示地址": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "地圖提示地址"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "地圖提示地址": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "地址": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "目前職缺.目前符合條件職缺數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "目前符合條件職缺數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "目前符合條件職缺數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_公司.公司名稱": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_公司",
+			          "ConceptualProperty": "公司名稱"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "公司名稱": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_地區.鄉鎮市區": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_地區",
+			          "ConceptualProperty": "鄉鎮市區"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "鄉鎮市區": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_地區.地址": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_地區",
+			          "ConceptualProperty": "地址"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "地址": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "目前職缺.地圖點位有職缺旗標": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "地圖點位有職缺旗標"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "地圖點位有職缺旗標": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "目前職缺.地圖目前叢集數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "地圖目前叢集數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "地圖目前叢集數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_公司": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_公司"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "dim 公司": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "dim_公司": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "dim_公司.公司代碼": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_公司",
+			          "ConceptualProperty": "公司代碼"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "公司代碼": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_公司.產業代碼": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_公司",
+			          "ConceptualProperty": "產業代碼"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "產業代碼": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_公司.產業類別": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_公司",
+			          "ConceptualProperty": "產業類別"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "產業類別": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_地區": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_地區"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "dim 地區": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "dim_地區": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "dim_地區.來源地區代碼": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_地區",
+			          "ConceptualProperty": "來源地區代碼"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "來源地區代碼": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_地區.地點範圍": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_地區",
+			          "ConceptualProperty": "工作地點範圍"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "地點範圍": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_地區.縣市": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_地區",
+			          "ConceptualProperty": "縣市"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "縣市": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "state or province": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Location"
+			    },
+			    "dim_技能": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_技能"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "dim 技能": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "dim_技能": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "dim_技能.技能代碼": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_技能",
+			          "ConceptualProperty": "技能代碼"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "技能代碼": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_技能.技能名稱": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_技能",
+			          "ConceptualProperty": "技能名稱"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "技能名稱": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_職類": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_職類"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "dim 職類": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "dim_職類": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "dim_職類.職類代碼": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_職類",
+			          "ConceptualProperty": "職類代碼"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職類代碼": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_職類.職類名稱": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_職類",
+			          "ConceptualProperty": "職類名稱"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職類名稱": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職缺技能對照": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職缺技能對照"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職缺技能對照": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職缺技能對照.職缺編號": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職缺技能對照",
+			          "ConceptualProperty": "職缺編號"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "職缺編號": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職缺技能對照.技能代碼": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職缺技能對照",
+			          "ConceptualProperty": "技能代碼"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "技能代碼": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_日期": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_日期"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "dim 日期": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "dim_日期": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "dim_日期.日期": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_日期",
+			          "ConceptualProperty": "日期"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "日期": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "dim_日期.年": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_日期",
+			          "ConceptualProperty": "年"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "年": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_日期.月份序號": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_日期",
+			          "ConceptualProperty": "月份序號"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "月份序號": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_日期.年月": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_日期",
+			          "ConceptualProperty": "年月"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "年月": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_日期.季度序號": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_日期",
+			          "ConceptualProperty": "季度序號"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "季度序號": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_日期.季度": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_日期",
+			          "ConceptualProperty": "季度"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "季度": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_日期.日": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_日期",
+			          "ConceptualProperty": "日"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "日": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職缺職類對照": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職缺職類對照"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "職缺職類對照": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職缺職類對照.職缺編號": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職缺職類對照",
+			          "ConceptualProperty": "職缺編號"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "職缺編號": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職缺職類對照.職類代碼": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職缺職類對照",
+			          "ConceptualProperty": "職類代碼"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "職類代碼": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職類擷取進度": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.執行代碼": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "執行代碼"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "執行代碼": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.執行狀態": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "執行狀態"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "執行狀態": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.擷取日期": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "擷取日期"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "擷取日期": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "職類擷取進度.選定職類數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "選定職類數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "選定職類數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.職類階層": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "職類階層"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職類階層": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.地區篩選": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "地區篩選"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "地區篩選": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.每頁筆數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "每頁筆數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "每頁筆數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.工作程序數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "工作程序數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "工作程序數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.開始時間": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "開始時間"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "開始時間": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "職類擷取進度.執行更新時間": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "執行更新時間"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "執行更新時間": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "職類擷取進度.最低請求間隔秒": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "最低請求間隔秒"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "最低請求間隔秒": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.目前請求間隔秒": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "目前請求間隔秒"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "目前請求間隔秒": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.閘道封鎖": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "閘道封鎖"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "閘道封鎖": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.資料庫讀取時間": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "資料庫讀取時間"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "資料庫讀取時間": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "職類擷取進度.職類代碼": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "職類代碼"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職類代碼": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.職類名稱": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "職類名稱"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職類名稱": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.佇列狀態": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "佇列狀態"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "佇列狀態": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.嘗試次數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "嘗試次數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "嘗試次數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.類別更新時間": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "類別更新時間"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "類別更新時間": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "職類擷取進度.結果狀態": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "結果狀態"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "結果狀態": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.擷取批次": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "擷取批次"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "擷取批次": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.批次品質": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "批次品質"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "批次品質": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.分頁狀態": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "分頁狀態"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "分頁狀態": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.職缺筆數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "職缺筆數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職缺筆數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.完成頁數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "完成頁數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "完成頁數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.警告旗標": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "警告旗標"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "警告旗標": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.上層職類": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "上層職類"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "上層職類": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.來源職類代碼原始": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "來源職類代碼原始"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "來源職類代碼原始": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.來源職類名稱": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "來源職類名稱"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "來源職類名稱": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.API回報職缺數下界": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "API回報職缺數下界"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "API回報職缺數下界": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.API回報職缺數上界": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "API回報職缺數上界"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "API回報職缺數上界": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.API回報頁數下界": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "API回報頁數下界"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "API回報頁數下界": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.API回報頁數上界": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "API回報頁數上界"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "API回報頁數上界": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.佇列終態旗標": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "佇列終態旗標"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "佇列終態旗標": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.分頁完整旗標": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "分頁完整旗標"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "分頁完整旗標": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.silver層可用旗標": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "Silver層可用旗標"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "silver層可用旗標": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.silver層封鎖旗標": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "Silver層封鎖旗標"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "silver層封鎖旗標": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.品質警告原因": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "品質警告原因"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "品質警告原因": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.已記錄批次數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "已記錄批次數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "已記錄批次數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.職缺平台": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "職缺平台"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職缺平台": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.職類階層顯示用": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "職類階層顯示用"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "職類階層顯示用": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.職類數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "職類數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職類數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.已選職類數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "已選職類數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "已選職類數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.已完成職類數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "已完成職類數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "已完成職類數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.完成率": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "完成率"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "完成率": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.待處理職類數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "待處理職類數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "待處理職類數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.處理中職類數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "處理中職類數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "處理中職類數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.警告批次數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "警告批次數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "警告批次數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.失敗職類數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "失敗職類數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "失敗職類數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.延後職類數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "延後職類數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "延後職類數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.目前執行狀態": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "目前執行狀態"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "目前執行狀態": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.來源請求狀態": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "來源請求狀態"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "來源請求狀態": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.目前請求間隔秒最大值": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "目前請求間隔秒最大值"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "目前請求間隔秒最大值": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.最新資料庫讀取時間": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "最新資料庫讀取時間"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "最新資料庫讀取時間": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "職類擷取進度.職缺總數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "職缺總數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "職缺總數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.佇列終態職類數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "佇列終態職類數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "佇列終態職類數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.終態處理率": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "終態處理率"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "終態處理率": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.分頁完整職類數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "分頁完整職類數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "分頁完整職類數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.silver層可用職類數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "Silver層可用職類數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "silver層可用職類數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.silver層封鎖職類數": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "Silver層封鎖職類數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "silver層封鎖職類數": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "職類擷取進度.分頁完整率": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "職類擷取進度",
+			          "ConceptualProperty": "分頁完整率"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "分頁完整率": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "table.column": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "目前職缺",
+			          "ConceptualProperty": "地圖提示公司名稱"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "公司名稱": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_.goldenl1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_職類",
+			          "ConceptualProperty": "GoldenL1"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Golden L1": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  },
+			  "Relationships": {
+			    "職缺職類對照_has_目前職缺": {
+			      "Binding": {
+			        "ConceptualEntity": "職缺職類對照"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職缺職類對照": {
+			          "Target": {
+			            "Entity": "職缺職類對照"
+			          }
+			        },
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        }
+			      }
+			    },
+			    "職缺技能對照_has_dim_技能": {
+			      "Binding": {
+			        "ConceptualEntity": "職缺技能對照"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職缺技能對照": {
+			          "Target": {
+			            "Entity": "職缺技能對照"
+			          }
+			        },
+			        "dim_技能": {
+			          "Target": {
+			            "Entity": "dim_技能"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職缺技能對照"
+			            },
+			            "Object": {
+			              "Role": "dim_技能"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職缺技能對照_have_dim_技能"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_技能"
+			            },
+			            "Object": {
+			              "Role": "職缺技能對照"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_技能_have_職缺技能對照"
+			        }
+			      ]
+			    },
+			    "職缺技能對照_has_目前職缺": {
+			      "Binding": {
+			        "ConceptualEntity": "職缺技能對照"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職缺技能對照": {
+			          "Target": {
+			            "Entity": "職缺技能對照"
+			          }
+			        },
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職缺技能對照"
+			            },
+			            "Object": {
+			              "Role": "目前職缺"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職缺技能對照_have_目前職缺"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "職缺技能對照"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_職缺技能對照"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_dim_日期": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "dim_日期": {
+			          "Target": {
+			            "Entity": "dim_日期"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "dim_日期"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_dim_日期"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_日期"
+			            },
+			            "Object": {
+			              "Role": "目前職缺"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_日期_have_目前職缺"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_dim_地區": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "dim_地區"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_dim_地區"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Object": {
+			              "Role": "目前職缺"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_have_目前職缺"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_dim_公司": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "dim_公司": {
+			          "Target": {
+			            "Entity": "dim_公司"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "dim_公司"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_dim_公司"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_公司"
+			            },
+			            "Object": {
+			              "Role": "目前職缺"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_公司_have_目前職缺"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_分頁完整率": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.分頁完整率": {
+			          "Target": {
+			            "Entity": "職類擷取進度.分頁完整率"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.分頁完整率"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_分頁完整率"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_silver層封鎖職類數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.silver層封鎖職類數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.silver層封鎖職類數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.silver層封鎖職類數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_silver層封鎖職類數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_silver層可用職類數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.silver層可用職類數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.silver層可用職類數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.silver層可用職類數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_silver層可用職類數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_分頁完整職類數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.分頁完整職類數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.分頁完整職類數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.分頁完整職類數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_分頁完整職類數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_終態處理率": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.終態處理率": {
+			          "Target": {
+			            "Entity": "職類擷取進度.終態處理率"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.終態處理率"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_終態處理率"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_佇列終態職類數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.佇列終態職類數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.佇列終態職類數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.佇列終態職類數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_佇列終態職類數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_職缺總數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.職缺總數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.職缺總數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.職缺總數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_職缺總數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_最新資料庫讀取時間": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.最新資料庫讀取時間": {
+			          "Target": {
+			            "Entity": "職類擷取進度.最新資料庫讀取時間"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.最新資料庫讀取時間"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_最新資料庫讀取時間"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_目前請求間隔秒最大值": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.目前請求間隔秒最大值": {
+			          "Target": {
+			            "Entity": "職類擷取進度.目前請求間隔秒最大值"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.目前請求間隔秒最大值"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_目前請求間隔秒最大值"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_來源請求狀態": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.來源請求狀態": {
+			          "Target": {
+			            "Entity": "職類擷取進度.來源請求狀態"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.來源請求狀態"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_來源請求狀態"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_目前執行狀態": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.目前執行狀態": {
+			          "Target": {
+			            "Entity": "職類擷取進度.目前執行狀態"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.目前執行狀態"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_目前執行狀態"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_延後職類數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.延後職類數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.延後職類數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.延後職類數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_延後職類數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_失敗職類數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.失敗職類數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.失敗職類數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.失敗職類數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_失敗職類數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_警告批次數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.警告批次數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.警告批次數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.警告批次數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_警告批次數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_處理中職類數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.處理中職類數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.處理中職類數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.處理中職類數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_處理中職類數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_待處理職類數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.待處理職類數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.待處理職類數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.待處理職類數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_待處理職類數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_完成率": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.完成率": {
+			          "Target": {
+			            "Entity": "職類擷取進度.完成率"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.完成率"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_完成率"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_已完成職類數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.已完成職類數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.已完成職類數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.已完成職類數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_已完成職類數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_已選職類數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.已選職類數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.已選職類數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.已選職類數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_已選職類數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_職類數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.職類數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.職類數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.職類數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_職類數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_職缺平台": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.職缺平台": {
+			          "Target": {
+			            "Entity": "職類擷取進度.職缺平台"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.職缺平台"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_職缺平台"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_已記錄批次數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.已記錄批次數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.已記錄批次數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.已記錄批次數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_已記錄批次數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_品質警告原因": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.品質警告原因": {
+			          "Target": {
+			            "Entity": "職類擷取進度.品質警告原因"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.品質警告原因"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_品質警告原因"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_完成頁數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.完成頁數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.完成頁數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.完成頁數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_完成頁數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_職缺筆數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.職缺筆數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.職缺筆數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.職缺筆數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_職缺筆數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_分頁狀態": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.分頁狀態": {
+			          "Target": {
+			            "Entity": "職類擷取進度.分頁狀態"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.分頁狀態"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_分頁狀態"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_批次品質": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.批次品質": {
+			          "Target": {
+			            "Entity": "職類擷取進度.批次品質"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.批次品質"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_批次品質"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_擷取批次": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.擷取批次": {
+			          "Target": {
+			            "Entity": "職類擷取進度.擷取批次"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.擷取批次"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_擷取批次"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_結果狀態": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.結果狀態": {
+			          "Target": {
+			            "Entity": "職類擷取進度.結果狀態"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.結果狀態"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_結果狀態"
+			        },
+			        {
+			          "DynamicAdjective": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Adjective": {
+			              "Role": "職類擷取進度.結果狀態"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "結果狀態_describe_職類擷取進度"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_類別更新時間": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.類別更新時間": {
+			          "Target": {
+			            "Entity": "職類擷取進度.類別更新時間"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.類別更新時間"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_類別更新時間"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_嘗試次數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.嘗試次數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.嘗試次數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.嘗試次數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_嘗試次數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_佇列狀態": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.佇列狀態": {
+			          "Target": {
+			            "Entity": "職類擷取進度.佇列狀態"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.佇列狀態"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_佇列狀態"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_職類名稱": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.職類名稱": {
+			          "Target": {
+			            "Entity": "職類擷取進度.職類名稱"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.職類名稱"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_職類名稱"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_職類代碼": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.職類代碼": {
+			          "Target": {
+			            "Entity": "職類擷取進度.職類代碼"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.職類代碼"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_職類代碼"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_目前請求間隔秒": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.目前請求間隔秒": {
+			          "Target": {
+			            "Entity": "職類擷取進度.目前請求間隔秒"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.目前請求間隔秒"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_目前請求間隔秒"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_最低請求間隔秒": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.最低請求間隔秒": {
+			          "Target": {
+			            "Entity": "職類擷取進度.最低請求間隔秒"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.最低請求間隔秒"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_最低請求間隔秒"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_執行更新時間": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.執行更新時間": {
+			          "Target": {
+			            "Entity": "職類擷取進度.執行更新時間"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.執行更新時間"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_執行更新時間"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_開始時間": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.開始時間": {
+			          "Target": {
+			            "Entity": "職類擷取進度.開始時間"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.開始時間"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_開始時間"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_工作程序數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.工作程序數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.工作程序數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.工作程序數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_工作程序數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_每頁筆數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.每頁筆數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.每頁筆數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.每頁筆數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_每頁筆數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_地區篩選": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.地區篩選": {
+			          "Target": {
+			            "Entity": "職類擷取進度.地區篩選"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.地區篩選"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_地區篩選"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_職類階層": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.職類階層": {
+			          "Target": {
+			            "Entity": "職類擷取進度.職類階層"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.職類階層"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_職類階層"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_擷取日期": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.擷取日期": {
+			          "Target": {
+			            "Entity": "職類擷取進度.擷取日期"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.擷取日期"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_擷取日期"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_執行狀態": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.執行狀態": {
+			          "Target": {
+			            "Entity": "職類擷取進度.執行狀態"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.執行狀態"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_執行狀態"
+			        }
+			      ]
+			    },
+			    "dim_日期_has_日": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_日期"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_日期": {
+			          "Target": {
+			            "Entity": "dim_日期"
+			          }
+			        },
+			        "dim_日期.日": {
+			          "Target": {
+			            "Entity": "dim_日期.日"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_日期"
+			            },
+			            "Object": {
+			              "Role": "dim_日期.日"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_日期_have_日"
+			        }
+			      ]
+			    },
+			    "dim_日期_has_季度": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_日期"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_日期": {
+			          "Target": {
+			            "Entity": "dim_日期"
+			          }
+			        },
+			        "dim_日期.季度": {
+			          "Target": {
+			            "Entity": "dim_日期.季度"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_日期"
+			            },
+			            "Object": {
+			              "Role": "dim_日期.季度"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_日期_have_季度"
+			        }
+			      ]
+			    },
+			    "dim_日期_has_季度序號": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_日期"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_日期": {
+			          "Target": {
+			            "Entity": "dim_日期"
+			          }
+			        },
+			        "dim_日期.季度序號": {
+			          "Target": {
+			            "Entity": "dim_日期.季度序號"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_日期"
+			            },
+			            "Object": {
+			              "Role": "dim_日期.季度序號"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_日期_have_季度序號"
+			        }
+			      ]
+			    },
+			    "dim_日期_has_年月": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_日期"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_日期": {
+			          "Target": {
+			            "Entity": "dim_日期"
+			          }
+			        },
+			        "dim_日期.年月": {
+			          "Target": {
+			            "Entity": "dim_日期.年月"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_日期"
+			            },
+			            "Object": {
+			              "Role": "dim_日期.年月"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_日期_have_年月"
+			        }
+			      ]
+			    },
+			    "dim_日期_has_月份序號": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_日期"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_日期": {
+			          "Target": {
+			            "Entity": "dim_日期"
+			          }
+			        },
+			        "dim_日期.月份序號": {
+			          "Target": {
+			            "Entity": "dim_日期.月份序號"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_日期"
+			            },
+			            "Object": {
+			              "Role": "dim_日期.月份序號"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_日期_have_月份序號"
+			        }
+			      ]
+			    },
+			    "dim_日期_has_年": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_日期"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_日期": {
+			          "Target": {
+			            "Entity": "dim_日期"
+			          }
+			        },
+			        "dim_日期.年": {
+			          "Target": {
+			            "Entity": "dim_日期.年"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_日期"
+			            },
+			            "Object": {
+			              "Role": "dim_日期.年"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_日期_have_年"
+			        }
+			      ]
+			    },
+			    "dim_日期_has_日期": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_日期"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_日期": {
+			          "Target": {
+			            "Entity": "dim_日期"
+			          }
+			        },
+			        "dim_日期.日期": {
+			          "Target": {
+			            "Entity": "dim_日期.日期"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_日期"
+			            },
+			            "Object": {
+			              "Role": "dim_日期.日期"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_日期_have_日期"
+			        }
+			      ]
+			    },
+			    "dim_職類_has_職類名稱": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_職類"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_職類": {
+			          "Target": {
+			            "Entity": "dim_職類"
+			          }
+			        },
+			        "dim_職類.職類名稱": {
+			          "Target": {
+			            "Entity": "dim_職類.職類名稱"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_職類"
+			            },
+			            "Object": {
+			              "Role": "dim_職類.職類名稱"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_職類_have_職類名稱"
+			        }
+			      ]
+			    },
+			    "dim_職類_has_職類代碼": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_職類"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_職類": {
+			          "Target": {
+			            "Entity": "dim_職類"
+			          }
+			        },
+			        "dim_職類.職類代碼": {
+			          "Target": {
+			            "Entity": "dim_職類.職類代碼"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_職類"
+			            },
+			            "Object": {
+			              "Role": "dim_職類.職類代碼"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_職類_have_職類代碼"
+			        }
+			      ]
+			    },
+			    "dim_技能_has_技能名稱": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_技能"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_技能": {
+			          "Target": {
+			            "Entity": "dim_技能"
+			          }
+			        },
+			        "dim_技能.技能名稱": {
+			          "Target": {
+			            "Entity": "dim_技能.技能名稱"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_技能"
+			            },
+			            "Object": {
+			              "Role": "dim_技能.技能名稱"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_技能_have_技能名稱"
+			        }
+			      ]
+			    },
+			    "dim_地區_has_縣市": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "dim_地區.縣市": {
+			          "Target": {
+			            "Entity": "dim_地區.縣市"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Object": {
+			              "Role": "dim_地區.縣市"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_have_縣市"
+			        }
+			      ]
+			    },
+			    "dim_地區_has_地點範圍": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "dim_地區.地點範圍": {
+			          "Target": {
+			            "Entity": "dim_地區.地點範圍"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Object": {
+			              "Role": "dim_地區.地點範圍"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_have_地點範圍"
+			        }
+			      ]
+			    },
+			    "dim_公司_has_產業類別": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_公司"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_公司": {
+			          "Target": {
+			            "Entity": "dim_公司"
+			          }
+			        },
+			        "dim_公司.產業類別": {
+			          "Target": {
+			            "Entity": "dim_公司.產業類別"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_公司"
+			            },
+			            "Object": {
+			              "Role": "dim_公司.產業類別"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_公司_have_產業類別"
+			        }
+			      ]
+			    },
+			    "dim_地區_has_目前職缺_地圖目前叢集數": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "目前職缺.地圖目前叢集數": {
+			          "Target": {
+			            "Entity": "目前職缺.地圖目前叢集數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.地圖目前叢集數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_have_地圖目前叢集數"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_地圖點位有職缺旗標": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.地圖點位有職缺旗標": {
+			          "Target": {
+			            "Entity": "目前職缺.地圖點位有職缺旗標"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.地圖點位有職缺旗標"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_地圖點位有職缺旗標"
+			        }
+			      ]
+			    },
+			    "dim_地區_has_目前職缺_地圖點位有職缺旗標": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "目前職缺.地圖點位有職缺旗標": {
+			          "Target": {
+			            "Entity": "目前職缺.地圖點位有職缺旗標"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.地圖點位有職缺旗標"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_have_地圖點位有職缺旗標"
+			        }
+			      ]
+			    },
+			    "dim_地區_has_地址": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "dim_地區.地址": {
+			          "Target": {
+			            "Entity": "dim_地區.地址"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Object": {
+			              "Role": "dim_地區.地址"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_have_地址"
+			        }
+			      ]
+			    },
+			    "dim_公司_has_公司名稱": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_公司"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_公司": {
+			          "Target": {
+			            "Entity": "dim_公司"
+			          }
+			        },
+			        "dim_公司.公司名稱": {
+			          "Target": {
+			            "Entity": "dim_公司.公司名稱"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_公司"
+			            },
+			            "Object": {
+			              "Role": "dim_公司.公司名稱"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_公司_have_公司名稱"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_目前符合條件職缺數": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.目前符合條件職缺數": {
+			          "Target": {
+			            "Entity": "目前職缺.目前符合條件職缺數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.目前符合條件職缺數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_目前符合條件職缺數"
+			        }
+			      ]
+			    },
+			    "dim_地區_has_目前職缺_地圖提示地址": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "目前職缺.地圖提示地址": {
+			          "Target": {
+			            "Entity": "目前職缺.地圖提示地址"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.地圖提示地址"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_have_地圖提示地址"
+			        }
+			      ]
+			    },
+			    "dim_地區_has_目前職缺_地圖提示地區": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "目前職缺.地圖提示地區": {
+			          "Target": {
+			            "Entity": "目前職缺.地圖提示地區"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.地圖提示地區"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_have_地圖提示地區"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_地圖提示職缺名稱": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.地圖提示職缺名稱": {
+			          "Target": {
+			            "Entity": "目前職缺.地圖提示職缺名稱"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.地圖提示職缺名稱"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_地圖提示職缺名稱"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_職缺平台": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.職缺平台": {
+			          "Target": {
+			            "Entity": "目前職缺.職缺平台"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.職缺平台"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_職缺平台"
+			        }
+			      ]
+			    },
+			    "dim_地區_has_經度": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "dim_地區.經度": {
+			          "Target": {
+			            "Entity": "dim_地區.經度"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Object": {
+			              "Role": "dim_地區.經度"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_have_經度"
+			        }
+			      ]
+			    },
+			    "dim_地區_has_緯度": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "dim_地區.緯度": {
+			          "Target": {
+			            "Entity": "dim_地區.緯度"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Object": {
+			              "Role": "dim_地區.緯度"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_have_緯度"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_來源職缺總數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.來源職缺總數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.來源職缺總數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.來源職缺總數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_來源職缺總數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_來源職類數": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.來源職類數": {
+			          "Target": {
+			            "Entity": "職類擷取進度.來源職類數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.來源職類數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_來源職類數"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_來源職類名稱顯示": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.來源職類名稱顯示": {
+			          "Target": {
+			            "Entity": "職類擷取進度.來源職類名稱顯示"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.來源職類名稱顯示"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_來源職類名稱顯示"
+			        }
+			      ]
+			    },
+			    "職類擷取進度_has_來源職類代碼": {
+			      "Binding": {
+			        "ConceptualEntity": "職類擷取進度"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職類擷取進度": {
+			          "Target": {
+			            "Entity": "職類擷取進度"
+			          }
+			        },
+			        "職類擷取進度.來源職類代碼": {
+			          "Target": {
+			            "Entity": "職類擷取進度.來源職類代碼"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "職類擷取進度"
+			            },
+			            "Object": {
+			              "Role": "職類擷取進度.來源職類代碼"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "職類擷取進度_have_來源職類代碼"
+			        }
+			      ]
+			    },
+			    "dim_地區_has_地區": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "dim_地區.地區": {
+			          "Target": {
+			            "Entity": "dim_地區.地區"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Object": {
+			              "Role": "dim_地區.地區"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_have_地區"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_職缺地區": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.職缺地區": {
+			          "Target": {
+			            "Entity": "目前職缺.職缺地區"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.職缺地區"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_職缺地區"
+			        }
+			      ]
+			    },
+			    "dim_公司_has_目前職缺_所選職缺公司名稱": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_公司"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_公司": {
+			          "Target": {
+			            "Entity": "dim_公司"
+			          }
+			        },
+			        "目前職缺.所選職缺公司名稱": {
+			          "Target": {
+			            "Entity": "目前職缺.所選職缺公司名稱"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_公司"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.所選職缺公司名稱"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_公司_have_所選職缺公司名稱"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_職缺來源連結": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.職缺來源連結": {
+			          "Target": {
+			            "Entity": "目前職缺.職缺來源連結"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.職缺來源連結"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_職缺來源連結"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_刊登日期": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.刊登日期": {
+			          "Target": {
+			            "Entity": "目前職缺.刊登日期"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.刊登日期"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_刊登日期"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_薪資上限": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.薪資上限": {
+			          "Target": {
+			            "Entity": "目前職缺.薪資上限"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.薪資上限"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_薪資上限"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_薪資下限": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.薪資下限": {
+			          "Target": {
+			            "Entity": "目前職缺.薪資下限"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.薪資下限"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_薪資下限"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_職缺編號": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.職缺編號": {
+			          "Target": {
+			            "Entity": "目前職缺.職缺編號"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.職缺編號"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_職缺編號"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_職缺名稱": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.職缺名稱": {
+			          "Target": {
+			            "Entity": "目前職缺.職缺名稱"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.職缺名稱"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_職缺名稱"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_職缺摘要": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.職缺摘要": {
+			          "Target": {
+			            "Entity": "目前職缺.職缺摘要"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.職缺摘要"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_職缺摘要"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_符合條件公司數": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.符合條件公司數": {
+			          "Target": {
+			            "Entity": "目前職缺.符合條件公司數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.符合條件公司數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_符合條件公司數"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_具備薪資上下限的職缺數": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.具備薪資上下限的職缺數": {
+			          "Target": {
+			            "Entity": "目前職缺.具備薪資上下限的職缺數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.具備薪資上下限的職缺數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_具備薪資上下限的職缺數"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_薪資上下限涵蓋率": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.薪資上下限涵蓋率": {
+			          "Target": {
+			            "Entity": "目前職缺.薪資上下限涵蓋率"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.薪資上下限涵蓋率"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_薪資上下限涵蓋率"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_技能篩選職缺數": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.技能篩選職缺數": {
+			          "Target": {
+			            "Entity": "目前職缺.技能篩選職缺數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.技能篩選職缺數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_技能篩選職缺數"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_技能職缺占比": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.技能職缺占比": {
+			          "Target": {
+			            "Entity": "目前職缺.技能職缺占比"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.技能職缺占比"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_技能職缺占比"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_職類篩選職缺數": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.職類篩選職缺數": {
+			          "Target": {
+			            "Entity": "目前職缺.職類篩選職缺數"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.職類篩選職缺數"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_職類篩選職缺數"
+			        }
+			      ]
+			    },
+			    "目前職缺_has_職類職缺占比": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.職類職缺占比": {
+			          "Target": {
+			            "Entity": "目前職缺.職類職缺占比"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "目前職缺"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.職類職缺占比"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "目前職缺_have_職類職缺占比"
+			        }
+			      ]
+			    },
+			    "dim_技能_has_目前職缺_職缺技能清單": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_技能"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_技能": {
+			          "Target": {
+			            "Entity": "dim_技能"
+			          }
+			        },
+			        "目前職缺.職缺技能清單": {
+			          "Target": {
+			            "Entity": "目前職缺.職缺技能清單"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_技能"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.職缺技能清單"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_技能_have_職缺技能清單"
+			        }
+			      ]
+			    },
+			    "dim_地區_has_目前職缺_地圖點位可繪製旗標": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "目前職缺.地圖點位可繪製旗標": {
+			          "Target": {
+			            "Entity": "目前職缺.地圖點位可繪製旗標"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Object": {
+			              "Role": "目前職缺.地圖點位可繪製旗標"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_have_地圖點位可繪製旗標"
+			        }
+			      ]
+			    },
+			    "dim_地區_in_縣市": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "dim_地區.縣市": {
+			          "Target": {
+			            "Entity": "dim_地區.縣市"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "dim_地區.縣市"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "dim_地區.縣市"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_are_in_縣市"
+			        }
+			      ]
+			    },
+			    "dim_地區_in_地址": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "dim_地區.地址": {
+			          "Target": {
+			            "Entity": "dim_地區.地址"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "dim_地區.地址"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "dim_地區.地址"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_are_in_地址"
+			        }
+			      ]
+			    },
+			    "dim_地區_in_目前職缺_地圖提示地址": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "目前職缺.地圖提示地址": {
+			          "Target": {
+			            "Entity": "目前職缺.地圖提示地址"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "目前職缺.地圖提示地址"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "目前職缺.地圖提示地址"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_are_in_地圖提示地址"
+			        }
+			      ]
+			    },
+			    "dim_地區_in_目前職缺_地圖提示地區": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "目前職缺.地圖提示地區": {
+			          "Target": {
+			            "Entity": "目前職缺.地圖提示地區"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "目前職缺.地圖提示地區"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "目前職缺.地圖提示地區"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_are_in_地圖提示地區"
+			        }
+			      ]
+			    },
+			    "dim_地區_in_地區": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_地區"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_地區": {
+			          "Target": {
+			            "Entity": "dim_地區"
+			          }
+			        },
+			        "dim_地區.地區": {
+			          "Target": {
+			            "Entity": "dim_地區.地區"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "dim_地區.地區"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "dim_地區"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "dim_地區.地區"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_地區_are_in_地區"
+			        }
+			      ]
+			    },
+			    "目前職缺_is_Posted_on_刊登日期": {
+			      "Binding": {
+			        "ConceptualEntity": "目前職缺"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "目前職缺": {
+			          "Target": {
+			            "Entity": "目前職缺"
+			          }
+			        },
+			        "目前職缺.刊登日期": {
+			          "Target": {
+			            "Entity": "目前職缺.刊登日期"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "When": {
+			          "Role": "目前職缺.刊登日期"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Verb": {
+			            "Verbs": [
+			              {
+			                "Post": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "目前職缺"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.9,
+			          "ID": "目前職缺_are_Posted_on_刊登日期"
+			        }
+			      ]
+			    },
+			    "職缺職類對照_has_dim_職類": {
+			      "Binding": {
+			        "ConceptualEntity": "職缺職類對照"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "職缺職類對照": {
+			          "Target": {
+			            "Entity": "職缺職類對照"
+			          }
+			        },
+			        "dim_職類": {
+			          "Target": {
+			            "Entity": "dim_職類"
+			          }
+			        }
+			      }
+			    }
+			  },
+			  "Agents": {
+			    "Internal": {
+			      "Version": "1.1.0"
 			    }
 			  }
 			}

@@ -1,0 +1,21 @@
+EVALUATE
+ROW(
+    "GoldenL1Options", COUNTROWS(VALUES('dim_職類'[GoldenL1])),
+    "GoldenL1Rows", COUNTROWS('dim_職類'),
+    "CategoryBridgeRows", COUNTROWS('職缺職類對照'),
+    "CategoryBridgeJobs", DISTINCTCOUNT('職缺職類對照'[職缺編號]),
+    "BlockedJobs", CALCULATE(
+        DISTINCTCOUNT('目前職缺'[職缺編號]),
+        'dim_職類'[GoldenL1] = "待對照／BLOCKED"
+    ),
+    "BlockedYes123Jobs", CALCULATE(
+        DISTINCTCOUNT('目前職缺'[職缺編號]),
+        'dim_職類'[GoldenL1] = "待對照／BLOCKED",
+        '目前職缺'[職缺平台] = "yes123"
+    ),
+    "Software104Jobs", CALCULATE(
+        DISTINCTCOUNT('目前職缺'[職缺編號]),
+        'dim_職類'[GoldenL1] = "資訊軟體系統類",
+        '目前職缺'[職缺平台] = "104"
+    )
+)

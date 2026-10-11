@@ -1,0 +1,82 @@
+DEFINE
+    VAR Yes123Domestic =
+        SUMMARIZECOLUMNS(
+            'dim_地區'[地區],
+            TREATAS({"yes123"}, '目前職缺'[職缺平台]),
+            TREATAS({"國內"}, 'dim_地區'[地點範圍]),
+            "Jobs", [目前符合條件職缺數],
+            "Presence", [地圖點位有職缺旗標]
+        )
+    VAR Yes123Overseas =
+        SUMMARIZECOLUMNS(
+            'dim_地區'[地區],
+            TREATAS({"yes123"}, '目前職缺'[職缺平台]),
+            TREATAS({"國外(台灣地區之外)"}, 'dim_地區'[地點範圍]),
+            "Jobs", [目前符合條件職缺數],
+            "Presence", [地圖點位有職缺旗標]
+        )
+    VAR Yes123Unknown =
+        SUMMARIZECOLUMNS(
+            'dim_地區'[地區],
+            TREATAS({"yes123"}, '目前職缺'[職缺平台]),
+            TREATAS({"未判定"}, 'dim_地區'[地點範圍]),
+            "Jobs", [目前符合條件職缺數],
+            "Presence", [地圖點位有職缺旗標]
+        )
+    VAR One04Domestic =
+        SUMMARIZECOLUMNS(
+            'dim_地區'[地區],
+            TREATAS({"104"}, '目前職缺'[職缺平台]),
+            TREATAS({"國內"}, 'dim_地區'[地點範圍]),
+            "Jobs", [目前符合條件職缺數],
+            "Presence", [地圖點位有職缺旗標]
+        )
+    VAR One04Overseas =
+        SUMMARIZECOLUMNS(
+            'dim_地區'[地區],
+            TREATAS({"104"}, '目前職缺'[職缺平台]),
+            TREATAS({"國外(台灣地區之外)"}, 'dim_地區'[地點範圍]),
+            "Jobs", [目前符合條件職缺數],
+            "Presence", [地圖點位有職缺旗標]
+        )
+    VAR One04Unknown =
+        SUMMARIZECOLUMNS(
+            'dim_地區'[地區],
+            TREATAS({"104"}, '目前職缺'[職缺平台]),
+            TREATAS({"未判定"}, 'dim_地區'[地點範圍]),
+            "Jobs", [目前符合條件職缺數],
+            "Presence", [地圖點位有職缺旗標]
+        )
+EVALUATE
+UNION(
+    ROW(
+        "Platform", "yes123", "Scope", "國內",
+        "Jobs", COALESCE(SUMX(Yes123Domestic, [Jobs]), 0),
+        "MapPoints", COALESCE(COUNTROWS(FILTER(Yes123Domestic, [Presence] = 1)), 0)
+    ),
+    ROW(
+        "Platform", "yes123", "Scope", "國外(台灣地區之外)",
+        "Jobs", COALESCE(SUMX(Yes123Overseas, [Jobs]), 0),
+        "MapPoints", COALESCE(COUNTROWS(FILTER(Yes123Overseas, [Presence] = 1)), 0)
+    ),
+    ROW(
+        "Platform", "yes123", "Scope", "未判定",
+        "Jobs", COALESCE(SUMX(Yes123Unknown, [Jobs]), 0),
+        "MapPoints", COALESCE(COUNTROWS(FILTER(Yes123Unknown, [Presence] = 1)), 0)
+    ),
+    ROW(
+        "Platform", "104", "Scope", "國內",
+        "Jobs", COALESCE(SUMX(One04Domestic, [Jobs]), 0),
+        "MapPoints", COALESCE(COUNTROWS(FILTER(One04Domestic, [Presence] = 1)), 0)
+    ),
+    ROW(
+        "Platform", "104", "Scope", "國外(台灣地區之外)",
+        "Jobs", COALESCE(SUMX(One04Overseas, [Jobs]), 0),
+        "MapPoints", COALESCE(COUNTROWS(FILTER(One04Overseas, [Presence] = 1)), 0)
+    ),
+    ROW(
+        "Platform", "104", "Scope", "未判定",
+        "Jobs", COALESCE(SUMX(One04Unknown, [Jobs]), 0),
+        "MapPoints", COALESCE(COUNTROWS(FILTER(One04Unknown, [Presence] = 1)), 0)
+    )
+)

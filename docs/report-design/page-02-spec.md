@@ -4,7 +4,7 @@
 
 呈現目前 refresh 的 raw salary bounds 覆蓋情況，並按職缺分類與地區提供可驗證的薪資分布視角。
 
-`FactSalaryObservation` 現已載入各平台的原始薪資觀測、幣別、給薪週期與解析狀態；本頁目前的指標和圖表仍使用 `FactJob.salaryLow/salaryHigh`。yes123 薪資上下限刻意保留 null，期間化觀測尚未接入本頁比較圖，需先按 `payPeriod` 與解析狀態設計指標。
+`gold.pbi_fact_salary_observations_v21` 仍保留各平台的原始薪資觀測、幣別、給薪週期與解析狀態，但 `FactSalaryObservation` 自 2026-10-10 起暫停載入 Power BI。現有指標和圖表仍使用 `FactJob.salaryLow/salaryHigh`；yes123 的薪資上下限維持 null。期間化觀測尚未接入本頁比較圖，需先修正批次篩選與跨查詢序列重複，再按 `payPeriod`、幣別與解析狀態設計指標。
 
 ## Canvas and grid
 

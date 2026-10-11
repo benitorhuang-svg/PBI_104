@@ -4,10 +4,10 @@
   "position": {
     "x": 518.21931522392038,
     "y": 13.839684976306479,
-    "z": 5001,
+    "z": 7000,
     "height": 73.81165320696789,
     "width": 169.15170526596808,
-    "tabOrder": 5001
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "card",
@@ -239,28 +239,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "741bcf0120fb2e5833b6",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "職類擷取進度"
-                  }
-                },
-                "Property": "職缺筆數"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

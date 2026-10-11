@@ -4,8 +4,8 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 0,
-        "y": 0
+        "x": 176.50876363118491,
+        "y": 3.1148606538772583
       },
       "nodes": [
         {
@@ -23,34 +23,21 @@
         },
         {
           "location": {
-            "x": 492.57850245718453,
-            "y": 323.9717373602798
+            "x": 740.57850245718453,
+            "y": 273.30507069361317
           },
           "nodeIndex": "目前職缺",
           "nodeLineageTag": "e01bc894-c60a-4e83-849b-cde9f0a28fda",
           "size": {
-            "height": 530.06634444135307,
+            "height": 338.06634444135307,
             "width": 234
           },
           "zIndex": 2
         },
         {
           "location": {
-            "x": 1287.4453408445881,
-            "y": 315.88401126412987
-          },
-          "nodeIndex": "職缺快照",
-          "nodeLineageTag": "b3392bee-cb0a-453d-9823-e3d0760b3593",
-          "size": {
-            "height": 470,
-            "width": 234
-          },
-          "zIndex": 3
-        },
-        {
-          "location": {
-            "x": 129.92009196930121,
-            "y": 603.52198101867259
+            "x": 429.92009196930121,
+            "y": 197.85531435200593
           },
           "nodeIndex": "職缺職類對照",
           "nodeLineageTag": "a890a5c5-1e0d-4917-a02d-a8d7d6c09d6f",
@@ -68,28 +55,15 @@
           "nodeIndex": "職類擷取進度",
           "nodeLineageTag": "ea5d659f-c051-4254-bf26-6b9078701251",
           "size": {
-            "height": 478.33333333333326,
+            "height": 689.99999999999977,
             "width": 234
           },
           "zIndex": 5
         },
         {
           "location": {
-            "x": 899.7066203606189,
-            "y": 324.70635222567591
-          },
-          "nodeIndex": "薪資觀測",
-          "nodeLineageTag": "0fa96ef4-d5e3-41ff-a263-68ddbda79682",
-          "size": {
-            "height": 473.13941490712409,
-            "width": 234
-          },
-          "zIndex": 11
-        },
-        {
-          "location": {
-            "x": 796.6634048178131,
-            "y": 1.3919679895894674
+            "x": 736.99673815114636,
+            "y": 0
           },
           "nodeIndex": "dim_公司",
           "nodeLineageTag": "b842679e-dd95-41aa-a9d2-8beb20593b13",
@@ -101,7 +75,7 @@
         },
         {
           "location": {
-            "x": 1123.7108325490758,
+            "x": 1309.7108325490758,
             "y": 0
           },
           "nodeIndex": "dim_日期",
@@ -114,8 +88,8 @@
         },
         {
           "location": {
-            "x": 486.53910519128351,
-            "y": 1.9289103705764603
+            "x": 1005.2057718579504,
+            "y": 0
           },
           "nodeIndex": "dim_地區",
           "nodeLineageTag": "8759c2f2-37c9-4ca5-9167-93818b4696a4",
@@ -140,8 +114,8 @@
         },
         {
           "location": {
-            "x": 132.98565289527869,
-            "y": 426.29747895737682
+            "x": 416.98565289527869,
+            "y": 0
           },
           "nodeIndex": "dim_職類",
           "nodeLineageTag": "93995401-31c6-47e0-a7d6-72ee2622e376",
@@ -153,7 +127,7 @@
         }
       ],
       "name": "所有資料表",
-      "zoomValue": 50,
+      "zoomValue": 60,
       "pinKeyFieldsToTop": true,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
