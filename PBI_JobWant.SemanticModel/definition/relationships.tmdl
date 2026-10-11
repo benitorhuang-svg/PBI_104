@@ -31,3 +31,8 @@ relationship FactJob_DimDate_appearDate
 	fromColumn: 目前職缺.刊登日期
 	toColumn: dim_日期.日期
 
+relationship FactJob_DimPlatform_sourcePlatform
+	fromColumn: 目前職缺.職缺平台
+	toColumn: dim_平台.平台代碼
+
+

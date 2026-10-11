@@ -188,6 +188,7 @@ def main() -> int:
         if len(path.read_text(encoding="utf-8-sig").splitlines()) > 300:
             raise ValueError(f"Maintained Python file exceeds 300 lines: {path.relative_to(ROOT)}")
     desktop_parse = "UNAVAILABLE"
+    bpa_status = "UNAVAILABLE"
     validation_scope = "STRUCTURE_ONLY"
     powershell = shutil.which("powershell") or shutil.which("pwsh")
     if powershell and os.name == "nt":
@@ -200,13 +201,23 @@ def main() -> int:
         desktop_parse = json.loads(result.stdout).get("Result", "FAIL")
         if desktop_parse != "PASS":
             raise RuntimeError(f"Desktop TMDL parser did not pass: {desktop_parse}")
+        bpa_path = ROOT / "tools/bpa/run_bpa.ps1"
+        if bpa_path.exists():
+            bpa_run = subprocess.run(
+                [powershell, "-NoProfile", "-File", str(bpa_path)],
+                capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=90
+            )
+            if bpa_run.returncode == 0:
+                bpa_status = json.loads(bpa_run.stdout).get("Status", "FAIL")
+                if bpa_status != "PASS":
+                    raise RuntimeError(f"BPA checks failed: {bpa_run.stdout}")
         validation_scope = "STRUCTURE_AND_DESKTOP_TMDL"
     result_status = "PASS" if desktop_parse == "PASS" else "STRUCTURE_PASS_DESKTOP_TMDL_UNAVAILABLE"
     print(json.dumps({"result": result_status, "validationScope": validation_scope,
                       "structuralChecks": "PASS", "jsonFiles": json_files, "pbirSchemas": schemas,
                       "projectArtifactLinks": artifact_links,
                       "reportFieldReferences": references, "queries": sync_result["queries"],
-                      "desktopTmdlParser": desktop_parse,
+                      "desktopTmdlParser": desktop_parse, "bpaStatus": bpa_status,
                       "schemaCompatibility": SCHEMA_FALLBACKS}, ensure_ascii=False))
     return 0
 

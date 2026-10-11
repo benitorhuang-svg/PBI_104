@@ -1,0 +1,54 @@
+table dim_平台
+	lineageTag: a7b8c9d0-1234-5678-9abc-def012345678
+
+	column 平台代碼
+		dataType: string
+		lineageTag: b8c9d0e1-2345-6789-abcd-ef0123456789
+		summarizeBy: none
+		sourceColumn: platformCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 平台名稱
+		dataType: string
+		lineageTag: c9d0e1f2-3456-789a-bcde-f0123456789a
+		summarizeBy: none
+		sortByColumn: 排序
+		sourceColumn: platformName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 排序
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d0e1f2a3-4567-89ab-cdef-0123456789ab
+		summarizeBy: none
+		sourceColumn: sortOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	column 可供分析
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e1f2a3b4-5678-9abc-def0-123456789abc
+		summarizeBy: none
+		sourceColumn: isAnalyticsEnabled
+
+		annotation SummarizationSetBy = Automatic
+
+	column 可供採集
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f2a3b4c5-6789-abcd-ef01-23456789abcd
+		summarizeBy: none
+		sourceColumn: isAcquisitionEnabled
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimPlatform = m
+		mode: import
+		source = mdl_DimPlatform
+

@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "目前職缺"
+                      "Entity": "dim_平台"
                     }
                   },
-                  "Property": "職缺平台"
+                  "Property": "平台名稱"
                 }
               },
-              "queryRef": "目前職缺.職缺平台",
+              "queryRef": "dim_平台.平台名稱",
               "active": true
             }
           ]

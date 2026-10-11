@@ -7,7 +7,7 @@ import json, re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 from ...shared.geocoding import standardize_taiwan_address
-from ...shared.postgres_schema import apply_schema
+from ...shared.postgres_schema import apply_schema, ensure_writer_schema
 
 def clean_text(val: Any) -> Optional[str]:
     return "".join(c for c in str(val) if ord(c) >= 32).strip() or None if val is not None else None
@@ -151,7 +151,7 @@ def ingest_yes123_batches(batches: List[Dict[str, Any]], config: Dict[str, Any],
     from psycopg.types.json import Jsonb
     results = []
     with psycopg.connect(**config) as conn:
-        with conn.transaction(): apply_schema(conn, schema_path)
+        with conn.transaction(): ensure_writer_schema(conn, schema_path)
         for b in batches:
             with conn.transaction(): results.append(save_yes123_batch(conn, b, Jsonb))
     return results

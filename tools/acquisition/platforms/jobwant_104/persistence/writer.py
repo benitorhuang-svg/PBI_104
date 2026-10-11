@@ -3,7 +3,7 @@
 from datetime import date, datetime
 
 from .pages import backfill_capture_pages, save_capture_pages
-from ....shared.postgres_schema import apply_schema
+from ....shared.postgres_schema import apply_schema, ensure_writer_schema
 from .raw_payload import (jsonb_projection, normalize_payload,
                           payload_quality_flags, source_json)
 
@@ -287,7 +287,7 @@ def ingest_batches(batches, config, schema_path, category_catalog=None):
     results = []
     with psycopg.connect(**config) as conn:
         with conn.transaction():
-            apply_schema(conn, schema_path)
+            ensure_writer_schema(conn, schema_path)
             if category_catalog:
                 _save_category_catalog(conn, category_catalog, Jsonb)
         for batch in batches:

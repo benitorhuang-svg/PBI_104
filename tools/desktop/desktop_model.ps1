@@ -40,6 +40,7 @@ try {
     DimSkill = 'dim_技能'
     BridgeJobCategory = '職缺職類對照'
     BridgeJobSkill = '職缺技能對照'
+    DimPlatform = 'dim_平台'
   }
   if ($Operation -eq 'Inventory') {
     [pscustomobject]@{Tables=@($model.Tables | ForEach-Object { [pscustomobject]@{Name=$_.Name;Columns=$_.Columns.Count;Partitions=@($_.Partitions | ForEach-Object { [pscustomobject]@{Name=$_.Name;State=$_.State.ToString()} })} }); Expressions=$model.Expressions.Count; Relationships=$model.Relationships.Count} | ConvertTo-Json -Depth 6 -Compress

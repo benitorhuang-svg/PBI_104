@@ -1,0 +1,10 @@
+EVALUATE
+ROW(
+    "PlatformRows", COUNTROWS('dim_平台'),
+    "104_Jobs_Via_Code", CALCULATE(COUNTROWS('目前職缺'), 'dim_平台'[平台代碼] = "104"),
+    "yes123_Jobs_Via_Code", CALCULATE(COUNTROWS('目前職缺'), 'dim_平台'[平台代碼] = "yes123"),
+    "104_Jobs_Via_Name", CALCULATE(COUNTROWS('目前職缺'), 'dim_平台'[平台名稱] = "104 人力銀行"),
+    "yes123_Jobs_Via_Name", CALCULATE(COUNTROWS('目前職缺'), 'dim_平台'[平台名稱] = "yes123 求職網"),
+    "Total_Jobs", COUNTROWS('目前職缺')
+)
+

@@ -50,3 +50,39 @@ def apply_schema(conn, schema_path):
             continue
         if migration:
             conn.execute(statement)
+
+
+def verify_writer_compatibility(conn):
+    """Verify that the database contains all tables required for ETL writing."""
+    required_tables = (
+        "bronze.capture_batches",
+        "bronze.raw_job_rows",
+        "bronze.capture_pages",
+        "silver.company_dimension",
+        "silver.area_dimension",
+        "silver.skill_dimension",
+        "silver.category_dimension",
+        "silver.job_current",
+        "silver.job_snapshots",
+        "silver.job_salary_observations",
+    )
+    missing = []
+    for table in required_tables:
+        exists = conn.execute("SELECT to_regclass(%s)", (table,)).fetchone()[0]
+        if not exists:
+            missing.append(table)
+    if missing:
+        raise RuntimeError(
+            f"Writer compatibility check failed: missing required tables {missing}"
+        )
+    return True
+
+
+def ensure_writer_schema(conn, schema_path):
+    """Ensure schema is ready for ETL writing without replaying bootstrap on protected databases."""
+    block_reason = _legacy_write_block_reason(conn)
+    if block_reason:
+        verify_writer_compatibility(conn)
+        return
+    apply_schema(conn, schema_path)
+

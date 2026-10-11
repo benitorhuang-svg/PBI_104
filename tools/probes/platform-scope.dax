@@ -3,7 +3,7 @@ DEFINE
         SUMMARIZECOLUMNS(
             'dim_地區'[地區],
             TREATAS({"yes123"}, '目前職缺'[職缺平台]),
-            TREATAS({"國內"}, 'dim_地區'[地點範圍]),
+            TREATAS({"國內"}, 'dim_地區'[工作地點範圍]),
             "Jobs", [目前符合條件職缺數],
             "Presence", [地圖點位有職缺旗標]
         )
@@ -11,7 +11,7 @@ DEFINE
         SUMMARIZECOLUMNS(
             'dim_地區'[地區],
             TREATAS({"yes123"}, '目前職缺'[職缺平台]),
-            TREATAS({"國外(台灣地區之外)"}, 'dim_地區'[地點範圍]),
+            TREATAS({"國外(台灣地區之外)"}, 'dim_地區'[工作地點範圍]),
             "Jobs", [目前符合條件職缺數],
             "Presence", [地圖點位有職缺旗標]
         )
@@ -19,7 +19,7 @@ DEFINE
         SUMMARIZECOLUMNS(
             'dim_地區'[地區],
             TREATAS({"yes123"}, '目前職缺'[職缺平台]),
-            TREATAS({"未判定"}, 'dim_地區'[地點範圍]),
+            TREATAS({"未判定"}, 'dim_地區'[工作地點範圍]),
             "Jobs", [目前符合條件職缺數],
             "Presence", [地圖點位有職缺旗標]
         )
@@ -27,7 +27,7 @@ DEFINE
         SUMMARIZECOLUMNS(
             'dim_地區'[地區],
             TREATAS({"104"}, '目前職缺'[職缺平台]),
-            TREATAS({"國內"}, 'dim_地區'[地點範圍]),
+            TREATAS({"國內"}, 'dim_地區'[工作地點範圍]),
             "Jobs", [目前符合條件職缺數],
             "Presence", [地圖點位有職缺旗標]
         )
@@ -35,7 +35,7 @@ DEFINE
         SUMMARIZECOLUMNS(
             'dim_地區'[地區],
             TREATAS({"104"}, '目前職缺'[職缺平台]),
-            TREATAS({"國外(台灣地區之外)"}, 'dim_地區'[地點範圍]),
+            TREATAS({"國外(台灣地區之外)"}, 'dim_地區'[工作地點範圍]),
             "Jobs", [目前符合條件職缺數],
             "Presence", [地圖點位有職缺旗標]
         )
@@ -43,7 +43,7 @@ DEFINE
         SUMMARIZECOLUMNS(
             'dim_地區'[地區],
             TREATAS({"104"}, '目前職缺'[職缺平台]),
-            TREATAS({"未判定"}, 'dim_地區'[地點範圍]),
+            TREATAS({"未判定"}, 'dim_地區'[工作地點範圍]),
             "Jobs", [目前符合條件職缺數],
             "Presence", [地圖點位有職缺旗標]
         )

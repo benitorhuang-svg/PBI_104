@@ -62,6 +62,55 @@ class MultiPlatformMigrationTests(unittest.TestCase):
         self.assertIn("job_title", sample)
         self.assertIn("company_name", sample)
 
+    def test_ensure_writer_schema_allows_protected_database_with_valid_tables(self):
+        from acquisition.shared.postgres_schema import ensure_writer_schema
+        from unittest.mock import MagicMock
+
+        mock_conn = MagicMock()
+        # Simulate protected database with version 47
+        def execute_side_effect(query, params=None):
+            m = MagicMock()
+            q = query.strip()
+            if "bronze.schema_migrations" in q and "to_regclass" in q:
+                m.fetchone.return_value = ("bronze.schema_migrations",)
+            elif "MAX(version)" in q:
+                m.fetchone.return_value = (47,)
+            elif "gold.pbi_fact_jobs_v21" in q:
+                m.fetchone.return_value = ("gold.pbi_fact_jobs_v21", None)
+            elif "to_regclass" in q and params:
+                m.fetchone.return_value = (params[0],)
+            else:
+                m.fetchone.return_value = (None,)
+            return m
+        mock_conn.execute.side_effect = execute_side_effect
+
+        # Should not raise any error and should not execute statements from init_postgres_schema.sql
+        ensure_writer_schema(mock_conn, PROJECT_ROOT / "tools/sql/init_postgres_schema.sql")
+
+    def test_apply_schema_still_blocks_protected_database(self):
+        from acquisition.shared.postgres_schema import apply_schema
+        from unittest.mock import MagicMock
+
+        mock_conn = MagicMock()
+        def execute_side_effect(query, params=None):
+            m = MagicMock()
+            q = query.strip()
+            if "bronze.schema_migrations" in q and "to_regclass" in q:
+                m.fetchone.return_value = ("bronze.schema_migrations",)
+            elif "MAX(version)" in q:
+                m.fetchone.return_value = (47,)
+            elif "gold.pbi_fact_jobs_v21" in q:
+                m.fetchone.return_value = ("gold.pbi_fact_jobs_v21", None)
+            else:
+                m.fetchone.return_value = (None,)
+            return m
+        mock_conn.execute.side_effect = execute_side_effect
+
+        with self.assertRaises(RuntimeError) as ctx:
+            apply_schema(mock_conn, PROJECT_ROOT / "tools/sql/init_postgres_schema.sql")
+        self.assertIn("Refusing to apply init_postgres_schema.sql to a protected database", str(ctx.exception))
+
 
 if __name__ == "__main__":
     unittest.main()
+

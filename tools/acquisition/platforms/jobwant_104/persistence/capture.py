@@ -9,7 +9,7 @@ from zoneinfo import ZoneInfo
 
 from ..client.pagination import validate_page
 from .loader import normalize_batch
-from .writer import _save_batch, _save_category_catalog, apply_schema
+from .writer import _save_batch, _save_category_catalog, apply_schema, ensure_writer_schema
 from ..capture.storage import encoded, series_key
 
 
@@ -114,7 +114,7 @@ def open_capture_sink(config, schema_path, category_catalog=None):
         with conn.transaction():
             conn.execute("SELECT pg_advisory_xact_lock(hashtextextended("
                          "'pbi104_schema_initialization', 0))")
-            apply_schema(conn, schema_path)
+            ensure_writer_schema(conn, schema_path)
             if category_catalog:
                 _save_category_catalog(conn, category_catalog, Jsonb)
         yield CaptureSink(conn, Jsonb)

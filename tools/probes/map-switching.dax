@@ -2,7 +2,7 @@ DEFINE
     VAR DomesticMap =
         SUMMARIZECOLUMNS(
             'dim_地區'[地區],
-            TREATAS({"國內"}, 'dim_地區'[地點範圍]),
+            TREATAS({"國內"}, 'dim_地區'[工作地點範圍]),
             "Jobs", [目前符合條件職缺數],
             "Presence", [地圖點位有職缺旗標],
             "Gate", [地圖點位可繪製旗標]
@@ -10,7 +10,7 @@ DEFINE
     VAR OverseasMap =
         SUMMARIZECOLUMNS(
             'dim_地區'[地區],
-            TREATAS({"國外(台灣地區之外)"}, 'dim_地區'[地點範圍]),
+            TREATAS({"國外(台灣地區之外)"}, 'dim_地區'[工作地點範圍]),
             "Jobs", [目前符合條件職缺數],
             "Presence", [地圖點位有職缺旗標],
             "Gate", [地圖點位可繪製旗標]
@@ -18,7 +18,7 @@ DEFINE
     VAR UnknownMap =
         SUMMARIZECOLUMNS(
             'dim_地區'[地區],
-            TREATAS({"未判定"}, 'dim_地區'[地點範圍]),
+            TREATAS({"未判定"}, 'dim_地區'[工作地點範圍]),
             "Jobs", [目前符合條件職缺數],
             "Presence", [地圖點位有職缺旗標],
             "Gate", [地圖點位可繪製旗標]

@@ -27,7 +27,8 @@
 - 架構與模型：[`architecture.md`](architecture/README.md)、[`data-model.md`](architecture/data-model.md)、[`semantic-model.md`](architecture/semantic-model.md)。
 - Schema 蒐錄：[`schema/`](schema/README.md)（共用契約、平台來源 schema 與 PostgreSQL dated catalog 快照）。
 - API、品質與擷取規模的日期快照：[`api-schema.md`](data-reference/api-schema.md)、[`data-quality-report.md`](data-reference/data-quality-report.md)、[`category-acquisition-probe.md`](data-reference/category-acquisition-probe.md)、[yes123 接入盤點](data-reference/yes123-category-acquisition-probe.md)。
-- 本機資料庫操作與歷史刷新驗收：[`local-database.md`](operations/local-database.md)、[`optimization-status.md`](operations/optimization-status.md)。
+- 本機資料庫操作與歷史刷新驗收：[`local-database.md`](operations/local-database.md)、[`optimization-status.md`](operations/optimization-status.md)、[`database-optimization-recommendations.md`](database-optimization-recommendations.md)、[`system-optimization-recommendations.md`](system-optimization-recommendations.md)、[`optimization-acceptance-2026-10-11.md`](operations/optimization-acceptance-2026-10-11.md)。
+- 完整優化實施方案：[`optimization-implementation-plan.md`](optimization-implementation-plan.md)（整合兩份建議的修正、13 項任務、分階段依賴、量測基準、驗收與回復方式；Phase A/B 實作驗收完成）。
 - 專案靜態盤點與文件內容審核：[`PROJECT_AUDIT.md`](audits/PROJECT_AUDIT.md)、[`DOCS_CONTENT_REVIEW_2026-10-09.md`](audits/DOCS_CONTENT_REVIEW_2026-10-09.md)。
 
 ## 素材與暫存資料

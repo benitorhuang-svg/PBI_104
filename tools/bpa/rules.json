@@ -1,0 +1,47 @@
+[
+  {
+    "ID": "BPA-PERF-01",
+    "Name": "Review bi-directional relationships",
+    "Category": "Performance",
+    "Description": "Bi-directional relationships can create unexpected filter propagation paths. Verify against the project filter equivalence matrix.",
+    "Severity": 2,
+    "Scope": "Relationship",
+    "Expression": "CrossFilteringBehavior = CrossFilteringBehavior.BothDirections and not Annotations.ContainsKey(\"Justification\")"
+  },
+  {
+    "ID": "BPA-PERF-02",
+    "Name": "Ensure fact table surrogate/high cardinality keys are hidden",
+    "Category": "Performance",
+    "Description": "High cardinality keys in fact tables should be hidden from report consumer view.",
+    "Severity": 2,
+    "Scope": "Column",
+    "Expression": "Table.Name == \"目前職缺\" and Name.EndsWith(\"編號\") and not IsHidden"
+  },
+  {
+    "ID": "BPA-MAINT-01",
+    "Name": "Provide format strings for visible measures",
+    "Category": "Maintenance",
+    "Description": "All visible numeric measures should have an explicit format string configured.",
+    "Severity": 2,
+    "Scope": "Measure",
+    "Expression": "not IsHidden and string.IsNullOrEmpty(FormatString)"
+  },
+  {
+    "ID": "BPA-INTEG-01",
+    "Name": "Active relationships must connect valid columns",
+    "Category": "Model Integrity",
+    "Description": "Ensure active relationships connect existing from and to columns.",
+    "Severity": 3,
+    "Scope": "Relationship",
+    "Expression": "IsActive and (FromColumn == null or ToColumn == null)"
+  },
+  {
+    "ID": "BPA-INTEG-02",
+    "Name": "Model tables must use Import mode",
+    "Category": "Model Integrity",
+    "Description": "All active model tables in JobWant semantic model must use Import mode.",
+    "Severity": 3,
+    "Scope": "Partition",
+    "Expression": "Mode != PartitionMode.Import"
+  }
+]
